@@ -60,6 +60,9 @@ document.getElementById("submitBtn").onclick = async () => {
   const password = document.getElementById("password").value;
   if (!email || !password) { showError("Enter your email and password."); return; }
 
+  const intent = new URLSearchParams(window.location.search).get("intent");
+  const destSuffix = intent ? `?intent=${encodeURIComponent(intent)}` : "";
+
   try {
     if (mode === "signup") {
       const fullName = document.getElementById("fullName").value.trim();
@@ -70,7 +73,7 @@ document.getElementById("submitBtn").onclick = async () => {
       await signIn(email, password);
     }
     const admin = await isCurrentUserAdmin();
-    window.location.href = admin ? "admin-dashboard.html" : "client-portal.html";
+    window.location.href = admin ? "admin-dashboard.html" : `client-portal.html${destSuffix}`;
   } catch (err) {
     showError(err.message || "Something went wrong. Please try again.");
   }
@@ -80,7 +83,9 @@ document.getElementById("submitBtn").onclick = async () => {
   const session = await getSession();
   if (session) {
     const admin = await isCurrentUserAdmin();
-    window.location.href = admin ? "admin-dashboard.html" : "client-portal.html";
+    const intent = new URLSearchParams(window.location.search).get("intent");
+    const destSuffix = intent ? `?intent=${encodeURIComponent(intent)}` : "";
+    window.location.href = admin ? "admin-dashboard.html" : `client-portal.html${destSuffix}`;
   }
 })();
 </script>

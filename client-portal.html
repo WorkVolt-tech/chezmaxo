@@ -29,6 +29,10 @@
 <script src="https://www.paypal.com/sdk/js" id="paypalSdkPlaceholder"></script>
 <script>
 const STAGES = ["Submitted","In Progress","Review","Live"];
+const BUILD_CATALOG = [
+  { key: "starter", name: "Starter Website", amount: 199, desc: "A clean, professional starting point — ideal for new or simple small businesses." },
+  { key: "business", name: "Business Website", amount: 399, desc: "More pages and features for established businesses that want a fuller presence." }
+];
 const PLANS = Object.keys(PLAN_PRICES).map(name => ({ name, monthly: PLAN_PRICES[name].monthly, yearly: PLAN_PRICES[name].yearly }));
 let state = { tab: "build", profile: null, requests: [], payments: [], messages: [], chatChannel: null };
 
@@ -49,17 +53,42 @@ async function renderMain(){
   renderSidebar();
   const main = document.getElementById("main");
   const c = state.profile;
+
   if(state.tab === "build"){
     const order = await getMyBuildOrder(c.id);
+
     if(!order || order.status === "awaiting_quote"){
       main.innerHTML = `
-        <div class="page-title"><div><div class="eyebrow">Website build</div><h2>Your project quote</h2></div></div>
-        <div class="card">
-          <p style="color:var(--ink-soft); margin-bottom:0;">We're still putting together your quote. Once it's ready, you'll see the price and payment options right here — no action needed from you yet. Have questions in the meantime? Send us a message.</p>
-        </div>`;
+        <div class="page-title"><div><div class="eyebrow">Website build</div><h2>Choose your website project</h2></div></div>
+        <div class="plans-grid">
+          ${BUILD_CATALOG.map(item => `
+            <div class="plan-pick">
+              <div class="pname">${item.name}</div><div class="pprice">$${item.amount}</div>
+              <p style="color:var(--ink-soft); font-size:13px; margin:8px 0 14px;">${item.desc}</p>
+              <button class="btn btn-primary btn-sm" data-buy="${item.key}">Buy Now</button>
+            </div>`).join("")}
+          <div class="plan-pick">
+            <div class="pname">Advanced / Custom</div><div class="pprice" style="font-size:20px;">Custom Quote</div>
+            <p style="color:var(--ink-soft); font-size:13px; margin:8px 0 14px;">Online stores, bookings, memberships, or custom functionality.</p>
+            <button class="btn btn-secondary btn-sm" data-custom="1">Request a Quote</button>
+          </div>
+        </div>
+        ${order && order.status === "awaiting_quote" ? "<p style=\"color:var(--ink-faint); font-size:12.5px; margin-top:16px;\">We are preparing your custom quote — you will see payment options here once it is ready.</p>" : ""}`;
+      main.querySelectorAll("[data-buy]").forEach(btn => btn.onclick = async () => {
+        const item = BUILD_CATALOG.find(i => i.key === btn.dataset.buy);
+        await setBuildOrderQuote(c.id, item.name, item.amount);
+        renderMain();
+      });
+      const customBtn = main.querySelector("[data-custom]");
+      if(customBtn) customBtn.onclick = async () => {
+        await setBuildOrderQuote(c.id, "Custom project (details pending)", null);
+        await sb.from("build_orders").update({ status: "awaiting_quote" }).eq("client_id", c.id);
+        state.tab = "messages";
+        renderMain();
+      };
     } else if(order.status === "awaiting_payment"){
       main.innerHTML = `
-        <div class="page-title"><div><div class="eyebrow">Website build</div><h2>Your project quote</h2></div></div>
+        <div class="page-title"><div><div class="eyebrow">Website build</div><h2>Complete your purchase</h2></div></div>
         <div class="ticket" style="margin-bottom:20px;">
           <div class="ticket-top">
             <div class="ticket-id">PROJECT QUOTE</div>
@@ -73,11 +102,16 @@ async function renderMain(){
           <div class="field"><label>Method</label><select id="buildPayMethod"><option>Zelle</option><option>Interac e-Transfer</option></select></div>
           <div class="field"><label>Reference / confirmation number</label><input id="buildPayRef" placeholder="e.g. from your bank's confirmation email"></div>
           <button class="btn btn-secondary" id="buildPaySubmit">I've sent this payment</button>
-        </div>`;
+        </div>
+        <p style="text-align:center; margin-top:16px;"><button class="btn btn-secondary btn-sm" id="buildChangeMind">Choose a different project</button></p>`;
       document.getElementById("buildPaySubmit").onclick = async () => {
         const method = document.getElementById("buildPayMethod").value;
         const ref = document.getElementById("buildPayRef").value.trim() || "(no reference provided)";
         await logManualPayment(c.id, method, order.amount, ref, "build");
+        renderMain();
+      };
+      document.getElementById("buildChangeMind").onclick = async () => {
+        await sb.from("build_orders").delete().eq("client_id", c.id);
         renderMain();
       };
       renderBuildPayPalButton(c, order);
@@ -262,6 +296,16 @@ document.getElementById("logoutBtn").onclick = signOut;
   if(await isCurrentUserAdmin()){ window.location.href = "admin-dashboard.html"; return; }
   state.profile = await getMyProfile();
   document.getElementById("whoami").textContent = state.profile.business_name || session.user.email;
+
+  const intent = new URLSearchParams(window.location.search).get("intent");
+  if(intent){
+    const item = BUILD_CATALOG.find(i => i.key === intent);
+    const existing = await getMyBuildOrder(state.profile.id);
+    if(item && (!existing || existing.status === "awaiting_quote")){
+      await setBuildOrderQuote(state.profile.id, item.name, item.amount);
+    }
+    state.tab = "build";
+  }
 
   const script = document.createElement("script");
   script.src = `https://www.paypal.com/sdk/js?client-id=${PAYPAL_CLIENT_ID}&currency=USD`;
