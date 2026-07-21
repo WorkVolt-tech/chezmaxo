@@ -1244,8 +1244,8 @@ const I18N = {
     "fr": "Un site web ne devrait pas être compliqué, coûteux ou peu fiable."
   },
   "about.lede": {
-    "en": "That belief is the whole reason [BUSINESS NAME] exists.",
-    "fr": "C'est cette conviction qui est à l'origine de [BUSINESS NAME]."
+    "en": "That belief is the whole reason Chezmaxo exists.",
+    "fr": "C'est cette conviction qui est à l'origine de Chezmaxo."
   },
   "about.ticket.id": {
     "en": "TICKET NO. 0001-FOUNDER",
@@ -1288,8 +1288,8 @@ const I18N = {
     "fr": "[HISTOIRE DU PROPRIÉTAIRE À REMPLACER — Remplacez ce paragraphe par votre propre histoire : ce que vous faisiez avant de démarrer cette entreprise, pourquoi les sites web de petites entreprises vous tiennent à cœur, et ce qui vous a mené à offrir à la fois la conception de sites et l'entretien continu.]"
   },
   "about.story.p2": {
-    "en": "Too many small-business owners are stuck choosing between an expensive agency, an unreliable freelancer, or a do-it-yourself website builder they never have time to maintain. [BUSINESS NAME] was created as a middle ground: a professional website, built properly, with straightforward ongoing support — for a price that actually makes sense for a small business.",
-    "fr": "Trop de propriétaires de petites entreprises sont coincés entre une agence coûteuse, un pigiste peu fiable ou un constructeur de site à faire soi-même qu'ils n'ont jamais le temps d'entretenir. [BUSINESS NAME] a été créé comme solution intermédiaire : un site web professionnel, bien construit, avec un soutien continu simple — à un prix logique pour une petite entreprise."
+    "en": "Too many small-business owners are stuck choosing between an expensive agency, an unreliable freelancer, or a do-it-yourself website builder they never have time to maintain. Chezmaxo was created as a middle ground: a professional website, built properly, with straightforward ongoing support — for a price that actually makes sense for a small business.",
+    "fr": "Trop de propriétaires de petites entreprises sont coincés entre une agence coûteuse, un pigiste peu fiable ou un constructeur de site à faire soi-même qu'ils n'ont jamais le temps d'entretenir. Chezmaxo a été créé comme solution intermédiaire : un site web professionnel, bien construit, avec un soutien continu simple — à un prix logique pour une petite entreprise."
   },
   "about.care.eyebrow": {
     "en": "What we care about",
@@ -1764,8 +1764,8 @@ const I18N = {
     "fr": "1. Introduction"
   },
   "privacy.p.1": {
-    "en": "[BUSINESS NAME] (“we,” “us,” or “our”) respects your privacy. This Privacy Policy explains what information we collect through our website, how we use it, and the choices you have. This is a placeholder template — replace bracketed sections with details specific to your business.",
-    "fr": "[BUSINESS NAME] (« nous » ou « notre ») respecte votre vie privée. Cette politique de confidentialité explique quels renseignements nous recueillons via notre site web, comment nous les utilisons, et les choix qui s'offrent à vous. Ceci est un modèle — remplacez les sections entre crochets par des détails propres à votre entreprise."
+    "en": "Chezmaxo (“we,” “us,” or “our”) respects your privacy. This Privacy Policy explains what information we collect through our website, how we use it, and the choices you have. This is a placeholder template — replace bracketed sections with details specific to your business.",
+    "fr": "Chezmaxo (« nous » ou « notre ») respecte votre vie privée. Cette politique de confidentialité explique quels renseignements nous recueillons via notre site web, comment nous les utilisons, et les choix qui s'offrent à vous. Ceci est un modèle — remplacez les sections entre crochets par des détails propres à votre entreprise."
   },
   "privacy.h2.2": {
     "en": "2. Information We Collect",
@@ -1856,16 +1856,16 @@ const I18N = {
     "fr": "1. Acceptation des conditions"
   },
   "terms.p.1": {
-    "en": "By using this website or engaging [BUSINESS NAME] for services, you agree to these Terms of Service. If you do not agree, please do not use this website or our services.",
-    "fr": "En utilisant ce site web ou en retenant les services de [BUSINESS NAME], vous acceptez ces conditions d'utilisation. Si vous n'êtes pas d'accord, veuillez ne pas utiliser ce site web ni nos services."
+    "en": "By using this website or engaging Chezmaxo for services, you agree to these Terms of Service. If you do not agree, please do not use this website or our services.",
+    "fr": "En utilisant ce site web ou en retenant les services de Chezmaxo, vous acceptez ces conditions d'utilisation. Si vous n'êtes pas d'accord, veuillez ne pas utiliser ce site web ni nos services."
   },
   "terms.h2.2": {
     "en": "2. Services",
     "fr": "2. Services"
   },
   "terms.p.2": {
-    "en": "[BUSINESS NAME] provides website design, website development, website management, and related digital services as described on this website. Specific project scope, pricing, and deliverables for individual clients are defined in a separate client agreement or proposal, which takes precedence over general website content.",
-    "fr": "[BUSINESS NAME] fournit des services de conception, développement, gestion de sites web et services numériques connexes tels que décrits sur ce site. La portée, les tarifs et les livrables spécifiques à chaque client sont définis dans une entente ou proposition distincte, qui a préséance sur le contenu général du site."
+    "en": "Chezmaxo provides website design, website development, website management, and related digital services as described on this website. Specific project scope, pricing, and deliverables for individual clients are defined in a separate client agreement or proposal, which takes precedence over general website content.",
+    "fr": "Chezmaxo fournit des services de conception, développement, gestion de sites web et services numériques connexes tels que décrits sur ce site. La portée, les tarifs et les livrables spécifiques à chaque client sont définis dans une entente ou proposition distincte, qui a préséance sur le contenu général du site."
   },
   "terms.h2.3": {
     "en": "3. Website Content",
@@ -1904,16 +1904,16 @@ const I18N = {
     "fr": "6. Propriété intellectuelle"
   },
   "terms.p.6": {
-    "en": "Ownership of final website deliverables will be addressed in your individual client agreement. Until full payment is received, [BUSINESS NAME] retains rights to work in progress. [OWNERSHIP TERMS PLACEHOLDER]",
-    "fr": "La propriété des livrables finaux du site sera précisée dans votre entente client individuelle. Jusqu'à réception du paiement complet, [BUSINESS NAME] conserve les droits sur le travail en cours. [CONDITIONS DE PROPRIÉTÉ À REMPLACER]"
+    "en": "Ownership of final website deliverables will be addressed in your individual client agreement. Until full payment is received, Chezmaxo retains rights to work in progress. [OWNERSHIP TERMS PLACEHOLDER]",
+    "fr": "La propriété des livrables finaux du site sera précisée dans votre entente client individuelle. Jusqu'à réception du paiement complet, Chezmaxo conserve les droits sur le travail en cours. [CONDITIONS DE PROPRIÉTÉ À REMPLACER]"
   },
   "terms.h2.7": {
     "en": "7. Limitation of Liability",
     "fr": "7. Limitation de responsabilité"
   },
   "terms.p.7": {
-    "en": "[BUSINESS NAME] is not liable for indirect, incidental, or consequential damages arising from use of this website or our services, to the fullest extent permitted by law. [JURISDICTION-SPECIFIC LANGUAGE PLACEHOLDER]",
-    "fr": "[BUSINESS NAME] n'est pas responsable des dommages indirects, accessoires ou consécutifs découlant de l'utilisation de ce site ou de nos services, dans toute la mesure permise par la loi. [LIBELLÉ SPÉCIFIQUE À LA JURIDICTION À REMPLACER]"
+    "en": "Chezmaxo is not liable for indirect, incidental, or consequential damages arising from use of this website or our services, to the fullest extent permitted by law. [JURISDICTION-SPECIFIC LANGUAGE PLACEHOLDER]",
+    "fr": "Chezmaxo n'est pas responsable des dommages indirects, accessoires ou consécutifs découlant de l'utilisation de ce site ou de nos services, dans toute la mesure permise par la loi. [LIBELLÉ SPÉCIFIQUE À LA JURIDICTION À REMPLACER]"
   },
   "terms.h2.8": {
     "en": "8. Termination",
@@ -2048,8 +2048,8 @@ const I18N = {
     "fr": "11. Accès au site web"
   },
   "care.p.11": {
-    "en": "Clients agree to provide [BUSINESS NAME] with the access needed (such as hosting or content-management credentials) to perform monitoring, backups, and updates under their plan.",
-    "fr": "Les clients acceptent de fournir à [BUSINESS NAME] les accès nécessaires (comme les identifiants d'hébergement ou de gestion de contenu) pour effectuer la surveillance, les sauvegardes et les mises à jour prévues à leur forfait."
+    "en": "Clients agree to provide Chezmaxo with the access needed (such as hosting or content-management credentials) to perform monitoring, backups, and updates under their plan.",
+    "fr": "Les clients acceptent de fournir à Chezmaxo les accès nécessaires (comme les identifiants d'hébergement ou de gestion de contenu) pour effectuer la surveillance, les sauvegardes et les mises à jour prévues à leur forfait."
   },
   "care.h2.12": {
     "en": "12. Client Responsibilities",
@@ -2072,8 +2072,8 @@ const I18N = {
     "fr": "14. Interruptions de service"
   },
   "care.p.14": {
-    "en": "[BUSINESS NAME] is not responsible for outages caused by hosting providers, domain registrars, or other third-party services outside of our direct control, though we will assist in resolving such issues where possible.",
-    "fr": "[BUSINESS NAME] n'est pas responsable des pannes causées par les fournisseurs d'hébergement, les registraires de domaine ou d'autres services tiers hors de notre contrôle direct, bien que nous aidions à résoudre ces problèmes lorsque possible."
+    "en": "Chezmaxo is not responsible for outages caused by hosting providers, domain registrars, or other third-party services outside of our direct control, though we will assist in resolving such issues where possible.",
+    "fr": "Chezmaxo n'est pas responsable des pannes causées par les fournisseurs d'hébergement, les registraires de domaine ou d'autres services tiers hors de notre contrôle direct, bien que nous aidions à résoudre ces problèmes lorsque possible."
   },
   "care.h2.15": {
     "en": "15. Ownership Terms",
@@ -2108,8 +2108,8 @@ const I18N = {
     "fr": "Les questions concernant votre forfait d'entretien peuvent être envoyées à [ADRESSE COURRIEL À REMPLACER]."
   },
   "title.home": {
-    "en": "[BUSINESS NAME] | Affordable Website Design & Care Plans for Small Businesses",
-    "fr": "[BUSINESS NAME] | Conception de sites web et forfaits d'entretien abordables pour PME"
+    "en": "Chezmaxo | Affordable Website Design & Care Plans for Small Businesses",
+    "fr": "Chezmaxo | Conception de sites web et forfaits d'entretien abordables pour PME"
   },
   "desc.home": {
     "en": "Professional, affordable websites for small businesses, with website care plans starting at $15/month for ongoing management, maintenance, and support.",
@@ -2156,80 +2156,80 @@ const I18N = {
     "fr": "Devis gratuit"
   },
   "title.services": {
-    "en": "Website Design, Management & Upgrades | [BUSINESS NAME]",
-    "fr": "Conception, gestion et améliorations de sites web | [BUSINESS NAME]"
+    "en": "Website Design, Management & Upgrades | Chezmaxo",
+    "fr": "Conception, gestion et améliorations de sites web | Chezmaxo"
   },
   "desc.services": {
     "en": "Custom website design, ongoing website management, and larger website upgrades for small businesses — all quoted clearly and approved before work begins.",
     "fr": "Conception de sites sur mesure, gestion continue et améliorations pour petites entreprises — le tout chiffré clairement et approuvé avant le début des travaux."
   },
   "title.pricing": {
-    "en": "Pricing | Website Care Plans From $15/Month | [BUSINESS NAME]",
-    "fr": "Tarifs | Forfaits d'entretien à partir de 15 $/mois | [BUSINESS NAME]"
+    "en": "Pricing | Website Care Plans From $15/Month | Chezmaxo",
+    "fr": "Tarifs | Forfaits d'entretien à partir de 15 $/mois | Chezmaxo"
   },
   "desc.pricing": {
     "en": "Website care plans starting at $15/month, plus clear starting prices for new website development. Simple, honest small-business website pricing.",
     "fr": "Forfaits d'entretien à partir de 15 $/mois, ainsi que des prix de départ clairs pour le développement de nouveaux sites. Des tarifs simples et honnêtes pour petites entreprises."
   },
   "title.how": {
-    "en": "How It Works | [BUSINESS NAME]",
-    "fr": "Comment ça marche | [BUSINESS NAME]"
+    "en": "How It Works | Chezmaxo",
+    "fr": "Comment ça marche | Chezmaxo"
   },
   "desc.how": {
     "en": "See our simple 5-step process for building and launching your small-business website, from free consultation to ongoing support.",
     "fr": "Découvrez notre processus simple en 5 étapes pour créer et lancer votre site web, de la consultation gratuite au soutien continu."
   },
   "title.portfolio": {
-    "en": "Portfolio | Small Business Websites We've Built | [BUSINESS NAME]",
-    "fr": "Portfolio | Sites web de petites entreprises réalisés | [BUSINESS NAME]"
+    "en": "Portfolio | Small Business Websites We've Built | Chezmaxo",
+    "fr": "Portfolio | Sites web de petites entreprises réalisés | Chezmaxo"
   },
   "desc.portfolio": {
     "en": "Browse sample small-business website projects across local business, restaurant, contractor, event, consultant, beauty, and community categories.",
     "fr": "Parcourez des exemples de projets de sites web pour petites entreprises : commerces locaux, restaurants, entrepreneurs, événementiel, consultants, beauté et organismes communautaires."
   },
   "title.about": {
-    "en": "About Us | [BUSINESS NAME]",
-    "fr": "À propos | [BUSINESS NAME]"
+    "en": "About Us | Chezmaxo",
+    "fr": "À propos | Chezmaxo"
   },
   "desc.about": {
-    "en": "Learn why [BUSINESS NAME] was created to give small businesses professional, affordable websites with reliable, ongoing support.",
-    "fr": "Découvrez pourquoi [BUSINESS NAME] a été créé pour offrir aux petites entreprises des sites web professionnels et abordables avec un soutien fiable et continu."
+    "en": "Learn why Chezmaxo was created to give small businesses professional, affordable websites with reliable, ongoing support.",
+    "fr": "Découvrez pourquoi Chezmaxo a été créé pour offrir aux petites entreprises des sites web professionnels et abordables avec un soutien fiable et continu."
   },
   "title.faq": {
-    "en": "Frequently Asked Questions | [BUSINESS NAME]",
-    "fr": "Foire aux questions | [BUSINESS NAME]"
+    "en": "Frequently Asked Questions | Chezmaxo",
+    "fr": "Foire aux questions | Chezmaxo"
   },
   "desc.faq": {
     "en": "Answers to common questions about website care plans, pricing, updates, ownership, and support for small-business websites.",
     "fr": "Réponses aux questions fréquentes sur les forfaits d'entretien, les tarifs, les mises à jour, la propriété et le soutien pour sites web de petites entreprises."
   },
   "title.contact": {
-    "en": "Contact Us | Get a Free Website Quote | [BUSINESS NAME]",
-    "fr": "Contact | Devis gratuit pour site web | [BUSINESS NAME]"
+    "en": "Contact Us | Get a Free Website Quote | Chezmaxo",
+    "fr": "Contact | Devis gratuit pour site web | Chezmaxo"
   },
   "desc.contact": {
-    "en": "Tell us about your business and the website you need. Request a free, no-obligation website quote from [BUSINESS NAME] today.",
+    "en": "Tell us about your business and the website you need. Request a free, no-obligation website quote from Chezmaxo today.",
     "fr": "Parlez-nous de votre entreprise et du site web dont vous avez besoin. Demandez un devis gratuit et sans obligation dès aujourd'hui."
   },
   "title.privacy": {
-    "en": "Privacy Policy | [BUSINESS NAME]",
-    "fr": "Politique de confidentialité | [BUSINESS NAME]"
+    "en": "Privacy Policy | Chezmaxo",
+    "fr": "Politique de confidentialité | Chezmaxo"
   },
   "desc.privacy": {
-    "en": "Privacy Policy template for [BUSINESS NAME]. Review and customize before publishing.",
-    "fr": "Modèle de politique de confidentialité pour [BUSINESS NAME]. À réviser et personnaliser avant publication."
+    "en": "Privacy Policy template for Chezmaxo. Review and customize before publishing.",
+    "fr": "Modèle de politique de confidentialité pour Chezmaxo. À réviser et personnaliser avant publication."
   },
   "title.terms": {
-    "en": "Terms of Service | [BUSINESS NAME]",
-    "fr": "Conditions d'utilisation | [BUSINESS NAME]"
+    "en": "Terms of Service | Chezmaxo",
+    "fr": "Conditions d'utilisation | Chezmaxo"
   },
   "desc.terms": {
-    "en": "Terms of Service template for [BUSINESS NAME]. Review and customize before publishing.",
-    "fr": "Modèle de conditions d'utilisation pour [BUSINESS NAME]. À réviser et personnaliser avant publication."
+    "en": "Terms of Service template for Chezmaxo. Review and customize before publishing.",
+    "fr": "Modèle de conditions d'utilisation pour Chezmaxo. À réviser et personnaliser avant publication."
   },
   "title.care": {
-    "en": "Website Care Plan Terms | [BUSINESS NAME]",
-    "fr": "Conditions du forfait d'entretien | [BUSINESS NAME]"
+    "en": "Website Care Plan Terms | Chezmaxo",
+    "fr": "Conditions du forfait d'entretien | Chezmaxo"
   },
   "desc.care": {
     "en": "Website Care Plan Terms template covering what's included, excluded, response times, and more. Review and customize before publishing.",
@@ -2238,7 +2238,7 @@ const I18N = {
 };
 
 /* =========================================================================
-   [BUSINESS NAME] — EN / FR language toggle
+   Chezmaxo — EN / FR language toggle
    I18N (the translation dictionary) is generated at build time and loaded
    just before this file. This file only contains the switching logic.
    ========================================================================= */
