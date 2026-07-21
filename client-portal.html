@@ -29,7 +29,7 @@
 <script src="https://www.paypal.com/sdk/js" id="paypalSdkPlaceholder"></script>
 <script>
 const STAGES = ["Submitted","In Progress","Review","Live"];
-const PLANS = [{name:"Starter Care",price:5},{name:"Monthly Support",price:15},{name:"Business Care",price:39}];
+const PLANS = Object.keys(PLAN_PRICES).map(name => ({ name, price: PLAN_PRICES[name] }));
 let state = { tab: "plan", profile: null, requests: [], payments: [], messages: [], chatChannel: null };
 
 function badgeClass(plan){
