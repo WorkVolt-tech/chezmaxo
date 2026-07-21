@@ -72,8 +72,8 @@ const I18N = {
     "fr": "Conditions du forfait d'entretien"
   },
   "home.hero.badge": {
-    "en": "Website care plans starting at only $5/month",
-    "fr": "Forfaits d'entretien de site web à partir de seulement 5 $/mois"
+    "en": "Website care plans starting at only $15/month",
+    "fr": "Forfaits d'entretien de site web à partir de seulement 15 $/mois"
   },
   "home.hero.h1": {
     "en": "Professional Websites Made Simple.",
@@ -144,8 +144,8 @@ const I18N = {
     "fr": "Forfait"
   },
   "home.ticket.planv": {
-    "en": "Starter Care — $5/mo",
-    "fr": "Forfait de base — 5 $/mois"
+    "en": "Starter Care — $15/mo",
+    "fr": "Forfait de base — 15 $/mois"
   },
   "home.how.eyebrow": {
     "en": "How it works",
@@ -156,8 +156,8 @@ const I18N = {
     "fr": "Créé une fois. Entretenu chaque mois."
   },
   "home.how.p": {
-    "en": "Most agencies disappear after launch. We stick around — for as little as $5 a month — so your website keeps working as hard as you do.",
-    "fr": "La plupart des agences disparaissent après le lancement. Nous restons présents — pour aussi peu que 5 $ par mois — pour que votre site web travaille aussi fort que vous."
+    "en": "Most agencies disappear after launch. We stick around — for as little as $15 a month — so your website keeps working as hard as you do.",
+    "fr": "La plupart des agences disparaissent après le lancement. Nous restons présents — pour aussi peu que 15 $ par mois — pour que votre site web travaille aussi fort que vous."
   },
   "home.how.c1h": {
     "en": "1. We design your site",
@@ -180,8 +180,8 @@ const I18N = {
     "fr": "3. Nous le maintenons en marche"
   },
   "home.how.c3p": {
-    "en": "With a care plan starting at $5/month, we monitor, back up, and make small updates so your website stays current and reliable.",
-    "fr": "Avec un forfait d'entretien à partir de 5 $/mois, nous surveillons, sauvegardons et effectuons de petites mises à jour pour que votre site reste à jour et fiable."
+    "en": "With a care plan starting at $15/month, we monitor, back up, and make small updates so your website stays current and reliable.",
+    "fr": "Avec un forfait d'entretien à partir de 15 $/mois, nous surveillons, sauvegardons et effectuons de petites mises à jour pour que votre site reste à jour et fiable."
   },
   "home.design.eyebrow": {
     "en": "Website design",
@@ -300,8 +300,8 @@ const I18N = {
     "fr": "Concentrez-vous sur vos clients. Nous veillons sur le site web."
   },
   "home.mgmt.p": {
-    "en": "Once your site is live, our care plans handle the technical side — monitoring, backups, and small updates like a phone number change or a new business hour — starting at just $5 a month.",
-    "fr": "Une fois votre site en ligne, nos forfaits d'entretien s'occupent du côté technique — surveillance, sauvegardes et petites mises à jour comme un changement de numéro de téléphone ou une nouvelle heure d'ouverture — à partir de seulement 5 $ par mois."
+    "en": "Once your site is live, our care plans handle the technical side — monitoring, backups, and small updates like a phone number change or a new business hour — starting at just $15 a month.",
+    "fr": "Une fois votre site en ligne, nos forfaits d'entretien s'occupent du côté technique — surveillance, sauvegardes et petites mises à jour comme un changement de numéro de téléphone ou une nouvelle heure d'ouverture — à partir de seulement 15 $ par mois."
   },
   "home.mgmt.li1": {
     "en": "Website monitoring & backups",
@@ -452,16 +452,16 @@ const I18N = {
     "fr": "Ce que disent les propriétaires d'entreprise."
   },
   "home.testi.1": {
-    "en": "“I never have to think about my website anymore. If something needs changing, I send a quick message and it's handled. Worth every penny of the $15 plan.”",
-    "fr": "« Je n'ai plus jamais à penser à mon site web. Si quelque chose doit changer, j'envoie un message rapide et c'est réglé. Ça vaut chaque sou du forfait à 15 $. »"
+    "en": "“I never have to think about my website anymore. If something needs changing, I send a quick message and it's handled. Worth every penny of the $30 plan.”",
+    "fr": "« Je n'ai plus jamais à penser à mon site web. Si quelque chose doit changer, j'envoie un message rapide et c'est réglé. Ça vaut chaque sou du forfait à 30 $. »"
   },
   "home.testi.1biz": {
     "en": "Owner, Precision Home Repairs",
     "fr": "Propriétaire, Précision Rénovations"
   },
   "home.testi.2": {
-    "en": "“They built our site fast and it actually looks like a real business, not a template. The $5 plan keeps it running without me lifting a finger.”",
-    "fr": "« Ils ont créé notre site rapidement et il ressemble vraiment à une entreprise sérieuse, pas à un modèle générique. Le forfait à 5 $ le garde fonctionnel sans que j'aie à lever le petit doigt. »"
+    "en": "“They built our site fast and it actually looks like a real business, not a template. The $15 plan keeps it running without me lifting a finger.”",
+    "fr": "« Ils ont créé notre site rapidement et il ressemble vraiment à une entreprise sérieuse, pas à un modèle générique. Le forfait à 15 $ le garde fonctionnel sans que j'aie à lever le petit doigt. »"
   },
   "home.testi.2biz": {
     "en": "Owner, The Fade Room Barbershop",
@@ -488,8 +488,8 @@ const I18N = {
     "fr": "Des réponses rapides avant de nous contacter."
   },
   "faq.q1": {
-    "en": "What's included in the $5 monthly plan?",
-    "fr": "Qu'est-ce qui est inclus dans le forfait mensuel de 5 $?"
+    "en": "What's included in the $15 monthly plan?",
+    "fr": "Qu'est-ce qui est inclus dans le forfait mensuel de 15 $?"
   },
   "faq.a1": {
     "en": "Basic monitoring, basic backups, email support, minor technical fixes, and one very small content update every three months. It's built for websites that mostly just need to stay healthy and online.",
@@ -612,8 +612,8 @@ const I18N = {
     "fr": "Vous ne devriez pas avoir besoin d'être développeur web pour gérer votre site."
   },
   "services.mgmt.p": {
-    "en": "Once your site is live, our care plans take the technical maintenance off your plate — starting at just $5 a month.",
-    "fr": "Une fois votre site en ligne, nos forfaits d'entretien s'occupent de la maintenance technique — à partir de seulement 5 $ par mois."
+    "en": "Once your site is live, our care plans take the technical maintenance off your plate — starting at just $15 a month.",
+    "fr": "Une fois votre site en ligne, nos forfaits d'entretien s'occupent de la maintenance technique — à partir de seulement 15 $ par mois."
   },
   "services.m1h": {
     "en": "Basic monitoring",
@@ -735,6 +735,10 @@ const I18N = {
     "en": "View Pricing",
     "fr": "Voir les tarifs"
   },
+  "common.year": {
+    "en": "year",
+    "fr": "année"
+  },
   "breadcrumb.pricing": {
     "en": "PRICING",
     "fr": "TARIFS"
@@ -758,6 +762,22 @@ const I18N = {
   "pricing.plans.p": {
     "en": "Every plan includes monitoring, backups, and support. The difference is how much update time is included each month.",
     "fr": "Chaque forfait comprend la surveillance, les sauvegardes et le soutien. La différence réside dans le temps de mise à jour inclus chaque mois."
+  },
+  "pricing.cycle.monthly": {
+    "en": "Monthly",
+    "fr": "Mensuel"
+  },
+  "pricing.cycle.yearly": {
+    "en": "Yearly",
+    "fr": "Annuel"
+  },
+  "pricing.cycle.savetag": {
+    "en": "2 months free",
+    "fr": "2 mois gratuits"
+  },
+  "pricing.starter.save": {
+    "en": "Save $30/year",
+    "fr": "Économisez 30 $/année"
   },
   "pricing.starter.desc": {
     "en": "For websites that just need to stay healthy, secure, and online.",
@@ -792,8 +812,12 @@ const I18N = {
     "fr": "Choisir le forfait de base"
   },
   "pricing.starter.note": {
-    "en": "Starting at only $5/month.",
-    "fr": "À partir de seulement 5 $/mois."
+    "en": "No long-term contract — cancel anytime.",
+    "fr": "Aucun contrat à long terme — annulez en tout temps."
+  },
+  "pricing.monthly.save": {
+    "en": "Save $60/year",
+    "fr": "Économisez 60 $/année"
   },
   "pricing.monthly.desc": {
     "en": "For businesses whose website details change on a regular basis.",
@@ -818,6 +842,10 @@ const I18N = {
   "pricing.monthly.note": {
     "en": "Our most popular plan for active small businesses.",
     "fr": "Notre forfait le plus populaire pour les petites entreprises actives."
+  },
+  "pricing.business.save": {
+    "en": "Save $160/year",
+    "fr": "Économisez 160 $/année"
   },
   "pricing.business.desc": {
     "en": "For growing businesses that want faster turnaround and more monthly work time.",
@@ -850,6 +878,10 @@ const I18N = {
   "pricing.business.note": {
     "en": "Best for businesses that update their site often.",
     "fr": "Idéal pour les entreprises qui mettent à jour leur site souvent."
+  },
+  "pricing.annual.note": {
+    "en": "Yearly plans are paid upfront for the year. Monthly plans have no long-term contract.",
+    "fr": "Les forfaits annuels sont payés d'avance pour l'année. Les forfaits mensuels n'ont aucun contrat à long terme."
   },
   "pricing.notice.label": {
     "en": "Please note",
@@ -980,8 +1012,8 @@ const I18N = {
     "fr": "Lancement et soutien continu"
   },
   "how.s5p": {
-    "en": "We connect your domain, launch your website, and set you up with a care plan starting at $5/month — so monitoring, backups, and small updates are handled going forward.",
-    "fr": "Nous connectons votre domaine, lançons votre site web et vous inscrivons à un forfait d'entretien à partir de 5 $/mois — pour que la surveillance, les sauvegardes et les petites mises à jour soient prises en charge par la suite."
+    "en": "We connect your domain, launch your website, and set you up with a care plan starting at $15/month — so monitoring, backups, and small updates are handled going forward.",
+    "fr": "Nous connectons votre domaine, lançons votre site web et vous inscrivons à un forfait d'entretien à partir de 15 $/mois — pour que la surveillance, les sauvegardes et les petites mises à jour soient prises en charge par la suite."
   },
   "how.cta.h2": {
     "en": "Ready to start with a free consultation?",
@@ -1280,8 +1312,8 @@ const I18N = {
     "fr": "Tarifs abordables"
   },
   "about.p2p": {
-    "en": "Website plans priced for real small-business budgets, starting at just $5/month.",
-    "fr": "Des forfaits à des prix adaptés aux budgets réels des petites entreprises, à partir de seulement 5 $/mois."
+    "en": "Website plans priced for real small-business budgets, starting at just $15/month.",
+    "fr": "Des forfaits à des prix adaptés aux budgets réels des petites entreprises, à partir de seulement 15 $/mois."
   },
   "about.p3h": {
     "en": "Reliable support",
@@ -1916,8 +1948,8 @@ const I18N = {
     "fr": "1. Forfaits couverts"
   },
   "care.p.1": {
-    "en": "These terms apply to the Starter Care ($5/month), Monthly Support ($15/month), and Business Care ($39/month) plans described on our Pricing page.",
-    "fr": "Ces conditions s'appliquent aux forfaits de base (5 $/mois), soutien mensuel (15 $/mois) et affaires (39 $/mois) décrits sur notre page Tarifs."
+    "en": "These terms apply to the Starter Care ($15/month), Monthly Support ($30/month), and Business Care ($80/month) plans described on our Pricing page.",
+    "fr": "Ces conditions s'appliquent aux forfaits de base (15 $/mois), soutien mensuel (30 $/mois) et affaires (80 $/mois) décrits sur notre page Tarifs."
   },
   "care.h2.2": {
     "en": "2. What's Included",
@@ -2080,8 +2112,8 @@ const I18N = {
     "fr": "[BUSINESS NAME] | Conception de sites web et forfaits d'entretien abordables pour PME"
   },
   "desc.home": {
-    "en": "Professional, affordable websites for small businesses, with website care plans starting at $5/month for ongoing management, maintenance, and support.",
-    "fr": "Des sites web professionnels et abordables pour les petites entreprises, avec des forfaits d'entretien à partir de 5 $/mois pour la gestion, la maintenance et le soutien continus."
+    "en": "Professional, affordable websites for small businesses, with website care plans starting at $15/month for ongoing management, maintenance, and support.",
+    "fr": "Des sites web professionnels et abordables pour les petites entreprises, avec des forfaits d'entretien à partir de 15 $/mois pour la gestion, la maintenance et le soutien continus."
   },
   "nav.home": {
     "en": "Home",
@@ -2132,12 +2164,12 @@ const I18N = {
     "fr": "Conception de sites sur mesure, gestion continue et améliorations pour petites entreprises — le tout chiffré clairement et approuvé avant le début des travaux."
   },
   "title.pricing": {
-    "en": "Pricing | Website Care Plans From $5/Month | [BUSINESS NAME]",
-    "fr": "Tarifs | Forfaits d'entretien à partir de 5 $/mois | [BUSINESS NAME]"
+    "en": "Pricing | Website Care Plans From $15/Month | [BUSINESS NAME]",
+    "fr": "Tarifs | Forfaits d'entretien à partir de 15 $/mois | [BUSINESS NAME]"
   },
   "desc.pricing": {
-    "en": "Website care plans starting at $5/month, plus clear starting prices for new website development. Simple, honest small-business website pricing.",
-    "fr": "Forfaits d'entretien à partir de 5 $/mois, ainsi que des prix de départ clairs pour le développement de nouveaux sites. Des tarifs simples et honnêtes pour petites entreprises."
+    "en": "Website care plans starting at $15/month, plus clear starting prices for new website development. Simple, honest small-business website pricing.",
+    "fr": "Forfaits d'entretien à partir de 15 $/mois, ainsi que des prix de départ clairs pour le développement de nouveaux sites. Des tarifs simples et honnêtes pour petites entreprises."
   },
   "title.how": {
     "en": "How It Works | [BUSINESS NAME]",
