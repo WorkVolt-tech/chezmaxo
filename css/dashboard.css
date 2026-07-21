@@ -108,3 +108,9 @@ button{font-family:inherit;cursor:pointer;}
 .empty-note{color:var(--ink-faint);font-size:13px;}
 .topbar .user-chip{font-family:var(--font-mono);font-size:12px;color:var(--ink-soft);display:flex;align-items:center;gap:10px;}
 .topbar .user-chip button{background:none;border:1px solid var(--border-strong);border-radius:8px;padding:5px 10px;font-size:12px;color:var(--ink-soft);}
+
+.billing-toggle{display:flex;gap:2px;width:fit-content;border:1.5px solid var(--border-strong);border-radius:100px;padding:4px;}
+.cycle-btn{font-family:var(--font-body);font-weight:600;font-size:13.5px;background:none;border:none;padding:8px 18px;border-radius:100px;color:var(--ink-soft);display:flex;align-items:center;gap:8px;}
+.cycle-btn.active{background:var(--color-primary);color:#fff;}
+.cycle-save-tag{font-family:var(--font-mono);font-size:10.5px;background:var(--color-accent);color:#fff;padding:2px 7px;border-radius:100px;}
+.cycle-btn.active .cycle-save-tag{background:rgba(255,255,255,0.25);}
