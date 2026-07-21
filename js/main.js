@@ -68,13 +68,19 @@ document.addEventListener('DOMContentLoaded', function () {
   if (form) {
     var successBox = document.getElementById('form-success');
 
+    function msg(key, fallback) {
+      var lang = window.__currentLang || 'en';
+      if (typeof I18N !== 'undefined' && I18N[key] && I18N[key][lang]) return I18N[key][lang];
+      return fallback;
+    }
+
     var validators = {
-      fullName: function (v) { return v.trim().length > 1 ? '' : 'Please enter your full name.'; },
-      email: function (v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) ? '' : 'Please enter a valid email address.'; },
-      phone: function (v) { return v.trim().length >= 7 ? '' : 'Please enter a valid phone number.'; },
-      businessName: function (v) { return v.trim().length > 1 ? '' : 'Please enter your business name.'; },
-      serviceNeeded: function (v) { return v ? '' : 'Please select what you need help with.'; },
-      description: function (v) { return v.trim().length > 9 ? '' : 'Please tell us a little more about your project (10+ characters).'; }
+      fullName: function (v) { return v.trim().length > 1 ? '' : msg('valid.name', 'Please enter your full name.'); },
+      email: function (v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) ? '' : msg('valid.email', 'Please enter a valid email address.'); },
+      phone: function (v) { return v.trim().length >= 7 ? '' : msg('valid.phone', 'Please enter a valid phone number.'); },
+      businessName: function (v) { return v.trim().length > 1 ? '' : msg('valid.biz', 'Please enter your business name.'); },
+      serviceNeeded: function (v) { return v ? '' : msg('valid.service', 'Please select what you need help with.'); },
+      description: function (v) { return v.trim().length > 9 ? '' : msg('valid.desc', 'Please tell us a little more about your project (10+ characters).'); }
     };
 
     function showError(field, message) {
