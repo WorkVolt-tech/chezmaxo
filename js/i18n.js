@@ -908,8 +908,8 @@ const I18N = {
     "fr": "Site de base"
   },
   "pricing.dev.starter.amt": {
-    "en": "Starting at $399",
-    "fr": "À partir de 399 $"
+    "en": "Starting at $199",
+    "fr": "À partir de 199 $"
   },
   "pricing.dev.starter.p": {
     "en": "A clean, professional starting point — ideal for new or simple small businesses.",
@@ -920,8 +920,8 @@ const I18N = {
     "fr": "Site affaires"
   },
   "pricing.dev.business.amt": {
-    "en": "Starting at $699",
-    "fr": "À partir de 699 $"
+    "en": "Starting at $399",
+    "fr": "À partir de 399 $"
   },
   "pricing.dev.business.p": {
     "en": "More pages and features for established businesses that want a fuller presence.",
@@ -1400,8 +1400,8 @@ const I18N = {
     "fr": "Combien coûte un site web?"
   },
   "faq.a6": {
-    "en": "Website development starts at $399 for a Starter Website, $699 for a Business Website, and Advanced Websites (with features like online stores or booking systems) are custom-quoted. Final pricing depends on pages, features, content, and complexity.",
-    "fr": "Le développement de site web débute à 399 $ pour un site de base, 699 $ pour un site affaires, et les sites avancés (avec fonctionnalités comme boutiques en ligne ou systèmes de réservation) font l'objet d'un devis personnalisé. Le prix final dépend des pages, fonctionnalités, contenu et complexité."
+    "en": "Website development starts at $199 for a Starter Website, $399 for a Business Website, and Advanced Websites (with features like online stores or booking systems) are custom-quoted. Final pricing depends on pages, features, content, and complexity.",
+    "fr": "Le développement de site web débute à 199 $ pour un site de base, 399 $ pour un site affaires, et les sites avancés (avec fonctionnalités comme boutiques en ligne ou systèmes de réservation) font l'objet d'un devis personnalisé. Le prix final dépend des pages, fonctionnalités, contenu et complexité."
   },
   "faq.q7": {
     "en": "How long does it take to build a website?",
