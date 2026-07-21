@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>[BUSINESS NAME] | Affordable Website Design &amp; Care Plans for Small Businesses</title>
-<meta name="description" content="Professional, affordable websites for small businesses, with website care plans starting at $5/month for ongoing management, maintenance, and support.">
-<link rel="canonical" href="https://www.yourbusiness.com/index.html">
+<title data-i18n="title.home">[BUSINESS NAME] | Affordable Website Design & Care Plans for Small Businesses</title>
+<meta name="description" content="Professional, affordable websites for small businesses, with website care plans starting at $5/month for ongoing management, maintenance, and support." data-i18n-content="desc.home">
+<link rel="canonical" href="https://www.chezmaxo.ca/index.html">
 
-<!-- Open Graph (placeholders — update image URL and site name before launch) -->
+<!-- Open Graph (placeholders — update image URL before launch) -->
 <meta property="og:type" content="website">
-<meta property="og:title" content="[BUSINESS NAME] | Affordable Website Design &amp; Care Plans for Small Businesses">
-<meta property="og:description" content="Professional, affordable websites for small businesses, with website care plans starting at $5/month for ongoing management, maintenance, and support.">
-<meta property="og:image" content="https://www.yourbusiness.com/images/og-cover.jpg">
-<meta property="og:url" content="https://www.yourbusiness.com/index.html">
+<meta property="og:title" content="[BUSINESS NAME] | Affordable Website Design & Care Plans for Small Businesses" data-i18n-content="title.home">
+<meta property="og:description" content="Professional, affordable websites for small businesses, with website care plans starting at $5/month for ongoing management, maintenance, and support." data-i18n-content="desc.home">
+<meta property="og:image" content="https://www.chezmaxo.ca/images/og-cover.jpg">
+<meta property="og:url" content="https://www.chezmaxo.ca/index.html">
 <meta property="og:site_name" content="[BUSINESS NAME]">
 <meta name="twitter:card" content="summary_large_image">
 
@@ -27,18 +27,26 @@
   <div class="nav-wrap">
     <a href="index.html" class="brand"><span class="mark">WD</span> [BUSINESS NAME]</a>
     <nav class="nav-links" id="nav-links" aria-label="Primary">
-        <a href="index.html" class="active">Home</a>
-        <a href="services.html">Services</a>
-        <a href="pricing.html">Pricing</a>
-        <a href="how-it-works.html">How It Works</a>
-        <a href="portfolio.html">Portfolio</a>
-        <a href="about.html">About</a>
-        <a href="faq.html">FAQ</a>
-        <a href="contact.html">Contact</a>
+        <a href="index.html" class="active" data-i18n="nav.home">Home</a>
+        <a href="services.html" class="" data-i18n="nav.services">Services</a>
+        <a href="pricing.html" class="" data-i18n="nav.pricing">Pricing</a>
+        <a href="how-it-works.html" class="" data-i18n="nav.how">How It Works</a>
+        <a href="portfolio.html" class="" data-i18n="nav.portfolio">Portfolio</a>
+        <a href="about.html" class="" data-i18n="nav.about">About</a>
+        <a href="faq.html" class="" data-i18n="nav.faq">FAQ</a>
+        <a href="contact.html" class="" data-i18n="nav.contact">Contact</a>
+      <div class="mobile-cta">
+        <a href="pricing.html" class="btn btn-secondary btn-sm btn-block"><span data-i18n="nav.viewplans">View Plans</span></a>
+        <a href="contact.html" class="btn btn-primary btn-sm btn-block"><span data-i18n="nav.getquote">Get a Free Quote</span></a>
+      </div>
     </nav>
     <div class="nav-cta">
-      <a href="pricing.html" class="btn btn-secondary btn-sm">View Plans</a>
-      <a href="contact.html" class="btn btn-primary btn-sm">Get a Free Quote</a>
+      <div class="lang-toggle" role="group" aria-label="Language / Langue">
+        <button class="lang-btn" data-lang-btn="en" aria-pressed="true">EN</button>
+        <button class="lang-btn" data-lang-btn="fr" aria-pressed="false">FR</button>
+      </div>
+      <a href="pricing.html" class="btn btn-secondary btn-sm desktop-only" data-i18n="nav.viewplans">View Plans</a>
+      <a href="contact.html" class="btn btn-primary btn-sm desktop-only" data-i18n="nav.getquote">Get a Free Quote</a>
       <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">
         <span></span><span></span><span></span>
       </button>
@@ -49,28 +57,28 @@
 <section class="hero">
   <div class="container hero-grid">
     <div>
-      <div class="hero-badge"><span class="dot"></span> Website care plans starting at only $5/month</div>
-      <h1>Professional Websites Made Simple.</h1>
-      <p class="hero-lede">We build affordable websites for small businesses and help manage, maintain, and update them after launch — so you never have to think about hosting, backups, or broken links again.</p>
+      <div class="hero-badge"><span class="dot"></span> <span data-i18n="home.hero.badge">Website care plans starting at only $5/month</span></div>
+      <h1><span data-i18n="home.hero.h1">Professional Websites Made Simple.</span></h1>
+      <p class="hero-lede"><span data-i18n="home.hero.lede">We build affordable websites for small businesses and help manage, maintain, and update them after launch — so you never have to think about hosting, backups, or broken links again.</span></p>
       <div class="hero-actions">
-        <a href="contact.html" class="btn btn-primary">Get a Free Quote</a>
-        <a href="pricing.html" class="btn btn-ghost-light">View Website Plans</a>
+        <a href="contact.html" class="btn btn-primary"><span data-i18n="cta.getquote">Get a Free Quote</span></a>
+        <a href="pricing.html" class="btn btn-ghost-light"><span data-i18n="cta.viewplans">View Website Plans</span></a>
       </div>
-      <p style="color:rgba(255,255,255,0.65); font-size:14px; margin-bottom:0;">No pressure, no jargon — just a clear plan for your website.</p>
+      <p style="color:rgba(255,255,255,0.65); font-size:14px; margin-bottom:0;"><span data-i18n="home.hero.note">No pressure, no jargon — just a clear plan for your website.</span></p>
     </div>
     <div class="ticket">
       <div class="ticket-top">
         <div>
-          <div class="ticket-id">TICKET NO. 0148-CARE</div>
-          <strong style="color:var(--color-primary); font-family:var(--font-display); font-size:18px;">Monthly Website Check-Up</strong>
+          <div class="ticket-id"><span data-i18n="home.ticket.id">TICKET NO. 0148-CARE</span></div>
+          <strong style="color:var(--color-primary); font-family:var(--font-display); font-size:18px;"><span data-i18n="home.ticket.title">Monthly Website Check-Up</span></strong>
         </div>
-        <div class="ticket-stamp">ON TRACK</div>
+        <div class="ticket-stamp"><span data-i18n="home.ticket.stamp">ON TRACK</span></div>
       </div>
-      <div class="ticket-row"><span class="label"><span class="ticket-check">&#10003;</span>Uptime monitoring</span><span class="val">Passed</span></div>
-      <div class="ticket-row"><span class="label"><span class="ticket-check">&#10003;</span>Backup completed</span><span class="val">This week</span></div>
-      <div class="ticket-row"><span class="label"><span class="ticket-check">&#10003;</span>Business hours updated</span><span class="val">Done</span></div>
-      <div class="ticket-row"><span class="label"><span class="ticket-check">&#10003;</span>Security check</span><span class="val">Clear</span></div>
-      <div class="ticket-row"><span class="label">Plan</span><span class="val">Starter Care — $5/mo</span></div>
+      <div class="ticket-row"><span class="label"><span class="ticket-check">&#10003;</span><span data-i18n="home.ticket.row1">Uptime monitoring</span></span><span class="val"><span data-i18n="home.ticket.row1v">Passed</span></span></div>
+      <div class="ticket-row"><span class="label"><span class="ticket-check">&#10003;</span><span data-i18n="home.ticket.row2">Backup completed</span></span><span class="val"><span data-i18n="home.ticket.row2v">This week</span></span></div>
+      <div class="ticket-row"><span class="label"><span class="ticket-check">&#10003;</span><span data-i18n="home.ticket.row3">Business hours updated</span></span><span class="val"><span data-i18n="home.ticket.row3v">Done</span></span></div>
+      <div class="ticket-row"><span class="label"><span class="ticket-check">&#10003;</span><span data-i18n="home.ticket.row4">Security check</span></span><span class="val"><span data-i18n="home.ticket.row4v">Clear</span></span></div>
+      <div class="ticket-row"><span class="label"><span data-i18n="home.ticket.plan">Plan</span></span><span class="val"><span data-i18n="home.ticket.planv">Starter Care — $5/mo</span></span></div>
     </div>
   </div>
 </section>
@@ -78,25 +86,25 @@
 <section>
   <div class="container">
     <div class="section-head center">
-      <div class="eyebrow">How it works</div>
-      <h2>Built once. Looked after every month.</h2>
-      <p>Most agencies disappear after launch. We stick around — for as little as $5 a month — so your website keeps working as hard as you do.</p>
+      <div class="eyebrow"><span data-i18n="home.how.eyebrow">How it works</span></div>
+      <h2><span data-i18n="home.how.h2">Built once. Looked after every month.</span></h2>
+      <p><span data-i18n="home.how.p">Most agencies disappear after launch. We stick around — for as little as $5 a month — so your website keeps working as hard as you do.</span></p>
     </div>
     <div class="grid-3">
       <div class="card">
         <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="9" x2="9" y2="20"/></svg></div>
-        <h3>1. We design your site</h3>
-        <p>Tell us about your business and we build a clean, mobile-friendly website that matches your brand and your goals.</p>
+        <h3><span data-i18n="home.how.c1h">1. We design your site</span></h3>
+        <p><span data-i18n="home.how.c1p">Tell us about your business and we build a clean, mobile-friendly website that matches your brand and your goals.</span></p>
       </div>
       <div class="card">
         <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 15l-2 6 6-2 9-9a4 4 0 0 0-4-4l-9 9z"/><circle cx="15" cy="9" r="1.5"/></svg></div>
-        <h3>2. We launch it properly</h3>
-        <p>We connect your domain, set things up correctly behind the scenes, and get your site live without the technical headaches.</p>
+        <h3><span data-i18n="home.how.c2h">2. We launch it properly</span></h3>
+        <p><span data-i18n="home.how.c2p">We connect your domain, set things up correctly behind the scenes, and get your site live without the technical headaches.</span></p>
       </div>
       <div class="card">
         <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 1 1-5.4 5.4L4 17l3 3 5.3-5.3a4 4 0 0 1 5.4-5.4l-3-3z"/></svg></div>
-        <h3>3. We keep it running</h3>
-        <p>With a care plan starting at $5/month, we monitor, back up, and make small updates so your website stays current and reliable.</p>
+        <h3><span data-i18n="home.how.c3h">3. We keep it running</span></h3>
+        <p><span data-i18n="home.how.c3p">With a care plan starting at $5/month, we monitor, back up, and make small updates so your website stays current and reliable.</span></p>
       </div>
     </div>
   </div>
@@ -106,27 +114,27 @@
   <div class="container">
     <div class="grid-2">
       <div>
-        <div class="eyebrow">Website design</div>
-        <h2>A website that actually looks like your business.</h2>
-        <p style="color:var(--ink-soft); font-size:16px;">Every website is designed around your services, your branding, and the customers you're trying to reach — not a recycled template. You'll get a mobile-friendly design, clear service pages, a way for customers to reach you, and a site that's genuinely easy to find on Google.</p>
+        <div class="eyebrow"><span data-i18n="home.design.eyebrow">Website design</span></div>
+        <h2><span data-i18n="home.design.h2">A website that actually looks like your business.</span></h2>
+        <p style="color:var(--ink-soft); font-size:16px;"><span data-i18n="home.design.p">Every website is designed around your services, your branding, and the customers you're trying to reach — not a recycled template. You'll get a mobile-friendly design, clear service pages, a way for customers to reach you, and a site that's genuinely easy to find on Google.</span></p>
         <ul style="margin-top:18px;">
-          <li style="padding:6px 0; color:var(--ink-soft);">&#10003; Custom layout built around your services</li>
-          <li style="padding:6px 0; color:var(--ink-soft);">&#10003; Mobile-friendly on every screen size</li>
-          <li style="padding:6px 0; color:var(--ink-soft);">&#10003; Contact forms, photo galleries &amp; maps</li>
-          <li style="padding:6px 0; color:var(--ink-soft);">&#10003; Basic search-engine setup included</li>
+          <li style="padding:6px 0; color:var(--ink-soft);">&#10003; <span data-i18n="home.design.li1">Custom layout built around your services</span></li>
+          <li style="padding:6px 0; color:var(--ink-soft);">&#10003; <span data-i18n="home.design.li2">Mobile-friendly on every screen size</span></li>
+          <li style="padding:6px 0; color:var(--ink-soft);">&#10003; <span data-i18n="home.design.li3">Contact forms, photo galleries & maps</span></li>
+          <li style="padding:6px 0; color:var(--ink-soft);">&#10003; <span data-i18n="home.design.li4">Basic search-engine setup included</span></li>
         </ul>
-        <a href="services.html" class="btn btn-secondary" style="margin-top:18px;">See Website Design Details</a>
+        <a href="services.html" class="btn btn-secondary" style="margin-top:18px;"><span data-i18n="home.design.cta">See Website Design Details</span></a>
       </div>
       <div class="ticket">
         <div class="ticket-top">
-          <div class="ticket-id">TICKET NO. 0092-BUILD</div>
-          <div class="ticket-stamp">APPROVED</div>
+          <div class="ticket-id"><span data-i18n="home.ticket2.id">TICKET NO. 0092-BUILD</span></div>
+          <div class="ticket-stamp"><span data-i18n="home.ticket2.stamp">APPROVED</span></div>
         </div>
-        <div class="ticket-row"><span class="label">Business type</span><span class="val">Local Contractor</span></div>
-        <div class="ticket-row"><span class="label">Pages included</span><span class="val">5</span></div>
-        <div class="ticket-row"><span class="label">Mobile-friendly</span><span class="val">Yes</span></div>
-        <div class="ticket-row"><span class="label">Contact form</span><span class="val">Yes</span></div>
-        <div class="ticket-row"><span class="label">Starting price</span><span class="val">$399</span></div>
+        <div class="ticket-row"><span class="label"><span data-i18n="home.ticket2.r1">Business type</span></span><span class="val"><span data-i18n="home.ticket2.r1v">Local Contractor</span></span></div>
+        <div class="ticket-row"><span class="label"><span data-i18n="home.ticket2.r2">Pages included</span></span><span class="val">5</span></div>
+        <div class="ticket-row"><span class="label"><span data-i18n="home.ticket2.r3">Mobile-friendly</span></span><span class="val"><span data-i18n="home.ticket2.r3v">Yes</span></span></div>
+        <div class="ticket-row"><span class="label"><span data-i18n="home.ticket2.r4">Contact form</span></span><span class="val"><span data-i18n="home.ticket2.r4v2">Yes</span></span></div>
+        <div class="ticket-row"><span class="label"><span data-i18n="home.ticket2.r5">Starting price</span></span><span class="val">$399</span></div>
       </div>
     </div>
   </div>
@@ -137,26 +145,26 @@
     <div class="grid-2">
       <div class="ticket" style="order:2;">
         <div class="ticket-top">
-          <div class="ticket-id">TICKET NO. 0148-CARE</div>
-          <div class="ticket-stamp">RENEWED</div>
+          <div class="ticket-id"><span data-i18n="home.ticket.id">TICKET NO. 0148-CARE</span></div>
+          <div class="ticket-stamp"><span data-i18n="home.ticket3.stamp">RENEWED</span></div>
         </div>
-        <div class="ticket-row"><span class="label">Plan</span><span class="val">Starter Care</span></div>
-        <div class="ticket-row"><span class="label">Monitoring &amp; backups</span><span class="val">Included</span></div>
-        <div class="ticket-row"><span class="label">Minor fixes</span><span class="val">Included</span></div>
-        <div class="ticket-row"><span class="label">Small update</span><span class="val">Every 3 months</span></div>
-        <div class="ticket-row"><span class="label">Price</span><span class="val">$5/month</span></div>
+        <div class="ticket-row"><span class="label"><span data-i18n="home.ticket.plan">Plan</span></span><span class="val"><span data-i18n="home.ticket3.r1v">Starter Care</span></span></div>
+        <div class="ticket-row"><span class="label"><span data-i18n="home.ticket3.r2">Monitoring & backups</span></span><span class="val"><span data-i18n="home.ticket3.included">Included</span></span></div>
+        <div class="ticket-row"><span class="label"><span data-i18n="home.ticket3.r3">Minor fixes</span></span><span class="val"><span data-i18n="home.ticket3.included">Included</span></span></div>
+        <div class="ticket-row"><span class="label"><span data-i18n="home.ticket3.r4">Small update</span></span><span class="val"><span data-i18n="home.ticket3.r4v">Every 3 months</span></span></div>
+        <div class="ticket-row"><span class="label"><span data-i18n="common.price">Price</span></span><span class="val">$5/<span data-i18n="common.month">month</span></span></div>
       </div>
       <div style="order:1;">
-        <div class="eyebrow alt">Website management</div>
-        <h2>You focus on customers. We watch over the website.</h2>
-        <p style="color:var(--ink-soft); font-size:16px;">Once your site is live, our care plans handle the technical side — monitoring, backups, and small updates like a phone number change or a new business hour — starting at just $5 a month.</p>
+        <div class="eyebrow alt"><span data-i18n="home.mgmt.eyebrow">Website management</span></div>
+        <h2><span data-i18n="home.mgmt.h2">You focus on customers. We watch over the website.</span></h2>
+        <p style="color:var(--ink-soft); font-size:16px;"><span data-i18n="home.mgmt.p">Once your site is live, our care plans handle the technical side — monitoring, backups, and small updates like a phone number change or a new business hour — starting at just $5 a month.</span></p>
         <ul style="margin-top:18px;">
-          <li style="padding:6px 0; color:var(--ink-soft);">&#10003; Website monitoring &amp; backups</li>
-          <li style="padding:6px 0; color:var(--ink-soft);">&#10003; Small content &amp; image updates</li>
-          <li style="padding:6px 0; color:var(--ink-soft);">&#10003; Friendly, responsive support</li>
-          <li style="padding:6px 0; color:var(--ink-soft);">&#10003; Larger upgrades quoted separately &amp; approved by you first</li>
+          <li style="padding:6px 0; color:var(--ink-soft);">&#10003; <span data-i18n="home.mgmt.li1">Website monitoring & backups</span></li>
+          <li style="padding:6px 0; color:var(--ink-soft);">&#10003; <span data-i18n="home.mgmt.li2">Small content & image updates</span></li>
+          <li style="padding:6px 0; color:var(--ink-soft);">&#10003; <span data-i18n="home.mgmt.li3">Friendly, responsive support</span></li>
+          <li style="padding:6px 0; color:var(--ink-soft);">&#10003; <span data-i18n="home.mgmt.li4">Larger upgrades quoted separately & approved by you first</span></li>
         </ul>
-        <a href="pricing.html" class="btn btn-secondary" style="margin-top:18px;">See Care Plan Pricing</a>
+        <a href="pricing.html" class="btn btn-secondary" style="margin-top:18px;"><span data-i18n="home.mgmt.cta">See Care Plan Pricing</span></a>
       </div>
     </div>
   </div>
@@ -165,49 +173,49 @@
 <section class="bg-alt">
   <div class="container">
     <div class="section-head center">
-      <div class="eyebrow">Pricing preview</div>
-      <h2>Simple pricing, no surprises.</h2>
-      <p>One upfront fee to build your website, then an affordable monthly plan to keep it running smoothly.</p>
+      <div class="eyebrow"><span data-i18n="home.pricing.eyebrow">Pricing preview</span></div>
+      <h2><span data-i18n="home.pricing.h2">Simple pricing, no surprises.</span></h2>
+      <p><span data-i18n="home.pricing.p">One upfront fee to build your website, then an affordable monthly plan to keep it running smoothly.</span></p>
     </div>
     <div class="plans">
       <div class="plan">
         <div class="plan-inner">
-          <div class="plan-name">Starter Care</div>
-          <div class="plan-price">$5<span>/month</span></div>
-          <p class="plan-desc">Basic monitoring, backups, and support for websites that just need to stay healthy.</p>
+          <div class="plan-name"><span data-i18n="plan.starter.name">Starter Care</span></div>
+          <div class="plan-price">$5<span>/<span data-i18n="common.month">month</span></span></div>
+          <p class="plan-desc"><span data-i18n="home.plan.starter.desc">Basic monitoring, backups, and support for websites that just need to stay healthy.</span></p>
           <ul class="plan-features">
-            <li><span class="yes">&#10003;</span> Monitoring &amp; backups</li>
-            <li><span class="yes">&#10003;</span> Minor technical fixes</li>
-            <li><span class="yes">&#10003;</span> One small update / 3 months</li>
+            <li><span class="yes">&#10003;</span> <span data-i18n="home.plan.starter.f1">Monitoring & backups</span></li>
+            <li><span class="yes">&#10003;</span> <span data-i18n="home.plan.starter.f2">Minor technical fixes</span></li>
+            <li><span class="yes">&#10003;</span> <span data-i18n="home.plan.starter.f3">One small update / 3 months</span></li>
           </ul>
-          <a href="pricing.html" class="btn btn-secondary btn-block">See Full Details</a>
+          <a href="pricing.html" class="btn btn-secondary btn-block"><span data-i18n="common.seedetails">See Full Details</span></a>
         </div>
       </div>
       <div class="plan featured">
-        <div class="plan-badge">Most Popular</div>
+        <div class="plan-badge"><span data-i18n="home.plan.popular">Most Popular</span></div>
         <div class="plan-inner">
-          <div class="plan-name">Monthly Support</div>
-          <div class="plan-price">$15<span>/month</span></div>
-          <p class="plan-desc">Regular small updates for businesses whose website details change often.</p>
+          <div class="plan-name"><span data-i18n="plan.monthly.name">Monthly Support</span></div>
+          <div class="plan-price">$15<span>/<span data-i18n="common.month">month</span></span></div>
+          <p class="plan-desc"><span data-i18n="home.plan.monthly.desc">Regular small updates for businesses whose website details change often.</span></p>
           <ul class="plan-features">
-            <li><span class="yes">&#10003;</span> Everything in Starter Care</li>
-            <li><span class="yes">&#10003;</span> One small update / month</li>
-            <li><span class="yes">&#10003;</span> Up to 15 minutes of work monthly</li>
+            <li><span class="yes">&#10003;</span> <span data-i18n="home.plan.monthly.f1">Everything in Starter Care</span></li>
+            <li><span class="yes">&#10003;</span> <span data-i18n="home.plan.monthly.f2">One small update / month</span></li>
+            <li><span class="yes">&#10003;</span> <span data-i18n="home.plan.monthly.f3">Up to 15 minutes of work monthly</span></li>
           </ul>
-          <a href="pricing.html" class="btn btn-primary btn-block">See Full Details</a>
+          <a href="pricing.html" class="btn btn-primary btn-block"><span data-i18n="common.seedetails">See Full Details</span></a>
         </div>
       </div>
       <div class="plan">
         <div class="plan-inner">
-          <div class="plan-name">Business Care</div>
-          <div class="plan-price">$39<span>/month</span></div>
-          <p class="plan-desc">Priority support and more monthly work time for growing businesses.</p>
+          <div class="plan-name"><span data-i18n="plan.business.name">Business Care</span></div>
+          <div class="plan-price">$39<span>/<span data-i18n="common.month">month</span></span></div>
+          <p class="plan-desc"><span data-i18n="home.plan.business.desc">Priority support and more monthly work time for growing businesses.</span></p>
           <ul class="plan-features">
-            <li><span class="yes">&#10003;</span> Everything in Monthly Support</li>
-            <li><span class="yes">&#10003;</span> Up to 45 minutes of work monthly</li>
-            <li><span class="yes">&#10003;</span> Priority, faster turnaround</li>
+            <li><span class="yes">&#10003;</span> <span data-i18n="home.plan.business.f1">Everything in Monthly Support</span></li>
+            <li><span class="yes">&#10003;</span> <span data-i18n="home.plan.business.f2">Up to 45 minutes of work monthly</span></li>
+            <li><span class="yes">&#10003;</span> <span data-i18n="home.plan.business.f3">Priority, faster turnaround</span></li>
           </ul>
-          <a href="pricing.html" class="btn btn-secondary btn-block">See Full Details</a>
+          <a href="pricing.html" class="btn btn-secondary btn-block"><span data-i18n="common.seedetails">See Full Details</span></a>
         </div>
       </div>
     </div>
@@ -217,18 +225,18 @@
 <section>
   <div class="container">
     <div class="section-head center">
-      <div class="eyebrow">Who we work with</div>
-      <h2>Built for the businesses that keep your town running.</h2>
+      <div class="eyebrow"><span data-i18n="home.who.eyebrow">Who we work with</span></div>
+      <h2><span data-i18n="home.who.h2">Built for the businesses that keep your town running.</span></h2>
     </div>
     <div class="grid-4">
-      <div class="card text-center"><div class="icon" style="margin:0 auto 14px;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 1 1-5.4 5.4L4 17l3 3 5.3-5.3a4 4 0 0 1 5.4-5.4l-3-3z"/></svg></div><h3 style="font-size:16px;">Contractors &amp; Handymen</h3></div>
-      <div class="card text-center"><div class="icon" style="margin:0 auto 14px;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2 20c0-3.3 3.1-6 7-6s7 2.7 7 6"/><circle cx="18" cy="9" r="2.6"/><path d="M16.5 14.2c2.6.5 4.5 2.4 4.5 5.8"/></svg></div><h3 style="font-size:16px;">Barbers &amp; Salons</h3></div>
-      <div class="card text-center"><div class="icon" style="margin:0 auto 14px;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="8" y1="3" x2="8" y2="7"/><line x1="16" y1="3" x2="16" y2="7"/></svg></div><h3 style="font-size:16px;">DJs &amp; Event Pros</h3></div>
-      <div class="card text-center"><div class="icon" style="margin:0 auto 14px;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg></div><h3 style="font-size:16px;">Cleaning Companies</h3></div>
-      <div class="card text-center"><div class="icon" style="margin:0 auto 14px;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="9" x2="9" y2="20"/></svg></div><h3 style="font-size:16px;">Restaurants</h3></div>
-      <div class="card text-center"><div class="icon" style="margin:0 auto 14px;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12l5-5 4 3 3-3 8 8"/><path d="M12 15l3 3"/></svg></div><h3 style="font-size:16px;">Consultants</h3></div>
-      <div class="card text-center"><div class="icon" style="margin:0 auto 14px;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 1 1-3.4-6.6L21 4l-1 4.5a7.9 7.9 0 0 1 1 3.5z"/></svg></div><h3 style="font-size:16px;">Daycares</h3></div>
-      <div class="card text-center"><div class="icon" style="margin:0 auto 14px;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="3" y1="12" x2="21" y2="12"/><path d="M12 3c2.5 2.6 4 6 4 9s-1.5 6.4-4 9c-2.5-2.6-4-6-4-9s1.5-6.4 4-9z"/></svg></div><h3 style="font-size:16px;">New &amp; Local Businesses</h3></div>
+      <div class="card text-center"><div class="icon" style="margin:0 auto 14px;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 1 1-5.4 5.4L4 17l3 3 5.3-5.3a4 4 0 0 1 5.4-5.4l-3-3z"/></svg></div><h3 style="font-size:16px;"><span data-i18n="home.who.1">Contractors & Handymen</span></h3></div>
+      <div class="card text-center"><div class="icon" style="margin:0 auto 14px;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2 20c0-3.3 3.1-6 7-6s7 2.7 7 6"/><circle cx="18" cy="9" r="2.6"/><path d="M16.5 14.2c2.6.5 4.5 2.4 4.5 5.8"/></svg></div><h3 style="font-size:16px;"><span data-i18n="home.who.2">Barbers & Salons</span></h3></div>
+      <div class="card text-center"><div class="icon" style="margin:0 auto 14px;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="8" y1="3" x2="8" y2="7"/><line x1="16" y1="3" x2="16" y2="7"/></svg></div><h3 style="font-size:16px;"><span data-i18n="home.who.3">DJs & Event Pros</span></h3></div>
+      <div class="card text-center"><div class="icon" style="margin:0 auto 14px;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg></div><h3 style="font-size:16px;"><span data-i18n="home.who.4">Cleaning Companies</span></h3></div>
+      <div class="card text-center"><div class="icon" style="margin:0 auto 14px;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="9" x2="9" y2="20"/></svg></div><h3 style="font-size:16px;"><span data-i18n="home.who.5">Restaurants</span></h3></div>
+      <div class="card text-center"><div class="icon" style="margin:0 auto 14px;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12l5-5 4 3 3-3 8 8"/><path d="M12 15l3 3"/></svg></div><h3 style="font-size:16px;"><span data-i18n="home.who.6">Consultants</span></h3></div>
+      <div class="card text-center"><div class="icon" style="margin:0 auto 14px;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 1 1-3.4-6.6L21 4l-1 4.5a7.9 7.9 0 0 1 1 3.5z"/></svg></div><h3 style="font-size:16px;"><span data-i18n="home.who.7">Daycares</span></h3></div>
+      <div class="card text-center"><div class="icon" style="margin:0 auto 14px;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="3" y1="12" x2="21" y2="12"/><path d="M12 3c2.5 2.6 4 6 4 9s-1.5 6.4-4 9c-2.5-2.6-4-6-4-9s1.5-6.4 4-9z"/></svg></div><h3 style="font-size:16px;"><span data-i18n="home.who.8">New & Local Businesses</span></h3></div>
     </div>
   </div>
 </section>
@@ -236,51 +244,51 @@
 <section class="bg-alt">
   <div class="container">
     <div class="section-head center">
-      <div class="eyebrow">Testimonials</div>
-      <h2>What business owners say.</h2>
+      <div class="eyebrow"><span data-i18n="home.testi.eyebrow">Testimonials</span></div>
+      <h2><span data-i18n="home.testi.h2">What business owners say.</span></h2>
     </div>
     <div class="grid-3">
       <div class="testimonial">
         <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-        <p>"I never have to think about my website anymore. If something needs changing, I send a quick message and it's handled. Worth every penny of the $15 plan."</p>
-        <div class="who"><div class="avatar">MR</div><div><div class="who-name">Marcus R.</div><div class="who-biz">Owner, Precision Home Repairs</div></div></div>
+        <p><span data-i18n="home.testi.1">“I never have to think about my website anymore. If something needs changing, I send a quick message and it's handled. Worth every penny of the $15 plan.”</span></p>
+        <div class="who"><div class="avatar">MR</div><div><div class="who-name">Marcus R.</div><div class="who-biz"><span data-i18n="home.testi.1biz">Owner, Precision Home Repairs</span></div></div></div>
       </div>
       <div class="testimonial">
         <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-        <p>"They built our site fast and it actually looks like a real business, not a template. The $5 plan keeps it running without me lifting a finger."</p>
-        <div class="who"><div class="avatar">JT</div><div><div class="who-name">Jasmine T.</div><div class="who-biz">Owner, The Fade Room Barbershop</div></div></div>
+        <p><span data-i18n="home.testi.2">“They built our site fast and it actually looks like a real business, not a template. The $5 plan keeps it running without me lifting a finger.”</span></p>
+        <div class="who"><div class="avatar">JT</div><div><div class="who-name">Jasmine T.</div><div class="who-biz"><span data-i18n="home.testi.2biz">Owner, The Fade Room Barbershop</span></div></div></div>
       </div>
       <div class="testimonial">
         <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-        <p>"Clear pricing, no surprise invoices, and they explain everything in plain English. Exactly what a small business owner needs."</p>
-        <div class="who"><div class="avatar">DP</div><div><div class="who-name">David P.</div><div class="who-biz">Owner, Sunrise Cleaning Co.</div></div></div>
+        <p><span data-i18n="home.testi.3">“Clear pricing, no surprise invoices, and they explain everything in plain English. Exactly what a small business owner needs.”</span></p>
+        <div class="who"><div class="avatar">DP</div><div><div class="who-name">David P.</div><div class="who-biz"><span data-i18n="home.testi.3biz">Owner, Sunrise Cleaning Co.</span></div></div></div>
       </div>
     </div>
-    <p class="placeholder-note" style="max-width:640px; margin:28px auto 0; text-align:center;">Placeholder testimonials shown above — replace with real client quotes (with permission) before launch.</p>
+    <p class="placeholder-note" style="max-width:640px; margin:28px auto 0; text-align:center;"><span data-i18n="home.testi.note">Placeholder testimonials shown above — replace with real client quotes (with permission) before launch.</span></p>
   </div>
 </section>
 
 <section>
   <div class="container">
     <div class="section-head center">
-      <div class="eyebrow">FAQ preview</div>
-      <h2>Quick answers before you reach out.</h2>
+      <div class="eyebrow"><span data-i18n="home.faqprev.eyebrow">FAQ preview</span></div>
+      <h2><span data-i18n="home.faqprev.h2">Quick answers before you reach out.</span></h2>
     </div>
     <div class="accordion" style="max-width:760px; margin:0 auto;">
       <div class="accordion-item">
-        <button class="accordion-btn" aria-expanded="false">What's included in the $5 monthly plan?<span class="plus">+</span></button>
-        <div class="accordion-panel"><div class="accordion-panel-inner">Basic monitoring, basic backups, email support, minor technical fixes, and one very small content update every three months. It's built for websites that mostly just need to stay healthy and online.</div></div>
+        <button class="accordion-btn" aria-expanded="false"><span data-i18n="faq.q1">What's included in the $5 monthly plan?</span><span class="plus">+</span></button>
+        <div class="accordion-panel"><div class="accordion-panel-inner"><span data-i18n="faq.a1">Basic monitoring, basic backups, email support, minor technical fixes, and one very small content update every three months. It's built for websites that mostly just need to stay healthy and online.</span></div></div>
       </div>
       <div class="accordion-item">
-        <button class="accordion-btn" aria-expanded="false">What counts as a "small" update?<span class="plus">+</span></button>
-        <div class="accordion-panel"><div class="accordion-panel-inner">Things like changing your business hours, updating a phone number or email, correcting text, replacing one image, updating a price, or adding a short announcement.</div></div>
+        <button class="accordion-btn" aria-expanded="false"><span data-i18n="faq.q4">What counts as a small update?</span><span class="plus">+</span></button>
+        <div class="accordion-panel"><div class="accordion-panel-inner"><span data-i18n="faq.a4">Things like changing your business hours, updating a phone number or email, correcting text, replacing one image, updating a price, or adding a short announcement.</span></div></div>
       </div>
       <div class="accordion-item">
-        <button class="accordion-btn" aria-expanded="false">What if I need something bigger, like a new page?<span class="plus">+</span></button>
-        <div class="accordion-panel"><div class="accordion-panel-inner">Larger changes — new pages, redesigns, booking or payment systems, online stores — aren't included in the monthly plans. We'll always quote and confirm the cost with you before starting any extra work.</div></div>
+        <button class="accordion-btn" aria-expanded="false"><span data-i18n="home.faqprev.q3">What if I need something bigger, like a new page?</span><span class="plus">+</span></button>
+        <div class="accordion-panel"><div class="accordion-panel-inner"><span data-i18n="home.faqprev.a3">Larger changes — new pages, redesigns, booking or payment systems, online stores — aren't included in the monthly plans. We'll always quote and confirm the cost with you before starting any extra work.</span></div></div>
       </div>
     </div>
-    <div class="text-center" style="margin-top:28px;"><a href="faq.html" class="btn btn-secondary">View All FAQs</a></div>
+    <div class="text-center" style="margin-top:28px;"><a href="faq.html" class="btn btn-secondary"><span data-i18n="home.faqprev.cta">View All FAQs</span></a></div>
   </div>
 </section>
 
@@ -288,12 +296,12 @@
   <div class="container">
     <div class="cta-band">
       <div>
-        <h2>Ready for a website you don't have to worry about?</h2>
-        <p>Tell us a bit about your business and we'll put together a free, no-pressure quote.</p>
+        <h2><span data-i18n="home.cta.h2">Ready for a website you don't have to worry about?</span></h2>
+        <p><span data-i18n="home.cta.p">Tell us a bit about your business and we'll put together a free, no-pressure quote.</span></p>
       </div>
       <div class="cta-actions">
-        <a href="contact.html" class="btn btn-primary">Get a Free Quote</a>
-        <a href="pricing.html" class="btn btn-ghost-light">View Website Plans</a>
+        <a href="contact.html" class="btn btn-primary"><span data-i18n="cta.getquote">Get a Free Quote</span></a>
+        <a href="pricing.html" class="btn btn-ghost-light"><span data-i18n="cta.viewplans">View Website Plans</span></a>
       </div>
     </div>
   </div>
@@ -304,7 +312,7 @@
     <div class="footer-grid">
       <div class="footer-brand">
         <a href="index.html" class="brand"><span class="mark">WD</span> [BUSINESS NAME]</a>
-        <p>Professional websites without the technical stress. We design, launch, and take care of websites for small businesses so you can focus on running yours.</p>
+        <p><span data-i18n="footer.tagline">Professional websites without the technical stress. We design, launch, and take care of websites for small businesses so you can focus on running yours.</span></p>
         <div class="footer-social">
           <a href="#" aria-label="Facebook">f</a>
           <a href="#" aria-label="Instagram">ig</a>
@@ -312,43 +320,44 @@
         </div>
       </div>
       <div class="footer-col">
-        <h4>Company</h4>
+        <h4><span data-i18n="footer.company">Company</span></h4>
         <ul>
-          <li><a href="about.html">About Us</a></li>
-          <li><a href="portfolio.html">Portfolio</a></li>
-          <li><a href="how-it-works.html">How It Works</a></li>
-          <li><a href="contact.html">Contact</a></li>
+          <li><a href="about.html"><span data-i18n="footer.about">About Us</span></a></li>
+          <li><a href="portfolio.html"><span data-i18n="footer.portfolio">Portfolio</span></a></li>
+          <li><a href="how-it-works.html"><span data-i18n="footer.how">How It Works</span></a></li>
+          <li><a href="contact.html"><span data-i18n="footer.contact">Contact</span></a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Services</h4>
+        <h4><span data-i18n="footer.services">Services</span></h4>
         <ul>
-          <li><a href="services.html">Website Design</a></li>
-          <li><a href="services.html#management">Website Management</a></li>
-          <li><a href="services.html#upgrades">Website Upgrades</a></li>
-          <li><a href="pricing.html">Care Plans &amp; Pricing</a></li>
+          <li><a href="services.html"><span data-i18n="footer.design">Website Design</span></a></li>
+          <li><a href="services.html#management"><span data-i18n="footer.management">Website Management</span></a></li>
+          <li><a href="services.html#upgrades"><span data-i18n="footer.upgrades">Website Upgrades</span></a></li>
+          <li><a href="pricing.html"><span data-i18n="footer.careplans">Care Plans & Pricing</span></a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Contact</h4>
+        <h4><span data-i18n="footer.contacth">Contact</span></h4>
         <ul>
           <li>[EMAIL ADDRESS PLACEHOLDER]</li>
           <li>[PHONE NUMBER PLACEHOLDER]</li>
-          <li>Service Area: [SERVICE AREA PLACEHOLDER]</li>
-          <li>Hours: [BUSINESS HOURS PLACEHOLDER]</li>
+          <li><span data-i18n="footer.area">Service Area:</span> [SERVICE AREA PLACEHOLDER]</li>
+          <li><span data-i18n="footer.hours">Hours:</span> [BUSINESS HOURS PLACEHOLDER]</li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>&copy; <span data-year></span> [BUSINESS NAME]. All rights reserved.</span>
+      <span>&copy; <span data-year></span> [BUSINESS NAME]. <span data-i18n="footer.rights">All rights reserved.</span></span>
       <div class="footer-legal">
-        <a href="privacy-policy.html">Privacy Policy</a>
-        <a href="terms-of-service.html">Terms of Service</a>
-        <a href="care-plan-terms.html">Website Care Plan Terms</a>
+        <a href="privacy-policy.html"><span data-i18n="footer.privacy">Privacy Policy</span></a>
+        <a href="terms-of-service.html"><span data-i18n="footer.terms">Terms of Service</span></a>
+        <a href="care-plan-terms.html"><span data-i18n="footer.careterms">Website Care Plan Terms</span></a>
       </div>
     </div>
   </div>
 </footer>
+<script src="js/i18n.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>

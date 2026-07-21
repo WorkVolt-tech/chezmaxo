@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>About Us | [BUSINESS NAME]</title>
-<meta name="description" content="Learn why [BUSINESS NAME] was created to give small businesses professional, affordable websites with reliable, ongoing support.">
-<link rel="canonical" href="https://www.yourbusiness.com/about.html">
+<title data-i18n="title.about">About Us | [BUSINESS NAME]</title>
+<meta name="description" content="Learn why [BUSINESS NAME] was created to give small businesses professional, affordable websites with reliable, ongoing support." data-i18n-content="desc.about">
+<link rel="canonical" href="https://www.chezmaxo.ca/about.html">
 
-<!-- Open Graph (placeholders — update image URL and site name before launch) -->
+<!-- Open Graph (placeholders — update image URL before launch) -->
 <meta property="og:type" content="website">
-<meta property="og:title" content="About Us | [BUSINESS NAME]">
-<meta property="og:description" content="Learn why [BUSINESS NAME] was created to give small businesses professional, affordable websites with reliable, ongoing support.">
-<meta property="og:image" content="https://www.yourbusiness.com/images/og-cover.jpg">
-<meta property="og:url" content="https://www.yourbusiness.com/about.html">
+<meta property="og:title" content="About Us | [BUSINESS NAME]" data-i18n-content="title.about">
+<meta property="og:description" content="Learn why [BUSINESS NAME] was created to give small businesses professional, affordable websites with reliable, ongoing support." data-i18n-content="desc.about">
+<meta property="og:image" content="https://www.chezmaxo.ca/images/og-cover.jpg">
+<meta property="og:url" content="https://www.chezmaxo.ca/about.html">
 <meta property="og:site_name" content="[BUSINESS NAME]">
 <meta name="twitter:card" content="summary_large_image">
 
@@ -27,18 +27,26 @@
   <div class="nav-wrap">
     <a href="index.html" class="brand"><span class="mark">WD</span> [BUSINESS NAME]</a>
     <nav class="nav-links" id="nav-links" aria-label="Primary">
-        <a href="index.html">Home</a>
-        <a href="services.html">Services</a>
-        <a href="pricing.html">Pricing</a>
-        <a href="how-it-works.html">How It Works</a>
-        <a href="portfolio.html">Portfolio</a>
-        <a href="about.html" class="active">About</a>
-        <a href="faq.html">FAQ</a>
-        <a href="contact.html">Contact</a>
+        <a href="index.html" class="" data-i18n="nav.home">Home</a>
+        <a href="services.html" class="" data-i18n="nav.services">Services</a>
+        <a href="pricing.html" class="" data-i18n="nav.pricing">Pricing</a>
+        <a href="how-it-works.html" class="" data-i18n="nav.how">How It Works</a>
+        <a href="portfolio.html" class="" data-i18n="nav.portfolio">Portfolio</a>
+        <a href="about.html" class="active" data-i18n="nav.about">About</a>
+        <a href="faq.html" class="" data-i18n="nav.faq">FAQ</a>
+        <a href="contact.html" class="" data-i18n="nav.contact">Contact</a>
+      <div class="mobile-cta">
+        <a href="pricing.html" class="btn btn-secondary btn-sm btn-block"><span data-i18n="nav.viewplans">View Plans</span></a>
+        <a href="contact.html" class="btn btn-primary btn-sm btn-block"><span data-i18n="nav.getquote">Get a Free Quote</span></a>
+      </div>
     </nav>
     <div class="nav-cta">
-      <a href="pricing.html" class="btn btn-secondary btn-sm">View Plans</a>
-      <a href="contact.html" class="btn btn-primary btn-sm">Get a Free Quote</a>
+      <div class="lang-toggle" role="group" aria-label="Language / Langue">
+        <button class="lang-btn" data-lang-btn="en" aria-pressed="true">EN</button>
+        <button class="lang-btn" data-lang-btn="fr" aria-pressed="false">FR</button>
+      </div>
+      <a href="pricing.html" class="btn btn-secondary btn-sm desktop-only" data-i18n="nav.viewplans">View Plans</a>
+      <a href="contact.html" class="btn btn-primary btn-sm desktop-only" data-i18n="nav.getquote">Get a Free Quote</a>
       <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">
         <span></span><span></span><span></span>
       </button>
@@ -48,9 +56,9 @@
 
 <section class="page-hero">
   <div class="container">
-    <div class="breadcrumb">ABOUT US</div>
-    <h1>Websites shouldn't be confusing, expensive, or unreliable.</h1>
-    <p>That belief is the whole reason [BUSINESS NAME] exists.</p>
+    <div class="breadcrumb"><span data-i18n="breadcrumb.about">ABOUT US</span></div>
+    <h1><span data-i18n="about.h1">Websites shouldn't be confusing, expensive, or unreliable.</span></h1>
+    <p><span data-i18n="about.lede">That belief is the whole reason [BUSINESS NAME] exists.</span></p>
   </div>
 </section>
 
@@ -59,20 +67,20 @@
     <div class="grid-2">
       <div class="ticket">
         <div class="ticket-top">
-          <div class="ticket-id">TICKET NO. 0001-FOUNDER</div>
-          <div class="ticket-stamp">ON FILE</div>
+          <div class="ticket-id"><span data-i18n="about.ticket.id">TICKET NO. 0001-FOUNDER</span></div>
+          <div class="ticket-stamp"><span data-i18n="about.ticket.stamp">ON FILE</span></div>
         </div>
         <div style="width:100%; aspect-ratio:1; border-radius:12px; background:linear-gradient(135deg, var(--color-primary-tint), var(--color-secondary-tint)); display:flex; align-items:center; justify-content:center; color:var(--color-primary); font-family:var(--font-mono); font-size:13px; margin-bottom:16px;">[OWNER PHOTO PLACEHOLDER]</div>
-        <div class="ticket-row"><span class="label">Name</span><span class="val">[OWNER NAME PLACEHOLDER]</span></div>
-        <div class="ticket-row"><span class="label">Role</span><span class="val">Founder</span></div>
-        <div class="ticket-row"><span class="label">Experience</span><span class="val">[YEARS OF EXPERIENCE PLACEHOLDER]</span></div>
-        <div class="ticket-row"><span class="label">Based in</span><span class="val">[LOCATION PLACEHOLDER]</span></div>
+        <div class="ticket-row"><span class="label"><span data-i18n="about.ticket.name">Name</span></span><span class="val">[OWNER NAME PLACEHOLDER]</span></div>
+        <div class="ticket-row"><span class="label"><span data-i18n="about.ticket.role">Role</span></span><span class="val"><span data-i18n="about.ticket.founder">Founder</span></span></div>
+        <div class="ticket-row"><span class="label"><span data-i18n="about.ticket.exp">Experience</span></span><span class="val">[YEARS OF EXPERIENCE PLACEHOLDER]</span></div>
+        <div class="ticket-row"><span class="label"><span data-i18n="about.ticket.based">Based in</span></span><span class="val">[LOCATION PLACEHOLDER]</span></div>
       </div>
       <div>
-        <div class="eyebrow">Our story</div>
-        <h2>Built to fix a familiar problem.</h2>
-        <p style="color:var(--ink-soft); font-size:16px;">[OWNER STORY PLACEHOLDER — Replace this paragraph with your own story: what you did before starting this business, why small-business websites matter to you, and what led you to offer both website design and ongoing care.]</p>
-        <p style="color:var(--ink-soft); font-size:16px;">Too many small-business owners are stuck choosing between an expensive agency, an unreliable freelancer, or a do-it-yourself website builder they never have time to maintain. [BUSINESS NAME] was created as a middle ground: a professional website, built properly, with straightforward ongoing support — for a price that actually makes sense for a small business.</p>
+        <div class="eyebrow"><span data-i18n="about.story.eyebrow">Our story</span></div>
+        <h2><span data-i18n="about.story.h2">Built to fix a familiar problem.</span></h2>
+        <p style="color:var(--ink-soft); font-size:16px;"><span data-i18n="about.story.p1">[OWNER STORY PLACEHOLDER — Replace this paragraph with your own story: what you did before starting this business, why small-business websites matter to you, and what led you to offer both website design and ongoing care.]</span></p>
+        <p style="color:var(--ink-soft); font-size:16px;"><span data-i18n="about.story.p2">Too many small-business owners are stuck choosing between an expensive agency, an unreliable freelancer, or a do-it-yourself website builder they never have time to maintain. [BUSINESS NAME] was created as a middle ground: a professional website, built properly, with straightforward ongoing support — for a price that actually makes sense for a small business.</span></p>
       </div>
     </div>
   </div>
@@ -81,16 +89,16 @@
 <section class="bg-alt">
   <div class="container">
     <div class="section-head center">
-      <div class="eyebrow alt">What we care about</div>
-      <h2>The principles behind every project.</h2>
+      <div class="eyebrow alt"><span data-i18n="about.care.eyebrow">What we care about</span></div>
+      <h2><span data-i18n="about.care.h2">The principles behind every project.</span></h2>
     </div>
     <div class="grid-3">
-      <div class="card"><div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 1 1-3.4-6.6L21 4l-1 4.5a7.9 7.9 0 0 1 1 3.5z"/></svg></div><h3>Clear communication</h3><p>No jargon, no surprise invoices — just plain explanations of what's happening and why.</p></div>
-      <div class="card"><div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 11 14 9 22 21 10 13 10 13 2"/></svg></div><h3>Affordable pricing</h3><p>Website plans priced for real small-business budgets, starting at just $5/month.</p></div>
-      <div class="card"><div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg></div><h3>Reliable support</h3><p>Your website is monitored and maintained — not left to break quietly in the background.</p></div>
-      <div class="card"><div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="9" x2="9" y2="20"/></svg></div><h3>Modern websites</h3><p>Clean, mobile-friendly designs that make your business look as good as it is.</p></div>
-      <div class="card"><div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12l5-5 4 3 3-3 8 8"/><path d="M12 15l3 3"/></svg></div><h3>Honest recommendations</h3><p>We'll tell you what your website actually needs — not what's most profitable to sell.</p></div>
-      <div class="card"><div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2 20c0-3.3 3.1-6 7-6s7 2.7 7 6"/><circle cx="18" cy="9" r="2.6"/><path d="M16.5 14.2c2.6.5 4.5 2.4 4.5 5.8"/></svg></div><h3>Long-term relationships</h3><p>We'd rather keep a client for years than sell a one-time project and disappear.</p></div>
+      <div class="card"><div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 1 1-3.4-6.6L21 4l-1 4.5a7.9 7.9 0 0 1 1 3.5z"/></svg></div><h3><span data-i18n="about.p1h">Clear communication</span></h3><p><span data-i18n="about.p1p">No jargon, no surprise invoices — just plain explanations of what's happening and why.</span></p></div>
+      <div class="card"><div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 11 14 9 22 21 10 13 10 13 2"/></svg></div><h3><span data-i18n="about.p2h">Affordable pricing</span></h3><p><span data-i18n="about.p2p">Website plans priced for real small-business budgets, starting at just $5/month.</span></p></div>
+      <div class="card"><div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg></div><h3><span data-i18n="about.p3h">Reliable support</span></h3><p><span data-i18n="about.p3p">Your website is monitored and maintained — not left to break quietly in the background.</span></p></div>
+      <div class="card"><div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="9" x2="9" y2="20"/></svg></div><h3><span data-i18n="about.p4h">Modern websites</span></h3><p><span data-i18n="about.p4p">Clean, mobile-friendly designs that make your business look as good as it is.</span></p></div>
+      <div class="card"><div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12l5-5 4 3 3-3 8 8"/><path d="M12 15l3 3"/></svg></div><h3><span data-i18n="about.p5h">Honest recommendations</span></h3><p><span data-i18n="about.p5p">We'll tell you what your website actually needs — not what's most profitable to sell.</span></p></div>
+      <div class="card"><div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2 20c0-3.3 3.1-6 7-6s7 2.7 7 6"/><circle cx="18" cy="9" r="2.6"/><path d="M16.5 14.2c2.6.5 4.5 2.4 4.5 5.8"/></svg></div><h3><span data-i18n="about.p6h">Long-term relationships</span></h3><p><span data-i18n="about.p6p">We'd rather keep a client for years than sell a one-time project and disappear.</span></p></div>
     </div>
   </div>
 </section>
@@ -99,12 +107,12 @@
   <div class="container">
     <div class="cta-band">
       <div>
-        <h2>Let's talk about your business.</h2>
-        <p>A free consultation is the easiest way to see if we're the right fit.</p>
+        <h2><span data-i18n="about.cta.h2">Let's talk about your business.</span></h2>
+        <p><span data-i18n="about.cta.p">A free consultation is the easiest way to see if we're the right fit.</span></p>
       </div>
       <div class="cta-actions">
-        <a href="contact.html" class="btn btn-primary">Get a Free Quote</a>
-        <a href="how-it-works.html" class="btn btn-secondary">See How It Works</a>
+        <a href="contact.html" class="btn btn-primary"><span data-i18n="cta.getquote">Get a Free Quote</span></a>
+        <a href="how-it-works.html" class="btn btn-secondary"><span data-i18n="about.cta.how">See How It Works</span></a>
       </div>
     </div>
   </div>
@@ -115,7 +123,7 @@
     <div class="footer-grid">
       <div class="footer-brand">
         <a href="index.html" class="brand"><span class="mark">WD</span> [BUSINESS NAME]</a>
-        <p>Professional websites without the technical stress. We design, launch, and take care of websites for small businesses so you can focus on running yours.</p>
+        <p><span data-i18n="footer.tagline">Professional websites without the technical stress. We design, launch, and take care of websites for small businesses so you can focus on running yours.</span></p>
         <div class="footer-social">
           <a href="#" aria-label="Facebook">f</a>
           <a href="#" aria-label="Instagram">ig</a>
@@ -123,43 +131,44 @@
         </div>
       </div>
       <div class="footer-col">
-        <h4>Company</h4>
+        <h4><span data-i18n="footer.company">Company</span></h4>
         <ul>
-          <li><a href="about.html">About Us</a></li>
-          <li><a href="portfolio.html">Portfolio</a></li>
-          <li><a href="how-it-works.html">How It Works</a></li>
-          <li><a href="contact.html">Contact</a></li>
+          <li><a href="about.html"><span data-i18n="footer.about">About Us</span></a></li>
+          <li><a href="portfolio.html"><span data-i18n="footer.portfolio">Portfolio</span></a></li>
+          <li><a href="how-it-works.html"><span data-i18n="footer.how">How It Works</span></a></li>
+          <li><a href="contact.html"><span data-i18n="footer.contact">Contact</span></a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Services</h4>
+        <h4><span data-i18n="footer.services">Services</span></h4>
         <ul>
-          <li><a href="services.html">Website Design</a></li>
-          <li><a href="services.html#management">Website Management</a></li>
-          <li><a href="services.html#upgrades">Website Upgrades</a></li>
-          <li><a href="pricing.html">Care Plans &amp; Pricing</a></li>
+          <li><a href="services.html"><span data-i18n="footer.design">Website Design</span></a></li>
+          <li><a href="services.html#management"><span data-i18n="footer.management">Website Management</span></a></li>
+          <li><a href="services.html#upgrades"><span data-i18n="footer.upgrades">Website Upgrades</span></a></li>
+          <li><a href="pricing.html"><span data-i18n="footer.careplans">Care Plans & Pricing</span></a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Contact</h4>
+        <h4><span data-i18n="footer.contacth">Contact</span></h4>
         <ul>
           <li>[EMAIL ADDRESS PLACEHOLDER]</li>
           <li>[PHONE NUMBER PLACEHOLDER]</li>
-          <li>Service Area: [SERVICE AREA PLACEHOLDER]</li>
-          <li>Hours: [BUSINESS HOURS PLACEHOLDER]</li>
+          <li><span data-i18n="footer.area">Service Area:</span> [SERVICE AREA PLACEHOLDER]</li>
+          <li><span data-i18n="footer.hours">Hours:</span> [BUSINESS HOURS PLACEHOLDER]</li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>&copy; <span data-year></span> [BUSINESS NAME]. All rights reserved.</span>
+      <span>&copy; <span data-year></span> [BUSINESS NAME]. <span data-i18n="footer.rights">All rights reserved.</span></span>
       <div class="footer-legal">
-        <a href="privacy-policy.html">Privacy Policy</a>
-        <a href="terms-of-service.html">Terms of Service</a>
-        <a href="care-plan-terms.html">Website Care Plan Terms</a>
+        <a href="privacy-policy.html"><span data-i18n="footer.privacy">Privacy Policy</span></a>
+        <a href="terms-of-service.html"><span data-i18n="footer.terms">Terms of Service</span></a>
+        <a href="care-plan-terms.html"><span data-i18n="footer.careterms">Website Care Plan Terms</span></a>
       </div>
     </div>
   </div>
 </footer>
+<script src="js/i18n.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>

@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pricing | Website Care Plans From $5/Month | [BUSINESS NAME]</title>
-<meta name="description" content="Website care plans starting at $5/month, plus clear starting prices for new website development. Simple, honest small-business website pricing.">
-<link rel="canonical" href="https://www.yourbusiness.com/pricing.html">
+<title data-i18n="title.pricing">Pricing | Website Care Plans From $5/Month | [BUSINESS NAME]</title>
+<meta name="description" content="Website care plans starting at $5/month, plus clear starting prices for new website development. Simple, honest small-business website pricing." data-i18n-content="desc.pricing">
+<link rel="canonical" href="https://www.chezmaxo.ca/pricing.html">
 
-<!-- Open Graph (placeholders — update image URL and site name before launch) -->
+<!-- Open Graph (placeholders — update image URL before launch) -->
 <meta property="og:type" content="website">
-<meta property="og:title" content="Pricing | Website Care Plans From $5/Month | [BUSINESS NAME]">
-<meta property="og:description" content="Website care plans starting at $5/month, plus clear starting prices for new website development. Simple, honest small-business website pricing.">
-<meta property="og:image" content="https://www.yourbusiness.com/images/og-cover.jpg">
-<meta property="og:url" content="https://www.yourbusiness.com/pricing.html">
+<meta property="og:title" content="Pricing | Website Care Plans From $5/Month | [BUSINESS NAME]" data-i18n-content="title.pricing">
+<meta property="og:description" content="Website care plans starting at $5/month, plus clear starting prices for new website development. Simple, honest small-business website pricing." data-i18n-content="desc.pricing">
+<meta property="og:image" content="https://www.chezmaxo.ca/images/og-cover.jpg">
+<meta property="og:url" content="https://www.chezmaxo.ca/pricing.html">
 <meta property="og:site_name" content="[BUSINESS NAME]">
 <meta name="twitter:card" content="summary_large_image">
 
@@ -27,18 +27,26 @@
   <div class="nav-wrap">
     <a href="index.html" class="brand"><span class="mark">WD</span> [BUSINESS NAME]</a>
     <nav class="nav-links" id="nav-links" aria-label="Primary">
-        <a href="index.html">Home</a>
-        <a href="services.html">Services</a>
-        <a href="pricing.html" class="active">Pricing</a>
-        <a href="how-it-works.html">How It Works</a>
-        <a href="portfolio.html">Portfolio</a>
-        <a href="about.html">About</a>
-        <a href="faq.html">FAQ</a>
-        <a href="contact.html">Contact</a>
+        <a href="index.html" class="" data-i18n="nav.home">Home</a>
+        <a href="services.html" class="" data-i18n="nav.services">Services</a>
+        <a href="pricing.html" class="active" data-i18n="nav.pricing">Pricing</a>
+        <a href="how-it-works.html" class="" data-i18n="nav.how">How It Works</a>
+        <a href="portfolio.html" class="" data-i18n="nav.portfolio">Portfolio</a>
+        <a href="about.html" class="" data-i18n="nav.about">About</a>
+        <a href="faq.html" class="" data-i18n="nav.faq">FAQ</a>
+        <a href="contact.html" class="" data-i18n="nav.contact">Contact</a>
+      <div class="mobile-cta">
+        <a href="pricing.html" class="btn btn-secondary btn-sm btn-block"><span data-i18n="nav.viewplans">View Plans</span></a>
+        <a href="contact.html" class="btn btn-primary btn-sm btn-block"><span data-i18n="nav.getquote">Get a Free Quote</span></a>
+      </div>
     </nav>
     <div class="nav-cta">
-      <a href="pricing.html" class="btn btn-secondary btn-sm">View Plans</a>
-      <a href="contact.html" class="btn btn-primary btn-sm">Get a Free Quote</a>
+      <div class="lang-toggle" role="group" aria-label="Language / Langue">
+        <button class="lang-btn" data-lang-btn="en" aria-pressed="true">EN</button>
+        <button class="lang-btn" data-lang-btn="fr" aria-pressed="false">FR</button>
+      </div>
+      <a href="pricing.html" class="btn btn-secondary btn-sm desktop-only" data-i18n="nav.viewplans">View Plans</a>
+      <a href="contact.html" class="btn btn-primary btn-sm desktop-only" data-i18n="nav.getquote">Get a Free Quote</a>
       <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">
         <span></span><span></span><span></span>
       </button>
@@ -48,83 +56,83 @@
 
 <section class="page-hero">
   <div class="container">
-    <div class="breadcrumb">PRICING</div>
-    <h1>Simple, honest pricing.</h1>
-    <p>One upfront fee to design and launch your website, then an affordable monthly care plan to keep it running. No unlimited-work promises — just clear terms, up front.</p>
+    <div class="breadcrumb"><span data-i18n="breadcrumb.pricing">PRICING</span></div>
+    <h1><span data-i18n="pricing.h1">Simple, honest pricing.</span></h1>
+    <p><span data-i18n="pricing.lede">One upfront fee to design and launch your website, then an affordable monthly care plan to keep it running. No unlimited-work promises — just clear terms, up front.</span></p>
   </div>
 </section>
 
 <section>
   <div class="container">
     <div class="section-head center">
-      <div class="eyebrow">Website care plans</div>
-      <h2>Choose the plan that matches how often your website changes.</h2>
-      <p>Every plan includes monitoring, backups, and support. The difference is how much update time is included each month.</p>
+      <div class="eyebrow"><span data-i18n="pricing.plans.eyebrow">Website care plans</span></div>
+      <h2><span data-i18n="pricing.plans.h2">Choose the plan that matches how often your website changes.</span></h2>
+      <p><span data-i18n="pricing.plans.p">Every plan includes monitoring, backups, and support. The difference is how much update time is included each month.</span></p>
     </div>
 
     <div class="plans">
       <div class="plan">
         <div class="plan-inner">
-          <div class="plan-name">Starter Care</div>
-          <div class="plan-price">$5<span>/month</span></div>
-          <p class="plan-desc">For websites that just need to stay healthy, secure, and online.</p>
+          <div class="plan-name"><span data-i18n="plan.starter.name">Starter Care</span></div>
+          <div class="plan-price">$5<span>/<span data-i18n="common.month">month</span></span></div>
+          <p class="plan-desc"><span data-i18n="pricing.starter.desc">For websites that just need to stay healthy, secure, and online.</span></p>
           <ul class="plan-features">
-            <li><span class="yes">&#10003;</span> Basic website monitoring</li>
-            <li><span class="yes">&#10003;</span> Basic backups</li>
-            <li><span class="yes">&#10003;</span> Email support</li>
-            <li><span class="yes">&#10003;</span> Minor technical fixes</li>
-            <li><span class="yes">&#10003;</span> One very small content update every 3 months</li>
-            <li><span class="yes">&#10003;</span> Standard response time</li>
-            <li class="excluded"><span class="no">&#10005;</span> Unused updates do not roll over</li>
+            <li><span class="yes">&#10003;</span> <span data-i18n="pricing.starter.f1">Basic website monitoring</span></li>
+            <li><span class="yes">&#10003;</span> <span data-i18n="pricing.starter.f2">Basic backups</span></li>
+            <li><span class="yes">&#10003;</span> <span data-i18n="pricing.starter.f3">Email support</span></li>
+            <li><span class="yes">&#10003;</span> <span data-i18n="home.plan.starter.f2">Minor technical fixes</span></li>
+            <li><span class="yes">&#10003;</span> <span data-i18n="pricing.starter.f5">One very small content update every 3 months</span></li>
+            <li><span class="yes">&#10003;</span> <span data-i18n="pricing.starter.f6">Standard response time</span></li>
+            <li class="excluded"><span class="no">&#10005;</span> <span data-i18n="common.norollover">Unused updates do not roll over</span></li>
           </ul>
-          <a href="contact.html" class="btn btn-secondary btn-block">Choose Starter Care</a>
-          <p class="plan-note">Starting at only $5/month.</p>
+          <a href="contact.html" class="btn btn-secondary btn-block"><span data-i18n="pricing.starter.choose">Choose Starter Care</span></a>
+          <p class="plan-note"><span data-i18n="pricing.starter.note">Starting at only $5/month.</span></p>
         </div>
       </div>
 
       <div class="plan featured">
-        <div class="plan-badge">Most Popular</div>
+        <div class="plan-badge"><span data-i18n="home.plan.popular">Most Popular</span></div>
         <div class="plan-inner">
-          <div class="plan-name">Monthly Support</div>
-          <div class="plan-price">$15<span>/month</span></div>
-          <p class="plan-desc">For businesses whose website details change on a regular basis.</p>
+          <div class="plan-name"><span data-i18n="plan.monthly.name">Monthly Support</span></div>
+          <div class="plan-price">$15<span>/<span data-i18n="common.month">month</span></span></div>
+          <p class="plan-desc"><span data-i18n="pricing.monthly.desc">For businesses whose website details change on a regular basis.</span></p>
           <ul class="plan-features">
-            <li><span class="yes">&#10003;</span> Everything in Starter Care</li>
-            <li><span class="yes">&#10003;</span> One small update per month</li>
-            <li><span class="yes">&#10003;</span> Up to 15 minutes of website work monthly</li>
-            <li><span class="yes">&#10003;</span> Content and image updates</li>
-            <li><span class="yes">&#10003;</span> 3–5 business day turnaround</li>
-            <li class="excluded"><span class="no">&#10005;</span> Unused support time does not roll over</li>
+            <li><span class="yes">&#10003;</span> <span data-i18n="home.plan.monthly.f1">Everything in Starter Care</span></li>
+            <li><span class="yes">&#10003;</span> <span data-i18n="home.plan.monthly.f2">One small update / month</span></li>
+            <li><span class="yes">&#10003;</span> <span data-i18n="home.plan.monthly.f3">Up to 15 minutes of work monthly</span></li>
+            <li><span class="yes">&#10003;</span> <span data-i18n="pricing.monthly.f4">Content and image updates</span></li>
+            <li><span class="yes">&#10003;</span> <span data-i18n="pricing.monthly.f5">3–5 business day turnaround</span></li>
+            <li class="excluded"><span class="no">&#10005;</span> <span data-i18n="pricing.monthly.f6">Unused support time does not roll over</span></li>
           </ul>
-          <a href="contact.html" class="btn btn-primary btn-block">Choose Monthly Support</a>
-          <p class="plan-note">Our most popular plan for active small businesses.</p>
+          <a href="contact.html" class="btn btn-primary btn-block"><span data-i18n="pricing.monthly.choose">Choose Monthly Support</span></a>
+          <p class="plan-note"><span data-i18n="pricing.monthly.note">Our most popular plan for active small businesses.</span></p>
         </div>
       </div>
 
       <div class="plan">
         <div class="plan-inner">
-          <div class="plan-name">Business Care</div>
-          <div class="plan-price">$39<span>/month</span></div>
-          <p class="plan-desc">For growing businesses that want faster turnaround and more monthly work time.</p>
+          <div class="plan-name"><span data-i18n="plan.business.name">Business Care</span></div>
+          <div class="plan-price">$39<span>/<span data-i18n="common.month">month</span></span></div>
+          <p class="plan-desc"><span data-i18n="pricing.business.desc">For growing businesses that want faster turnaround and more monthly work time.</span></p>
           <ul class="plan-features">
-            <li><span class="yes">&#10003;</span> Everything in Monthly Support</li>
-            <li><span class="yes">&#10003;</span> Up to 45 minutes of website work monthly</li>
-            <li><span class="yes">&#10003;</span> Priority support</li>
-            <li><span class="yes">&#10003;</span> Faster turnaround</li>
-            <li><span class="yes">&#10003;</span> Minor layout adjustments</li>
-            <li><span class="yes">&#10003;</span> More frequent content updates</li>
-            <li><span class="yes">&#10003;</span> Basic performance reviews</li>
-            <li class="excluded"><span class="no">&#10005;</span> Unused work time does not roll over</li>
+            <li><span class="yes">&#10003;</span> <span data-i18n="home.plan.business.f1">Everything in Monthly Support</span></li>
+            <li><span class="yes">&#10003;</span> <span data-i18n="home.plan.business.f2">Up to 45 minutes of work monthly</span></li>
+            <li><span class="yes">&#10003;</span> <span data-i18n="home.plan.business.f3">Priority, faster turnaround</span></li>
+            <li><span class="yes">&#10003;</span> <span data-i18n="pricing.business.f4">Faster turnaround</span></li>
+            <li><span class="yes">&#10003;</span> <span data-i18n="pricing.business.f5">Minor layout adjustments</span></li>
+            <li><span class="yes">&#10003;</span> <span data-i18n="pricing.business.f6">More frequent content updates</span></li>
+            <li><span class="yes">&#10003;</span> <span data-i18n="pricing.business.f7">Basic performance reviews</span></li>
+            <li class="excluded"><span class="no">&#10005;</span> <span data-i18n="pricing.business.f8">Unused work time does not roll over</span></li>
           </ul>
-          <a href="contact.html" class="btn btn-secondary btn-block">Choose Business Care</a>
-          <p class="plan-note">Best for businesses that update their site often.</p>
+          <a href="contact.html" class="btn btn-secondary btn-block"><span data-i18n="pricing.business.choose">Choose Business Care</span></a>
+          <p class="plan-note"><span data-i18n="pricing.business.note">Best for businesses that update their site often.</span></p>
         </div>
       </div>
     </div>
 
     <div class="callout" style="max-width:820px; margin:34px auto 0;">
-      <span style="color:var(--color-accent-dark); font-weight:700;">Please note</span>
-      <span>Care plans cover maintenance, monitoring, support, and small updates. They do not include redesigns, new pages, advanced features, or unlimited changes. Larger work is always quoted and approved separately — see Website Upgrades.</span>
+      <span style="color:var(--color-accent-dark); font-weight:700;"><span data-i18n="pricing.notice.label">Please note</span></span>
+      <span><span data-i18n="pricing.notice.text">Care plans cover maintenance, monitoring, support, and small updates. They do not include redesigns, new pages, advanced features, or unlimited changes. Larger work is always quoted and approved separately — see Website Upgrades.</span></span>
     </div>
   </div>
 </section>
@@ -132,32 +140,32 @@
 <section class="bg-alt">
   <div class="container">
     <div class="section-head center">
-      <div class="eyebrow alt">Website development</div>
-      <h2>Building your website — starting prices.</h2>
-      <p>Final pricing depends on the number of pages, features, content, integrations, and overall complexity of your project.</p>
+      <div class="eyebrow alt"><span data-i18n="pricing.dev.eyebrow">Website development</span></div>
+      <h2><span data-i18n="pricing.dev.h2">Building your website — starting prices.</span></h2>
+      <p><span data-i18n="pricing.dev.p">Final pricing depends on the number of pages, features, content, integrations, and overall complexity of your project.</span></p>
     </div>
     <div class="dev-pricing">
       <div class="dev-card">
-        <h4>Starter Website</h4>
-        <div class="amt">Starting at $399</div>
-        <p style="color:var(--ink-soft); font-size:14.5px; margin-top:10px;">A clean, professional starting point — ideal for new or simple small businesses.</p>
+        <h4><span data-i18n="pricing.dev.starter.h">Starter Website</span></h4>
+        <div class="amt"><span data-i18n="pricing.dev.starter.amt">Starting at $399</span></div>
+        <p style="color:var(--ink-soft); font-size:14.5px; margin-top:10px;"><span data-i18n="pricing.dev.starter.p">A clean, professional starting point — ideal for new or simple small businesses.</span></p>
       </div>
       <div class="dev-card">
-        <h4>Business Website</h4>
-        <div class="amt">Starting at $699</div>
-        <p style="color:var(--ink-soft); font-size:14.5px; margin-top:10px;">More pages and features for established businesses that want a fuller presence.</p>
+        <h4><span data-i18n="pricing.dev.business.h">Business Website</span></h4>
+        <div class="amt"><span data-i18n="pricing.dev.business.amt">Starting at $699</span></div>
+        <p style="color:var(--ink-soft); font-size:14.5px; margin-top:10px;"><span data-i18n="pricing.dev.business.p">More pages and features for established businesses that want a fuller presence.</span></p>
       </div>
       <div class="dev-card">
-        <h4>Advanced Website</h4>
-        <div class="amt">Custom Quote</div>
-        <p style="color:var(--ink-soft); font-size:14.5px; margin-top:10px;">For projects with online stores, bookings, memberships, or custom functionality.</p>
+        <h4><span data-i18n="pricing.dev.advanced.h">Advanced Website</span></h4>
+        <div class="amt"><span data-i18n="pricing.dev.advanced.amt">Custom Quote</span></div>
+        <p style="color:var(--ink-soft); font-size:14.5px; margin-top:10px;"><span data-i18n="pricing.dev.advanced.p">For projects with online stores, bookings, memberships, or custom functionality.</span></p>
       </div>
     </div>
     <div class="callout" style="margin-top:26px;">
-      <span style="color:var(--color-accent-dark); font-weight:700;">Good to know</span>
-      <span>Domain names, premium software, paid plugins, email services, and third-party subscriptions may cost extra and are billed separately from your website-development fee or care plan.</span>
+      <span style="color:var(--color-accent-dark); font-weight:700;"><span data-i18n="pricing.goodtoknow">Good to know</span></span>
+      <span><span data-i18n="pricing.thirdparty">Domain names, premium software, paid plugins, email services, and third-party subscriptions may cost extra and are billed separately from your website-development fee or care plan.</span></span>
     </div>
-    <p class="text-center" style="margin-top:26px; color:var(--ink-faint); font-size:13.5px;">Prices are starting rates and may be adjusted depending on the project.</p>
+    <p class="text-center" style="margin-top:26px; color:var(--ink-faint); font-size:13.5px;"><span data-i18n="pricing.disclaimer">Prices are starting rates and may be adjusted depending on the project.</span></p>
   </div>
 </section>
 
@@ -165,12 +173,12 @@
   <div class="container">
     <div class="cta-band">
       <div>
-        <h2>Still deciding which plan fits your business?</h2>
-        <p>We're happy to walk through your options — no pressure, no obligation.</p>
+        <h2><span data-i18n="pricing.cta.h2">Still deciding which plan fits your business?</span></h2>
+        <p><span data-i18n="pricing.cta.p">We're happy to walk through your options — no pressure, no obligation.</span></p>
       </div>
       <div class="cta-actions">
-        <a href="contact.html" class="btn btn-primary">Get a Free Quote</a>
-        <a href="faq.html" class="btn btn-ghost-light">Read the FAQ</a>
+        <a href="contact.html" class="btn btn-primary"><span data-i18n="cta.getquote">Get a Free Quote</span></a>
+        <a href="faq.html" class="btn btn-ghost-light"><span data-i18n="pricing.cta.faq">Read the FAQ</span></a>
       </div>
     </div>
   </div>
@@ -181,7 +189,7 @@
     <div class="footer-grid">
       <div class="footer-brand">
         <a href="index.html" class="brand"><span class="mark">WD</span> [BUSINESS NAME]</a>
-        <p>Professional websites without the technical stress. We design, launch, and take care of websites for small businesses so you can focus on running yours.</p>
+        <p><span data-i18n="footer.tagline">Professional websites without the technical stress. We design, launch, and take care of websites for small businesses so you can focus on running yours.</span></p>
         <div class="footer-social">
           <a href="#" aria-label="Facebook">f</a>
           <a href="#" aria-label="Instagram">ig</a>
@@ -189,43 +197,44 @@
         </div>
       </div>
       <div class="footer-col">
-        <h4>Company</h4>
+        <h4><span data-i18n="footer.company">Company</span></h4>
         <ul>
-          <li><a href="about.html">About Us</a></li>
-          <li><a href="portfolio.html">Portfolio</a></li>
-          <li><a href="how-it-works.html">How It Works</a></li>
-          <li><a href="contact.html">Contact</a></li>
+          <li><a href="about.html"><span data-i18n="footer.about">About Us</span></a></li>
+          <li><a href="portfolio.html"><span data-i18n="footer.portfolio">Portfolio</span></a></li>
+          <li><a href="how-it-works.html"><span data-i18n="footer.how">How It Works</span></a></li>
+          <li><a href="contact.html"><span data-i18n="footer.contact">Contact</span></a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Services</h4>
+        <h4><span data-i18n="footer.services">Services</span></h4>
         <ul>
-          <li><a href="services.html">Website Design</a></li>
-          <li><a href="services.html#management">Website Management</a></li>
-          <li><a href="services.html#upgrades">Website Upgrades</a></li>
-          <li><a href="pricing.html">Care Plans &amp; Pricing</a></li>
+          <li><a href="services.html"><span data-i18n="footer.design">Website Design</span></a></li>
+          <li><a href="services.html#management"><span data-i18n="footer.management">Website Management</span></a></li>
+          <li><a href="services.html#upgrades"><span data-i18n="footer.upgrades">Website Upgrades</span></a></li>
+          <li><a href="pricing.html"><span data-i18n="footer.careplans">Care Plans & Pricing</span></a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Contact</h4>
+        <h4><span data-i18n="footer.contacth">Contact</span></h4>
         <ul>
           <li>[EMAIL ADDRESS PLACEHOLDER]</li>
           <li>[PHONE NUMBER PLACEHOLDER]</li>
-          <li>Service Area: [SERVICE AREA PLACEHOLDER]</li>
-          <li>Hours: [BUSINESS HOURS PLACEHOLDER]</li>
+          <li><span data-i18n="footer.area">Service Area:</span> [SERVICE AREA PLACEHOLDER]</li>
+          <li><span data-i18n="footer.hours">Hours:</span> [BUSINESS HOURS PLACEHOLDER]</li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>&copy; <span data-year></span> [BUSINESS NAME]. All rights reserved.</span>
+      <span>&copy; <span data-year></span> [BUSINESS NAME]. <span data-i18n="footer.rights">All rights reserved.</span></span>
       <div class="footer-legal">
-        <a href="privacy-policy.html">Privacy Policy</a>
-        <a href="terms-of-service.html">Terms of Service</a>
-        <a href="care-plan-terms.html">Website Care Plan Terms</a>
+        <a href="privacy-policy.html"><span data-i18n="footer.privacy">Privacy Policy</span></a>
+        <a href="terms-of-service.html"><span data-i18n="footer.terms">Terms of Service</span></a>
+        <a href="care-plan-terms.html"><span data-i18n="footer.careterms">Website Care Plan Terms</span></a>
       </div>
     </div>
   </div>
 </footer>
+<script src="js/i18n.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>

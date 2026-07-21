@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>How It Works | [BUSINESS NAME]</title>
-<meta name="description" content="See our simple 5-step process for building and launching your small-business website, from free consultation to ongoing support.">
-<link rel="canonical" href="https://www.yourbusiness.com/how-it-works.html">
+<title data-i18n="title.how">How It Works | [BUSINESS NAME]</title>
+<meta name="description" content="See our simple 5-step process for building and launching your small-business website, from free consultation to ongoing support." data-i18n-content="desc.how">
+<link rel="canonical" href="https://www.chezmaxo.ca/how-it-works.html">
 
-<!-- Open Graph (placeholders — update image URL and site name before launch) -->
+<!-- Open Graph (placeholders — update image URL before launch) -->
 <meta property="og:type" content="website">
-<meta property="og:title" content="How It Works | [BUSINESS NAME]">
-<meta property="og:description" content="See our simple 5-step process for building and launching your small-business website, from free consultation to ongoing support.">
-<meta property="og:image" content="https://www.yourbusiness.com/images/og-cover.jpg">
-<meta property="og:url" content="https://www.yourbusiness.com/how-it-works.html">
+<meta property="og:title" content="How It Works | [BUSINESS NAME]" data-i18n-content="title.how">
+<meta property="og:description" content="See our simple 5-step process for building and launching your small-business website, from free consultation to ongoing support." data-i18n-content="desc.how">
+<meta property="og:image" content="https://www.chezmaxo.ca/images/og-cover.jpg">
+<meta property="og:url" content="https://www.chezmaxo.ca/how-it-works.html">
 <meta property="og:site_name" content="[BUSINESS NAME]">
 <meta name="twitter:card" content="summary_large_image">
 
@@ -27,18 +27,26 @@
   <div class="nav-wrap">
     <a href="index.html" class="brand"><span class="mark">WD</span> [BUSINESS NAME]</a>
     <nav class="nav-links" id="nav-links" aria-label="Primary">
-        <a href="index.html">Home</a>
-        <a href="services.html">Services</a>
-        <a href="pricing.html">Pricing</a>
-        <a href="how-it-works.html" class="active">How It Works</a>
-        <a href="portfolio.html">Portfolio</a>
-        <a href="about.html">About</a>
-        <a href="faq.html">FAQ</a>
-        <a href="contact.html">Contact</a>
+        <a href="index.html" class="" data-i18n="nav.home">Home</a>
+        <a href="services.html" class="" data-i18n="nav.services">Services</a>
+        <a href="pricing.html" class="" data-i18n="nav.pricing">Pricing</a>
+        <a href="how-it-works.html" class="active" data-i18n="nav.how">How It Works</a>
+        <a href="portfolio.html" class="" data-i18n="nav.portfolio">Portfolio</a>
+        <a href="about.html" class="" data-i18n="nav.about">About</a>
+        <a href="faq.html" class="" data-i18n="nav.faq">FAQ</a>
+        <a href="contact.html" class="" data-i18n="nav.contact">Contact</a>
+      <div class="mobile-cta">
+        <a href="pricing.html" class="btn btn-secondary btn-sm btn-block"><span data-i18n="nav.viewplans">View Plans</span></a>
+        <a href="contact.html" class="btn btn-primary btn-sm btn-block"><span data-i18n="nav.getquote">Get a Free Quote</span></a>
+      </div>
     </nav>
     <div class="nav-cta">
-      <a href="pricing.html" class="btn btn-secondary btn-sm">View Plans</a>
-      <a href="contact.html" class="btn btn-primary btn-sm">Get a Free Quote</a>
+      <div class="lang-toggle" role="group" aria-label="Language / Langue">
+        <button class="lang-btn" data-lang-btn="en" aria-pressed="true">EN</button>
+        <button class="lang-btn" data-lang-btn="fr" aria-pressed="false">FR</button>
+      </div>
+      <a href="pricing.html" class="btn btn-secondary btn-sm desktop-only" data-i18n="nav.viewplans">View Plans</a>
+      <a href="contact.html" class="btn btn-primary btn-sm desktop-only" data-i18n="nav.getquote">Get a Free Quote</a>
       <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">
         <span></span><span></span><span></span>
       </button>
@@ -48,9 +56,9 @@
 
 <section class="page-hero">
   <div class="container">
-    <div class="breadcrumb">HOW IT WORKS</div>
-    <h1>From first conversation to a website that's genuinely looked after.</h1>
-    <p>Five clear steps. No technical jargon, no guesswork about what happens next.</p>
+    <div class="breadcrumb"><span data-i18n="breadcrumb.how">HOW IT WORKS</span></div>
+    <h1><span data-i18n="how.h1">From first conversation to a website that's genuinely looked after.</span></h1>
+    <p><span data-i18n="how.lede">Five clear steps. No technical jargon, no guesswork about what happens next.</span></p>
   </div>
 </section>
 
@@ -60,36 +68,36 @@
       <div class="step">
         <div class="step-num">1</div>
         <div>
-          <h3>Free consultation</h3>
-          <p>We start with a short, no-pressure conversation about your business, your goals, and what you want your website to do for you. There's no cost and no obligation — it's just about understanding what you need.</p>
+          <h3><span data-i18n="how.s1h">Free consultation</span></h3>
+          <p><span data-i18n="how.s1p">We start with a short, no-pressure conversation about your business, your goals, and what you want your website to do for you. There's no cost and no obligation — it's just about understanding what you need.</span></p>
         </div>
       </div>
       <div class="step">
         <div class="step-num">2</div>
         <div>
-          <h3>Website planning</h3>
-          <p>We map out the pages, features, and content your site needs, and put together a clear, upfront quote. You'll know exactly what's included before anything is built.</p>
+          <h3><span data-i18n="how.s2h">Website planning</span></h3>
+          <p><span data-i18n="how.s2p">We map out the pages, features, and content your site needs, and put together a clear, upfront quote. You'll know exactly what's included before anything is built.</span></p>
         </div>
       </div>
       <div class="step">
         <div class="step-num">3</div>
         <div>
-          <h3>Design and development</h3>
-          <p>We design and build your website around your branding and services, keeping you updated along the way so there are no surprises when it's time to review.</p>
+          <h3><span data-i18n="how.s3h">Design and development</span></h3>
+          <p><span data-i18n="how.s3p">We design and build your website around your branding and services, keeping you updated along the way so there are no surprises when it's time to review.</span></p>
         </div>
       </div>
       <div class="step">
         <div class="step-num">4</div>
         <div>
-          <h3>Review and approval</h3>
-          <p>Before anything goes live, you review the full website and request any changes. We don't launch until you're happy with the result.</p>
+          <h3><span data-i18n="how.s4h">Review and approval</span></h3>
+          <p><span data-i18n="how.s4p">Before anything goes live, you review the full website and request any changes. We don't launch until you're happy with the result.</span></p>
         </div>
       </div>
       <div class="step">
         <div class="step-num">5</div>
         <div>
-          <h3>Launch and ongoing support</h3>
-          <p>We connect your domain, launch your website, and set you up with a care plan starting at $5/month — so monitoring, backups, and small updates are handled going forward.</p>
+          <h3><span data-i18n="how.s5h">Launch and ongoing support</span></h3>
+          <p><span data-i18n="how.s5p">We connect your domain, launch your website, and set you up with a care plan starting at $5/month — so monitoring, backups, and small updates are handled going forward.</span></p>
         </div>
       </div>
     </div>
@@ -100,12 +108,12 @@
   <div class="container">
     <div class="cta-band">
       <div>
-        <h2>Ready to start with a free consultation?</h2>
-        <p>There's no cost and no pressure — just a conversation about your business.</p>
+        <h2><span data-i18n="how.cta.h2">Ready to start with a free consultation?</span></h2>
+        <p><span data-i18n="how.cta.p">There's no cost and no pressure — just a conversation about your business.</span></p>
       </div>
       <div class="cta-actions">
-        <a href="contact.html" class="btn btn-primary">Get a Free Quote</a>
-        <a href="portfolio.html" class="btn btn-secondary">See Our Work</a>
+        <a href="contact.html" class="btn btn-primary"><span data-i18n="cta.getquote">Get a Free Quote</span></a>
+        <a href="portfolio.html" class="btn btn-secondary"><span data-i18n="how.cta.portfolio">See Our Work</span></a>
       </div>
     </div>
   </div>
@@ -116,7 +124,7 @@
     <div class="footer-grid">
       <div class="footer-brand">
         <a href="index.html" class="brand"><span class="mark">WD</span> [BUSINESS NAME]</a>
-        <p>Professional websites without the technical stress. We design, launch, and take care of websites for small businesses so you can focus on running yours.</p>
+        <p><span data-i18n="footer.tagline">Professional websites without the technical stress. We design, launch, and take care of websites for small businesses so you can focus on running yours.</span></p>
         <div class="footer-social">
           <a href="#" aria-label="Facebook">f</a>
           <a href="#" aria-label="Instagram">ig</a>
@@ -124,43 +132,44 @@
         </div>
       </div>
       <div class="footer-col">
-        <h4>Company</h4>
+        <h4><span data-i18n="footer.company">Company</span></h4>
         <ul>
-          <li><a href="about.html">About Us</a></li>
-          <li><a href="portfolio.html">Portfolio</a></li>
-          <li><a href="how-it-works.html">How It Works</a></li>
-          <li><a href="contact.html">Contact</a></li>
+          <li><a href="about.html"><span data-i18n="footer.about">About Us</span></a></li>
+          <li><a href="portfolio.html"><span data-i18n="footer.portfolio">Portfolio</span></a></li>
+          <li><a href="how-it-works.html"><span data-i18n="footer.how">How It Works</span></a></li>
+          <li><a href="contact.html"><span data-i18n="footer.contact">Contact</span></a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Services</h4>
+        <h4><span data-i18n="footer.services">Services</span></h4>
         <ul>
-          <li><a href="services.html">Website Design</a></li>
-          <li><a href="services.html#management">Website Management</a></li>
-          <li><a href="services.html#upgrades">Website Upgrades</a></li>
-          <li><a href="pricing.html">Care Plans &amp; Pricing</a></li>
+          <li><a href="services.html"><span data-i18n="footer.design">Website Design</span></a></li>
+          <li><a href="services.html#management"><span data-i18n="footer.management">Website Management</span></a></li>
+          <li><a href="services.html#upgrades"><span data-i18n="footer.upgrades">Website Upgrades</span></a></li>
+          <li><a href="pricing.html"><span data-i18n="footer.careplans">Care Plans & Pricing</span></a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Contact</h4>
+        <h4><span data-i18n="footer.contacth">Contact</span></h4>
         <ul>
           <li>[EMAIL ADDRESS PLACEHOLDER]</li>
           <li>[PHONE NUMBER PLACEHOLDER]</li>
-          <li>Service Area: [SERVICE AREA PLACEHOLDER]</li>
-          <li>Hours: [BUSINESS HOURS PLACEHOLDER]</li>
+          <li><span data-i18n="footer.area">Service Area:</span> [SERVICE AREA PLACEHOLDER]</li>
+          <li><span data-i18n="footer.hours">Hours:</span> [BUSINESS HOURS PLACEHOLDER]</li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>&copy; <span data-year></span> [BUSINESS NAME]. All rights reserved.</span>
+      <span>&copy; <span data-year></span> [BUSINESS NAME]. <span data-i18n="footer.rights">All rights reserved.</span></span>
       <div class="footer-legal">
-        <a href="privacy-policy.html">Privacy Policy</a>
-        <a href="terms-of-service.html">Terms of Service</a>
-        <a href="care-plan-terms.html">Website Care Plan Terms</a>
+        <a href="privacy-policy.html"><span data-i18n="footer.privacy">Privacy Policy</span></a>
+        <a href="terms-of-service.html"><span data-i18n="footer.terms">Terms of Service</span></a>
+        <a href="care-plan-terms.html"><span data-i18n="footer.careterms">Website Care Plan Terms</span></a>
       </div>
     </div>
   </div>
 </footer>
+<script src="js/i18n.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>

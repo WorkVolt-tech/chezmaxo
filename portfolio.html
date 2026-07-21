@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portfolio | Small Business Websites We've Built | [BUSINESS NAME]</title>
-<meta name="description" content="Browse sample small-business website projects across local business, restaurant, contractor, event, consultant, beauty, and community categories.">
-<link rel="canonical" href="https://www.yourbusiness.com/portfolio.html">
+<title data-i18n="title.portfolio">Portfolio | Small Business Websites We've Built | [BUSINESS NAME]</title>
+<meta name="description" content="Browse sample small-business website projects across local business, restaurant, contractor, event, consultant, beauty, and community categories." data-i18n-content="desc.portfolio">
+<link rel="canonical" href="https://www.chezmaxo.ca/portfolio.html">
 
-<!-- Open Graph (placeholders — update image URL and site name before launch) -->
+<!-- Open Graph (placeholders — update image URL before launch) -->
 <meta property="og:type" content="website">
-<meta property="og:title" content="Portfolio | Small Business Websites We've Built | [BUSINESS NAME]">
-<meta property="og:description" content="Browse sample small-business website projects across local business, restaurant, contractor, event, consultant, beauty, and community categories.">
-<meta property="og:image" content="https://www.yourbusiness.com/images/og-cover.jpg">
-<meta property="og:url" content="https://www.yourbusiness.com/portfolio.html">
+<meta property="og:title" content="Portfolio | Small Business Websites We've Built | [BUSINESS NAME]" data-i18n-content="title.portfolio">
+<meta property="og:description" content="Browse sample small-business website projects across local business, restaurant, contractor, event, consultant, beauty, and community categories." data-i18n-content="desc.portfolio">
+<meta property="og:image" content="https://www.chezmaxo.ca/images/og-cover.jpg">
+<meta property="og:url" content="https://www.chezmaxo.ca/portfolio.html">
 <meta property="og:site_name" content="[BUSINESS NAME]">
 <meta name="twitter:card" content="summary_large_image">
 
@@ -27,18 +27,26 @@
   <div class="nav-wrap">
     <a href="index.html" class="brand"><span class="mark">WD</span> [BUSINESS NAME]</a>
     <nav class="nav-links" id="nav-links" aria-label="Primary">
-        <a href="index.html">Home</a>
-        <a href="services.html">Services</a>
-        <a href="pricing.html">Pricing</a>
-        <a href="how-it-works.html">How It Works</a>
-        <a href="portfolio.html" class="active">Portfolio</a>
-        <a href="about.html">About</a>
-        <a href="faq.html">FAQ</a>
-        <a href="contact.html">Contact</a>
+        <a href="index.html" class="" data-i18n="nav.home">Home</a>
+        <a href="services.html" class="" data-i18n="nav.services">Services</a>
+        <a href="pricing.html" class="" data-i18n="nav.pricing">Pricing</a>
+        <a href="how-it-works.html" class="" data-i18n="nav.how">How It Works</a>
+        <a href="portfolio.html" class="active" data-i18n="nav.portfolio">Portfolio</a>
+        <a href="about.html" class="" data-i18n="nav.about">About</a>
+        <a href="faq.html" class="" data-i18n="nav.faq">FAQ</a>
+        <a href="contact.html" class="" data-i18n="nav.contact">Contact</a>
+      <div class="mobile-cta">
+        <a href="pricing.html" class="btn btn-secondary btn-sm btn-block"><span data-i18n="nav.viewplans">View Plans</span></a>
+        <a href="contact.html" class="btn btn-primary btn-sm btn-block"><span data-i18n="nav.getquote">Get a Free Quote</span></a>
+      </div>
     </nav>
     <div class="nav-cta">
-      <a href="pricing.html" class="btn btn-secondary btn-sm">View Plans</a>
-      <a href="contact.html" class="btn btn-primary btn-sm">Get a Free Quote</a>
+      <div class="lang-toggle" role="group" aria-label="Language / Langue">
+        <button class="lang-btn" data-lang-btn="en" aria-pressed="true">EN</button>
+        <button class="lang-btn" data-lang-btn="fr" aria-pressed="false">FR</button>
+      </div>
+      <a href="pricing.html" class="btn btn-secondary btn-sm desktop-only" data-i18n="nav.viewplans">View Plans</a>
+      <a href="contact.html" class="btn btn-primary btn-sm desktop-only" data-i18n="nav.getquote">Get a Free Quote</a>
       <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">
         <span></span><span></span><span></span>
       </button>
@@ -48,117 +56,117 @@
 
 <section class="page-hero">
   <div class="container">
-    <div class="breadcrumb">PORTFOLIO</div>
-    <h1>A sample of the small businesses we've built for.</h1>
-    <p>Every project below is a placeholder — swap in real client screenshots, names, and links once your first projects are live. See the README for how.</p>
+    <div class="breadcrumb"><span data-i18n="breadcrumb.portfolio">PORTFOLIO</span></div>
+    <h1><span data-i18n="pf.h1">A sample of the small businesses we've built for.</span></h1>
+    <p><span data-i18n="pf.lede">Every project below is a placeholder — swap in real client screenshots, names, and links once your first projects are live. See the README for how.</span></p>
   </div>
 </section>
 
 <section>
   <div class="container">
     <div class="filters">
-      <button class="filter-btn active" data-filter="all">All Projects</button>
-      <button class="filter-btn" data-filter="local-business">Local Business</button>
-      <button class="filter-btn" data-filter="restaurant">Restaurant</button>
-      <button class="filter-btn" data-filter="contractor">Contractor</button>
-      <button class="filter-btn" data-filter="event">Event Professional</button>
-      <button class="filter-btn" data-filter="consultant">Consultant</button>
-      <button class="filter-btn" data-filter="beauty">Beauty & Wellness</button>
-      <button class="filter-btn" data-filter="community">Community Organization</button>
+      <button class="filter-btn active" data-filter="all" data-i18n="cat.all">All Projects</button>
+      <button class="filter-btn" data-filter="local-business" data-i18n="cat.local">Local Business</button>
+      <button class="filter-btn" data-filter="restaurant" data-i18n="cat.restaurant">Restaurant</button>
+      <button class="filter-btn" data-filter="contractor" data-i18n="cat.contractor">Contractor</button>
+      <button class="filter-btn" data-filter="event" data-i18n="cat.event">Event Professional</button>
+      <button class="filter-btn" data-filter="consultant" data-i18n="cat.consultant">Consultant</button>
+      <button class="filter-btn" data-filter="beauty" data-i18n="cat.beauty">Beauty & Wellness</button>
+      <button class="filter-btn" data-filter="community" data-i18n="cat.community">Community Organization</button>
     </div>
     <div class="portfolio-grid">
       <div class="pf-card" data-category="local-business">
-        <div class="pf-thumb"><span>Project photo placeholder</span></div>
+        <div class="pf-thumb"><span data-i18n="pf.placeholder">Project photo placeholder</span></div>
         <div class="pf-body">
-          <div class="pf-tag">Local Business</div>
-          <h3>Maple Street Hardware</h3>
-          <p>A five-page site with service listings, store hours, and a contact form for a family-owned hardware store.</p>
-          <div class="pf-services"><span>Website Design</span><span>Starter Care</span></div>
-          <a href="contact.html" class="btn btn-secondary btn-sm">View Project (placeholder)</a>
+          <div class="pf-tag" data-i18n="cat.local">Local Business</div>
+          <h3 data-i18n="pf1.name">Maple Street Hardware</h3>
+          <p data-i18n="pf1.desc">A five-page site with service listings, store hours, and a contact form for a family-owned hardware store.</p>
+          <div class="pf-services"><span data-i18n="pf1.svc0">Website Design</span><span data-i18n="pf1.svc1">Starter Care</span></div>
+          <a href="contact.html" class="btn btn-secondary btn-sm" data-i18n="pf.viewproject">View Project (placeholder)</a>
         </div>
       </div>
       <div class="pf-card" data-category="restaurant">
-        <div class="pf-thumb"><span>Project photo placeholder</span></div>
+        <div class="pf-thumb"><span data-i18n="pf.placeholder">Project photo placeholder</span></div>
         <div class="pf-body">
-          <div class="pf-tag">Restaurant</div>
-          <h3>Rosa's Kitchen</h3>
-          <p>A warm, photo-forward site with an online menu, hours, and location details for a family restaurant.</p>
-          <div class="pf-services"><span>Website Design</span><span>Monthly Support</span></div>
-          <a href="contact.html" class="btn btn-secondary btn-sm">View Project (placeholder)</a>
+          <div class="pf-tag" data-i18n="cat.restaurant">Restaurant</div>
+          <h3 data-i18n="pf2.name">Rosa's Kitchen</h3>
+          <p data-i18n="pf2.desc">A warm, photo-forward site with an online menu, hours, and location details for a family restaurant.</p>
+          <div class="pf-services"><span data-i18n="pf2.svc0">Website Design</span><span data-i18n="pf2.svc1">Monthly Support</span></div>
+          <a href="contact.html" class="btn btn-secondary btn-sm" data-i18n="pf.viewproject">View Project (placeholder)</a>
         </div>
       </div>
       <div class="pf-card" data-category="contractor">
-        <div class="pf-thumb"><span>Project photo placeholder</span></div>
+        <div class="pf-thumb"><span data-i18n="pf.placeholder">Project photo placeholder</span></div>
         <div class="pf-body">
-          <div class="pf-tag">Contractor</div>
-          <h3>Precision Home Repairs</h3>
-          <p>A trust-building site with a services breakdown, project gallery, and quote-request form.</p>
-          <div class="pf-services"><span>Website Design</span><span>Monthly Support</span></div>
-          <a href="contact.html" class="btn btn-secondary btn-sm">View Project (placeholder)</a>
+          <div class="pf-tag" data-i18n="cat.contractor">Contractor</div>
+          <h3 data-i18n="pf3.name">Precision Home Repairs</h3>
+          <p data-i18n="pf3.desc">A trust-building site with a services breakdown, project gallery, and quote-request form.</p>
+          <div class="pf-services"><span data-i18n="pf3.svc0">Website Design</span><span data-i18n="pf3.svc1">Monthly Support</span></div>
+          <a href="contact.html" class="btn btn-secondary btn-sm" data-i18n="pf.viewproject">View Project (placeholder)</a>
         </div>
       </div>
       <div class="pf-card" data-category="event">
-        <div class="pf-thumb"><span>Project photo placeholder</span></div>
+        <div class="pf-thumb"><span data-i18n="pf.placeholder">Project photo placeholder</span></div>
         <div class="pf-body">
-          <div class="pf-tag">Event Professional</div>
-          <h3>DJ Marco Live</h3>
-          <p>A bold, media-rich site with an event gallery, booking inquiry form, and social links.</p>
-          <div class="pf-services"><span>Website Design</span><span>Starter Care</span></div>
-          <a href="contact.html" class="btn btn-secondary btn-sm">View Project (placeholder)</a>
+          <div class="pf-tag" data-i18n="cat.event">Event Professional</div>
+          <h3 data-i18n="pf4.name">DJ Marco Live</h3>
+          <p data-i18n="pf4.desc">A bold, media-rich site with an event gallery, booking inquiry form, and social links.</p>
+          <div class="pf-services"><span data-i18n="pf4.svc0">Website Design</span><span data-i18n="pf4.svc1">Starter Care</span></div>
+          <a href="contact.html" class="btn btn-secondary btn-sm" data-i18n="pf.viewproject">View Project (placeholder)</a>
         </div>
       </div>
       <div class="pf-card" data-category="consultant">
-        <div class="pf-thumb"><span>Project photo placeholder</span></div>
+        <div class="pf-thumb"><span data-i18n="pf.placeholder">Project photo placeholder</span></div>
         <div class="pf-body">
-          <div class="pf-tag">Consultant</div>
-          <h3>Clearview Business Advisors</h3>
-          <p>A polished, credibility-focused site with a services page and calendar booking link.</p>
-          <div class="pf-services"><span>Website Design</span><span>Business Care</span></div>
-          <a href="contact.html" class="btn btn-secondary btn-sm">View Project (placeholder)</a>
+          <div class="pf-tag" data-i18n="cat.consultant">Consultant</div>
+          <h3 data-i18n="pf5.name">Clearview Business Advisors</h3>
+          <p data-i18n="pf5.desc">A polished, credibility-focused site with a services page and calendar booking link.</p>
+          <div class="pf-services"><span data-i18n="pf5.svc0">Website Design</span><span data-i18n="pf5.svc1">Business Care</span></div>
+          <a href="contact.html" class="btn btn-secondary btn-sm" data-i18n="pf.viewproject">View Project (placeholder)</a>
         </div>
       </div>
       <div class="pf-card" data-category="beauty">
-        <div class="pf-thumb"><span>Project photo placeholder</span></div>
+        <div class="pf-thumb"><span data-i18n="pf.placeholder">Project photo placeholder</span></div>
         <div class="pf-body">
-          <div class="pf-tag">Beauty & Wellness</div>
-          <h3>The Fade Room Barbershop</h3>
-          <p>A clean, modern site with a service menu, gallery, and map for walk-in customers.</p>
-          <div class="pf-services"><span>Website Design</span><span>Monthly Support</span></div>
-          <a href="contact.html" class="btn btn-secondary btn-sm">View Project (placeholder)</a>
+          <div class="pf-tag" data-i18n="cat.beauty">Beauty & Wellness</div>
+          <h3 data-i18n="pf6.name">The Fade Room Barbershop</h3>
+          <p data-i18n="pf6.desc">A clean, modern site with a service menu, gallery, and map for walk-in customers.</p>
+          <div class="pf-services"><span data-i18n="pf6.svc0">Website Design</span><span data-i18n="pf6.svc1">Monthly Support</span></div>
+          <a href="contact.html" class="btn btn-secondary btn-sm" data-i18n="pf.viewproject">View Project (placeholder)</a>
         </div>
       </div>
       <div class="pf-card" data-category="community">
-        <div class="pf-thumb"><span>Project photo placeholder</span></div>
+        <div class="pf-thumb"><span data-i18n="pf.placeholder">Project photo placeholder</span></div>
         <div class="pf-body">
-          <div class="pf-tag">Community Organization</div>
-          <h3>Riverside Neighborhood Alliance</h3>
-          <p>An accessible, easy-to-update site for event announcements and volunteer sign-ups.</p>
-          <div class="pf-services"><span>Website Design</span><span>Starter Care</span></div>
-          <a href="contact.html" class="btn btn-secondary btn-sm">View Project (placeholder)</a>
+          <div class="pf-tag" data-i18n="cat.community">Community Organization</div>
+          <h3 data-i18n="pf7.name">Riverside Neighborhood Alliance</h3>
+          <p data-i18n="pf7.desc">An accessible, easy-to-update site for event announcements and volunteer sign-ups.</p>
+          <div class="pf-services"><span data-i18n="pf7.svc0">Website Design</span><span data-i18n="pf7.svc1">Starter Care</span></div>
+          <a href="contact.html" class="btn btn-secondary btn-sm" data-i18n="pf.viewproject">View Project (placeholder)</a>
         </div>
       </div>
       <div class="pf-card" data-category="local-business">
-        <div class="pf-thumb"><span>Project photo placeholder</span></div>
+        <div class="pf-thumb"><span data-i18n="pf.placeholder">Project photo placeholder</span></div>
         <div class="pf-body">
-          <div class="pf-tag">Local Business</div>
-          <h3>Sunrise Cleaning Co.</h3>
-          <p>A straightforward service site with pricing tiers, testimonials, and a quote request form.</p>
-          <div class="pf-services"><span>Website Design</span><span>Business Care</span></div>
-          <a href="contact.html" class="btn btn-secondary btn-sm">View Project (placeholder)</a>
+          <div class="pf-tag" data-i18n="cat.local">Local Business</div>
+          <h3 data-i18n="pf8.name">Sunrise Cleaning Co.</h3>
+          <p data-i18n="pf8.desc">A straightforward service site with pricing tiers, testimonials, and a quote request form.</p>
+          <div class="pf-services"><span data-i18n="pf8.svc0">Website Design</span><span data-i18n="pf8.svc1">Business Care</span></div>
+          <a href="contact.html" class="btn btn-secondary btn-sm" data-i18n="pf.viewproject">View Project (placeholder)</a>
         </div>
       </div>
       <div class="pf-card" data-category="event">
-        <div class="pf-thumb"><span>Project photo placeholder</span></div>
+        <div class="pf-thumb"><span data-i18n="pf.placeholder">Project photo placeholder</span></div>
         <div class="pf-body">
-          <div class="pf-tag">Event Professional</div>
-          <h3>Bright Beginnings Daycare</h3>
-          <p>A friendly, parent-focused site with enrollment info, a photo gallery, and staff bios.</p>
-          <div class="pf-services"><span>Website Design</span><span>Monthly Support</span></div>
-          <a href="contact.html" class="btn btn-secondary btn-sm">View Project (placeholder)</a>
+          <div class="pf-tag" data-i18n="cat.event">Event Professional</div>
+          <h3 data-i18n="pf9.name">Bright Beginnings Daycare</h3>
+          <p data-i18n="pf9.desc">A friendly, parent-focused site with enrollment info, a photo gallery, and staff bios.</p>
+          <div class="pf-services"><span data-i18n="pf9.svc0">Website Design</span><span data-i18n="pf9.svc1">Monthly Support</span></div>
+          <a href="contact.html" class="btn btn-secondary btn-sm" data-i18n="pf.viewproject">View Project (placeholder)</a>
         </div>
       </div>
     </div>
-    <p class="placeholder-note" style="margin-top:30px;">All projects on this page are placeholders for demonstration. Replace names, descriptions, and thumbnail images with real client work (with permission) before launch.</p>
+    <p class="placeholder-note" style="margin-top:30px;"><span data-i18n="pf.note">All projects on this page are placeholders for demonstration. Replace names, descriptions, and thumbnail images with real client work (with permission) before launch.</span></p>
   </div>
 </section>
 
@@ -166,11 +174,11 @@
   <div class="container">
     <div class="cta-band">
       <div>
-        <h2>Want your business featured here next?</h2>
-        <p>Let's talk about your project and get your business online.</p>
+        <h2><span data-i18n="pf.cta.h2">Want your business featured here next?</span></h2>
+        <p><span data-i18n="pf.cta.p">Let's talk about your project and get your business online.</span></p>
       </div>
       <div class="cta-actions">
-        <a href="contact.html" class="btn btn-primary">Get a Free Quote</a>
+        <a href="contact.html" class="btn btn-primary"><span data-i18n="cta.getquote">Get a Free Quote</span></a>
       </div>
     </div>
   </div>
@@ -181,7 +189,7 @@
     <div class="footer-grid">
       <div class="footer-brand">
         <a href="index.html" class="brand"><span class="mark">WD</span> [BUSINESS NAME]</a>
-        <p>Professional websites without the technical stress. We design, launch, and take care of websites for small businesses so you can focus on running yours.</p>
+        <p><span data-i18n="footer.tagline">Professional websites without the technical stress. We design, launch, and take care of websites for small businesses so you can focus on running yours.</span></p>
         <div class="footer-social">
           <a href="#" aria-label="Facebook">f</a>
           <a href="#" aria-label="Instagram">ig</a>
@@ -189,43 +197,44 @@
         </div>
       </div>
       <div class="footer-col">
-        <h4>Company</h4>
+        <h4><span data-i18n="footer.company">Company</span></h4>
         <ul>
-          <li><a href="about.html">About Us</a></li>
-          <li><a href="portfolio.html">Portfolio</a></li>
-          <li><a href="how-it-works.html">How It Works</a></li>
-          <li><a href="contact.html">Contact</a></li>
+          <li><a href="about.html"><span data-i18n="footer.about">About Us</span></a></li>
+          <li><a href="portfolio.html"><span data-i18n="footer.portfolio">Portfolio</span></a></li>
+          <li><a href="how-it-works.html"><span data-i18n="footer.how">How It Works</span></a></li>
+          <li><a href="contact.html"><span data-i18n="footer.contact">Contact</span></a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Services</h4>
+        <h4><span data-i18n="footer.services">Services</span></h4>
         <ul>
-          <li><a href="services.html">Website Design</a></li>
-          <li><a href="services.html#management">Website Management</a></li>
-          <li><a href="services.html#upgrades">Website Upgrades</a></li>
-          <li><a href="pricing.html">Care Plans &amp; Pricing</a></li>
+          <li><a href="services.html"><span data-i18n="footer.design">Website Design</span></a></li>
+          <li><a href="services.html#management"><span data-i18n="footer.management">Website Management</span></a></li>
+          <li><a href="services.html#upgrades"><span data-i18n="footer.upgrades">Website Upgrades</span></a></li>
+          <li><a href="pricing.html"><span data-i18n="footer.careplans">Care Plans & Pricing</span></a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Contact</h4>
+        <h4><span data-i18n="footer.contacth">Contact</span></h4>
         <ul>
           <li>[EMAIL ADDRESS PLACEHOLDER]</li>
           <li>[PHONE NUMBER PLACEHOLDER]</li>
-          <li>Service Area: [SERVICE AREA PLACEHOLDER]</li>
-          <li>Hours: [BUSINESS HOURS PLACEHOLDER]</li>
+          <li><span data-i18n="footer.area">Service Area:</span> [SERVICE AREA PLACEHOLDER]</li>
+          <li><span data-i18n="footer.hours">Hours:</span> [BUSINESS HOURS PLACEHOLDER]</li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>&copy; <span data-year></span> [BUSINESS NAME]. All rights reserved.</span>
+      <span>&copy; <span data-year></span> [BUSINESS NAME]. <span data-i18n="footer.rights">All rights reserved.</span></span>
       <div class="footer-legal">
-        <a href="privacy-policy.html">Privacy Policy</a>
-        <a href="terms-of-service.html">Terms of Service</a>
-        <a href="care-plan-terms.html">Website Care Plan Terms</a>
+        <a href="privacy-policy.html"><span data-i18n="footer.privacy">Privacy Policy</span></a>
+        <a href="terms-of-service.html"><span data-i18n="footer.terms">Terms of Service</span></a>
+        <a href="care-plan-terms.html"><span data-i18n="footer.careterms">Website Care Plan Terms</span></a>
       </div>
     </div>
   </div>
 </footer>
+<script src="js/i18n.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>

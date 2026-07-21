@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Contact Us | Get a Free Website Quote | [BUSINESS NAME]</title>
-<meta name="description" content="Tell us about your business and the website you need. Request a free, no-obligation website quote from [BUSINESS NAME] today.">
-<link rel="canonical" href="https://www.yourbusiness.com/contact.html">
+<title data-i18n="title.contact">Contact Us | Get a Free Website Quote | [BUSINESS NAME]</title>
+<meta name="description" content="Tell us about your business and the website you need. Request a free, no-obligation website quote from [BUSINESS NAME] today." data-i18n-content="desc.contact">
+<link rel="canonical" href="https://www.chezmaxo.ca/contact.html">
 
-<!-- Open Graph (placeholders — update image URL and site name before launch) -->
+<!-- Open Graph (placeholders — update image URL before launch) -->
 <meta property="og:type" content="website">
-<meta property="og:title" content="Contact Us | Get a Free Website Quote | [BUSINESS NAME]">
-<meta property="og:description" content="Tell us about your business and the website you need. Request a free, no-obligation website quote from [BUSINESS NAME] today.">
-<meta property="og:image" content="https://www.yourbusiness.com/images/og-cover.jpg">
-<meta property="og:url" content="https://www.yourbusiness.com/contact.html">
+<meta property="og:title" content="Contact Us | Get a Free Website Quote | [BUSINESS NAME]" data-i18n-content="title.contact">
+<meta property="og:description" content="Tell us about your business and the website you need. Request a free, no-obligation website quote from [BUSINESS NAME] today." data-i18n-content="desc.contact">
+<meta property="og:image" content="https://www.chezmaxo.ca/images/og-cover.jpg">
+<meta property="og:url" content="https://www.chezmaxo.ca/contact.html">
 <meta property="og:site_name" content="[BUSINESS NAME]">
 <meta name="twitter:card" content="summary_large_image">
 
@@ -27,18 +27,26 @@
   <div class="nav-wrap">
     <a href="index.html" class="brand"><span class="mark">WD</span> [BUSINESS NAME]</a>
     <nav class="nav-links" id="nav-links" aria-label="Primary">
-        <a href="index.html">Home</a>
-        <a href="services.html">Services</a>
-        <a href="pricing.html">Pricing</a>
-        <a href="how-it-works.html">How It Works</a>
-        <a href="portfolio.html">Portfolio</a>
-        <a href="about.html">About</a>
-        <a href="faq.html">FAQ</a>
-        <a href="contact.html" class="active">Contact</a>
+        <a href="index.html" class="" data-i18n="nav.home">Home</a>
+        <a href="services.html" class="" data-i18n="nav.services">Services</a>
+        <a href="pricing.html" class="" data-i18n="nav.pricing">Pricing</a>
+        <a href="how-it-works.html" class="" data-i18n="nav.how">How It Works</a>
+        <a href="portfolio.html" class="" data-i18n="nav.portfolio">Portfolio</a>
+        <a href="about.html" class="" data-i18n="nav.about">About</a>
+        <a href="faq.html" class="" data-i18n="nav.faq">FAQ</a>
+        <a href="contact.html" class="active" data-i18n="nav.contact">Contact</a>
+      <div class="mobile-cta">
+        <a href="pricing.html" class="btn btn-secondary btn-sm btn-block"><span data-i18n="nav.viewplans">View Plans</span></a>
+        <a href="contact.html" class="btn btn-primary btn-sm btn-block"><span data-i18n="nav.getquote">Get a Free Quote</span></a>
+      </div>
     </nav>
     <div class="nav-cta">
-      <a href="pricing.html" class="btn btn-secondary btn-sm">View Plans</a>
-      <a href="contact.html" class="btn btn-primary btn-sm">Get a Free Quote</a>
+      <div class="lang-toggle" role="group" aria-label="Language / Langue">
+        <button class="lang-btn" data-lang-btn="en" aria-pressed="true">EN</button>
+        <button class="lang-btn" data-lang-btn="fr" aria-pressed="false">FR</button>
+      </div>
+      <a href="pricing.html" class="btn btn-secondary btn-sm desktop-only" data-i18n="nav.viewplans">View Plans</a>
+      <a href="contact.html" class="btn btn-primary btn-sm desktop-only" data-i18n="nav.getquote">Get a Free Quote</a>
       <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">
         <span></span><span></span><span></span>
       </button>
@@ -48,9 +56,9 @@
 
 <section class="page-hero">
   <div class="container">
-    <div class="breadcrumb">CONTACT</div>
-    <h1>Tell us about your business and the website you need.</h1>
-    <p>Fill out the form below and we'll follow up with a free, no-pressure quote. No obligation, no pushy sales calls.</p>
+    <div class="breadcrumb"><span data-i18n="breadcrumb.contact">CONTACT</span></div>
+    <h1><span data-i18n="contact.h1">Tell us about your business and the website you need.</span></h1>
+    <p><span data-i18n="contact.lede">Fill out the form below and we'll follow up with a free, no-pressure quote. No obligation, no pushy sales calls.</span></p>
   </div>
 </section>
 
@@ -58,117 +66,117 @@
   <div class="container">
     <div class="grid-2" style="align-items:flex-start;">
       <div>
-        <div id="form-success" class="form-success">Thanks — your request has been received! This is a front-end demo, so nothing was actually sent yet. See the note in the README about connecting this form to email.</div>
+        <div id="form-success" class="form-success" data-i18n="contact.success">Thanks — your request has been received! This is a front-end demo, so nothing was actually sent yet. See the note in the README about connecting this form to email.</div>
         <form id="contact-form" novalidate>
           <div class="form-grid">
             <div class="field">
-              <label for="fullName">Full name <span class="req">*</span></label>
+              <label for="fullName" data-i18n="contact.f.name">Full name</label> <span class="req">*</span>
               <input type="text" id="fullName" name="fullName" autocomplete="name" required>
-              <div class="error-msg"></div>
+              <div class="error-msg" data-i18n-placeholder-target="fullName"></div>
             </div>
             <div class="field">
-              <label for="businessName">Business name <span class="req">*</span></label>
+              <label for="businessName" data-i18n="contact.f.biz">Business name</label> <span class="req">*</span>
               <input type="text" id="businessName" name="businessName" autocomplete="organization" required>
               <div class="error-msg"></div>
             </div>
             <div class="field">
-              <label for="email">Email <span class="req">*</span></label>
+              <label for="email" data-i18n="contact.f.email">Email</label> <span class="req">*</span>
               <input type="email" id="email" name="email" autocomplete="email" required>
               <div class="error-msg"></div>
             </div>
             <div class="field">
-              <label for="phone">Phone number <span class="req">*</span></label>
+              <label for="phone" data-i18n="contact.f.phone">Phone number</label> <span class="req">*</span>
               <input type="tel" id="phone" name="phone" autocomplete="tel" required>
               <div class="error-msg"></div>
             </div>
             <div class="field">
-              <label for="website">Existing website URL (if any)</label>
-              <input type="text" id="website" name="website" placeholder="e.g. www.yourbusiness.com">
+              <label for="website" data-i18n="contact.f.website">Existing website URL (if any)</label>
+              <input type="text" id="website" name="website" placeholder="e.g. www.yourbusiness.com" data-i18n-placeholder="contact.ph.website">
             </div>
             <div class="field">
-              <label for="businessType">Type of business</label>
-              <input type="text" id="businessType" name="businessType" placeholder="e.g. barbershop, contractor, restaurant">
+              <label for="businessType" data-i18n="contact.f.type">Type of business</label>
+              <input type="text" id="businessType" name="businessType" placeholder="e.g. barbershop, contractor, restaurant" data-i18n-placeholder="contact.ph.type">
             </div>
             <div class="field">
-              <label for="serviceNeeded">Service needed <span class="req">*</span></label>
+              <label for="serviceNeeded" data-i18n="contact.f.service">Service needed</label> <span class="req">*</span>
               <select id="serviceNeeded" name="serviceNeeded" required>
-                <option value="">Select an option</option>
-                <option>New website</option>
-                <option>Website redesign</option>
-                <option>Website maintenance</option>
-                <option>Small website update</option>
-                <option>Online store</option>
-                <option>Booking system</option>
-                <option>Custom feature</option>
-                <option>Not sure yet</option>
+                <option value="" data-i18n="contact.opt.select">Select an option</option>
+                <option data-i18n="svc.new">New website</option>
+                <option data-i18n="svc.redesign">Website redesign</option>
+                <option data-i18n="svc.maint">Website maintenance</option>
+                <option data-i18n="svc.small">Small website update</option>
+                <option data-i18n="svc.store">Online store</option>
+                <option data-i18n="svc.booking">Booking system</option>
+                <option data-i18n="svc.custom">Custom feature</option>
+                <option data-i18n="svc.unsure">Not sure yet</option>
               </select>
               <div class="error-msg"></div>
             </div>
             <div class="field">
-              <label for="budget">Estimated budget</label>
+              <label for="budget" data-i18n="contact.f.budget">Estimated budget</label>
               <select id="budget" name="budget">
-                <option value="">Select a range (optional)</option>
-                <option>Under $500</option>
-                <option>$500 – $1,000</option>
-                <option>$1,000 – $2,500</option>
-                <option>$2,500+</option>
-                <option>Not sure yet</option>
+                <option value="" data-i18n="contact.opt.budget">Select a range (optional)</option>
+                <option data-i18n="bud.1">Under $500</option>
+                <option data-i18n="bud.2">$500 – $1,000</option>
+                <option data-i18n="bud.3">$1,000 – $2,500</option>
+                <option data-i18n="bud.4">$2,500+</option>
+                <option data-i18n="bud.5">Not sure yet</option>
               </select>
             </div>
             <div class="field">
-              <label for="launchDate">Desired launch date</label>
-              <input type="text" id="launchDate" name="launchDate" placeholder="e.g. within 1 month, flexible">
+              <label for="launchDate" data-i18n="contact.f.launch">Desired launch date</label>
+              <input type="text" id="launchDate" name="launchDate" placeholder="e.g. within 1 month, flexible" data-i18n-placeholder="contact.ph.launch">
             </div>
             <div class="field">
-              <label for="contactMethod">Preferred contact method</label>
+              <label for="contactMethod" data-i18n="contact.f.method">Preferred contact method</label>
               <select id="contactMethod" name="contactMethod">
-                <option value="">Select an option</option>
-                <option>Email</option>
-                <option>Phone call</option>
-                <option>Text message</option>
+                <option value="" data-i18n="contact.opt.select2">Select an option</option>
+                <option data-i18n="cm.email">Email</option>
+                <option data-i18n="cm.phone">Phone call</option>
+                <option data-i18n="cm.text">Text message</option>
               </select>
             </div>
             <div class="field full">
-              <label>What do you need help with? (select all that apply)</label>
+              <label data-i18n="contact.f.needs">What do you need help with? (select all that apply)</label>
               <div class="checkbox-grid">
-                <label class="checkbox-item"><input type="checkbox" name="needs" value="New website"> New website</label>
-                <label class="checkbox-item"><input type="checkbox" name="needs" value="Website redesign"> Website redesign</label>
-                <label class="checkbox-item"><input type="checkbox" name="needs" value="Website maintenance"> Website maintenance</label>
-                <label class="checkbox-item"><input type="checkbox" name="needs" value="Small website update"> Small website update</label>
-                <label class="checkbox-item"><input type="checkbox" name="needs" value="Online store"> Online store</label>
-                <label class="checkbox-item"><input type="checkbox" name="needs" value="Booking system"> Booking system</label>
-                <label class="checkbox-item"><input type="checkbox" name="needs" value="Custom feature"> Custom feature</label>
-                <label class="checkbox-item"><input type="checkbox" name="needs" value="Not sure yet"> Not sure yet</label>
+                <label class="checkbox-item"><input type="checkbox" name="needs" value="New website"> <span data-i18n="needs.new">New website</span></label>
+                <label class="checkbox-item"><input type="checkbox" name="needs" value="Website redesign"> <span data-i18n="needs.redesign">Website redesign</span></label>
+                <label class="checkbox-item"><input type="checkbox" name="needs" value="Website maintenance"> <span data-i18n="needs.maint">Website maintenance</span></label>
+                <label class="checkbox-item"><input type="checkbox" name="needs" value="Small website update"> <span data-i18n="needs.small">Small website update</span></label>
+                <label class="checkbox-item"><input type="checkbox" name="needs" value="Online store"> <span data-i18n="needs.store">Online store</span></label>
+                <label class="checkbox-item"><input type="checkbox" name="needs" value="Booking system"> <span data-i18n="needs.booking">Booking system</span></label>
+                <label class="checkbox-item"><input type="checkbox" name="needs" value="Custom feature"> <span data-i18n="needs.custom">Custom feature</span></label>
+                <label class="checkbox-item"><input type="checkbox" name="needs" value="Not sure yet"> <span data-i18n="needs.unsure">Not sure yet</span></label>
               </div>
             </div>
             <div class="field full">
-              <label for="description">Tell us about your business and project <span class="req">*</span></label>
+              <label for="description" data-i18n="contact.f.desc">Tell us about your business and your project</label> <span class="req">*</span>
               <textarea id="description" name="description" rows="5" required></textarea>
               <div class="error-msg"></div>
             </div>
           </div>
-          <p class="form-note">Fields marked <span class="req">*</span> are required. We'll never share your information with third parties.</p>
-          <button type="submit" class="btn btn-primary" style="margin-top:16px;">Send My Request</button>
+          <p class="form-note" data-i18n="contact.note">Fields marked * are required. We'll never share your information with third parties.</p>
+          <button type="submit" class="btn btn-primary" style="margin-top:16px;" data-i18n="contact.submit">Send My Request</button>
         </form>
       </div>
 
       <div>
         <div class="ticket" style="margin-bottom:24px;">
           <div class="ticket-top">
-            <div class="ticket-id">CONTACT DETAILS</div>
-            <div class="ticket-stamp">OPEN</div>
+            <div class="ticket-id" data-i18n="contact.ticket.title">CONTACT DETAILS</div>
+            <div class="ticket-stamp" data-i18n="contact.ticket.stamp">OPEN</div>
           </div>
-          <div class="ticket-row"><span class="label">Email</span><span class="val">[EMAIL ADDRESS PLACEHOLDER]</span></div>
-          <div class="ticket-row"><span class="label">Phone</span><span class="val">[PHONE NUMBER PLACEHOLDER]</span></div>
-          <div class="ticket-row"><span class="label">Service area</span><span class="val">[SERVICE AREA PLACEHOLDER]</span></div>
-          <div class="ticket-row"><span class="label">Business hours</span><span class="val">[BUSINESS HOURS PLACEHOLDER]</span></div>
+          <div class="ticket-row"><span class="label" data-i18n="contact.f.email">Email</span><span class="val">[EMAIL ADDRESS PLACEHOLDER]</span></div>
+          <div class="ticket-row"><span class="label" data-i18n="contact.ticket.phone">Phone</span><span class="val">[PHONE NUMBER PLACEHOLDER]</span></div>
+          <div class="ticket-row"><span class="label" data-i18n="contact.ticket.area">Service area</span><span class="val">[SERVICE AREA PLACEHOLDER]</span></div>
+          <div class="ticket-row"><span class="label" data-i18n="contact.ticket.hours">Business hours</span><span class="val">[BUSINESS HOURS PLACEHOLDER]</span></div>
         </div>
         <div class="card">
-          <h3>What happens after I submit this form?</h3>
-          <p>We'll review your project details and follow up — usually within one to two business days — with a free, no-obligation quote and any questions we have about your business.</p>
+          <h3 data-i18n="contact.after.h">What happens after I submit this form?</h3>
+          <p data-i18n="contact.after.p">We'll review your project details and follow up — usually within one to two business days — with a free, no-obligation quote and any questions we have about your business.</p>
         </div>
         <div class="card" style="margin-top:20px;">
-          <h3>Follow along</h3>
+          <h3 data-i18n="contact.follow.h">Follow along</h3>
           <p style="margin-bottom:14px;">[SOCIAL MEDIA LINKS PLACEHOLDER]</p>
           <div class="footer-social" style="margin-top:0;">
             <a href="#" style="border-color:var(--border-strong); color:var(--color-primary);" aria-label="Facebook">f</a>
@@ -186,7 +194,7 @@
     <div class="footer-grid">
       <div class="footer-brand">
         <a href="index.html" class="brand"><span class="mark">WD</span> [BUSINESS NAME]</a>
-        <p>Professional websites without the technical stress. We design, launch, and take care of websites for small businesses so you can focus on running yours.</p>
+        <p><span data-i18n="footer.tagline">Professional websites without the technical stress. We design, launch, and take care of websites for small businesses so you can focus on running yours.</span></p>
         <div class="footer-social">
           <a href="#" aria-label="Facebook">f</a>
           <a href="#" aria-label="Instagram">ig</a>
@@ -194,43 +202,44 @@
         </div>
       </div>
       <div class="footer-col">
-        <h4>Company</h4>
+        <h4><span data-i18n="footer.company">Company</span></h4>
         <ul>
-          <li><a href="about.html">About Us</a></li>
-          <li><a href="portfolio.html">Portfolio</a></li>
-          <li><a href="how-it-works.html">How It Works</a></li>
-          <li><a href="contact.html">Contact</a></li>
+          <li><a href="about.html"><span data-i18n="footer.about">About Us</span></a></li>
+          <li><a href="portfolio.html"><span data-i18n="footer.portfolio">Portfolio</span></a></li>
+          <li><a href="how-it-works.html"><span data-i18n="footer.how">How It Works</span></a></li>
+          <li><a href="contact.html"><span data-i18n="footer.contact">Contact</span></a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Services</h4>
+        <h4><span data-i18n="footer.services">Services</span></h4>
         <ul>
-          <li><a href="services.html">Website Design</a></li>
-          <li><a href="services.html#management">Website Management</a></li>
-          <li><a href="services.html#upgrades">Website Upgrades</a></li>
-          <li><a href="pricing.html">Care Plans &amp; Pricing</a></li>
+          <li><a href="services.html"><span data-i18n="footer.design">Website Design</span></a></li>
+          <li><a href="services.html#management"><span data-i18n="footer.management">Website Management</span></a></li>
+          <li><a href="services.html#upgrades"><span data-i18n="footer.upgrades">Website Upgrades</span></a></li>
+          <li><a href="pricing.html"><span data-i18n="footer.careplans">Care Plans & Pricing</span></a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Contact</h4>
+        <h4><span data-i18n="footer.contacth">Contact</span></h4>
         <ul>
           <li>[EMAIL ADDRESS PLACEHOLDER]</li>
           <li>[PHONE NUMBER PLACEHOLDER]</li>
-          <li>Service Area: [SERVICE AREA PLACEHOLDER]</li>
-          <li>Hours: [BUSINESS HOURS PLACEHOLDER]</li>
+          <li><span data-i18n="footer.area">Service Area:</span> [SERVICE AREA PLACEHOLDER]</li>
+          <li><span data-i18n="footer.hours">Hours:</span> [BUSINESS HOURS PLACEHOLDER]</li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>&copy; <span data-year></span> [BUSINESS NAME]. All rights reserved.</span>
+      <span>&copy; <span data-year></span> [BUSINESS NAME]. <span data-i18n="footer.rights">All rights reserved.</span></span>
       <div class="footer-legal">
-        <a href="privacy-policy.html">Privacy Policy</a>
-        <a href="terms-of-service.html">Terms of Service</a>
-        <a href="care-plan-terms.html">Website Care Plan Terms</a>
+        <a href="privacy-policy.html"><span data-i18n="footer.privacy">Privacy Policy</span></a>
+        <a href="terms-of-service.html"><span data-i18n="footer.terms">Terms of Service</span></a>
+        <a href="care-plan-terms.html"><span data-i18n="footer.careterms">Website Care Plan Terms</span></a>
       </div>
     </div>
   </div>
 </footer>
+<script src="js/i18n.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>

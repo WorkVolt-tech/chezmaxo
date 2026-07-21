@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Frequently Asked Questions | [BUSINESS NAME]</title>
-<meta name="description" content="Answers to common questions about website care plans, pricing, updates, ownership, and support for small-business websites.">
-<link rel="canonical" href="https://www.yourbusiness.com/faq.html">
+<title data-i18n="title.faq">Frequently Asked Questions | [BUSINESS NAME]</title>
+<meta name="description" content="Answers to common questions about website care plans, pricing, updates, ownership, and support for small-business websites." data-i18n-content="desc.faq">
+<link rel="canonical" href="https://www.chezmaxo.ca/faq.html">
 
-<!-- Open Graph (placeholders — update image URL and site name before launch) -->
+<!-- Open Graph (placeholders — update image URL before launch) -->
 <meta property="og:type" content="website">
-<meta property="og:title" content="Frequently Asked Questions | [BUSINESS NAME]">
-<meta property="og:description" content="Answers to common questions about website care plans, pricing, updates, ownership, and support for small-business websites.">
-<meta property="og:image" content="https://www.yourbusiness.com/images/og-cover.jpg">
-<meta property="og:url" content="https://www.yourbusiness.com/faq.html">
+<meta property="og:title" content="Frequently Asked Questions | [BUSINESS NAME]" data-i18n-content="title.faq">
+<meta property="og:description" content="Answers to common questions about website care plans, pricing, updates, ownership, and support for small-business websites." data-i18n-content="desc.faq">
+<meta property="og:image" content="https://www.chezmaxo.ca/images/og-cover.jpg">
+<meta property="og:url" content="https://www.chezmaxo.ca/faq.html">
 <meta property="og:site_name" content="[BUSINESS NAME]">
 <meta name="twitter:card" content="summary_large_image">
 
@@ -27,18 +27,26 @@
   <div class="nav-wrap">
     <a href="index.html" class="brand"><span class="mark">WD</span> [BUSINESS NAME]</a>
     <nav class="nav-links" id="nav-links" aria-label="Primary">
-        <a href="index.html">Home</a>
-        <a href="services.html">Services</a>
-        <a href="pricing.html">Pricing</a>
-        <a href="how-it-works.html">How It Works</a>
-        <a href="portfolio.html">Portfolio</a>
-        <a href="about.html">About</a>
-        <a href="faq.html" class="active">FAQ</a>
-        <a href="contact.html">Contact</a>
+        <a href="index.html" class="" data-i18n="nav.home">Home</a>
+        <a href="services.html" class="" data-i18n="nav.services">Services</a>
+        <a href="pricing.html" class="" data-i18n="nav.pricing">Pricing</a>
+        <a href="how-it-works.html" class="" data-i18n="nav.how">How It Works</a>
+        <a href="portfolio.html" class="" data-i18n="nav.portfolio">Portfolio</a>
+        <a href="about.html" class="" data-i18n="nav.about">About</a>
+        <a href="faq.html" class="active" data-i18n="nav.faq">FAQ</a>
+        <a href="contact.html" class="" data-i18n="nav.contact">Contact</a>
+      <div class="mobile-cta">
+        <a href="pricing.html" class="btn btn-secondary btn-sm btn-block"><span data-i18n="nav.viewplans">View Plans</span></a>
+        <a href="contact.html" class="btn btn-primary btn-sm btn-block"><span data-i18n="nav.getquote">Get a Free Quote</span></a>
+      </div>
     </nav>
     <div class="nav-cta">
-      <a href="pricing.html" class="btn btn-secondary btn-sm">View Plans</a>
-      <a href="contact.html" class="btn btn-primary btn-sm">Get a Free Quote</a>
+      <div class="lang-toggle" role="group" aria-label="Language / Langue">
+        <button class="lang-btn" data-lang-btn="en" aria-pressed="true">EN</button>
+        <button class="lang-btn" data-lang-btn="fr" aria-pressed="false">FR</button>
+      </div>
+      <a href="pricing.html" class="btn btn-secondary btn-sm desktop-only" data-i18n="nav.viewplans">View Plans</a>
+      <a href="contact.html" class="btn btn-primary btn-sm desktop-only" data-i18n="nav.getquote">Get a Free Quote</a>
       <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">
         <span></span><span></span><span></span>
       </button>
@@ -48,9 +56,9 @@
 
 <section class="page-hero">
   <div class="container">
-    <div class="breadcrumb">FAQ</div>
-    <h1>Frequently asked questions.</h1>
-    <p>Can't find what you're looking for? Reach out anytime — we're glad to answer questions before you commit to anything.</p>
+    <div class="breadcrumb"><span data-i18n="breadcrumb.faq">FAQ</span></div>
+    <h1><span data-i18n="faqpage.h1">Frequently asked questions.</span></h1>
+    <p><span data-i18n="faqpage.lede">Can't find what you're looking for? Reach out anytime — we're glad to answer questions before you commit to anything.</span></p>
   </div>
 </section>
 
@@ -58,68 +66,68 @@
   <div class="container">
     <div class="accordion" style="max-width:820px; margin:0 auto;">
       <div class="accordion-item">
-        <button class="accordion-btn" aria-expanded="false">What is included in the $5 monthly plan?<span class="plus">+</span></button>
-        <div class="accordion-panel"><div class="accordion-panel-inner">The Starter Care plan includes basic website monitoring, basic backups, email support, minor technical fixes, and one very small content update every three months. It's designed for websites that mainly need to stay online, secure, and healthy.</div></div>
+        <button class="accordion-btn" aria-expanded="false"><span data-i18n="faq.q1">What's included in the $5 monthly plan?</span><span class="plus">+</span></button>
+        <div class="accordion-panel"><div class="accordion-panel-inner" data-i18n="faq.a1">Basic monitoring, basic backups, email support, minor technical fixes, and one very small content update every three months. It's built for websites that mostly just need to stay healthy and online.</div></div>
       </div>
       <div class="accordion-item">
-        <button class="accordion-btn" aria-expanded="false">Is website hosting included?<span class="plus">+</span></button>
-        <div class="accordion-panel"><div class="accordion-panel-inner">Hosting details are confirmed as part of your website agreement. In many cases hosting is arranged on your behalf and included as part of your plan; in others it may be billed separately. We'll always be clear about which applies to your project before you commit.</div></div>
+        <button class="accordion-btn" aria-expanded="false"><span data-i18n="faq.q2">Is website hosting included?</span><span class="plus">+</span></button>
+        <div class="accordion-panel"><div class="accordion-panel-inner" data-i18n="faq.a2">Hosting details are confirmed as part of your website agreement. In many cases hosting is arranged on your behalf and included as part of your plan; in others it may be billed separately. We'll always be clear about which applies to your project before you commit.</div></div>
       </div>
       <div class="accordion-item">
-        <button class="accordion-btn" aria-expanded="false">Can I cancel my care plan?<span class="plus">+</span></button>
-        <div class="accordion-panel"><div class="accordion-panel-inner">Cancellation terms depend on the care plan and client agreement you've signed. Details are outlined in your Website Care Plan Terms, which we're happy to walk through with you before you sign up.</div></div>
+        <button class="accordion-btn" aria-expanded="false"><span data-i18n="faq.q3">Can I cancel my care plan?</span><span class="plus">+</span></button>
+        <div class="accordion-panel"><div class="accordion-panel-inner" data-i18n="faq.a3">Cancellation terms depend on the care plan and client agreement you've signed. Details are outlined in your Website Care Plan Terms, which we're happy to walk through with you before you sign up.</div></div>
       </div>
       <div class="accordion-item">
-        <button class="accordion-btn" aria-expanded="false">What counts as a small update?<span class="plus">+</span></button>
-        <div class="accordion-panel"><div class="accordion-panel-inner">Small updates include things like changing your business hours, updating a phone number or email address, correcting text, replacing one image, updating a price, adding a short announcement, or fixing a minor website issue.</div></div>
+        <button class="accordion-btn" aria-expanded="false"><span data-i18n="faq.q4">What counts as a small update?</span><span class="plus">+</span></button>
+        <div class="accordion-panel"><div class="accordion-panel-inner" data-i18n="faq.a4">Things like changing your business hours, updating a phone number or email, correcting text, replacing one image, updating a price, or adding a short announcement.</div></div>
       </div>
       <div class="accordion-item">
-        <button class="accordion-btn" aria-expanded="false">What counts as a large change?<span class="plus">+</span></button>
-        <div class="accordion-panel"><div class="accordion-panel-inner">Large changes include adding new pages, redesigning sections, adding booking or payment systems, creating an online store, adding custom forms, adding memberships or login systems, writing large amounts of new content, major SEO work, or a full website redesign. These are quoted and approved separately from your care plan.</div></div>
+        <button class="accordion-btn" aria-expanded="false"><span data-i18n="faq.q5">What counts as a large change?</span><span class="plus">+</span></button>
+        <div class="accordion-panel"><div class="accordion-panel-inner" data-i18n="faq.a5">Large changes include adding new pages, redesigning sections, adding booking or payment systems, creating an online store, adding custom forms, adding memberships or login systems, writing large amounts of new content, major SEO work, or a full website redesign. These are quoted and approved separately from your care plan.</div></div>
       </div>
       <div class="accordion-item">
-        <button class="accordion-btn" aria-expanded="false">How much does a website cost?<span class="plus">+</span></button>
-        <div class="accordion-panel"><div class="accordion-panel-inner">Website development starts at $399 for a Starter Website, $699 for a Business Website, and Advanced Websites (with features like online stores or booking systems) are custom-quoted. Final pricing depends on pages, features, content, and complexity.</div></div>
+        <button class="accordion-btn" aria-expanded="false"><span data-i18n="faq.q6">How much does a website cost?</span><span class="plus">+</span></button>
+        <div class="accordion-panel"><div class="accordion-panel-inner" data-i18n="faq.a6">Website development starts at $399 for a Starter Website, $699 for a Business Website, and Advanced Websites (with features like online stores or booking systems) are custom-quoted. Final pricing depends on pages, features, content, and complexity.</div></div>
       </div>
       <div class="accordion-item">
-        <button class="accordion-btn" aria-expanded="false">How long does it take to build a website?<span class="plus">+</span></button>
-        <div class="accordion-panel"><div class="accordion-panel-inner">Timelines vary by project size and how quickly we receive your content and feedback. During your free consultation, we'll give you a realistic estimate based on your specific project.</div></div>
+        <button class="accordion-btn" aria-expanded="false"><span data-i18n="faq.q7">How long does it take to build a website?</span><span class="plus">+</span></button>
+        <div class="accordion-panel"><div class="accordion-panel-inner" data-i18n="faq.a7">Timelines vary by project size and how quickly we receive your content and feedback. During your free consultation, we'll give you a realistic estimate based on your specific project.</div></div>
       </div>
       <div class="accordion-item">
-        <button class="accordion-btn" aria-expanded="false">Can you redesign my existing website?<span class="plus">+</span></button>
-        <div class="accordion-panel"><div class="accordion-panel-inner">Yes. Full redesigns are treated as a larger project and quoted separately, based on what you'd like to keep, change, or rebuild from scratch.</div></div>
+        <button class="accordion-btn" aria-expanded="false"><span data-i18n="faq.q8">Can you redesign my existing website?</span><span class="plus">+</span></button>
+        <div class="accordion-panel"><div class="accordion-panel-inner" data-i18n="faq.a8">Yes. Full redesigns are treated as a larger project and quoted separately, based on what you'd like to keep, change, or rebuild from scratch.</div></div>
       </div>
       <div class="accordion-item">
-        <button class="accordion-btn" aria-expanded="false">Do I own my website?<span class="plus">+</span></button>
-        <div class="accordion-panel"><div class="accordion-panel-inner">Ownership terms are clearly stated in your client agreement before any work begins, so you know exactly what you own and what's included as part of ongoing service.</div></div>
+        <button class="accordion-btn" aria-expanded="false"><span data-i18n="faq.q9">Do I own my website?</span><span class="plus">+</span></button>
+        <div class="accordion-panel"><div class="accordion-panel-inner" data-i18n="faq.a9">Ownership terms are clearly stated in your client agreement before any work begins, so you know exactly what you own and what's included as part of ongoing service.</div></div>
       </div>
       <div class="accordion-item">
-        <button class="accordion-btn" aria-expanded="false">Can you help with a domain name?<span class="plus">+</span></button>
-        <div class="accordion-panel"><div class="accordion-panel-inner">Yes. We can help you choose and connect a domain name. Domain name registration itself is a third-party cost and may be billed separately from your website-development fee.</div></div>
+        <button class="accordion-btn" aria-expanded="false"><span data-i18n="faq.q10">Can you help with a domain name?</span><span class="plus">+</span></button>
+        <div class="accordion-panel"><div class="accordion-panel-inner" data-i18n="faq.a10">Yes. We can help you choose and connect a domain name. Domain name registration itself is a third-party cost and may be billed separately from your website-development fee.</div></div>
       </div>
       <div class="accordion-item">
-        <button class="accordion-btn" aria-expanded="false">Do you create online stores?<span class="plus">+</span></button>
-        <div class="accordion-panel"><div class="accordion-panel-inner">Yes, online stores are available as a larger upgrade with a custom quote, since they involve extra planning around products, payments, and shipping or fulfillment.</div></div>
+        <button class="accordion-btn" aria-expanded="false"><span data-i18n="faq.q11">Do you create online stores?</span><span class="plus">+</span></button>
+        <div class="accordion-panel"><div class="accordion-panel-inner" data-i18n="faq.a11">Yes, online stores are available as a larger upgrade with a custom quote, since they involve extra planning around products, payments, and shipping or fulfillment.</div></div>
       </div>
       <div class="accordion-item">
-        <button class="accordion-btn" aria-expanded="false">What happens if my website has a problem?<span class="plus">+</span></button>
-        <div class="accordion-panel"><div class="accordion-panel-inner">Care plan clients can reach out to our support team, and we'll investigate and resolve minor technical issues as part of your plan. More significant issues are assessed and, if needed, quoted separately.</div></div>
+        <button class="accordion-btn" aria-expanded="false"><span data-i18n="faq.q12">What happens if my website has a problem?</span><span class="plus">+</span></button>
+        <div class="accordion-panel"><div class="accordion-panel-inner" data-i18n="faq.a12">Care plan clients can reach out to our support team, and we'll investigate and resolve minor technical issues as part of your plan. More significant issues are assessed and, if needed, quoted separately.</div></div>
       </div>
       <div class="accordion-item">
-        <button class="accordion-btn" aria-expanded="false">Can unused support time roll over?<span class="plus">+</span></button>
-        <div class="accordion-panel"><div class="accordion-panel-inner">No. To keep pricing simple and predictable for everyone, unused updates or support time do not roll over to the next month.</div></div>
+        <button class="accordion-btn" aria-expanded="false"><span data-i18n="faq.q13">Can unused support time roll over?</span><span class="plus">+</span></button>
+        <div class="accordion-panel"><div class="accordion-panel-inner" data-i18n="faq.a13">No. To keep pricing simple and predictable for everyone, unused updates or support time do not roll over to the next month.</div></div>
       </div>
       <div class="accordion-item">
-        <button class="accordion-btn" aria-expanded="false">Are third-party subscriptions included?<span class="plus">+</span></button>
-        <div class="accordion-panel"><div class="accordion-panel-inner">No. Domain names, premium software, paid plugins, email services, and other third-party subscriptions may cost extra and are separate from your website-development fee or monthly care plan.</div></div>
+        <button class="accordion-btn" aria-expanded="false"><span data-i18n="faq.q14">Are third-party subscriptions included?</span><span class="plus">+</span></button>
+        <div class="accordion-panel"><div class="accordion-panel-inner" data-i18n="faq.a14">No. Domain names, premium software, paid plugins, email services, and other third-party subscriptions may cost extra and are separate from your website-development fee or monthly care plan.</div></div>
       </div>
       <div class="accordion-item">
-        <button class="accordion-btn" aria-expanded="false">Do you offer payment plans?<span class="plus">+</span></button>
-        <div class="accordion-panel"><div class="accordion-panel-inner">In some cases, yes. Reach out during your free consultation and we can discuss whether a payment plan makes sense for your project.</div></div>
+        <button class="accordion-btn" aria-expanded="false"><span data-i18n="faq.q15">Do you offer payment plans?</span><span class="plus">+</span></button>
+        <div class="accordion-panel"><div class="accordion-panel-inner" data-i18n="faq.a15">In some cases, yes. Reach out during your free consultation and we can discuss whether a payment plan makes sense for your project.</div></div>
       </div>
       <div class="accordion-item">
-        <button class="accordion-btn" aria-expanded="false">Can I request changes before the website launches?<span class="plus">+</span></button>
-        <div class="accordion-panel"><div class="accordion-panel-inner">Absolutely. Before your website goes live, you'll have a full review-and-approval step where you can request changes. We don't launch until you're happy with the result.</div></div>
+        <button class="accordion-btn" aria-expanded="false"><span data-i18n="faq.q16">Can I request changes before the website launches?</span><span class="plus">+</span></button>
+        <div class="accordion-panel"><div class="accordion-panel-inner" data-i18n="faq.a16">Absolutely. Before your website goes live, you'll have a full review-and-approval step where you can request changes. We don't launch until you're happy with the result.</div></div>
       </div>
     </div>
   </div>
@@ -129,11 +137,11 @@
   <div class="container">
     <div class="cta-band">
       <div>
-        <h2>Still have questions?</h2>
-        <p>Send us a message and we'll get back to you personally — no automated sales pitch.</p>
+        <h2><span data-i18n="faqpage.cta.h2">Still have questions?</span></h2>
+        <p><span data-i18n="faqpage.cta.p">Send us a message and we'll get back to you personally — no automated sales pitch.</span></p>
       </div>
       <div class="cta-actions">
-        <a href="contact.html" class="btn btn-primary">Contact Us</a>
+        <a href="contact.html" class="btn btn-primary"><span data-i18n="faqpage.cta.btn">Contact Us</span></a>
       </div>
     </div>
   </div>
@@ -144,7 +152,7 @@
     <div class="footer-grid">
       <div class="footer-brand">
         <a href="index.html" class="brand"><span class="mark">WD</span> [BUSINESS NAME]</a>
-        <p>Professional websites without the technical stress. We design, launch, and take care of websites for small businesses so you can focus on running yours.</p>
+        <p><span data-i18n="footer.tagline">Professional websites without the technical stress. We design, launch, and take care of websites for small businesses so you can focus on running yours.</span></p>
         <div class="footer-social">
           <a href="#" aria-label="Facebook">f</a>
           <a href="#" aria-label="Instagram">ig</a>
@@ -152,43 +160,44 @@
         </div>
       </div>
       <div class="footer-col">
-        <h4>Company</h4>
+        <h4><span data-i18n="footer.company">Company</span></h4>
         <ul>
-          <li><a href="about.html">About Us</a></li>
-          <li><a href="portfolio.html">Portfolio</a></li>
-          <li><a href="how-it-works.html">How It Works</a></li>
-          <li><a href="contact.html">Contact</a></li>
+          <li><a href="about.html"><span data-i18n="footer.about">About Us</span></a></li>
+          <li><a href="portfolio.html"><span data-i18n="footer.portfolio">Portfolio</span></a></li>
+          <li><a href="how-it-works.html"><span data-i18n="footer.how">How It Works</span></a></li>
+          <li><a href="contact.html"><span data-i18n="footer.contact">Contact</span></a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Services</h4>
+        <h4><span data-i18n="footer.services">Services</span></h4>
         <ul>
-          <li><a href="services.html">Website Design</a></li>
-          <li><a href="services.html#management">Website Management</a></li>
-          <li><a href="services.html#upgrades">Website Upgrades</a></li>
-          <li><a href="pricing.html">Care Plans &amp; Pricing</a></li>
+          <li><a href="services.html"><span data-i18n="footer.design">Website Design</span></a></li>
+          <li><a href="services.html#management"><span data-i18n="footer.management">Website Management</span></a></li>
+          <li><a href="services.html#upgrades"><span data-i18n="footer.upgrades">Website Upgrades</span></a></li>
+          <li><a href="pricing.html"><span data-i18n="footer.careplans">Care Plans & Pricing</span></a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Contact</h4>
+        <h4><span data-i18n="footer.contacth">Contact</span></h4>
         <ul>
           <li>[EMAIL ADDRESS PLACEHOLDER]</li>
           <li>[PHONE NUMBER PLACEHOLDER]</li>
-          <li>Service Area: [SERVICE AREA PLACEHOLDER]</li>
-          <li>Hours: [BUSINESS HOURS PLACEHOLDER]</li>
+          <li><span data-i18n="footer.area">Service Area:</span> [SERVICE AREA PLACEHOLDER]</li>
+          <li><span data-i18n="footer.hours">Hours:</span> [BUSINESS HOURS PLACEHOLDER]</li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>&copy; <span data-year></span> [BUSINESS NAME]. All rights reserved.</span>
+      <span>&copy; <span data-year></span> [BUSINESS NAME]. <span data-i18n="footer.rights">All rights reserved.</span></span>
       <div class="footer-legal">
-        <a href="privacy-policy.html">Privacy Policy</a>
-        <a href="terms-of-service.html">Terms of Service</a>
-        <a href="care-plan-terms.html">Website Care Plan Terms</a>
+        <a href="privacy-policy.html"><span data-i18n="footer.privacy">Privacy Policy</span></a>
+        <a href="terms-of-service.html"><span data-i18n="footer.terms">Terms of Service</span></a>
+        <a href="care-plan-terms.html"><span data-i18n="footer.careterms">Website Care Plan Terms</span></a>
       </div>
     </div>
   </div>
 </footer>
+<script src="js/i18n.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>
