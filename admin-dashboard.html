@@ -37,7 +37,7 @@ function badgeClass(plan){
 }
 
 function renderSidebar(){
-  const items = [["projects","Projects (CRM)"],["requests","Update requests"],["payments","Payments"],["messages","Messages"]];
+  const items = [["projects","Projects (CRM)"],["orders","Build Orders"],["requests","Update requests"],["payments","Payments"],["messages","Messages"]];
   document.getElementById("sidebar").innerHTML = items.map(([k,l]) =>
     `<button data-tab="${k}" class="${state.tab===k?'active':''}"><span class="dot"></span>${l}</button>`).join("");
   document.querySelectorAll("#sidebar button").forEach(b => b.onclick = () => { state.tab = b.dataset.tab; renderMain(); });
@@ -68,6 +68,43 @@ async function renderMain(){
     });
   }
 
+  else if(state.tab === "orders"){
+    state.clients = await listClients();
+    const orders = await listAllBuildOrders();
+    const orderByClient = {};
+    orders.forEach(o => { orderByClient[o.client_id] = o; });
+    main.innerHTML = `
+      <div class="page-title"><div><div class="eyebrow">Website builds</div><h2>Build orders</h2></div></div>
+      <p style="color:var(--ink-soft); font-size:13.5px; max-width:640px; margin-bottom:20px;">Set the quoted price for each client's website after your initial conversation. Their dashboard will show the amount and payment options the moment you save it here.</p>
+      <div class="card" style="padding:0; margin-bottom:26px;">
+        <table class="table"><thead><tr><th>Client</th><th>What's being built</th><th>Amount</th><th>Status</th></tr></thead>
+        <tbody>${state.clients.map(c => {
+          const o = orderByClient[c.id];
+          const statusLabel = !o ? "No quote yet" : o.status === "paid" ? "Paid" : o.status === "awaiting_payment" ? "Awaiting payment" : "Awaiting quote";
+          const statusClass = !o ? "open" : o.status === "paid" ? "confirmed" : "pending";
+          return `<tr><td>${c.business_name || c.full_name}</td><td>${o ? o.description : "—"}</td><td>${o && o.amount ? "$"+o.amount : "—"}</td><td><span class="status status-${statusClass}">${statusLabel}</span></td></tr>`;
+        }).join("") || '<tr><td colspan="4" class="empty-note">No clients yet.</td></tr>'}
+        </tbody></table>
+      </div>
+      <div class="card">
+        <h3 style="font-size:16px; margin-bottom:14px;">Set or update a quote</h3>
+        <div class="field"><label>Client</label>
+          <select id="orderClientSelect">${state.clients.map(c => `<option value="${c.id}">${c.business_name || c.full_name}</option>`).join("")}</select>
+        </div>
+        <div class="field"><label>What are you building?</label><textarea id="orderDesc" rows="2" placeholder="e.g. 5-page site with contact form and photo gallery"></textarea></div>
+        <div class="field"><label>Quoted amount ($)</label><input id="orderAmount" type="number" step="0.01" placeholder="299.00"></div>
+        <button class="btn btn-primary" id="orderSave">Save Quote</button>
+      </div>`;
+    document.getElementById("orderSave").onclick = async () => {
+      const clientId = document.getElementById("orderClientSelect").value;
+      const description = document.getElementById("orderDesc").value.trim();
+      const amount = parseFloat(document.getElementById("orderAmount").value);
+      if(!amount || amount <= 0){ alert("Enter a valid amount."); return; }
+      await setBuildOrderQuote(clientId, description, amount);
+      renderMain();
+    };
+  }
+
   else if(state.tab === "requests"){
     const rows = await listAllRequests();
     main.innerHTML = `
@@ -92,12 +129,12 @@ async function renderMain(){
       <div class="page-title"><div><div class="eyebrow">Billing</div><h2>Payments</h2></div></div>
       <p style="color:var(--ink-soft);font-size:13.5px;max-width:640px;margin-bottom:16px;">PayPal payments confirm automatically. Zelle and Interac e-Transfer need a manual check against your bank/Zelle activity before confirming.</p>
       <div class="card" style="padding:0;">
-        <table class="table"><thead><tr><th>Client</th><th>Method</th><th>Amount</th><th>Reference</th><th>Status</th><th></th></tr></thead>
+        <table class="table"><thead><tr><th>Client</th><th>For</th><th>Method</th><th>Amount</th><th>Reference</th><th>Status</th><th></th></tr></thead>
         <tbody>${rows.length ? rows.map(p => `
-          <tr><td>${p.profiles?.business_name || "—"}</td><td>${p.method}</td><td>$${p.amount}</td>
+          <tr><td>${p.profiles?.business_name || "—"}</td><td>${p.purpose === "build" ? "Website build" : "Care plan"}</td><td>${p.method}</td><td>$${p.amount}</td>
           <td style="font-family:var(--font-mono);font-size:11.5px;color:var(--ink-faint);">${p.reference}</td>
           <td><span class="status status-${p.status}">${p.status==='confirmed'?'Confirmed':'Pending review'}</span></td>
-          <td>${p.status==='pending' ? `<button class="btn btn-teal btn-sm" data-confirm="${p.id}">Mark as paid</button>` : ''}</td></tr>`).join('') : '<tr><td colspan="6" class="empty-note">No payments yet.</td></tr>'}
+          <td>${p.status==='pending' ? `<button class="btn btn-teal btn-sm" data-confirm="${p.id}">Mark as paid</button>` : ''}</td></tr>`).join('') : '<tr><td colspan="7" class="empty-note">No payments yet.</td></tr>'}
         </tbody></table>
       </div>`;
     main.querySelectorAll("[data-confirm]").forEach(b => b.onclick = async () => {

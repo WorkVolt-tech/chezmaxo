@@ -30,7 +30,7 @@
 <script>
 const STAGES = ["Submitted","In Progress","Review","Live"];
 const PLANS = Object.keys(PLAN_PRICES).map(name => ({ name, monthly: PLAN_PRICES[name].monthly, yearly: PLAN_PRICES[name].yearly }));
-let state = { tab: "plan", profile: null, requests: [], payments: [], messages: [], chatChannel: null };
+let state = { tab: "build", profile: null, requests: [], payments: [], messages: [], chatChannel: null };
 
 function badgeClass(plan){
   if(plan==="Starter Care") return "badge-starter";
@@ -39,7 +39,7 @@ function badgeClass(plan){
 }
 
 function renderSidebar(){
-  const items = [["plan","My plan"],["project","My project"],["requests","Update requests"],["payments","Payments"],["messages","Messages"]];
+  const items = [["build","Website Build"],["plan","My plan"],["project","My project"],["requests","Update requests"],["payments","Payments"],["messages","Messages"]];
   document.getElementById("sidebar").innerHTML = items.map(([k,l]) =>
     `<button data-tab="${k}" class="${state.tab===k?'active':''}"><span class="dot"></span>${l}</button>`).join("");
   document.querySelectorAll("#sidebar button").forEach(b => b.onclick = () => { state.tab = b.dataset.tab; renderMain(); });
@@ -49,7 +49,60 @@ async function renderMain(){
   renderSidebar();
   const main = document.getElementById("main");
   const c = state.profile;
-  if(state.tab === "plan"){
+  if(state.tab === "build"){
+    const order = await getMyBuildOrder(c.id);
+    if(!order || order.status === "awaiting_quote"){
+      main.innerHTML = `
+        <div class="page-title"><div><div class="eyebrow">Website build</div><h2>Your project quote</h2></div></div>
+        <div class="card">
+          <p style="color:var(--ink-soft); margin-bottom:0;">We're still putting together your quote. Once it's ready, you'll see the price and payment options right here — no action needed from you yet. Have questions in the meantime? Send us a message.</p>
+        </div>`;
+    } else if(order.status === "awaiting_payment"){
+      main.innerHTML = `
+        <div class="page-title"><div><div class="eyebrow">Website build</div><h2>Your project quote</h2></div></div>
+        <div class="ticket" style="margin-bottom:20px;">
+          <div class="ticket-top">
+            <div class="ticket-id">PROJECT QUOTE</div>
+            <div class="ticket-stamp">AWAITING PAYMENT</div>
+          </div>
+          <div class="ticket-row"><span class="label">What we're building</span><span class="val">${order.description || "Your website"}</span></div>
+          <div class="ticket-row"><span class="label">Amount due</span><span class="val">$${order.amount}</span></div>
+        </div>
+        <div class="paybox"><h4>Pay with PayPal</h4><p>Confirms automatically — no waiting.</p><div id="paypal-build-button"></div></div>
+        <div class="paybox"><h4>Pay with Zelle or Interac e-Transfer</h4><p>Send payment as usual, then log it below. We'll confirm it here once we verify it against our account (usually within one business day).</p>
+          <div class="field"><label>Method</label><select id="buildPayMethod"><option>Zelle</option><option>Interac e-Transfer</option></select></div>
+          <div class="field"><label>Reference / confirmation number</label><input id="buildPayRef" placeholder="e.g. from your bank's confirmation email"></div>
+          <button class="btn btn-secondary" id="buildPaySubmit">I've sent this payment</button>
+        </div>`;
+      document.getElementById("buildPaySubmit").onclick = async () => {
+        const method = document.getElementById("buildPayMethod").value;
+        const ref = document.getElementById("buildPayRef").value.trim() || "(no reference provided)";
+        await logManualPayment(c.id, method, order.amount, ref, "build");
+        renderMain();
+      };
+      renderBuildPayPalButton(c, order);
+    } else {
+      main.innerHTML = `
+        <div class="page-title"><div><div class="eyebrow">Website build</div><h2>Your project quote</h2></div></div>
+        <div class="ticket" style="margin-bottom:20px;">
+          <div class="ticket-top">
+            <div class="ticket-id">PROJECT QUOTE</div>
+            <div class="ticket-stamp">PAID</div>
+          </div>
+          <div class="ticket-row"><span class="label">What we're building</span><span class="val">${order.description || "Your website"}</span></div>
+          <div class="ticket-row"><span class="label">Amount paid</span><span class="val">$${order.amount}</span></div>
+          <div class="ticket-row"><span class="label">Paid on</span><span class="val">${order.paid_at ? new Date(order.paid_at).toLocaleDateString() : "—"}</span></div>
+        </div>
+        <div class="card">
+          <h3>Ready for ongoing care?</h3>
+          <p style="color:var(--ink-soft);">Your build is paid and in progress — check the "My project" tab for status. Once it's live, pick a care plan to keep it monitored, backed up, and updated.</p>
+          <button class="btn btn-primary" data-goto="plan">Choose a Care Plan</button>
+        </div>`;
+      const gotoBtn = main.querySelector("[data-goto]");
+      if(gotoBtn) gotoBtn.onclick = () => { state.tab = "plan"; renderMain(); };
+    }
+  }
+  else if(state.tab === "plan"){
     const cycle = c.billing_cycle || "monthly";
     main.innerHTML = `
       <div class="page-title"><div><div class="eyebrow">Billing</div><h2>My plan</h2></div></div>
@@ -168,6 +221,23 @@ async function renderMain(){
   }
 }
 
+function renderBuildPayPalButton(c, order){
+  const container = document.getElementById("paypal-build-button");
+  if(!container || typeof paypal === "undefined"){
+    if(container) container.innerHTML = '<p style="color:var(--ink-faint);font-size:12.5px;">PayPal button unavailable — check that PAYPAL_CLIENT_ID is set in js/config.js.</p>';
+    return;
+  }
+  paypal.Buttons({
+    createOrder: (data, actions) => actions.order.create({ purchase_units: [{ description: (order.description || "Website build").slice(0,120), amount: { value: parseFloat(order.amount).toFixed(2) } }] }),
+    onApprove: async (data, actions) => {
+      const details = await actions.order.capture();
+      await logPayPalPayment(c.id, order.amount, details.id, "build");
+      await markBuildOrderPaidClientSide(c.id);
+      renderMain();
+    }
+  }).render("#paypal-build-button");
+}
+
 function renderPayPalButton(c, amount){
   const container = document.getElementById("paypal-button");
   if(!container || typeof paypal === "undefined"){
@@ -195,7 +265,7 @@ document.getElementById("logoutBtn").onclick = signOut;
 
   const script = document.createElement("script");
   script.src = `https://www.paypal.com/sdk/js?client-id=${PAYPAL_CLIENT_ID}&currency=USD`;
-  script.onload = () => { if (state.tab === "payments") renderMain(); };
+  script.onload = () => { if (state.tab === "payments" || state.tab === "build") renderMain(); };
   document.head.appendChild(script);
   document.getElementById("paypalSdkPlaceholder").remove();
 
