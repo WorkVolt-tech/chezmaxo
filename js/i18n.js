@@ -719,6 +719,14 @@ const I18N = {
     "en": "Every upgrade is scoped and quoted separately, and nothing begins until you've approved the cost.",
     "fr": "Chaque amélioration est évaluée et chiffrée séparément, et rien ne débute avant que vous n'ayez approuvé le coût."
   },
+  "services.platform.label": {
+    "en": "Already have a website?",
+    "fr": "Vous avez déjà un site web?"
+  },
+  "services.platform.text": {
+    "en": "If your current site is on WordPress, we can typically take over management directly. We're not able to manage websites that stay on Wix — it's a closed platform that doesn't allow outside access to a site's code, so there's no way for us to monitor, back up, or maintain it. What we can do is rebuild a Wix site as a proper website first, so it becomes fully manageable under any of our care plans.",
+    "fr": "Si votre site actuel est sur WordPress, nous pouvons généralement en prendre la gestion directement. Nous ne sommes pas en mesure de gérer les sites web qui restent sur Wix — c'est une plateforme fermée qui ne permet pas d'accès externe au code d'un site, donc il n'y a aucun moyen pour nous de le surveiller, le sauvegarder ou l'entretenir. Ce que nous pouvons faire, c'est reconstruire un site Wix en un vrai site web d'abord, afin qu'il devienne entièrement gérable sous n'importe lequel de nos forfaits d'entretien."
+  },
   "services.upg.cta": {
     "en": "Ask About an Upgrade",
     "fr": "Renseignez-vous sur une amélioration"
@@ -1416,8 +1424,16 @@ const I18N = {
     "fr": "Pouvez-vous refaire mon site web existant?"
   },
   "faq.a8": {
-    "en": "Yes. Full redesigns are treated as a larger project and quoted separately, based on what you'd like to keep, change, or rebuild from scratch.",
-    "fr": "Oui. Les refontes complètes sont traitées comme un projet plus important et chiffrées séparément, selon ce que vous souhaitez garder, changer ou reconstruire à neuf."
+    "en": "Yes. Full redesigns are treated as a larger project and quoted separately, based on what you'd like to keep, change, or rebuild from scratch. How this works depends on what platform your current site is built on — see the next question for details on WordPress and Wix specifically.",
+    "fr": "Oui. Les refontes complètes sont traitées comme un projet plus important et chiffrées séparément, selon ce que vous souhaitez garder, changer ou reconstruire à neuf. La façon de procéder dépend de la plateforme de votre site actuel — voir la question suivante pour les détails sur WordPress et Wix."
+  },
+  "faq.q8b": {
+    "en": "My current site is on WordPress or Wix — can you manage it?",
+    "fr": "Mon site actuel est sur WordPress ou Wix — pouvez-vous le gérer?"
+  },
+  "faq.a8b": {
+    "en": "WordPress: yes. We can take over management directly through your hosting or the WordPress dashboard and handle updates, backups, security, and content changes. Wix: no, we're not able to manage a website while it stays on Wix. Wix is a closed platform — it doesn't allow a site's code or files to be exported or accessed from outside its own editor, so there's no way for us to monitor, back up, or maintain it the way our care plans work. What we can do is rebuild your Wix site as a proper website (usually on WordPress or a custom-built site), matching your existing pages, content, and design as closely as you'd like. Once it's rebuilt outside of Wix, it's fully manageable under any of our care plans going forward.",
+    "fr": "WordPress : oui. Nous pouvons prendre en charge la gestion directement via votre hébergement ou le tableau de bord WordPress et gérer les mises à jour, sauvegardes, sécurité et changements de contenu. Wix : non, nous ne sommes pas en mesure de gérer un site web tant qu'il reste sur Wix. Wix est une plateforme fermée — elle ne permet pas d'exporter ou d'accéder au code ou aux fichiers d'un site depuis l'extérieur de son propre éditeur, donc il n'y a aucun moyen pour nous de le surveiller, le sauvegarder ou l'entretenir de la façon dont fonctionnent nos forfaits. Ce que nous pouvons faire, c'est reconstruire votre site Wix en un vrai site web (habituellement sur WordPress ou un site personnalisé), en reproduisant vos pages, votre contenu et votre design d'aussi près que vous le souhaitez. Une fois reconstruit hors de Wix, il devient entièrement gérable sous n'importe lequel de nos forfaits d'entretien."
   },
   "faq.q9": {
     "en": "Do I own my website?",
