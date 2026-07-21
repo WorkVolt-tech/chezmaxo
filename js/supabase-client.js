@@ -84,6 +84,11 @@ async function updateClientPlan(clientId, plan) {
   if (error) throw error;
 }
 
+async function updateClientBillingCycle(clientId, billingCycle) {
+  const { error } = await sb.from("profiles").update({ billing_cycle: billingCycle }).eq("id", clientId);
+  if (error) throw error;
+}
+
 // ---------------- Requests ----------------
 
 async function listMyRequests(clientId) {
@@ -122,18 +127,53 @@ async function listAllPayments() {
   return data;
 }
 
-async function logManualPayment(clientId, method, amount, reference) {
-  const { error } = await sb.from("payments").insert({ client_id: clientId, method, amount, reference, status: "pending" });
+async function logManualPayment(clientId, method, amount, reference, purpose = "care_plan") {
+  const { error } = await sb.from("payments").insert({ client_id: clientId, method, amount, reference, status: "pending", purpose });
   if (error) throw error;
 }
 
-async function logPayPalPayment(clientId, amount, reference) {
-  const { error } = await sb.from("payments").insert({ client_id: clientId, method: "PayPal", amount, reference, status: "confirmed" });
+async function logPayPalPayment(clientId, amount, reference, purpose = "care_plan") {
+  const { error } = await sb.from("payments").insert({ client_id: clientId, method: "PayPal", amount, reference, status: "confirmed", purpose });
   if (error) throw error;
 }
 
 async function confirmPayment(paymentId) {
+  const { data: payment, error: fetchErr } = await sb.from("payments").select("*").eq("id", paymentId).single();
+  if (fetchErr) throw fetchErr;
   const { error } = await sb.from("payments").update({ status: "confirmed" }).eq("id", paymentId);
+  if (error) throw error;
+  if (payment.purpose === "build") {
+    await sb.from("build_orders").update({ status: "paid", paid_at: new Date().toISOString() }).eq("client_id", payment.client_id);
+  }
+}
+
+// ---------------- Build Orders ----------------
+
+async function getMyBuildOrder(clientId) {
+  const { data, error } = await sb.from("build_orders").select("*").eq("client_id", clientId).maybeSingle();
+  if (error) throw error;
+  return data;
+}
+
+async function listAllBuildOrders() {
+  const { data, error } = await sb.from("build_orders").select("*, profiles(business_name)").order("created_at", { ascending: false });
+  if (error) throw error;
+  return data;
+}
+
+async function setBuildOrderQuote(clientId, description, amount) {
+  const { data: existing } = await sb.from("build_orders").select("id").eq("client_id", clientId).maybeSingle();
+  if (existing) {
+    const { error } = await sb.from("build_orders").update({ description, amount, status: "awaiting_payment" }).eq("client_id", clientId);
+    if (error) throw error;
+  } else {
+    const { error } = await sb.from("build_orders").insert({ client_id: clientId, description, amount, status: "awaiting_payment" });
+    if (error) throw error;
+  }
+}
+
+async function markBuildOrderPaidClientSide(clientId) {
+  const { error } = await sb.from("build_orders").update({ status: "paid", paid_at: new Date().toISOString() }).eq("client_id", clientId);
   if (error) throw error;
 }
 
