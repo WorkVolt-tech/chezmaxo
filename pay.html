@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pay Your Invoice | Chezmaxo</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="stylesheet" href="css/style.css">
+<style>
+  body{ background: var(--bg-alt); }
+  .pay-wrap{ max-width: 560px; margin: 0 auto; padding: 64px 24px 80px; }
+  .pay-header{ text-align:center; margin-bottom: 32px; }
+  .pay-header .brand{ justify-content:center; margin-bottom: 22px; }
+  .invoice-card{ background:#fff; border:1px solid var(--border); border-radius: var(--radius-lg); padding: 8px; }
+  .invoice-inner{ border:1px dashed var(--border-strong); border-radius:16px; padding: 30px 26px; }
+  .invoice-row{ display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid var(--border); font-size:14.5px; }
+  .invoice-row:last-child{ border-bottom:none; }
+  .invoice-row .label{ color:var(--ink-soft); }
+  .invoice-row .val{ font-weight:600; color:var(--color-primary); }
+  .invoice-amount{ font-family: var(--font-display); font-size:42px; color:var(--color-primary); text-align:center; margin: 18px 0 6px; }
+  .invoice-project{ text-align:center; color:var(--ink-soft); font-size:14.5px; margin-bottom:24px; }
+  .alt-pay{ margin-top: 22px; border:1.5px dashed var(--border-strong); border-radius: var(--radius-md); padding:18px 20px; }
+  .alt-pay h4{ font-size:14.5px; margin-bottom:6px; }
+  .alt-pay p{ font-size:13.5px; color:var(--ink-soft); margin-bottom:0; }
+  .success-box{ display:none; background: var(--color-secondary-tint); border:1px dashed var(--color-secondary); border-radius: var(--radius-md); padding:22px; text-align:center; color:var(--color-secondary-dark); font-weight:600; }
+  .success-box.show{ display:block; }
+  .missing-params{ text-align:center; color:var(--ink-soft); }
+</style>
+</head>
+<body>
+
+<div class="pay-wrap">
+  <div class="pay-header">
+    <a href="index.html" class="brand"><span class="mark"><img src="images/logo-icon.png" alt="Chezmaxo"></span> Chezmaxo</a>
+    <p style="color:var(--ink-soft); font-size:15px;">Secure payment for your website project.</p>
+  </div>
+
+  <div id="content"></div>
+</div>
+
+<script>
+function getParam(name){
+  return new URLSearchParams(window.location.search).get(name);
+}
+
+const amount = parseFloat(getParam("amount"));
+const project = getParam("project") || "Your website project";
+const client = getParam("name");
+
+const contentEl = document.getElementById("content");
+
+if (!amount || amount <= 0) {
+  contentEl.innerHTML = `
+    <div class="invoice-card"><div class="invoice-inner missing-params">
+      <p>This payment link is missing an amount. If you received this link from us, please let us know and we'll send a corrected one.</p>
+      <p style="margin-top:16px;"><a href="contact.html" class="btn btn-secondary">Contact Us</a></p>
+    </div></div>`;
+} else {
+  contentEl.innerHTML = `
+    <div class="invoice-card">
+      <div class="invoice-inner">
+        <div class="invoice-amount">$${amount.toFixed(2)}</div>
+        <div class="invoice-project">${project}${client ? " — for " + client : ""}</div>
+        <div class="invoice-row"><span class="label">Billed to</span><span class="val">${client || "—"}</span></div>
+        <div class="invoice-row"><span class="label">Project</span><span class="val">${project}</span></div>
+        <div class="invoice-row"><span class="label">Amount due</span><span class="val">$${amount.toFixed(2)} USD</span></div>
+        <div id="success-box" class="success-box">Payment received — thank you! We'll follow up by email to confirm next steps.</div>
+        <div id="paypal-button" style="margin-top:18px;"></div>
+      </div>
+    </div>
+    <div class="alt-pay">
+      <h4>Prefer Zelle or Interac e-Transfer?</h4>
+      <p>Send $${amount.toFixed(2)} to [ZELLE EMAIL/PHONE PLACEHOLDER] (Zelle, US) or [E-TRANSFER EMAIL PLACEHOLDER] (Interac, Canada), then reply to our email or text with your confirmation number so we can mark it received.</p>
+    </div>`;
+
+  const script = document.createElement("script");
+  script.src = "https://www.paypal.com/sdk/js?client-id=YOUR_PAYPAL_CLIENT_ID&currency=USD";
+  script.onload = () => {
+    paypal.Buttons({
+      createOrder: (data, actions) => actions.order.create({
+        purchase_units: [{ description: project.slice(0, 120), amount: { value: amount.toFixed(2) } }]
+      }),
+      onApprove: async (data, actions) => {
+        await actions.order.capture();
+        document.getElementById("paypal-button").style.display = "none";
+        document.getElementById("success-box").classList.add("show");
+      }
+    }).render("#paypal-button");
+  };
+  document.head.appendChild(script);
+}
+</script>
+</body>
+</html>
