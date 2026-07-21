@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Dashboard | [BUSINESS NAME]</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/dashboard.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/config.js"></script>
+<script src="js/supabase-client.js"></script>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand"><span class="mark">WD</span> My Dashboard</div>
+  <div class="user-chip">
+    <span id="whoami"></span>
+    <button id="logoutBtn">Sign out</button>
+  </div>
+</div>
+
+<div class="layout">
+  <div class="sidebar" id="sidebar"></div>
+  <div class="main" id="main"><div class="loading-note">Loading your dashboard...</div></div>
+</div>
+
+<script src="https://www.paypal.com/sdk/js" id="paypalSdkPlaceholder"></script>
+<script>
+const STAGES = ["Submitted","In Progress","Review","Live"];
+const PLANS = [{name:"Starter Care",price:5},{name:"Monthly Support",price:15},{name:"Business Care",price:39}];
+let state = { tab: "plan", profile: null, requests: [], payments: [], messages: [], chatChannel: null };
+
+function badgeClass(plan){
+  if(plan==="Starter Care") return "badge-starter";
+  if(plan==="Monthly Support") return "badge-monthly";
+  return "badge-business";
+}
+
+function renderSidebar(){
+  const items = [["plan","My plan"],["project","My project"],["requests","Update requests"],["payments","Payments"],["messages","Messages"]];
+  document.getElementById("sidebar").innerHTML = items.map(([k,l]) =>
+    `<button data-tab="${k}" class="${state.tab===k?'active':''}"><span class="dot"></span>${l}</button>`).join("");
+  document.querySelectorAll("#sidebar button").forEach(b => b.onclick = () => { state.tab = b.dataset.tab; renderMain(); });
+}
+
+async function renderMain(){
+  renderSidebar();
+  const main = document.getElementById("main");
+  const c = state.profile;
+  if(state.tab === "plan"){
+    main.innerHTML = `
+      <div class="page-title"><div><div class="eyebrow">Billing</div><h2>My plan</h2></div></div>
+      <div class="plans-grid">${PLANS.map(p => `
+        <div class="plan-pick ${p.name===c.plan?'current':''}">
+          <div class="pname">${p.name}</div><div class="pprice">$${p.price}/mo</div>
+          ${p.name===c.plan ? '<span class="badge badge-monthly" style="background:var(--color-secondary-tint);color:var(--color-secondary-dark);">Current plan</span>' : `<button class="btn btn-secondary btn-sm" data-switch="${p.name}">Switch to this plan</button>`}
+        </div>`).join("")}
+      </div>
+      <p style="color:var(--ink-faint);font-size:12.5px;margin-top:14px;">Switching plans here updates your dashboard immediately. Your next invoice will reflect the new plan.</p>`;
+    main.querySelectorAll("[data-switch]").forEach(b => b.onclick = async () => {
+      await updateClientPlan(c.id, b.dataset.switch);
+      c.plan = b.dataset.switch;
+      renderMain();
+    });
+  }
+  else if(state.tab === "project"){
+    main.innerHTML = `
+      <div class="page-title"><div><div class="eyebrow">Project</div><h2>Where things stand</h2></div></div>
+      <div class="card">
+        <div class="stepper">${STAGES.map((s,i) => `
+          <div class="step ${i<c.stage?'done':i===c.stage?'now':''}"><div class="circ">${i<c.stage?'&#10003;':i+1}</div><div class="slabel">${s}</div></div>`).join("")}
+        </div>
+        <p style="color:var(--ink-soft);font-size:13.5px;margin-top:18px;">Current stage: <strong style="color:var(--color-primary);">${STAGES[c.stage]}</strong></p>
+      </div>`;
+  }
+  else if(state.tab === "requests"){
+    state.requests = await listMyRequests(c.id);
+    main.innerHTML = `
+      <div class="page-title"><div><div class="eyebrow">Requests</div><h2>Submit an update</h2></div></div>
+      <div class="card">
+        <div class="field"><label>What would you like changed?</label><textarea id="reqText" rows="3" placeholder="e.g. Update our business hours for the holidays"></textarea></div>
+        <button class="btn btn-primary" id="reqSubmit">Submit request</button>
+      </div>
+      <h3 style="font-size:16px;margin:20px 0 10px;">Your requests</h3>
+      <div class="card" style="padding:0;">
+        <table class="table"><thead><tr><th>Ticket</th><th>Request</th><th>Status</th></tr></thead>
+        <tbody>${state.requests.length ? state.requests.map(r => `<tr><td style="font-family:var(--font-mono);font-size:12px;">R-${r.id}</td><td>${r.text}</td><td><span class="status status-${r.status==='done'?'done':'open'}">${r.status==='done'?'Completed':'Open'}</span></td></tr>`).join("") : '<tr><td colspan="3" class="empty-note">No requests yet.</td></tr>'}</tbody></table>
+      </div>`;
+    document.getElementById("reqSubmit").onclick = async () => {
+      const t = document.getElementById("reqText").value.trim();
+      if(!t) return;
+      await submitRequest(c.id, t);
+      renderMain();
+    };
+  }
+  else if(state.tab === "payments"){
+    state.payments = await listMyPayments(c.id);
+    main.innerHTML = `
+      <div class="page-title"><div><div class="eyebrow">Billing</div><h2>Payments</h2></div></div>
+      <div class="paybox"><h4>Pay with PayPal</h4><p>Confirms automatically — no waiting. Charges $${PLANS.find(p=>p.name===c.plan).price} for your ${c.plan} plan.</p><div id="paypal-button"></div></div>
+      <div class="paybox"><h4>Pay with Zelle or Interac e-Transfer</h4><p>Send payment as usual, then log it below. We'll confirm it in your dashboard once we verify it against our account (usually within one business day).</p>
+        <div class="field"><label>Method</label><select id="payMethod"><option>Zelle</option><option>Interac e-Transfer</option></select></div>
+        <div class="field"><label>Amount sent</label><input id="payAmount" type="number" step="0.01" value="${PLANS.find(p=>p.name===c.plan).price}"></div>
+        <div class="field"><label>Reference / confirmation number</label><input id="payRef" placeholder="e.g. from your bank's confirmation email"></div>
+        <button class="btn btn-secondary" id="paySubmit">I've sent this payment</button>
+      </div>
+      <h3 style="font-size:16px;margin:20px 0 10px;">Payment history</h3>
+      <div class="card" style="padding:0;">
+        <table class="table"><thead><tr><th>Method</th><th>Amount</th><th>Status</th></tr></thead>
+        <tbody>${state.payments.length ? state.payments.map(p => `<tr><td>${p.method}</td><td>$${p.amount}</td><td><span class="status status-${p.status}">${p.status==='confirmed'?'Confirmed':'Pending review'}</span></td></tr>`).join("") : '<tr><td colspan="3" class="empty-note">No payments yet.</td></tr>'}</tbody></table>
+      </div>`;
+    document.getElementById("paySubmit").onclick = async () => {
+      const method = document.getElementById("payMethod").value;
+      const amount = parseFloat(document.getElementById("payAmount").value) || 0;
+      const ref = document.getElementById("payRef").value.trim() || "(no reference provided)";
+      await logManualPayment(c.id, method, amount, ref);
+      renderMain();
+    };
+    renderPayPalButton(c);
+  }
+  else if(state.tab === "messages"){
+    state.messages = await listMessages(c.id);
+    main.innerHTML = `
+      <div class="page-title"><div><div class="eyebrow">Messages</div><h2>Chat with us</h2></div></div>
+      <div class="chat-wrap">
+        <div class="chat-panel">
+          <div class="chat-msgs" id="chatMsgs">${state.messages.map(m => `<div class="msg ${m.sender_role==='client'?'mine':'theirs'}">${m.text}</div>`).join("")}</div>
+          <div class="chat-input"><input id="chatInput" placeholder="Type a message..."><button class="btn btn-primary btn-sm" id="chatSend">Send</button></div>
+        </div>
+      </div>`;
+    const msgsEl = document.getElementById("chatMsgs");
+    msgsEl.scrollTop = msgsEl.scrollHeight;
+    document.getElementById("chatSend").onclick = async () => {
+      const v = document.getElementById("chatInput").value.trim();
+      if(!v) return;
+      const session = await getSession();
+      await sendMessage(c.id, session.user.id, "client", v);
+      document.getElementById("chatInput").value = "";
+    };
+    if(state.chatChannel) sb.removeChannel(state.chatChannel);
+    state.chatChannel = subscribeToMessages(c.id, (payload) => {
+      if(state.tab !== "messages") return;
+      const div = document.createElement("div");
+      div.className = "msg " + (payload.new.sender_role==="client" ? "mine" : "theirs");
+      div.textContent = payload.new.text;
+      msgsEl.appendChild(div);
+      msgsEl.scrollTop = msgsEl.scrollHeight;
+    });
+  }
+}
+
+function renderPayPalButton(c){
+  const container = document.getElementById("paypal-button");
+  if(!container || typeof paypal === "undefined"){
+    if(container) container.innerHTML = '<p style="color:var(--ink-faint);font-size:12.5px;">PayPal button unavailable — check that PAYPAL_CLIENT_ID is set in js/config.js.</p>';
+    return;
+  }
+  const amount = PLANS.find(p => p.name === c.plan).price;
+  paypal.Buttons({
+    createOrder: (data, actions) => actions.order.create({ purchase_units: [{ amount: { value: amount.toFixed(2) } }] }),
+    onApprove: async (data, actions) => {
+      const details = await actions.order.capture();
+      await logPayPalPayment(c.id, amount, details.id);
+      renderMain();
+    }
+  }).render("#paypal-button");
+}
+
+document.getElementById("logoutBtn").onclick = signOut;
+
+(async () => {
+  const session = await requireSession();
+  if(!session) return;
+  if(await isCurrentUserAdmin()){ window.location.href = "admin-dashboard.html"; return; }
+  state.profile = await getMyProfile();
+  document.getElementById("whoami").textContent = state.profile.business_name || session.user.email;
+
+  const script = document.createElement("script");
+  script.src = `https://www.paypal.com/sdk/js?client-id=${PAYPAL_CLIENT_ID}&currency=USD`;
+  script.onload = () => { if (state.tab === "payments") renderMain(); };
+  document.head.appendChild(script);
+  document.getElementById("paypalSdkPlaceholder").remove();
+
+  renderMain();
+})();
+</script>
+</body>
+</html>
