@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us | Get a Free Website Quote | [BUSINESS NAME]</title>
+<meta name="description" content="Tell us about your business and the website you need. Request a free, no-obligation website quote from [BUSINESS NAME] today.">
+<link rel="canonical" href="https://www.yourbusiness.com/contact.html">
+
+<!-- Open Graph (placeholders — update image URL and site name before launch) -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Contact Us | Get a Free Website Quote | [BUSINESS NAME]">
+<meta property="og:description" content="Tell us about your business and the website you need. Request a free, no-obligation website quote from [BUSINESS NAME] today.">
+<meta property="og:image" content="https://www.yourbusiness.com/images/og-cover.jpg">
+<meta property="og:url" content="https://www.yourbusiness.com/contact.html">
+<meta property="og:site_name" content="[BUSINESS NAME]">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="nav-wrap">
+    <a href="index.html" class="brand"><span class="mark">WD</span> [BUSINESS NAME]</a>
+    <nav class="nav-links" id="nav-links" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="services.html">Services</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="how-it-works.html">How It Works</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="about.html">About</a>
+        <a href="faq.html">FAQ</a>
+        <a href="contact.html" class="active">Contact</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="pricing.html" class="btn btn-secondary btn-sm">View Plans</a>
+      <a href="contact.html" class="btn btn-primary btn-sm">Get a Free Quote</a>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="container">
+    <div class="breadcrumb">CONTACT</div>
+    <h1>Tell us about your business and the website you need.</h1>
+    <p>Fill out the form below and we'll follow up with a free, no-pressure quote. No obligation, no pushy sales calls.</p>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="grid-2" style="align-items:flex-start;">
+      <div>
+        <div id="form-success" class="form-success">Thanks — your request has been received! This is a front-end demo, so nothing was actually sent yet. See the note in the README about connecting this form to email.</div>
+        <form id="contact-form" novalidate>
+          <div class="form-grid">
+            <div class="field">
+              <label for="fullName">Full name <span class="req">*</span></label>
+              <input type="text" id="fullName" name="fullName" autocomplete="name" required>
+              <div class="error-msg"></div>
+            </div>
+            <div class="field">
+              <label for="businessName">Business name <span class="req">*</span></label>
+              <input type="text" id="businessName" name="businessName" autocomplete="organization" required>
+              <div class="error-msg"></div>
+            </div>
+            <div class="field">
+              <label for="email">Email <span class="req">*</span></label>
+              <input type="email" id="email" name="email" autocomplete="email" required>
+              <div class="error-msg"></div>
+            </div>
+            <div class="field">
+              <label for="phone">Phone number <span class="req">*</span></label>
+              <input type="tel" id="phone" name="phone" autocomplete="tel" required>
+              <div class="error-msg"></div>
+            </div>
+            <div class="field">
+              <label for="website">Existing website URL (if any)</label>
+              <input type="text" id="website" name="website" placeholder="e.g. www.yourbusiness.com">
+            </div>
+            <div class="field">
+              <label for="businessType">Type of business</label>
+              <input type="text" id="businessType" name="businessType" placeholder="e.g. barbershop, contractor, restaurant">
+            </div>
+            <div class="field">
+              <label for="serviceNeeded">Service needed <span class="req">*</span></label>
+              <select id="serviceNeeded" name="serviceNeeded" required>
+                <option value="">Select an option</option>
+                <option>New website</option>
+                <option>Website redesign</option>
+                <option>Website maintenance</option>
+                <option>Small website update</option>
+                <option>Online store</option>
+                <option>Booking system</option>
+                <option>Custom feature</option>
+                <option>Not sure yet</option>
+              </select>
+              <div class="error-msg"></div>
+            </div>
+            <div class="field">
+              <label for="budget">Estimated budget</label>
+              <select id="budget" name="budget">
+                <option value="">Select a range (optional)</option>
+                <option>Under $500</option>
+                <option>$500 – $1,000</option>
+                <option>$1,000 – $2,500</option>
+                <option>$2,500+</option>
+                <option>Not sure yet</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="launchDate">Desired launch date</label>
+              <input type="text" id="launchDate" name="launchDate" placeholder="e.g. within 1 month, flexible">
+            </div>
+            <div class="field">
+              <label for="contactMethod">Preferred contact method</label>
+              <select id="contactMethod" name="contactMethod">
+                <option value="">Select an option</option>
+                <option>Email</option>
+                <option>Phone call</option>
+                <option>Text message</option>
+              </select>
+            </div>
+            <div class="field full">
+              <label>What do you need help with? (select all that apply)</label>
+              <div class="checkbox-grid">
+                <label class="checkbox-item"><input type="checkbox" name="needs" value="New website"> New website</label>
+                <label class="checkbox-item"><input type="checkbox" name="needs" value="Website redesign"> Website redesign</label>
+                <label class="checkbox-item"><input type="checkbox" name="needs" value="Website maintenance"> Website maintenance</label>
+                <label class="checkbox-item"><input type="checkbox" name="needs" value="Small website update"> Small website update</label>
+                <label class="checkbox-item"><input type="checkbox" name="needs" value="Online store"> Online store</label>
+                <label class="checkbox-item"><input type="checkbox" name="needs" value="Booking system"> Booking system</label>
+                <label class="checkbox-item"><input type="checkbox" name="needs" value="Custom feature"> Custom feature</label>
+                <label class="checkbox-item"><input type="checkbox" name="needs" value="Not sure yet"> Not sure yet</label>
+              </div>
+            </div>
+            <div class="field full">
+              <label for="description">Tell us about your business and project <span class="req">*</span></label>
+              <textarea id="description" name="description" rows="5" required></textarea>
+              <div class="error-msg"></div>
+            </div>
+          </div>
+          <p class="form-note">Fields marked <span class="req">*</span> are required. We'll never share your information with third parties.</p>
+          <button type="submit" class="btn btn-primary" style="margin-top:16px;">Send My Request</button>
+        </form>
+      </div>
+
+      <div>
+        <div class="ticket" style="margin-bottom:24px;">
+          <div class="ticket-top">
+            <div class="ticket-id">CONTACT DETAILS</div>
+            <div class="ticket-stamp">OPEN</div>
+          </div>
+          <div class="ticket-row"><span class="label">Email</span><span class="val">[EMAIL ADDRESS PLACEHOLDER]</span></div>
+          <div class="ticket-row"><span class="label">Phone</span><span class="val">[PHONE NUMBER PLACEHOLDER]</span></div>
+          <div class="ticket-row"><span class="label">Service area</span><span class="val">[SERVICE AREA PLACEHOLDER]</span></div>
+          <div class="ticket-row"><span class="label">Business hours</span><span class="val">[BUSINESS HOURS PLACEHOLDER]</span></div>
+        </div>
+        <div class="card">
+          <h3>What happens after I submit this form?</h3>
+          <p>We'll review your project details and follow up — usually within one to two business days — with a free, no-obligation quote and any questions we have about your business.</p>
+        </div>
+        <div class="card" style="margin-top:20px;">
+          <h3>Follow along</h3>
+          <p style="margin-bottom:14px;">[SOCIAL MEDIA LINKS PLACEHOLDER]</p>
+          <div class="footer-social" style="margin-top:0;">
+            <a href="#" style="border-color:var(--border-strong); color:var(--color-primary);" aria-label="Facebook">f</a>
+            <a href="#" style="border-color:var(--border-strong); color:var(--color-primary);" aria-label="Instagram">ig</a>
+            <a href="#" style="border-color:var(--border-strong); color:var(--color-primary);" aria-label="LinkedIn">in</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="brand"><span class="mark">WD</span> [BUSINESS NAME]</a>
+        <p>Professional websites without the technical stress. We design, launch, and take care of websites for small businesses so you can focus on running yours.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Facebook">f</a>
+          <a href="#" aria-label="Instagram">ig</a>
+          <a href="#" aria-label="LinkedIn">in</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="how-it-works.html">How It Works</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="services.html">Website Design</a></li>
+          <li><a href="services.html#management">Website Management</a></li>
+          <li><a href="services.html#upgrades">Website Upgrades</a></li>
+          <li><a href="pricing.html">Care Plans &amp; Pricing</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li>[EMAIL ADDRESS PLACEHOLDER]</li>
+          <li>[PHONE NUMBER PLACEHOLDER]</li>
+          <li>Service Area: [SERVICE AREA PLACEHOLDER]</li>
+          <li>Hours: [BUSINESS HOURS PLACEHOLDER]</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; <span data-year></span> [BUSINESS NAME]. All rights reserved.</span>
+      <div class="footer-legal">
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms-of-service.html">Terms of Service</a>
+        <a href="care-plan-terms.html">Website Care Plan Terms</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="js/main.js"></script>
+</body>
+</html>
