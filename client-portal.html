@@ -29,7 +29,7 @@
 <script src="https://www.paypal.com/sdk/js" id="paypalSdkPlaceholder"></script>
 <script>
 const STAGES = ["Submitted","In Progress","Review","Live"];
-const PLANS = Object.keys(PLAN_PRICES).map(name => ({ name, price: PLAN_PRICES[name] }));
+const PLANS = Object.keys(PLAN_PRICES).map(name => ({ name, monthly: PLAN_PRICES[name].monthly, yearly: PLAN_PRICES[name].yearly }));
 let state = { tab: "plan", profile: null, requests: [], payments: [], messages: [], chatChannel: null };
 
 function badgeClass(plan){
@@ -50,18 +50,32 @@ async function renderMain(){
   const main = document.getElementById("main");
   const c = state.profile;
   if(state.tab === "plan"){
+    const cycle = c.billing_cycle || "monthly";
     main.innerHTML = `
       <div class="page-title"><div><div class="eyebrow">Billing</div><h2>My plan</h2></div></div>
-      <div class="plans-grid">${PLANS.map(p => `
-        <div class="plan-pick ${p.name===c.plan?'current':''}">
-          <div class="pname">${p.name}</div><div class="pprice">$${p.price}/mo</div>
-          ${p.name===c.plan ? '<span class="badge badge-monthly" style="background:var(--color-secondary-tint);color:var(--color-secondary-dark);">Current plan</span>' : `<button class="btn btn-secondary btn-sm" data-switch="${p.name}">Switch to this plan</button>`}
-        </div>`).join("")}
+      <div class="billing-toggle" style="margin-bottom:20px;">
+        <button class="cycle-btn ${cycle==='monthly'?'active':''}" data-setcycle="monthly">Monthly</button>
+        <button class="cycle-btn ${cycle==='yearly'?'active':''}" data-setcycle="yearly">Yearly <span class="cycle-save-tag">2 months free</span></button>
       </div>
-      <p style="color:var(--ink-faint);font-size:12.5px;margin-top:14px;">Switching plans here updates your dashboard immediately. Your next invoice will reflect the new plan.</p>`;
+      <div class="plans-grid">${PLANS.map(p => {
+        const price = cycle === "yearly" ? p.yearly : p.monthly;
+        const suffix = cycle === "yearly" ? "yr" : "mo";
+        return `
+        <div class="plan-pick ${p.name===c.plan?'current':''}">
+          <div class="pname">${p.name}</div><div class="pprice">$${price}/${suffix}</div>
+          ${p.name===c.plan ? '<span class="badge badge-monthly" style="background:var(--color-secondary-tint);color:var(--color-secondary-dark);">Current plan</span>' : `<button class="btn btn-secondary btn-sm" data-switch="${p.name}">Switch to this plan</button>`}
+        </div>`;
+      }).join("")}
+      </div>
+      <p style="color:var(--ink-faint);font-size:12.5px;margin-top:14px;">Switching plans or billing cycle here updates your dashboard immediately. Your next invoice will reflect the change.</p>`;
     main.querySelectorAll("[data-switch]").forEach(b => b.onclick = async () => {
       await updateClientPlan(c.id, b.dataset.switch);
       c.plan = b.dataset.switch;
+      renderMain();
+    });
+    main.querySelectorAll("[data-setcycle]").forEach(b => b.onclick = async () => {
+      await updateClientBillingCycle(c.id, b.dataset.setcycle);
+      c.billing_cycle = b.dataset.setcycle;
       renderMain();
     });
   }
@@ -97,12 +111,15 @@ async function renderMain(){
   }
   else if(state.tab === "payments"){
     state.payments = await listMyPayments(c.id);
+    const cycle = c.billing_cycle || "monthly";
+    const planObj = PLANS.find(p=>p.name===c.plan);
+    const amount = cycle === "yearly" ? planObj.yearly : planObj.monthly;
     main.innerHTML = `
       <div class="page-title"><div><div class="eyebrow">Billing</div><h2>Payments</h2></div></div>
-      <div class="paybox"><h4>Pay with PayPal</h4><p>Confirms automatically — no waiting. Charges $${PLANS.find(p=>p.name===c.plan).price} for your ${c.plan} plan.</p><div id="paypal-button"></div></div>
+      <div class="paybox"><h4>Pay with PayPal</h4><p>Confirms automatically — no waiting. Charges $${amount} for your ${c.plan} plan (${cycle} billing).</p><div id="paypal-button"></div></div>
       <div class="paybox"><h4>Pay with Zelle or Interac e-Transfer</h4><p>Send payment as usual, then log it below. We'll confirm it in your dashboard once we verify it against our account (usually within one business day).</p>
         <div class="field"><label>Method</label><select id="payMethod"><option>Zelle</option><option>Interac e-Transfer</option></select></div>
-        <div class="field"><label>Amount sent</label><input id="payAmount" type="number" step="0.01" value="${PLANS.find(p=>p.name===c.plan).price}"></div>
+        <div class="field"><label>Amount sent</label><input id="payAmount" type="number" step="0.01" value="${amount}"></div>
         <div class="field"><label>Reference / confirmation number</label><input id="payRef" placeholder="e.g. from your bank's confirmation email"></div>
         <button class="btn btn-secondary" id="paySubmit">I've sent this payment</button>
       </div>
@@ -113,12 +130,12 @@ async function renderMain(){
       </div>`;
     document.getElementById("paySubmit").onclick = async () => {
       const method = document.getElementById("payMethod").value;
-      const amount = parseFloat(document.getElementById("payAmount").value) || 0;
+      const amt = parseFloat(document.getElementById("payAmount").value) || 0;
       const ref = document.getElementById("payRef").value.trim() || "(no reference provided)";
-      await logManualPayment(c.id, method, amount, ref);
+      await logManualPayment(c.id, method, amt, ref);
       renderMain();
     };
-    renderPayPalButton(c);
+    renderPayPalButton(c, amount);
   }
   else if(state.tab === "messages"){
     state.messages = await listMessages(c.id);
@@ -151,13 +168,12 @@ async function renderMain(){
   }
 }
 
-function renderPayPalButton(c){
+function renderPayPalButton(c, amount){
   const container = document.getElementById("paypal-button");
   if(!container || typeof paypal === "undefined"){
     if(container) container.innerHTML = '<p style="color:var(--ink-faint);font-size:12.5px;">PayPal button unavailable — check that PAYPAL_CLIENT_ID is set in js/config.js.</p>';
     return;
   }
-  const amount = PLANS.find(p => p.name === c.plan).price;
   paypal.Buttons({
     createOrder: (data, actions) => actions.order.create({ purchase_units: [{ amount: { value: amount.toFixed(2) } }] }),
     onApprove: async (data, actions) => {
