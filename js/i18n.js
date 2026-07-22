@@ -51,9 +51,17 @@ const I18N = {
     "en": "Service Area:",
     "fr": "Zone desservie :"
   },
+  "common.servicearea": {
+    "en": "Canada & USA",
+    "fr": "Canada et É.-U."
+  },
   "footer.hours": {
     "en": "Hours:",
     "fr": "Heures :"
+  },
+  "common.hours": {
+    "en": "Noon – 11 PM, 7 days a week",
+    "fr": "Midi à 23 h, 7 jours sur 7"
   },
   "footer.rights": {
     "en": "All rights reserved.",
@@ -1820,8 +1828,8 @@ const I18N = {
     "fr": "7. Vos choix"
   },
   "privacy.p.7": {
-    "en": "You may request access to, correction of, or deletion of your personal information by contacting us at [EMAIL ADDRESS PLACEHOLDER].",
-    "fr": "Vous pouvez demander l'accès, la correction ou la suppression de vos renseignements personnels en nous contactant à [ADRESSE COURRIEL À REMPLACER]."
+    "en": "You may request access to, correction of, or deletion of your personal information by contacting us at marxanc@outlook.com.",
+    "fr": "Vous pouvez demander l'accès, la correction ou la suppression de vos renseignements personnels en nous contactant à marxanc@outlook.com."
   },
   "privacy.h2.8": {
     "en": "8. Changes to This Policy",
@@ -1836,8 +1844,8 @@ const I18N = {
     "fr": "9. Nous contacter"
   },
   "privacy.p.9": {
-    "en": "Questions about this policy can be sent to [EMAIL ADDRESS PLACEHOLDER] or [PHONE NUMBER PLACEHOLDER].",
-    "fr": "Les questions concernant cette politique peuvent être envoyées à [ADRESSE COURRIEL À REMPLACER] ou [NUMÉRO DE TÉLÉPHONE À REMPLACER]."
+    "en": "Questions about this policy can be sent to marxanc@outlook.com or 514-943-1535.",
+    "fr": "Les questions concernant cette politique peuvent être envoyées à marxanc@outlook.com ou 514-943-1535."
   },
   "terms.h1": {
     "en": "Terms of Service",
@@ -1928,8 +1936,8 @@ const I18N = {
     "fr": "10. Nous contacter"
   },
   "terms.p.10": {
-    "en": "Questions about these terms can be sent to [EMAIL ADDRESS PLACEHOLDER].",
-    "fr": "Les questions concernant ces conditions peuvent être envoyées à [ADRESSE COURRIEL À REMPLACER]."
+    "en": "Questions about these terms can be sent to marxanc@outlook.com.",
+    "fr": "Les questions concernant ces conditions peuvent être envoyées à marxanc@outlook.com."
   },
   "care.h1": {
     "en": "Website Care Plan Terms",
@@ -2096,8 +2104,8 @@ const I18N = {
     "fr": "18. Nous contacter"
   },
   "care.p.18": {
-    "en": "Questions about your care plan can be sent to [EMAIL ADDRESS PLACEHOLDER].",
-    "fr": "Les questions concernant votre forfait d'entretien peuvent être envoyées à [ADRESSE COURRIEL À REMPLACER]."
+    "en": "Questions about your care plan can be sent to marxanc@outlook.com.",
+    "fr": "Les questions concernant votre forfait d'entretien peuvent être envoyées à marxanc@outlook.com."
   },
   "title.home": {
     "en": "Chezmaxo | Affordable Website Design & Care Plans for Small Businesses",
