@@ -14,7 +14,7 @@
 <body>
 
 <div class="topbar">
-  <div class="brand"><span class="mark">WD</span> Admin Dashboard</div>
+  <div class="brand"><span class="mark"><img src="images/logo-icon.png" alt="Chezmaxo"></span> Admin Dashboard</div>
   <div class="user-chip">
     <span id="whoami">Admin</span>
     <button id="logoutBtn">Sign out</button>
@@ -37,7 +37,7 @@ function badgeClass(plan){
 }
 
 function renderSidebar(){
-  const items = [["projects","Projects (CRM)"],["orders","Build Orders"],["requests","Update requests"],["payments","Payments"],["messages","Messages"]];
+  const items = [["projects","Projects (CRM)"],["orders","Build Orders"],["requests","Update requests"],["finance","Finance"],["applications","Applications"],["team","Team"],["payments","Payments"],["messages","Messages"]];
   document.getElementById("sidebar").innerHTML = items.map(([k,l]) =>
     `<button data-tab="${k}" class="${state.tab===k?'active':''}"><span class="dot"></span>${l}</button>`).join("");
   document.querySelectorAll("#sidebar button").forEach(b => b.onclick = () => { state.tab = b.dataset.tab; renderMain(); });
@@ -107,14 +107,21 @@ async function renderMain(){
 
   else if(state.tab === "requests"){
     const rows = await listAllRequests();
+    const priorityRank = { urgent: 0, high: 1, normal: 2, low: 3 };
+    rows.sort((a,b) => (priorityRank[a.priority||'normal'] - priorityRank[b.priority||'normal']) || (new Date(b.created_at) - new Date(a.created_at)));
+    const priorityBadge = (p) => {
+      const cls = { urgent: 'status-pending', high: 'status-pending', normal: 'status-open', low: 'status-confirmed' }[p] || 'status-open';
+      return `<span class="status ${cls}">${(p||'normal').charAt(0).toUpperCase()+(p||'normal').slice(1)}</span>`;
+    };
     main.innerHTML = `
-      <div class="page-title"><div><div class="eyebrow">Inbox</div><h2>Update requests</h2></div></div>
+      <div class="page-title"><div><div class="eyebrow">Inbox · sorted by priority</div><h2>Update requests</h2></div></div>
       <div class="card" style="padding:0;">
-        <table class="table"><thead><tr><th>Ticket</th><th>Client</th><th>Request</th><th>Status</th><th></th></tr></thead>
+        <table class="table"><thead><tr><th>Ticket</th><th>Client</th><th>Priority</th><th>Request</th><th>Status</th><th></th></tr></thead>
         <tbody>${rows.length ? rows.map(r => `
-          <tr><td style="font-family:var(--font-mono);font-size:12px;">R-${r.id}</td><td>${r.profiles?.business_name || "—"}</td><td>${r.text}</td>
+          <tr><td style="font-family:var(--font-mono);font-size:12px;">R-${r.id}</td><td>${r.profiles?.business_name || "—"}</td>
+          <td>${priorityBadge(r.priority)}</td><td>${r.text}</td>
           <td><span class="status status-${r.status==='done'?'done':'open'}">${r.status==='done'?'Completed':'Open'}</span></td>
-          <td>${r.status==='open' ? `<button class="btn btn-teal btn-sm" data-done="${r.id}">Mark complete</button>` : ''}</td></tr>`).join('') : '<tr><td colspan="5" class="empty-note">No requests yet.</td></tr>'}
+          <td>${r.status==='open' ? `<button class="btn btn-teal btn-sm" data-done="${r.id}">Mark complete</button>` : ''}</td></tr>`).join('') : '<tr><td colspan="6" class="empty-note">No requests yet.</td></tr>'}
         </tbody></table>
       </div>`;
     main.querySelectorAll("[data-done]").forEach(b => b.onclick = async () => {
@@ -139,6 +146,103 @@ async function renderMain(){
       </div>`;
     main.querySelectorAll("[data-confirm]").forEach(b => b.onclick = async () => {
       await confirmPayment(b.dataset.confirm);
+      renderMain();
+    });
+  }
+
+  else if(state.tab === "finance"){
+    const payments = await listAllPayments();
+    const expenses = await listExpenses();
+    const income = payments.filter(p => p.status === "confirmed").reduce((s,p) => s + Number(p.amount), 0);
+    const outflow = expenses.filter(e => e.status === "paid").reduce((s,e) => s + Number(e.amount), 0);
+    main.innerHTML = `
+      <div class="page-title"><div><div class="eyebrow">Money in / money out</div><h2>Finance overview</h2></div></div>
+      <div class="grid-3" style="margin-bottom:26px;">
+        <div class="card"><h4 style="font-family:var(--font-mono); font-size:12px; text-transform:uppercase; color:var(--ink-faint);">Income (confirmed)</h4><div style="font-family:var(--font-display); font-size:30px; color:var(--color-secondary-dark);">$${income.toFixed(2)}</div></div>
+        <div class="card"><h4 style="font-family:var(--font-mono); font-size:12px; text-transform:uppercase; color:var(--ink-faint);">Expenses (paid)</h4><div style="font-family:var(--font-display); font-size:30px; color:#C23B3B;">$${outflow.toFixed(2)}</div></div>
+        <div class="card"><h4 style="font-family:var(--font-mono); font-size:12px; text-transform:uppercase; color:var(--ink-faint);">Net</h4><div style="font-family:var(--font-display); font-size:30px; color:var(--color-primary);">$${(income-outflow).toFixed(2)}</div></div>
+      </div>
+      <p style="color:var(--ink-soft); font-size:13.5px; margin-bottom:20px;">Income comes from confirmed client payments (see the <strong>Payments</strong> tab for who's charging what). Expenses below are money going out — contractors, staff, supplies, software.</p>
+      <div class="card">
+        <h3 style="font-size:16px; margin-bottom:14px;">Log an expense — who you're paying</h3>
+        <div class="field"><label>What's this for?</label><input id="expDesc" placeholder="e.g. Contractor payment for logo design"></div>
+        <div class="form-grid">
+          <div class="field"><label>Paid to</label><input id="expPaidTo" placeholder="e.g. Jane Smith, AWS, Staples"></div>
+          <div class="field"><label>Category</label><select id="expCategory">
+            <option>Contractor / Staff</option><option>Software & Subscriptions</option><option>Supplies</option><option>Other</option>
+          </select></div>
+          <div class="field"><label>Amount ($)</label><input id="expAmount" type="number" step="0.01" placeholder="150.00"></div>
+          <div class="field"><label>Date</label><input id="expDate" type="date"></div>
+        </div>
+        <button class="btn btn-primary" id="expSave">Log Expense</button>
+      </div>
+      <h3 style="font-size:16px; margin:22px 0 10px;">Expense history</h3>
+      <div class="card" style="padding:0;">
+        <table class="table"><thead><tr><th>Date</th><th>Description</th><th>Paid to</th><th>Category</th><th>Amount</th><th></th></tr></thead>
+        <tbody>${expenses.length ? expenses.map(e => `
+          <tr><td>${e.expense_date}</td><td>${e.description}</td><td>${e.paid_to||'—'}</td><td>${e.category}</td><td>$${e.amount}</td>
+          <td><button class="btn btn-secondary btn-sm" data-delexp="${e.id}">Remove</button></td></tr>`).join('') : '<tr><td colspan="6" class="empty-note">No expenses logged yet.</td></tr>'}
+        </tbody></table>
+      </div>`;
+    document.getElementById("expDate").valueAsDate = new Date();
+    document.getElementById("expSave").onclick = async () => {
+      const desc = document.getElementById("expDesc").value.trim();
+      const paidTo = document.getElementById("expPaidTo").value.trim();
+      const category = document.getElementById("expCategory").value;
+      const amount = parseFloat(document.getElementById("expAmount").value);
+      const date = document.getElementById("expDate").value;
+      if(!desc || !amount || amount <= 0){ alert("Enter a description and a valid amount."); return; }
+      await addExpense(desc, category, paidTo, amount, "paid", date);
+      renderMain();
+    };
+    main.querySelectorAll("[data-delexp]").forEach(b => b.onclick = async () => {
+      await deleteExpense(b.dataset.delexp);
+      renderMain();
+    });
+  }
+
+  else if(state.tab === "applications"){
+    const apps = await listJobApplications();
+    main.innerHTML = `
+      <div class="page-title"><div><div class="eyebrow">Hiring</div><h2>Job applications</h2></div></div>
+      <div class="card" style="padding:0;">
+        <table class="table"><thead><tr><th>Name</th><th>Role</th><th>Contact</th><th>Portfolio</th><th>Status</th><th></th></tr></thead>
+        <tbody>${apps.length ? apps.map(a => `
+          <tr><td>${a.full_name}</td><td>${a.role}</td><td style="font-size:12px;">${a.email}<br>${a.phone||''}</td>
+          <td>${a.portfolio_url ? `<a href="${a.portfolio_url}" target="_blank" rel="noopener" style="color:var(--color-secondary-dark);">View</a>` : '—'}</td>
+          <td><span class="status status-${a.status==='accepted'?'confirmed':a.status==='rejected'?'pending':'open'}">${a.status.charAt(0).toUpperCase()+a.status.slice(1)}</span></td>
+          <td>${a.status==='pending' ? `<button class="btn btn-teal btn-sm" data-accept="${a.id}">Accept</button> <button class="btn btn-secondary btn-sm" data-reject="${a.id}">Reject</button>` : ''}</td></tr>`).join('') : '<tr><td colspan="6" class="empty-note">No applications yet.</td></tr>'}
+        </tbody></table>
+      </div>`;
+    main.querySelectorAll("[data-accept]").forEach(b => b.onclick = async () => { await updateJobApplicationStatus(b.dataset.accept, "accepted"); renderMain(); });
+    main.querySelectorAll("[data-reject]").forEach(b => b.onclick = async () => { await updateJobApplicationStatus(b.dataset.reject, "rejected"); renderMain(); });
+  }
+
+  else if(state.tab === "team"){
+    const allProfiles = await listClients();
+    const admins = await listAdmins();
+    const adminIds = new Set(admins.map(a => a.user_id));
+    main.innerHTML = `
+      <div class="page-title"><div><div class="eyebrow">Staff access</div><h2>Team</h2></div></div>
+      <p style="color:var(--ink-soft); font-size:13.5px; max-width:640px; margin-bottom:20px;">Anyone you make an admin gets full access to this dashboard — all clients, payments, and finances. Only add people you trust with that. They need to create a normal account first (same signup form as clients), then you make them admin here.</p>
+      <div class="card" style="padding:0;">
+        <table class="table"><thead><tr><th>Name</th><th>Email / Business</th><th>Role</th><th></th></tr></thead>
+        <tbody>${allProfiles.length ? allProfiles.map(p => `
+          <tr><td>${p.full_name || "—"}</td><td>${p.business_name || "—"}</td>
+          <td><span class="status ${adminIds.has(p.id)?'status-confirmed':'status-open'}">${adminIds.has(p.id)?'Admin':'Client'}</span></td>
+          <td>${adminIds.has(p.id)
+            ? `<button class="btn btn-secondary btn-sm" data-demote="${p.id}">Remove Admin</button>`
+            : `<button class="btn btn-teal btn-sm" data-promote="${p.id}">Make Admin</button>`}</td></tr>`).join('') : '<tr><td colspan="4" class="empty-note">No accounts yet.</td></tr>'}
+        </tbody></table>
+      </div>`;
+    main.querySelectorAll("[data-promote]").forEach(b => b.onclick = async () => {
+      if(!confirm("Give this person full admin access to everything in this dashboard?")) return;
+      await promoteToAdmin(b.dataset.promote);
+      renderMain();
+    });
+    main.querySelectorAll("[data-demote]").forEach(b => b.onclick = async () => {
+      if(!confirm("Remove admin access for this person?")) return;
+      await demoteAdmin(b.dataset.demote);
       renderMain();
     });
   }

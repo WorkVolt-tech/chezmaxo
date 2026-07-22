@@ -14,7 +14,7 @@
 <body>
 
 <div class="topbar">
-  <div class="brand"><span class="mark">WD</span> My Dashboard</div>
+  <div class="brand"><span class="mark"><img src="images/logo-icon.png" alt="Chezmaxo"></span> My Dashboard</div>
   <div class="user-chip">
     <span id="whoami"></span>
     <button id="logoutBtn">Sign out</button>
@@ -195,17 +195,26 @@ async function renderMain(){
       <div class="page-title"><div><div class="eyebrow">Requests</div><h2>Submit an update</h2></div></div>
       <div class="card">
         <div class="field"><label>What would you like changed?</label><textarea id="reqText" rows="3" placeholder="e.g. Update our business hours for the holidays"></textarea></div>
+        <div class="field"><label>How urgent is this?</label>
+          <select id="reqPriority">
+            <option value="normal">Normal</option>
+            <option value="low">Low — whenever you get a chance</option>
+            <option value="high">High — soon please</option>
+            <option value="urgent">Urgent — time-sensitive</option>
+          </select>
+        </div>
         <button class="btn btn-primary" id="reqSubmit">Submit request</button>
       </div>
       <h3 style="font-size:16px;margin:20px 0 10px;">Your requests</h3>
       <div class="card" style="padding:0;">
-        <table class="table"><thead><tr><th>Ticket</th><th>Request</th><th>Status</th></tr></thead>
-        <tbody>${state.requests.length ? state.requests.map(r => `<tr><td style="font-family:var(--font-mono);font-size:12px;">R-${r.id}</td><td>${r.text}</td><td><span class="status status-${r.status==='done'?'done':'open'}">${r.status==='done'?'Completed':'Open'}</span></td></tr>`).join("") : '<tr><td colspan="3" class="empty-note">No requests yet.</td></tr>'}</tbody></table>
+        <table class="table"><thead><tr><th>Ticket</th><th>Request</th><th>Priority</th><th>Status</th></tr></thead>
+        <tbody>${state.requests.length ? state.requests.map(r => `<tr><td style="font-family:var(--font-mono);font-size:12px;">R-${r.id}</td><td>${r.text}</td><td>${(r.priority||'normal').charAt(0).toUpperCase()+(r.priority||'normal').slice(1)}</td><td><span class="status status-${r.status==='done'?'done':'open'}">${r.status==='done'?'Completed':'Open'}</span></td></tr>`).join("") : '<tr><td colspan="4" class="empty-note">No requests yet.</td></tr>'}</tbody></table>
       </div>`;
     document.getElementById("reqSubmit").onclick = async () => {
       const t = document.getElementById("reqText").value.trim();
+      const priority = document.getElementById("reqPriority").value;
       if(!t) return;
-      await submitRequest(c.id, t);
+      await submitRequest(c.id, t, priority);
       renderMain();
     };
   }

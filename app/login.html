@@ -14,7 +14,10 @@
 <body>
 <div class="auth-wrap">
   <div class="auth-card">
-    <h2>Chezmaxo</h2>
+    <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px;">
+      <span class="mark"><img src="images/logo-icon.png" alt="Chezmaxo"></span>
+      <h2 style="margin:0;">Chezmaxo</h2>
+    </div>
     <p class="sub" id="subtext">Sign in to your client dashboard.</p>
     <div class="auth-toggle">
       <button id="tabSignin" class="active">Sign in</button>
@@ -53,6 +56,7 @@ function hideError(){ document.getElementById("formError").classList.remove("sho
 
 document.getElementById("tabSignin").onclick = () => setMode("signin");
 document.getElementById("tabSignup").onclick = () => setMode("signup");
+setMode("signin");
 
 document.getElementById("submitBtn").onclick = async () => {
   hideError();
