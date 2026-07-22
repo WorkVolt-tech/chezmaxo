@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Dashboard | [BUSINESS NAME]</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/dashboard.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/config.js"></script>
+<script src="js/supabase-client.js"></script>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand"><span class="mark">WD</span> My Dashboard</div>
+  <div class="user-chip">
+    <span id="whoami"></span>
+    <button id="logoutBtn">Sign out</button>
+  </div>
+</div>
+
+<div class="layout">
+  <div class="sidebar" id="sidebar"></div>
+  <div class="main" id="main"><div class="loading-note">Loading your dashboard...</div></div>
+</div>
+
+<script src="https://www.paypal.com/sdk/js" id="paypalSdkPlaceholder"></script>
+<script>
+const STAGES = ["Submitted","In Progress","Review","Live"];
+const BUILD_CATALOG = [
+  { key: "starter", name: "Starter Website", amount: 199, desc: "A clean, professional starting point — ideal for new or simple small businesses." },
+  { key: "business", name: "Business Website", amount: 399, desc: "More pages and features for established businesses that want a fuller presence." }
+];
+const PLANS = Object.keys(PLAN_PRICES).map(name => ({ name, monthly: PLAN_PRICES[name].monthly, yearly: PLAN_PRICES[name].yearly }));
+let state = { tab: "build", profile: null, requests: [], payments: [], messages: [], chatChannel: null };
+
+function badgeClass(plan){
+  if(plan==="Starter Care") return "badge-starter";
+  if(plan==="Monthly Support") return "badge-monthly";
+  return "badge-business";
+}
+
+function renderSidebar(){
+  const items = [["build","Website Build"],["plan","My plan"],["project","My project"],["requests","Update requests"],["payments","Payments"],["messages","Messages"]];
+  document.getElementById("sidebar").innerHTML = items.map(([k,l]) =>
+    `<button data-tab="${k}" class="${state.tab===k?'active':''}"><span class="dot"></span>${l}</button>`).join("");
+  document.querySelectorAll("#sidebar button").forEach(b => b.onclick = () => { state.tab = b.dataset.tab; renderMain(); });
+}
+
+async function renderMain(){
+  renderSidebar();
+  const main = document.getElementById("main");
+  const c = state.profile;
+
+  if(state.tab === "build"){
+    const order = await getMyBuildOrder(c.id);
+    const hasPendingRequest = order && order.status === "awaiting_quote" && order.description;
+
+    if(!order || (order.status === "awaiting_quote" && !order.description)){
+      main.innerHTML = `
+        <div class="page-title"><div><div class="eyebrow">Website build</div><h2>Choose your website project</h2></div></div>
+        <div class="plans-grid">
+          ${BUILD_CATALOG.map(item => `
+            <div class="plan-pick">
+              <div class="pname">${item.name}</div><div class="pprice">$${item.amount}</div>
+              <p style="color:var(--ink-soft); font-size:13px; margin:8px 0 14px;">${item.desc}</p>
+              <button class="btn btn-primary btn-sm" data-request="${item.key}">Request a Quote</button>
+            </div>`).join("")}
+          <div class="plan-pick">
+            <div class="pname">Advanced / Custom</div><div class="pprice" style="font-size:20px;">Custom Quote</div>
+            <p style="color:var(--ink-soft); font-size:13px; margin:8px 0 14px;">Online stores, bookings, memberships, or custom functionality.</p>
+            <button class="btn btn-secondary btn-sm" data-custom="1">Request a Quote</button>
+          </div>
+        </div>
+        <p style="color:var(--ink-faint); font-size:12.5px; margin-top:16px;">Requesting a quote doesn't charge you anything — we'll confirm the final price with you before any payment is due.</p>`;
+      main.querySelectorAll("[data-request]").forEach(btn => btn.onclick = async () => {
+        const item = BUILD_CATALOG.find(i => i.key === btn.dataset.request);
+        await requestBuildQuote(c.id, `${item.name} (client requested, starting at $${item.amount})`);
+        renderMain();
+      });
+      const customBtn = main.querySelector("[data-custom]");
+      if(customBtn) customBtn.onclick = async () => {
+        await requestBuildQuote(c.id, "Custom project (details pending)");
+        state.tab = "messages";
+        renderMain();
+      };
+    } else if(hasPendingRequest){
+      main.innerHTML = `
+        <div class="page-title"><div><div class="eyebrow">Website build</div><h2>Quote requested</h2></div></div>
+        <div class="ticket" style="margin-bottom:20px;">
+          <div class="ticket-top">
+            <div class="ticket-id">PROJECT REQUEST</div>
+            <div class="ticket-stamp">AWAITING CONFIRMATION</div>
+          </div>
+          <div class="ticket-row"><span class="label">You requested</span><span class="val">${order.description}</span></div>
+        </div>
+        <div class="card">
+          <p style="color:var(--ink-soft); margin-bottom:0;">We've got your request — we'll confirm the final price and next steps shortly. You'll see payment options here the moment it's confirmed. Have details to add in the meantime? Send us a message.</p>
+        </div>`;
+    } else if(order.status === "awaiting_payment"){
+      main.innerHTML = `
+        <div class="page-title"><div><div class="eyebrow">Website build</div><h2>Complete your purchase</h2></div></div>
+        <div class="ticket" style="margin-bottom:20px;">
+          <div class="ticket-top">
+            <div class="ticket-id">PROJECT QUOTE</div>
+            <div class="ticket-stamp">AWAITING PAYMENT</div>
+          </div>
+          <div class="ticket-row"><span class="label">What we're building</span><span class="val">${order.description || "Your website"}</span></div>
+          <div class="ticket-row"><span class="label">Amount due</span><span class="val">$${order.amount}</span></div>
+        </div>
+        <div class="paybox"><h4>Pay with PayPal</h4><p>Confirms automatically — no waiting.</p><div id="paypal-build-button"></div></div>
+        <div class="paybox"><h4>Pay with Zelle or Interac e-Transfer</h4><p>Send payment as usual, then log it below. We'll confirm it here once we verify it against our account (usually within one business day).</p>
+          <div class="field"><label>Method</label><select id="buildPayMethod"><option>Zelle</option><option>Interac e-Transfer</option></select></div>
+          <div class="field"><label>Reference / confirmation number</label><input id="buildPayRef" placeholder="e.g. from your bank's confirmation email"></div>
+          <button class="btn btn-secondary" id="buildPaySubmit">I've sent this payment</button>
+        </div>
+        <p style="text-align:center; margin-top:16px;"><button class="btn btn-secondary btn-sm" id="buildChangeMind">Choose a different project</button></p>`;
+      document.getElementById("buildPaySubmit").onclick = async () => {
+        const method = document.getElementById("buildPayMethod").value;
+        const ref = document.getElementById("buildPayRef").value.trim() || "(no reference provided)";
+        await logManualPayment(c.id, method, order.amount, ref, "build");
+        renderMain();
+      };
+      document.getElementById("buildChangeMind").onclick = async () => {
+        await sb.from("build_orders").delete().eq("client_id", c.id);
+        renderMain();
+      };
+      renderBuildPayPalButton(c, order);
+    } else {
+      main.innerHTML = `
+        <div class="page-title"><div><div class="eyebrow">Website build</div><h2>Your project quote</h2></div></div>
+        <div class="ticket" style="margin-bottom:20px;">
+          <div class="ticket-top">
+            <div class="ticket-id">PROJECT QUOTE</div>
+            <div class="ticket-stamp">PAID</div>
+          </div>
+          <div class="ticket-row"><span class="label">What we're building</span><span class="val">${order.description || "Your website"}</span></div>
+          <div class="ticket-row"><span class="label">Amount paid</span><span class="val">$${order.amount}</span></div>
+          <div class="ticket-row"><span class="label">Paid on</span><span class="val">${order.paid_at ? new Date(order.paid_at).toLocaleDateString() : "—"}</span></div>
+        </div>
+        <div class="card">
+          <h3>Ready for ongoing care?</h3>
+          <p style="color:var(--ink-soft);">Your build is paid and in progress — check the "My project" tab for status. Once it's live, pick a care plan to keep it monitored, backed up, and updated.</p>
+          <button class="btn btn-primary" data-goto="plan">Choose a Care Plan</button>
+        </div>`;
+      const gotoBtn = main.querySelector("[data-goto]");
+      if(gotoBtn) gotoBtn.onclick = () => { state.tab = "plan"; renderMain(); };
+    }
+  }
+  else if(state.tab === "plan"){
+    const cycle = c.billing_cycle || "monthly";
+    main.innerHTML = `
+      <div class="page-title"><div><div class="eyebrow">Billing</div><h2>My plan</h2></div></div>
+      <div class="billing-toggle" style="margin-bottom:20px;">
+        <button class="cycle-btn ${cycle==='monthly'?'active':''}" data-setcycle="monthly">Monthly</button>
+        <button class="cycle-btn ${cycle==='yearly'?'active':''}" data-setcycle="yearly">Yearly <span class="cycle-save-tag">2 months free</span></button>
+      </div>
+      <div class="plans-grid">${PLANS.map(p => {
+        const price = cycle === "yearly" ? p.yearly : p.monthly;
+        const suffix = cycle === "yearly" ? "yr" : "mo";
+        return `
+        <div class="plan-pick ${p.name===c.plan?'current':''}">
+          <div class="pname">${p.name}</div><div class="pprice">$${price}/${suffix}</div>
+          ${p.name===c.plan ? '<span class="badge badge-monthly" style="background:var(--color-secondary-tint);color:var(--color-secondary-dark);">Current plan</span>' : `<button class="btn btn-secondary btn-sm" data-switch="${p.name}">Switch to this plan</button>`}
+        </div>`;
+      }).join("")}
+      </div>
+      <p style="color:var(--ink-faint);font-size:12.5px;margin-top:14px;">Switching plans or billing cycle here updates your dashboard immediately. Your next invoice will reflect the change.</p>`;
+    main.querySelectorAll("[data-switch]").forEach(b => b.onclick = async () => {
+      await updateClientPlan(c.id, b.dataset.switch);
+      c.plan = b.dataset.switch;
+      renderMain();
+    });
+    main.querySelectorAll("[data-setcycle]").forEach(b => b.onclick = async () => {
+      await updateClientBillingCycle(c.id, b.dataset.setcycle);
+      c.billing_cycle = b.dataset.setcycle;
+      renderMain();
+    });
+  }
+  else if(state.tab === "project"){
+    main.innerHTML = `
+      <div class="page-title"><div><div class="eyebrow">Project</div><h2>Where things stand</h2></div></div>
+      <div class="card">
+        <div class="stepper">${STAGES.map((s,i) => `
+          <div class="step ${i<c.stage?'done':i===c.stage?'now':''}"><div class="circ">${i<c.stage?'&#10003;':i+1}</div><div class="slabel">${s}</div></div>`).join("")}
+        </div>
+        <p style="color:var(--ink-soft);font-size:13.5px;margin-top:18px;">Current stage: <strong style="color:var(--color-primary);">${STAGES[c.stage]}</strong></p>
+      </div>`;
+  }
+  else if(state.tab === "requests"){
+    state.requests = await listMyRequests(c.id);
+    main.innerHTML = `
+      <div class="page-title"><div><div class="eyebrow">Requests</div><h2>Submit an update</h2></div></div>
+      <div class="card">
+        <div class="field"><label>What would you like changed?</label><textarea id="reqText" rows="3" placeholder="e.g. Update our business hours for the holidays"></textarea></div>
+        <button class="btn btn-primary" id="reqSubmit">Submit request</button>
+      </div>
+      <h3 style="font-size:16px;margin:20px 0 10px;">Your requests</h3>
+      <div class="card" style="padding:0;">
+        <table class="table"><thead><tr><th>Ticket</th><th>Request</th><th>Status</th></tr></thead>
+        <tbody>${state.requests.length ? state.requests.map(r => `<tr><td style="font-family:var(--font-mono);font-size:12px;">R-${r.id}</td><td>${r.text}</td><td><span class="status status-${r.status==='done'?'done':'open'}">${r.status==='done'?'Completed':'Open'}</span></td></tr>`).join("") : '<tr><td colspan="3" class="empty-note">No requests yet.</td></tr>'}</tbody></table>
+      </div>`;
+    document.getElementById("reqSubmit").onclick = async () => {
+      const t = document.getElementById("reqText").value.trim();
+      if(!t) return;
+      await submitRequest(c.id, t);
+      renderMain();
+    };
+  }
+  else if(state.tab === "payments"){
+    state.payments = await listMyPayments(c.id);
+    const cycle = c.billing_cycle || "monthly";
+    const planObj = PLANS.find(p=>p.name===c.plan);
+    const amount = cycle === "yearly" ? planObj.yearly : planObj.monthly;
+    main.innerHTML = `
+      <div class="page-title"><div><div class="eyebrow">Billing</div><h2>Payments</h2></div></div>
+      <div class="paybox"><h4>Pay with PayPal</h4><p>Confirms automatically — no waiting. Charges $${amount} for your ${c.plan} plan (${cycle} billing).</p><div id="paypal-button"></div></div>
+      <div class="paybox"><h4>Pay with Zelle or Interac e-Transfer</h4><p>Send payment as usual, then log it below. We'll confirm it in your dashboard once we verify it against our account (usually within one business day).</p>
+        <div class="field"><label>Method</label><select id="payMethod"><option>Zelle</option><option>Interac e-Transfer</option></select></div>
+        <div class="field"><label>Amount sent</label><input id="payAmount" type="number" step="0.01" value="${amount}"></div>
+        <div class="field"><label>Reference / confirmation number</label><input id="payRef" placeholder="e.g. from your bank's confirmation email"></div>
+        <button class="btn btn-secondary" id="paySubmit">I've sent this payment</button>
+      </div>
+      <h3 style="font-size:16px;margin:20px 0 10px;">Payment history</h3>
+      <div class="card" style="padding:0;">
+        <table class="table"><thead><tr><th>Method</th><th>Amount</th><th>Status</th></tr></thead>
+        <tbody>${state.payments.length ? state.payments.map(p => `<tr><td>${p.method}</td><td>$${p.amount}</td><td><span class="status status-${p.status}">${p.status==='confirmed'?'Confirmed':'Pending review'}</span></td></tr>`).join("") : '<tr><td colspan="3" class="empty-note">No payments yet.</td></tr>'}</tbody></table>
+      </div>`;
+    document.getElementById("paySubmit").onclick = async () => {
+      const method = document.getElementById("payMethod").value;
+      const amt = parseFloat(document.getElementById("payAmount").value) || 0;
+      const ref = document.getElementById("payRef").value.trim() || "(no reference provided)";
+      await logManualPayment(c.id, method, amt, ref);
+      renderMain();
+    };
+    renderPayPalButton(c, amount);
+  }
+  else if(state.tab === "messages"){
+    state.messages = await listMessages(c.id);
+    main.innerHTML = `
+      <div class="page-title"><div><div class="eyebrow">Messages</div><h2>Chat with us</h2></div></div>
+      <div class="chat-wrap">
+        <div class="chat-panel">
+          <div class="chat-msgs" id="chatMsgs">${state.messages.map(m => `<div class="msg ${m.sender_role==='client'?'mine':'theirs'}">${m.text}</div>`).join("")}</div>
+          <div class="chat-input"><input id="chatInput" placeholder="Type a message..."><button class="btn btn-primary btn-sm" id="chatSend">Send</button></div>
+        </div>
+      </div>`;
+    const msgsEl = document.getElementById("chatMsgs");
+    msgsEl.scrollTop = msgsEl.scrollHeight;
+    document.getElementById("chatSend").onclick = async () => {
+      const v = document.getElementById("chatInput").value.trim();
+      if(!v) return;
+      const session = await getSession();
+      await sendMessage(c.id, session.user.id, "client", v);
+      document.getElementById("chatInput").value = "";
+    };
+    if(state.chatChannel) sb.removeChannel(state.chatChannel);
+    state.chatChannel = subscribeToMessages(c.id, (payload) => {
+      if(state.tab !== "messages") return;
+      const div = document.createElement("div");
+      div.className = "msg " + (payload.new.sender_role==="client" ? "mine" : "theirs");
+      div.textContent = payload.new.text;
+      msgsEl.appendChild(div);
+      msgsEl.scrollTop = msgsEl.scrollHeight;
+    });
+  }
+}
+
+function renderBuildPayPalButton(c, order){
+  const container = document.getElementById("paypal-build-button");
+  if(!container || typeof paypal === "undefined"){
+    if(container) container.innerHTML = '<p style="color:var(--ink-faint);font-size:12.5px;">PayPal button unavailable — check that PAYPAL_CLIENT_ID is set in js/config.js.</p>';
+    return;
+  }
+  paypal.Buttons({
+    createOrder: (data, actions) => actions.order.create({ purchase_units: [{ description: (order.description || "Website build").slice(0,120), amount: { value: parseFloat(order.amount).toFixed(2) } }] }),
+    onApprove: async (data, actions) => {
+      const details = await actions.order.capture();
+      await logPayPalPayment(c.id, order.amount, details.id, "build");
+      await markBuildOrderPaidClientSide(c.id);
+      renderMain();
+    }
+  }).render("#paypal-build-button");
+}
+
+function renderPayPalButton(c, amount){
+  const container = document.getElementById("paypal-button");
+  if(!container || typeof paypal === "undefined"){
+    if(container) container.innerHTML = '<p style="color:var(--ink-faint);font-size:12.5px;">PayPal button unavailable — check that PAYPAL_CLIENT_ID is set in js/config.js.</p>';
+    return;
+  }
+  paypal.Buttons({
+    createOrder: (data, actions) => actions.order.create({ purchase_units: [{ amount: { value: amount.toFixed(2) } }] }),
+    onApprove: async (data, actions) => {
+      const details = await actions.order.capture();
+      await logPayPalPayment(c.id, amount, details.id);
+      renderMain();
+    }
+  }).render("#paypal-button");
+}
+
+document.getElementById("logoutBtn").onclick = signOut;
+
+(async () => {
+  const session = await requireSession();
+  if(!session) return;
+  if(await isCurrentUserAdmin()){ window.location.href = "admin-dashboard.html"; return; }
+  state.profile = await getMyProfile();
+  document.getElementById("whoami").textContent = state.profile.business_name || session.user.email;
+
+  const intent = new URLSearchParams(window.location.search).get("intent");
+  if(intent){
+    const item = BUILD_CATALOG.find(i => i.key === intent);
+    const existing = await getMyBuildOrder(state.profile.id);
+    if(item && !existing){
+      await requestBuildQuote(state.profile.id, `${item.name} (client requested, starting at $${item.amount})`);
+    }
+    state.tab = "build";
+  }
+
+  const script = document.createElement("script");
+  script.src = `https://www.paypal.com/sdk/js?client-id=${PAYPAL_CLIENT_ID}&currency=USD`;
+  script.onload = () => { if (state.tab === "payments" || state.tab === "build") renderMain(); };
+  document.head.appendChild(script);
+  document.getElementById("paypalSdkPlaceholder").remove();
+
+  renderMain();
+})();
+</script>
+</body>
+</html>

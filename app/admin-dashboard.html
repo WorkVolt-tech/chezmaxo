@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard | [BUSINESS NAME]</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/dashboard.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/config.js"></script>
+<script src="js/supabase-client.js"></script>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand"><span class="mark">WD</span> Admin Dashboard</div>
+  <div class="user-chip">
+    <span id="whoami">Admin</span>
+    <button id="logoutBtn">Sign out</button>
+  </div>
+</div>
+
+<div class="layout">
+  <div class="sidebar" id="sidebar"></div>
+  <div class="main" id="main"><div class="loading-note">Loading...</div></div>
+</div>
+
+<script>
+const STAGES = ["Submitted","In Progress","Review","Live"];
+let state = { tab: "projects", clients: [], chatClientId: null, chatChannel: null };
+
+function badgeClass(plan){
+  if(plan==="Starter Care") return "badge-starter";
+  if(plan==="Monthly Support") return "badge-monthly";
+  return "badge-business";
+}
+
+function renderSidebar(){
+  const items = [["projects","Projects (CRM)"],["orders","Build Orders"],["requests","Update requests"],["payments","Payments"],["messages","Messages"]];
+  document.getElementById("sidebar").innerHTML = items.map(([k,l]) =>
+    `<button data-tab="${k}" class="${state.tab===k?'active':''}"><span class="dot"></span>${l}</button>`).join("");
+  document.querySelectorAll("#sidebar button").forEach(b => b.onclick = () => { state.tab = b.dataset.tab; renderMain(); });
+}
+
+async function renderMain(){
+  renderSidebar();
+  const main = document.getElementById("main");
+
+  if(state.tab === "projects"){
+    state.clients = await listClients();
+    main.innerHTML = `
+      <div class="page-title"><div><div class="eyebrow">CRM board</div><h2>Active projects</h2></div></div>
+      <div class="kanban">${STAGES.map((s,i) => `
+        <div class="kcol"><h4>${s}<span>${state.clients.filter(c=>c.stage===i).length}</span></h4>
+        ${state.clients.filter(c=>c.stage===i).map(c => `
+          <div class="ticket">
+            <div class="tid">CLIENT · ${c.business_name || c.full_name}</div>
+            <div class="tname">${c.business_name || c.full_name}</div>
+            <span class="badge ${badgeClass(c.plan)}">${c.plan}</span>
+            ${i<3 ? `<button class="btn btn-secondary btn-sm advance" data-advance="${c.id}" data-next="${i+1}">Advance to ${STAGES[i+1]} &rarr;</button>` : `<div class="pill-note" style="background:var(--color-secondary-tint);color:var(--color-secondary-dark);margin-top:8px;">Live site</div>`}
+          </div>`).join("") || '<p class="empty-note">No projects at this stage.</p>'}
+        </div>`).join("")}
+      </div>`;
+    main.querySelectorAll("[data-advance]").forEach(b => b.onclick = async () => {
+      await updateClientStage(b.dataset.advance, parseInt(b.dataset.next));
+      renderMain();
+    });
+  }
+
+  else if(state.tab === "orders"){
+    state.clients = await listClients();
+    const orders = await listAllBuildOrders();
+    const orderByClient = {};
+    orders.forEach(o => { orderByClient[o.client_id] = o; });
+    main.innerHTML = `
+      <div class="page-title"><div><div class="eyebrow">Website builds</div><h2>Build orders</h2></div></div>
+      <p style="color:var(--ink-soft); font-size:13.5px; max-width:640px; margin-bottom:20px;">Set the quoted price for each client's website after your initial conversation. Their dashboard will show the amount and payment options the moment you save it here.</p>
+      <div class="card" style="padding:0; margin-bottom:26px;">
+        <table class="table"><thead><tr><th>Client</th><th>What's being built</th><th>Amount</th><th>Status</th></tr></thead>
+        <tbody>${state.clients.map(c => {
+          const o = orderByClient[c.id];
+          const statusLabel = !o ? "No quote yet" : o.status === "paid" ? "Paid" : o.status === "awaiting_payment" ? "Awaiting payment" : "Awaiting quote";
+          const statusClass = !o ? "open" : o.status === "paid" ? "confirmed" : "pending";
+          return `<tr><td>${c.business_name || c.full_name}</td><td>${o ? o.description : "—"}</td><td>${o && o.amount ? "$"+o.amount : "—"}</td><td><span class="status status-${statusClass}">${statusLabel}</span></td></tr>`;
+        }).join("") || '<tr><td colspan="4" class="empty-note">No clients yet.</td></tr>'}
+        </tbody></table>
+      </div>
+      <div class="card">
+        <h3 style="font-size:16px; margin-bottom:14px;">Set or update a quote</h3>
+        <div class="field"><label>Client</label>
+          <select id="orderClientSelect">${state.clients.map(c => `<option value="${c.id}">${c.business_name || c.full_name}</option>`).join("")}</select>
+        </div>
+        <div class="field"><label>What are you building?</label><textarea id="orderDesc" rows="2" placeholder="e.g. 5-page site with contact form and photo gallery"></textarea></div>
+        <div class="field"><label>Quoted amount ($)</label><input id="orderAmount" type="number" step="0.01" placeholder="299.00"></div>
+        <button class="btn btn-primary" id="orderSave">Save Quote</button>
+      </div>`;
+    document.getElementById("orderSave").onclick = async () => {
+      const clientId = document.getElementById("orderClientSelect").value;
+      const description = document.getElementById("orderDesc").value.trim();
+      const amount = parseFloat(document.getElementById("orderAmount").value);
+      if(!amount || amount <= 0){ alert("Enter a valid amount."); return; }
+      await setBuildOrderQuote(clientId, description, amount);
+      renderMain();
+    };
+  }
+
+  else if(state.tab === "requests"){
+    const rows = await listAllRequests();
+    main.innerHTML = `
+      <div class="page-title"><div><div class="eyebrow">Inbox</div><h2>Update requests</h2></div></div>
+      <div class="card" style="padding:0;">
+        <table class="table"><thead><tr><th>Ticket</th><th>Client</th><th>Request</th><th>Status</th><th></th></tr></thead>
+        <tbody>${rows.length ? rows.map(r => `
+          <tr><td style="font-family:var(--font-mono);font-size:12px;">R-${r.id}</td><td>${r.profiles?.business_name || "—"}</td><td>${r.text}</td>
+          <td><span class="status status-${r.status==='done'?'done':'open'}">${r.status==='done'?'Completed':'Open'}</span></td>
+          <td>${r.status==='open' ? `<button class="btn btn-teal btn-sm" data-done="${r.id}">Mark complete</button>` : ''}</td></tr>`).join('') : '<tr><td colspan="5" class="empty-note">No requests yet.</td></tr>'}
+        </tbody></table>
+      </div>`;
+    main.querySelectorAll("[data-done]").forEach(b => b.onclick = async () => {
+      await markRequestDone(b.dataset.done);
+      renderMain();
+    });
+  }
+
+  else if(state.tab === "payments"){
+    const rows = await listAllPayments();
+    main.innerHTML = `
+      <div class="page-title"><div><div class="eyebrow">Billing</div><h2>Payments</h2></div></div>
+      <p style="color:var(--ink-soft);font-size:13.5px;max-width:640px;margin-bottom:16px;">PayPal payments confirm automatically. Zelle and Interac e-Transfer need a manual check against your bank/Zelle activity before confirming.</p>
+      <div class="card" style="padding:0;">
+        <table class="table"><thead><tr><th>Client</th><th>For</th><th>Method</th><th>Amount</th><th>Reference</th><th>Status</th><th></th></tr></thead>
+        <tbody>${rows.length ? rows.map(p => `
+          <tr><td>${p.profiles?.business_name || "—"}</td><td>${p.purpose === "build" ? "Website build" : "Care plan"}</td><td>${p.method}</td><td>$${p.amount}</td>
+          <td style="font-family:var(--font-mono);font-size:11.5px;color:var(--ink-faint);">${p.reference}</td>
+          <td><span class="status status-${p.status}">${p.status==='confirmed'?'Confirmed':'Pending review'}</span></td>
+          <td>${p.status==='pending' ? `<button class="btn btn-teal btn-sm" data-confirm="${p.id}">Mark as paid</button>` : ''}</td></tr>`).join('') : '<tr><td colspan="7" class="empty-note">No payments yet.</td></tr>'}
+        </tbody></table>
+      </div>`;
+    main.querySelectorAll("[data-confirm]").forEach(b => b.onclick = async () => {
+      await confirmPayment(b.dataset.confirm);
+      renderMain();
+    });
+  }
+
+  else if(state.tab === "messages"){
+    state.clients = await listClients();
+    if(!state.chatClientId && state.clients.length) state.chatClientId = state.clients[0].id;
+    const active = state.clients.find(c => c.id === state.chatClientId);
+    const msgs = active ? await listMessages(active.id) : [];
+    main.innerHTML = `
+      <div class="page-title"><div><div class="eyebrow">Messages</div><h2>Conversations</h2></div></div>
+      <div class="chat-wrap">
+        <div class="chat-list">${state.clients.map(c => `<div class="chat-item ${c.id===state.chatClientId?'active':''}" data-chat="${c.id}"><div class="cn">${c.business_name || c.full_name}</div></div>`).join("") || '<p class="empty-note" style="padding:14px;">No clients yet.</p>'}</div>
+        <div class="chat-panel">
+          <div class="chat-msgs" id="chatMsgs">${msgs.map(m => `<div class="msg ${m.sender_role==='admin'?'mine':'theirs'}">${m.text}</div>`).join("")}</div>
+          <div class="chat-input"><input id="chatInput" placeholder="Type a message..." ${active?'':'disabled'}><button class="btn btn-primary btn-sm" id="chatSend" ${active?'':'disabled'}>Send</button></div>
+        </div>
+      </div>`;
+    main.querySelectorAll("[data-chat]").forEach(el => el.onclick = () => { state.chatClientId = el.dataset.chat; renderMain(); });
+    const msgsEl = document.getElementById("chatMsgs");
+    msgsEl.scrollTop = msgsEl.scrollHeight;
+    if(active){
+      document.getElementById("chatSend").onclick = async () => {
+        const v = document.getElementById("chatInput").value.trim();
+        if(!v) return;
+        const session = await getSession();
+        await sendMessage(active.id, session.user.id, "admin", v);
+        document.getElementById("chatInput").value = "";
+      };
+      if(state.chatChannel) sb.removeChannel(state.chatChannel);
+      state.chatChannel = subscribeToMessages(active.id, (payload) => {
+        if(state.tab !== "messages" || state.chatClientId !== active.id) return;
+        const div = document.createElement("div");
+        div.className = "msg " + (payload.new.sender_role==="admin" ? "mine" : "theirs");
+        div.textContent = payload.new.text;
+        msgsEl.appendChild(div);
+        msgsEl.scrollTop = msgsEl.scrollHeight;
+      });
+    }
+  }
+}
+
+document.getElementById("logoutBtn").onclick = signOut;
+
+(async () => {
+  const session = await requireSession();
+  if(!session) return;
+  if(!(await isCurrentUserAdmin())){ window.location.href = "client-portal.html"; return; }
+  document.getElementById("whoami").textContent = session.user.email;
+  renderMain();
+})();
+</script>
+</body>
+</html>
