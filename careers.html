@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Careers | Chezmaxo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="stylesheet" href="css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="nav-wrap">
+    <a href="index.html" class="brand"><span class="mark"><img src="images/logo-icon.png" alt="Chezmaxo"></span> Chezmaxo</a>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="container">
+    <div class="breadcrumb">CAREERS</div>
+    <h1>Work with us.</h1>
+    <p>We occasionally bring on web/app designers, developers, and contractors for overflow work. Tell us about yourself below — we review every application personally.</p>
+  </div>
+</section>
+
+<section>
+  <div class="container" style="max-width:640px;">
+    <div id="formSuccess" class="form-success">Thanks — your application has been received! We review every application personally and will reach out if it looks like a fit.</div>
+    <form id="jobForm" novalidate>
+      <div class="form-grid">
+        <div class="field"><label>Full name <span class="req">*</span></label><input id="jaName" required></div>
+        <div class="field"><label>Email <span class="req">*</span></label><input id="jaEmail" type="email" required></div>
+        <div class="field"><label>Phone number</label><input id="jaPhone"></div>
+        <div class="field"><label>Role you're applying for <span class="req">*</span></label>
+          <select id="jaRole" required>
+            <option value="">Select an option</option>
+            <option>Web Designer</option>
+            <option>App Designer</option>
+            <option>Developer</option>
+            <option>Contractor — Other</option>
+          </select>
+        </div>
+        <div class="field full"><label>Portfolio / website link</label><input id="jaPortfolio" placeholder="e.g. https://yourportfolio.com"></div>
+        <div class="field full"><label>Tell us about yourself <span class="req">*</span></label><textarea id="jaMessage" rows="5" required placeholder="Experience, what you're looking for, availability..."></textarea></div>
+      </div>
+      <div id="jaError" class="form-note" style="color:#C23B3B; display:none;"></div>
+      <button type="submit" class="btn btn-primary" style="margin-top:16px;">Submit Application</button>
+    </form>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-bottom" style="border-top:none; justify-content:center;">
+      <span>&copy; <span id="yr"></span> Chezmaxo. All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.getElementById("yr").textContent = new Date().getFullYear();
+
+// Same Supabase project as your dashboard app — paste the same values
+// from app/js/config.js here.
+const SUPABASE_URL = "YOUR_SUPABASE_PROJECT_URL";
+const SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_KEY";
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+document.getElementById("jobForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const errEl = document.getElementById("jaError");
+  errEl.style.display = "none";
+
+  const name = document.getElementById("jaName").value.trim();
+  const email = document.getElementById("jaEmail").value.trim();
+  const phone = document.getElementById("jaPhone").value.trim();
+  const role = document.getElementById("jaRole").value;
+  const portfolio = document.getElementById("jaPortfolio").value.trim();
+  const message = document.getElementById("jaMessage").value.trim();
+
+  if (!name || !email || !role || message.length < 10) {
+    errEl.textContent = "Please fill in your name, email, role, and a bit about yourself (10+ characters).";
+    errEl.style.display = "block";
+    return;
+  }
+
+  try {
+    const { error } = await sb.from("job_applications").insert({
+      full_name: name, email, phone, role, portfolio_url: portfolio, message
+    });
+    if (error) throw error;
+    document.getElementById("jobForm").style.display = "none";
+    document.getElementById("formSuccess").classList.add("show");
+  } catch (err) {
+    errEl.textContent = "Something went wrong submitting your application. Please try again or email us directly.";
+    errEl.style.display = "block";
+  }
+});
+</script>
+</body>
+</html>
