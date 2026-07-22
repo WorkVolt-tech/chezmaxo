@@ -456,6 +456,7 @@ section{ padding: 88px 0; }
 .cycle-save-tag{font-family:var(--font-mono);font-size:11px;background:var(--color-accent);color:#fff;padding:2px 8px;border-radius:100px;}
 .cycle-btn.active .cycle-save-tag{background:rgba(255,255,255,0.25);}
 .save-badge{display:none;align-items:center;font-family:var(--font-mono);font-size:12px;font-weight:600;color:var(--color-secondary-dark);background:var(--color-secondary-tint);padding:4px 10px;border-radius:100px;margin-bottom:14px;}
+.dev-pricing{ display:grid; grid-template-columns: repeat(3,1fr); gap:22px; }
 @media (max-width: 900px){ .dev-pricing{ grid-template-columns:1fr; } }
 .dev-card{
   border:1px solid var(--border); border-radius: var(--radius-md);
@@ -463,6 +464,15 @@ section{ padding: 88px 0; }
 }
 .dev-card .amt{ font-family: var(--font-display); font-size: 30px; color: var(--color-primary); }
 .dev-card h4{ font-family: var(--font-mono); font-size:13px; letter-spacing:.06em; text-transform:uppercase; color: var(--ink-soft); margin-bottom:10px; }
+.dev-selectable{ border: 2px solid transparent; transition: border-color .15s ease, transform .15s ease; }
+.dev-selectable.selected{ border-color: var(--color-accent); transform: translateY(-2px); }
+.dev-cart-summary{
+  display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap;
+  margin-top:24px; background:#fff; border:1.5px dashed var(--color-accent); border-radius: var(--radius-md);
+  padding:18px 22px;
+}
+.dev-cart-item{ display:flex; gap:16px; align-items:baseline; font-weight:600; color:var(--color-primary); font-size:16px; }
+.dev-cart-item span:last-child{ font-family:var(--font-mono); color:var(--color-accent-dark); }
 
 .callout{
   border: 1px dashed var(--border-strong);
