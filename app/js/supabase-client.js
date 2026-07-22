@@ -103,8 +103,8 @@ async function listAllRequests() {
   return data;
 }
 
-async function submitRequest(clientId, text) {
-  const { error } = await sb.from("requests").insert({ client_id: clientId, text });
+async function submitRequest(clientId, text, priority = "normal") {
+  const { error } = await sb.from("requests").insert({ client_id: clientId, text, priority });
   if (error) throw error;
 }
 
@@ -185,6 +185,64 @@ async function requestBuildQuote(clientId, description) {
 
 async function markBuildOrderPaidClientSide(clientId) {
   const { error } = await sb.from("build_orders").update({ status: "paid", paid_at: new Date().toISOString() }).eq("client_id", clientId);
+  if (error) throw error;
+}
+
+// ---------------- Team / Admin management ----------------
+
+async function listAdmins() {
+  const { data, error } = await sb.from("admins").select("*, profiles(business_name, full_name)");
+  if (error) throw error;
+  return data;
+}
+
+async function promoteToAdmin(userId) {
+  const { error } = await sb.from("admins").insert({ user_id: userId });
+  if (error) throw error;
+}
+
+async function demoteAdmin(userId) {
+  const { error } = await sb.from("admins").delete().eq("user_id", userId);
+  if (error) throw error;
+}
+
+// ---------------- Job Applications ----------------
+
+async function submitJobApplication(fullName, email, phone, role, portfolioUrl, message) {
+  const { error } = await sb.from("job_applications").insert({
+    full_name: fullName, email, phone, role, portfolio_url: portfolioUrl, message
+  });
+  if (error) throw error;
+}
+
+async function listJobApplications() {
+  const { data, error } = await sb.from("job_applications").select("*").order("created_at", { ascending: false });
+  if (error) throw error;
+  return data;
+}
+
+async function updateJobApplicationStatus(id, status) {
+  const { error } = await sb.from("job_applications").update({ status }).eq("id", id);
+  if (error) throw error;
+}
+
+// ---------------- Expenses ----------------
+
+async function listExpenses() {
+  const { data, error } = await sb.from("expenses").select("*").order("expense_date", { ascending: false });
+  if (error) throw error;
+  return data;
+}
+
+async function addExpense(description, category, paidTo, amount, status, expenseDate) {
+  const { error } = await sb.from("expenses").insert({
+    description, category, paid_to: paidTo, amount, status, expense_date: expenseDate
+  });
+  if (error) throw error;
+}
+
+async function deleteExpense(id) {
+  const { error } = await sb.from("expenses").delete().eq("id", id);
   if (error) throw error;
 }
 
