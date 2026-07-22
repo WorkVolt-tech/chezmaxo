@@ -99,21 +99,6 @@
               <input type="text" id="businessType" name="businessType" placeholder="e.g. barbershop, contractor, restaurant" data-i18n-placeholder="contact.ph.type">
             </div>
             <div class="field">
-              <label for="serviceNeeded" data-i18n="contact.f.service">Service needed</label> <span class="req">*</span>
-              <select id="serviceNeeded" name="serviceNeeded" required>
-                <option value="" data-i18n="contact.opt.select">Select an option</option>
-                <option data-i18n="svc.new">New website</option>
-                <option data-i18n="svc.redesign">Website redesign</option>
-                <option data-i18n="svc.maint">Website maintenance</option>
-                <option data-i18n="svc.small">Small website update</option>
-                <option data-i18n="svc.store">Online store</option>
-                <option data-i18n="svc.booking">Booking system</option>
-                <option data-i18n="svc.custom">Custom feature</option>
-                <option data-i18n="svc.unsure">Not sure yet</option>
-              </select>
-              <div class="error-msg"></div>
-            </div>
-            <div class="field">
               <label for="budget" data-i18n="contact.f.budget">Estimated budget</label>
               <select id="budget" name="budget">
                 <option value="" data-i18n="contact.opt.budget">Select a range (optional)</option>
@@ -137,8 +122,8 @@
                 <option data-i18n="cm.text">Text message</option>
               </select>
             </div>
-            <div class="field full">
-              <label data-i18n="contact.f.needs">What do you need help with? (select all that apply)</label>
+            <div class="field full" id="needsField">
+              <label data-i18n="contact.f.needs">What do you need help with? (select all that apply)</label> <span class="req">*</span>
               <div class="checkbox-grid">
                 <label class="checkbox-item"><input type="checkbox" name="needs" value="New website"> <span data-i18n="needs.new">New website</span></label>
                 <label class="checkbox-item"><input type="checkbox" name="needs" value="Website redesign"> <span data-i18n="needs.redesign">Website redesign</span></label>
@@ -149,6 +134,7 @@
                 <label class="checkbox-item"><input type="checkbox" name="needs" value="Custom feature"> <span data-i18n="needs.custom">Custom feature</span></label>
                 <label class="checkbox-item"><input type="checkbox" name="needs" value="Not sure yet"> <span data-i18n="needs.unsure">Not sure yet</span></label>
               </div>
+              <div class="error-msg" id="needsError"></div>
             </div>
             <div class="field full">
               <label for="description" data-i18n="contact.f.desc">Tell us about your business and your project</label> <span class="req">*</span>
@@ -196,16 +182,16 @@
   var pkg = new URLSearchParams(window.location.search).get("package");
   if (!pkg) return;
   var labels = {
-    starter: { service: "New website", desc: "I'm interested in the Starter Website package (starting at $199). Please send me a quote." },
-    business: { service: "New website", desc: "I'm interested in the Business Website package (starting at $399). Please send me a quote." },
-    advanced: { service: "Not sure yet", desc: "I'm interested in an Advanced / Custom Website project. Please reach out to discuss what I need." }
+    starter: { desc: "I'm interested in the Starter Website package (starting at $199). Please send me a quote." },
+    business: { desc: "I'm interested in the Business Website package (starting at $399). Please send me a quote." },
+    advanced: { desc: "I'm interested in an Advanced / Custom Website project. Please reach out to discuss what I need." }
   };
   var info = labels[pkg];
   if (!info) return;
-  var serviceSelect = document.getElementById("serviceNeeded");
-  if (serviceSelect) serviceSelect.value = info.service;
   var newWebsiteCheckbox = document.querySelector('input[name="needs"][value="New website"]');
   if (newWebsiteCheckbox && pkg !== "advanced") newWebsiteCheckbox.checked = true;
+  var customCheckbox = document.querySelector('input[name="needs"][value="Custom feature"]');
+  if (customCheckbox && pkg === "advanced") customCheckbox.checked = true;
   var descField = document.getElementById("description");
   if (descField && !descField.value) descField.value = info.desc;
 })();
