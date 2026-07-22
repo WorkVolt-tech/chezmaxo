@@ -172,6 +172,17 @@ async function setBuildOrderQuote(clientId, description, amount) {
   }
 }
 
+async function requestBuildQuote(clientId, description) {
+  const { data: existing } = await sb.from("build_orders").select("id").eq("client_id", clientId).maybeSingle();
+  if (existing) {
+    const { error } = await sb.from("build_orders").update({ description, status: "awaiting_quote" }).eq("client_id", clientId);
+    if (error) throw error;
+  } else {
+    const { error } = await sb.from("build_orders").insert({ client_id: clientId, description, status: "awaiting_quote" });
+    if (error) throw error;
+  }
+}
+
 async function markBuildOrderPaidClientSide(clientId) {
   const { error } = await sb.from("build_orders").update({ status: "paid", paid_at: new Date().toISOString() }).eq("client_id", clientId);
   if (error) throw error;

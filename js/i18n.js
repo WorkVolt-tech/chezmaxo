@@ -923,9 +923,9 @@ const I18N = {
     "en": "A clean, professional starting point — ideal for new or simple small businesses.",
     "fr": "Un point de départ propre et professionnel — idéal pour les nouvelles entreprises ou les entreprises simples."
   },
-  "pricing.dev.buynow": {
-    "en": "Buy Now",
-    "fr": "Acheter maintenant"
+  "pricing.dev.select": {
+    "en": "Select This Package",
+    "fr": "Sélectionner ce forfait"
   },
   "pricing.dev.business.h": {
     "en": "Business Website",
@@ -951,9 +951,13 @@ const I18N = {
     "en": "For projects with online stores, bookings, memberships, or custom functionality.",
     "fr": "Pour les projets avec boutiques en ligne, réservations, adhésions ou fonctionnalités personnalisées."
   },
-  "pricing.dev.getquote": {
-    "en": "Get a Custom Quote",
-    "fr": "Obtenir un devis personnalisé"
+  "pricing.dev.selected": {
+    "en": "Your selection",
+    "fr": "Votre sélection"
+  },
+  "pricing.dev.requestquote": {
+    "en": "Request a Quote",
+    "fr": "Demander un devis"
   },
   "pricing.goodtoknow": {
     "en": "Good to know",
