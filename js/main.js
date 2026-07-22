@@ -79,9 +79,17 @@ document.addEventListener('DOMContentLoaded', function () {
       email: function (v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) ? '' : msg('valid.email', 'Please enter a valid email address.'); },
       phone: function (v) { return v.trim().length >= 7 ? '' : msg('valid.phone', 'Please enter a valid phone number.'); },
       businessName: function (v) { return v.trim().length > 1 ? '' : msg('valid.biz', 'Please enter your business name.'); },
-      serviceNeeded: function (v) { return v ? '' : msg('valid.service', 'Please select what you need help with.'); },
       description: function (v) { return v.trim().length > 9 ? '' : msg('valid.desc', 'Please tell us a little more about your project (10+ characters).'); }
     };
+
+    function validateNeeds() {
+      var checked = form.querySelectorAll('input[name="needs"]:checked').length > 0;
+      var wrap = document.getElementById('needsField');
+      var errEl = document.getElementById('needsError');
+      if (wrap) wrap.classList.toggle('has-error', !checked);
+      if (errEl) errEl.textContent = checked ? '' : msg('valid.needs', 'Please select at least one option.');
+      return checked;
+    }
 
     function showError(field, message) {
       var wrap = field.closest('.field');
@@ -99,6 +107,10 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     });
 
+    form.querySelectorAll('input[name="needs"]').forEach(function (cb) {
+      cb.addEventListener('change', validateNeeds);
+    });
+
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       var valid = true;
@@ -109,10 +121,15 @@ document.addEventListener('DOMContentLoaded', function () {
         showError(field, msg);
         if (msg) valid = false;
       });
+      if (!validateNeeds()) valid = false;
 
       if (!valid) {
         var firstError = form.querySelector('.has-error input, .has-error select, .has-error textarea');
         if (firstError) firstError.focus();
+        else {
+          var errWrap = form.querySelector('.has-error');
+          if (errWrap) errWrap.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
         return;
       }
 

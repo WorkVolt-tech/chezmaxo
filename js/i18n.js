@@ -1547,6 +1547,10 @@ const I18N = {
     "en": "Please tell us a little more about your project (10+ characters).",
     "fr": "Veuillez nous en dire un peu plus sur votre projet (10 caractères ou plus)."
   },
+  "valid.needs": {
+    "en": "Please select at least one option.",
+    "fr": "Veuillez sélectionner au moins une option."
+  },
   "breadcrumb.contact": {
     "en": "CONTACT",
     "fr": "CONTACT"
@@ -1594,46 +1598,6 @@ const I18N = {
   "contact.ph.type": {
     "en": "e.g. barbershop, contractor, restaurant",
     "fr": "ex. salon de coiffure, entrepreneur, restaurant"
-  },
-  "contact.f.service": {
-    "en": "Service needed",
-    "fr": "Service requis"
-  },
-  "contact.opt.select": {
-    "en": "Select an option",
-    "fr": "Sélectionnez une option"
-  },
-  "svc.new": {
-    "en": "New website",
-    "fr": "Nouveau site web"
-  },
-  "svc.redesign": {
-    "en": "Website redesign",
-    "fr": "Refonte de site web"
-  },
-  "svc.maint": {
-    "en": "Website maintenance",
-    "fr": "Entretien de site web"
-  },
-  "svc.small": {
-    "en": "Small website update",
-    "fr": "Petite mise à jour de site"
-  },
-  "svc.store": {
-    "en": "Online store",
-    "fr": "Boutique en ligne"
-  },
-  "svc.booking": {
-    "en": "Booking system",
-    "fr": "Système de réservation"
-  },
-  "svc.custom": {
-    "en": "Custom feature",
-    "fr": "Fonctionnalité personnalisée"
-  },
-  "svc.unsure": {
-    "en": "Not sure yet",
-    "fr": "Pas encore certain"
   },
   "contact.f.budget": {
     "en": "Estimated budget",
