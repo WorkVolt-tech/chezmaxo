@@ -56,8 +56,9 @@ async function renderMain(){
 
   if(state.tab === "build"){
     const order = await getMyBuildOrder(c.id);
+    const hasPendingRequest = order && order.status === "awaiting_quote" && order.description;
 
-    if(!order || order.status === "awaiting_quote"){
+    if(!order || (order.status === "awaiting_quote" && !order.description)){
       main.innerHTML = `
         <div class="page-title"><div><div class="eyebrow">Website build</div><h2>Choose your website project</h2></div></div>
         <div class="plans-grid">
@@ -65,7 +66,7 @@ async function renderMain(){
             <div class="plan-pick">
               <div class="pname">${item.name}</div><div class="pprice">$${item.amount}</div>
               <p style="color:var(--ink-soft); font-size:13px; margin:8px 0 14px;">${item.desc}</p>
-              <button class="btn btn-primary btn-sm" data-buy="${item.key}">Buy Now</button>
+              <button class="btn btn-primary btn-sm" data-request="${item.key}">Request a Quote</button>
             </div>`).join("")}
           <div class="plan-pick">
             <div class="pname">Advanced / Custom</div><div class="pprice" style="font-size:20px;">Custom Quote</div>
@@ -73,19 +74,31 @@ async function renderMain(){
             <button class="btn btn-secondary btn-sm" data-custom="1">Request a Quote</button>
           </div>
         </div>
-        ${order && order.status === "awaiting_quote" ? "<p style=\"color:var(--ink-faint); font-size:12.5px; margin-top:16px;\">We are preparing your custom quote — you will see payment options here once it is ready.</p>" : ""}`;
-      main.querySelectorAll("[data-buy]").forEach(btn => btn.onclick = async () => {
-        const item = BUILD_CATALOG.find(i => i.key === btn.dataset.buy);
-        await setBuildOrderQuote(c.id, item.name, item.amount);
+        <p style="color:var(--ink-faint); font-size:12.5px; margin-top:16px;">Requesting a quote doesn't charge you anything — we'll confirm the final price with you before any payment is due.</p>`;
+      main.querySelectorAll("[data-request]").forEach(btn => btn.onclick = async () => {
+        const item = BUILD_CATALOG.find(i => i.key === btn.dataset.request);
+        await requestBuildQuote(c.id, `${item.name} (client requested, starting at $${item.amount})`);
         renderMain();
       });
       const customBtn = main.querySelector("[data-custom]");
       if(customBtn) customBtn.onclick = async () => {
-        await setBuildOrderQuote(c.id, "Custom project (details pending)", null);
-        await sb.from("build_orders").update({ status: "awaiting_quote" }).eq("client_id", c.id);
+        await requestBuildQuote(c.id, "Custom project (details pending)");
         state.tab = "messages";
         renderMain();
       };
+    } else if(hasPendingRequest){
+      main.innerHTML = `
+        <div class="page-title"><div><div class="eyebrow">Website build</div><h2>Quote requested</h2></div></div>
+        <div class="ticket" style="margin-bottom:20px;">
+          <div class="ticket-top">
+            <div class="ticket-id">PROJECT REQUEST</div>
+            <div class="ticket-stamp">AWAITING CONFIRMATION</div>
+          </div>
+          <div class="ticket-row"><span class="label">You requested</span><span class="val">${order.description}</span></div>
+        </div>
+        <div class="card">
+          <p style="color:var(--ink-soft); margin-bottom:0;">We've got your request — we'll confirm the final price and next steps shortly. You'll see payment options here the moment it's confirmed. Have details to add in the meantime? Send us a message.</p>
+        </div>`;
     } else if(order.status === "awaiting_payment"){
       main.innerHTML = `
         <div class="page-title"><div><div class="eyebrow">Website build</div><h2>Complete your purchase</h2></div></div>
@@ -301,8 +314,8 @@ document.getElementById("logoutBtn").onclick = signOut;
   if(intent){
     const item = BUILD_CATALOG.find(i => i.key === intent);
     const existing = await getMyBuildOrder(state.profile.id);
-    if(item && (!existing || existing.status === "awaiting_quote")){
-      await setBuildOrderQuote(state.profile.id, item.name, item.amount);
+    if(item && !existing){
+      await requestBuildQuote(state.profile.id, `${item.name} (client requested, starting at $${item.amount})`);
     }
     state.tab = "build";
   }

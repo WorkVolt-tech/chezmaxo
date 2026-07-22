@@ -190,6 +190,27 @@
   </div>
 </section>
 
+
+<script>
+(function(){
+  var pkg = new URLSearchParams(window.location.search).get("package");
+  if (!pkg) return;
+  var labels = {
+    starter: { service: "New website", desc: "I'm interested in the Starter Website package (starting at $199). Please send me a quote." },
+    business: { service: "New website", desc: "I'm interested in the Business Website package (starting at $399). Please send me a quote." },
+    advanced: { service: "Not sure yet", desc: "I'm interested in an Advanced / Custom Website project. Please reach out to discuss what I need." }
+  };
+  var info = labels[pkg];
+  if (!info) return;
+  var serviceSelect = document.getElementById("serviceNeeded");
+  if (serviceSelect) serviceSelect.value = info.service;
+  var newWebsiteCheckbox = document.querySelector('input[name="needs"][value="New website"]');
+  if (newWebsiteCheckbox && pkg !== "advanced") newWebsiteCheckbox.checked = true;
+  var descField = document.getElementById("description");
+  if (descField && !descField.value) descField.value = info.desc;
+})();
+</script>
+
 <footer class="site-footer">
   <div class="container">
     <div class="footer-grid">

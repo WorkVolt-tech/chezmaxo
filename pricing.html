@@ -154,25 +154,54 @@
       <h2><span data-i18n="pricing.dev.h2">Building your website — starting prices.</span></h2>
       <p><span data-i18n="pricing.dev.p">Final pricing depends on the number of pages, features, content, integrations, and overall complexity of your project.</span></p>
     </div>
-    <div class="dev-pricing">
-      <div class="dev-card">
+    <div class="dev-pricing" id="devCart">
+      <div class="dev-card dev-selectable" data-pkg="starter" data-label="Starter Website" data-price="$199">
         <h4><span data-i18n="pricing.dev.starter.h">Starter Website</span></h4>
         <div class="amt"><span data-i18n="pricing.dev.starter.amt">Starting at $199</span></div>
         <p style="color:var(--ink-soft); font-size:14.5px; margin-top:10px;"><span data-i18n="pricing.dev.starter.p">A clean, professional starting point — ideal for new or simple small businesses.</span></p>
-        <a href="app/login.html?intent=starter" class="btn btn-primary btn-sm btn-block" style="margin-top:14px;"><span data-i18n="pricing.dev.buynow">Buy Now</span></a>
+        <button type="button" class="btn btn-secondary btn-sm btn-block dev-select-btn" style="margin-top:14px;"><span data-i18n="pricing.dev.select">Select This Package</span></button>
       </div>
-      <div class="dev-card">
+      <div class="dev-card dev-selectable" data-pkg="business" data-label="Business Website" data-price="$399">
         <h4><span data-i18n="pricing.dev.business.h">Business Website</span></h4>
         <div class="amt"><span data-i18n="pricing.dev.business.amt">Starting at $399</span></div>
         <p style="color:var(--ink-soft); font-size:14.5px; margin-top:10px;"><span data-i18n="pricing.dev.business.p">More pages and features for established businesses that want a fuller presence.</span></p>
-        <a href="app/login.html?intent=business" class="btn btn-primary btn-sm btn-block" style="margin-top:14px;"><span data-i18n="pricing.dev.buynow">Buy Now</span></a>
+        <button type="button" class="btn btn-secondary btn-sm btn-block dev-select-btn" style="margin-top:14px;"><span data-i18n="pricing.dev.select">Select This Package</span></button>
       </div>
-      <div class="dev-card">
+      <div class="dev-card dev-selectable" data-pkg="advanced" data-label="Advanced / Custom Website" data-price="Custom Quote">
         <h4><span data-i18n="pricing.dev.advanced.h">Advanced Website</span></h4>
         <div class="amt"><span data-i18n="pricing.dev.advanced.amt">Custom Quote</span></div>
         <p style="color:var(--ink-soft); font-size:14.5px; margin-top:10px;"><span data-i18n="pricing.dev.advanced.p">For projects with online stores, bookings, memberships, or custom functionality.</span></p>
-        <a href="contact.html" class="btn btn-secondary btn-sm btn-block" style="margin-top:14px;"><span data-i18n="pricing.dev.getquote">Get a Custom Quote</span></a>
+        <button type="button" class="btn btn-secondary btn-sm btn-block dev-select-btn" style="margin-top:14px;"><span data-i18n="pricing.dev.select">Select This Package</span></button>
       </div>
+    </div>
+    <div id="devCartSummary" class="dev-cart-summary" style="display:none;">
+      <div>
+        <div class="eyebrow" style="margin-bottom:6px;"><span data-i18n="pricing.dev.selected">Your selection</span></div>
+        <div class="dev-cart-item"><span id="devCartLabel"></span><span id="devCartPrice"></span></div>
+      </div>
+      <a href="contact.html" id="devCartCta" class="btn btn-primary"><span data-i18n="pricing.dev.requestquote">Request a Quote</span></a>
+    </div>
+    
+    <script>
+    (function(){
+      var cards = document.querySelectorAll('#devCart .dev-selectable');
+      var summary = document.getElementById('devCartSummary');
+      var labelEl = document.getElementById('devCartLabel');
+      var priceEl = document.getElementById('devCartPrice');
+      var cta = document.getElementById('devCartCta');
+      cards.forEach(function(card){
+        card.querySelector('.dev-select-btn').addEventListener('click', function(){
+          cards.forEach(function(c){ c.classList.remove('selected'); });
+          card.classList.add('selected');
+          labelEl.textContent = card.dataset.label;
+          priceEl.textContent = card.dataset.price;
+          cta.href = 'contact.html?package=' + card.dataset.pkg;
+          summary.style.display = 'flex';
+          summary.scrollIntoView({behavior:'smooth', block:'nearest'});
+        });
+      });
+    })();
+    </script>
     </div>
     <div class="callout" style="margin-top:26px;">
       <span style="color:var(--color-accent-dark); font-weight:700;"><span data-i18n="pricing.goodtoknow">Good to know</span></span>

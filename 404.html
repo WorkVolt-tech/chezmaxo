@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page Not Found | Chezmaxo</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="stylesheet" href="css/style.css">
+<style>
+  .notfound-wrap{ min-height: 100vh; display:flex; align-items:center; justify-content:center; background: var(--bg-alt); padding: 24px; }
+  .notfound-card{ max-width: 460px; width:100%; text-align:center; }
+  .notfound-brand{ display:inline-flex; align-items:center; gap:10px; font-family:var(--font-display); font-weight:700; font-size:19px; color:var(--color-primary); margin-bottom:36px; }
+  .notfound-ticket{ background:#fff; border:1px solid var(--border); border-radius: var(--radius-lg); padding:8px; text-align:left; }
+  .notfound-inner{ border:1px dashed var(--border-strong); border-radius:16px; padding:34px 28px; }
+  .notfound-top{ display:flex; justify-content:space-between; align-items:flex-start; border-bottom:1px dashed var(--border-strong); padding-bottom:14px; margin-bottom:18px; }
+  .notfound-id{ font-family:var(--font-mono); font-size:12px; color:var(--ink-faint); }
+  .notfound-stamp{ font-family:var(--font-mono); font-size:11px; font-weight:700; letter-spacing:.06em; color:#C23B3B; border:1.5px solid #C23B3B; padding:4px 10px; border-radius:5px; transform:rotate(3deg); }
+  .notfound-code{ font-family:var(--font-display); font-size:64px; color:var(--color-primary); line-height:1; margin-bottom:10px; }
+  .notfound-headline{ font-size:19px; margin-bottom:10px; }
+  .notfound-text{ color:var(--ink-soft); font-size:14.5px; margin-bottom:24px; }
+  .notfound-actions{ display:flex; gap:10px; flex-wrap:wrap; }
+</style>
+</head>
+<body>
+
+<div class="notfound-wrap">
+  <div class="notfound-card">
+    <a href="index.html" class="notfound-brand"><span class="mark"><img src="images/logo-icon.png" alt="Chezmaxo" style="width:34px;height:34px;object-fit:contain;"></span> Chezmaxo</a>
+
+    <div class="notfound-ticket">
+      <div class="notfound-inner">
+        <div class="notfound-top">
+          <div class="notfound-id">TICKET NO. 0000-MISSING</div>
+          <div class="notfound-stamp">NOT FOUND</div>
+        </div>
+        <div class="notfound-code">404</div>
+        <h1 class="notfound-headline">This page took a wrong turn.</h1>
+        <p class="notfound-text">The page you're looking for doesn't exist, may have moved, or the link might be mistyped. Let's get you back on track.</p>
+        <div class="notfound-actions">
+          <a href="index.html" class="btn btn-primary btn-sm">Back to Home</a>
+          <a href="contact.html" class="btn btn-secondary btn-sm">Contact Us</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
