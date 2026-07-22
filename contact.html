@@ -71,22 +71,22 @@
         <form id="contact-form" novalidate>
           <div class="form-grid">
             <div class="field">
-              <label for="fullName" data-i18n="contact.f.name">Full name</label> <span class="req">*</span>
+              <label for="fullName"><span class="req">*</span> <span data-i18n="contact.f.name">Full name</span></label>
               <input type="text" id="fullName" name="fullName" autocomplete="name" required>
               <div class="error-msg" data-i18n-placeholder-target="fullName"></div>
             </div>
             <div class="field">
-              <label for="businessName" data-i18n="contact.f.biz">Business name</label> <span class="req">*</span>
+              <label for="businessName"><span class="req">*</span> <span data-i18n="contact.f.biz">Business name</span></label>
               <input type="text" id="businessName" name="businessName" autocomplete="organization" required>
               <div class="error-msg"></div>
             </div>
             <div class="field">
-              <label for="email" data-i18n="contact.f.email">Email</label> <span class="req">*</span>
+              <label for="email"><span class="req">*</span> <span data-i18n="contact.f.email">Email</span></label>
               <input type="email" id="email" name="email" autocomplete="email" required>
               <div class="error-msg"></div>
             </div>
             <div class="field">
-              <label for="phone" data-i18n="contact.f.phone">Phone number</label> <span class="req">*</span>
+              <label for="phone"><span class="req">*</span> <span data-i18n="contact.f.phone">Phone number</span></label>
               <input type="tel" id="phone" name="phone" autocomplete="tel" required>
               <div class="error-msg"></div>
             </div>
@@ -123,7 +123,7 @@
               </select>
             </div>
             <div class="field full" id="needsField">
-              <label data-i18n="contact.f.needs">What do you need help with? (select all that apply)</label> <span class="req">*</span>
+              <label><span class="req">*</span> <span data-i18n="contact.f.needs">What do you need help with? (select all that apply)</span></label>
               <div class="checkbox-grid">
                 <label class="checkbox-item"><input type="checkbox" name="needs" value="New website"> <span data-i18n="needs.new">New website</span></label>
                 <label class="checkbox-item"><input type="checkbox" name="needs" value="Website redesign"> <span data-i18n="needs.redesign">Website redesign</span></label>
@@ -137,7 +137,7 @@
               <div class="error-msg" id="needsError"></div>
             </div>
             <div class="field full">
-              <label for="description" data-i18n="contact.f.desc">Tell us about your business and your project</label> <span class="req">*</span>
+              <label for="description"><span class="req">*</span> <span data-i18n="contact.f.desc">Tell us about your business and your project</span></label>
               <textarea id="description" name="description" rows="5" required></textarea>
               <div class="error-msg"></div>
             </div>
