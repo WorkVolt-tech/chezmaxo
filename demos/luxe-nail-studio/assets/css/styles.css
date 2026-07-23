@@ -221,6 +221,37 @@ td { padding: 0.75rem 1rem; border-bottom: 1px solid var(--lavender-soft); }
 .error-text { color: #dc2626; font-size: 0.85rem; }
 .success-text { color: #15803d; font-size: 0.85rem; }
 
+/* ===== Admin extras ===== */
+.demo-credentials {
+  background: #FEF3C7; color: #92400E; border-radius: 0.75rem; padding: 0.9rem 1.1rem;
+  font-size: 0.82rem; margin-bottom: 1.25rem; line-height: 1.5;
+}
+.demo-credentials strong { font-family: monospace; }
+.toggle-pill {
+  display: inline-flex; align-items: center; gap: 0.4rem; border: none; border-radius: 999px;
+  padding: 0.3rem 0.8rem; font-size: 0.75rem; font-weight: 700; cursor: pointer;
+}
+.toggle-pill.on { background: #dcfce7; color: #166534; }
+.toggle-pill.off { background: #e5e7eb; color: #374151; }
+.row-actions { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.btn-sm { padding: 0.4rem 0.9rem; font-size: 0.78rem; }
+.admin-page-head { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem; }
+.mini-form { display: grid; gap: 0.75rem; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); align-items: end; margin-bottom: 1.5rem; }
+.mini-form .field { margin-bottom: 0; }
+.day-group { margin-bottom: 1.75rem; }
+.day-group h4 { margin-bottom: 0.6rem; }
+.slot-chip {
+  display: inline-flex; align-items: center; gap: 0.5rem; background: #fff; border: 1px solid var(--lavender-soft);
+  border-radius: 0.6rem; padding: 0.4rem 0.7rem; font-size: 0.82rem; margin: 0 0.4rem 0.4rem 0;
+}
+.slot-chip.inactive { opacity: 0.5; }
+.slot-chip button { background: none; border: none; color: #dc2626; cursor: pointer; font-size: 0.9rem; line-height: 1; }
+.client-thread { display: flex; gap: 1.25rem; }
+.client-thread .thread-list { width: 260px; flex-shrink: 0; border-right: 1px solid var(--lavender-soft); max-height: 560px; overflow-y: auto; }
+.client-thread .thread-item { padding: 0.75rem 0.9rem; border-radius: 0.6rem; cursor: pointer; font-size: 0.85rem; }
+.client-thread .thread-item.active, .client-thread .thread-item:hover { background: var(--lavender-soft); }
+.client-thread .thread-item .unread-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--blossom-dark); margin-right: 6px; }
+
 /* ===== Elevated homepage components ===== */
 
 .header-socials { display: flex; gap: 0.6rem; margin-right: 0.25rem; }
