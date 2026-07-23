@@ -1192,16 +1192,20 @@ const I18N = {
     "fr": "Conception de site"
   },
   "pf6.svc1": {
-    "en": "Monthly Support",
-    "fr": "Soutien mensuel"
+    "en": "Booking System",
+    "fr": "Système de réservation"
+  },
+  "pf6.svc2": {
+    "en": "Business Care",
+    "fr": "Forfait affaires"
   },
   "pf6.name": {
-    "en": "The Fade Room Barbershop",
-    "fr": "Barbier The Fade Room"
+    "en": "Luxe Nail Studio",
+    "fr": "Luxe Nail Studio"
   },
   "pf6.desc": {
-    "en": "A clean, modern site with a service menu, gallery, and map for walk-in customers.",
-    "fr": "Un site propre et moderne avec menu de services, galerie et carte pour la clientèle sans rendez-vous."
+    "en": "A bilingual (EN/FR) appointment-based studio site with real-time online booking, a self-serve appointment manager with live chat, and a full admin dashboard for calendar, clients, and content.",
+    "fr": "Un site bilingue (FR/EN) pour un studio sur rendez-vous, avec réservation en ligne en temps réel, gestion de rendez-vous en libre-service avec clavardage en direct, et un tableau de bord administratif complet pour le calendrier, la clientèle et le contenu."
   },
   "pf7.svc0": {
     "en": "Website Design",
