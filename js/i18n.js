@@ -1115,10 +1115,6 @@ const I18N = {
     "en": "View Live Demo",
     "fr": "Voir la démo en direct"
   },
-  "pf.placeholder": {
-    "en": "Project photo placeholder",
-    "fr": "Photo du projet à venir"
-  },
   "pf6.name": {
     "en": "Luxe Nail Studio",
     "fr": "Luxe Nail Studio"
@@ -1138,6 +1134,10 @@ const I18N = {
   "pf.viewproject": {
     "en": "View Project (placeholder)",
     "fr": "Voir le projet (exemple)"
+  },
+  "pf.placeholder": {
+    "en": "Project photo placeholder",
+    "fr": "Photo du projet à venir"
   },
   "pf1.name": {
     "en": "Maple Street Hardware",
