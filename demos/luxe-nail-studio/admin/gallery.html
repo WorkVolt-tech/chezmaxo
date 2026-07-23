@@ -11,74 +11,72 @@
 <body>
 <div class="admin-shell">
   <aside class="admin-sidebar" id="admin-sidebar"></aside>
-  <main class="admin-main">
-    <h1 id="page-title">Gallery</h1>
-    <label class="btn btn-primary" style="display:inline-flex;margin:1rem 0;cursor:pointer">
-      <span id="upload-label"></span>
-      <input type="file" id="upload-input" accept="image/*" class="hidden" />
-    </label>
-    <div id="gallery-grid" class="grid grid-3"></div>
-  </main>
+  <main class="admin-main" id="admin-main"></main>
 </div>
 
 <script src="../assets/js/mock-supabase.js"></script>
 <script src="../assets/js/i18n.js"></script>
 <script src="../assets/js/admin-shell.js"></script>
 <script>
-let images = [];
-
-async function loadImages() {
-  const { data } = await sb.from("gallery_images").select("*").order("display_order");
-  images = data || [];
-  renderGrid();
-}
-
-function renderGrid() {
-  const lang = getLang();
-  document.getElementById("gallery-grid").innerHTML = images.map((img) => `
-    <div class="card" style="padding:0;overflow:hidden">
-      <img src="${img.image_url}" style="aspect-ratio:1;object-fit:cover;width:100%" />
-      <div style="padding:0.75rem">
-        <input data-id="${img.id}" data-field="style_name_en" value="${img.style_name_en || ""}" placeholder="${lang === "fr" ? "Nom du style (EN)" : "Style name (EN)"}" style="font-size:0.75rem;margin-bottom:0.4rem" />
-        <input data-id="${img.id}" data-field="style_name_fr" value="${img.style_name_fr || ""}" placeholder="${lang === "fr" ? "Nom du style (FR)" : "Style name (FR)"}" style="font-size:0.75rem;margin-bottom:0.4rem" />
-        <button data-id="${img.id}" data-url="${img.image_url}" class="remove-img" style="background:none;border:none;color:#dc2626;font-size:0.75rem;cursor:pointer">${lang === "fr" ? "Retirer" : "Remove"}</button>
-      </div>
-    </div>`).join("");
-
-  document.querySelectorAll("[data-field]").forEach((input) => {
-    input.addEventListener("blur", async () => {
-      await sb.from("gallery_images").update({ [input.dataset.field]: input.value }).eq("id", input.dataset.id);
-    });
-  });
-  document.querySelectorAll(".remove-img").forEach((btn) => {
-    btn.addEventListener("click", async () => {
-      await sb.from("gallery_images").delete().eq("id", btn.dataset.id);
-      const path = btn.dataset.url.split("/gallery/")[1];
-      if (path) await sb.storage.from("gallery").remove([path]);
-      loadImages();
-    });
-  });
-}
+const DEMO_COLOR_PAIRS = [["#B497D6","#4A1D5C"],["#F2C6D8","#6B3480"],["#C9A227","#4A1D5C"],["#E29CBB","#33123F"],["#4A1D5C","#C9A227"]];
 
 async function renderContent() {
-  const lang = getLang();
-  document.getElementById("page-title").textContent = lang === "fr" ? "Galerie" : "Gallery";
-  document.getElementById("upload-label").textContent = lang === "fr" ? "+ Ajouter une image" : "+ Upload image";
-  document.getElementById("upload-input").addEventListener("change", async (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
-    const path = `${crypto.randomUUID()}.${file.name.split(".").pop()}`;
-    const { error } = await sb.storage.from("gallery").upload(path, file);
-    if (!error) {
-      const { data: pub } = sb.storage.from("gallery").getPublicUrl(path);
-      await sb.from("gallery_images").insert({ image_url: pub.publicUrl, display_order: images.length });
-      loadImages();
-    }
-    e.target.value = "";
+  const main = document.getElementById("admin-main");
+  const { data: images } = await sb.from("gallery_images").select("*").order("display_order");
+
+  main.innerHTML = `
+    <div class="admin-page-head"><h2 style="margin:0">Gallery</h2></div>
+
+    <div class="card" style="margin-bottom:1.5rem">
+      <h3 style="font-size:1.05rem;margin-bottom:0.9rem">Add a photo</h3>
+      <p class="text-muted" style="margin-bottom:0.9rem">This demo generates a placeholder image from a label — in the real system, you'd upload an actual photo here.</p>
+      <div class="mini-form">
+        <div class="field"><label>Style name (EN)</label><input id="gi-en" /></div>
+        <div class="field"><label>Style name (FR)</label><input id="gi-fr" /></div>
+        <div class="field"><label>Category</label><input id="gi-cat" placeholder="e.g. Gel, Acrylic, Nail Art" /></div>
+        <button class="btn btn-primary btn-sm" id="gi-add">Add to Gallery</button>
+      </div>
+    </div>
+
+    <div class="gallery-grid">
+      ${(images || []).length ? images.map((img, i) => `
+        <figure style="position:relative">
+          <img src="${img.image_url}" alt="${img.style_name_en||""}" />
+          <figcaption style="padding:0.75rem;font-size:0.85rem">
+            <p style="font-weight:600;color:var(--royal)">${img.style_name_en || "Untitled"}</p>
+            ${img.category ? `<p class="text-muted">${img.category}</p>` : ""}
+            <div class="row-actions" style="margin-top:0.5rem">
+              <button class="toggle-pill ${img.is_active ? "on" : "off"}" data-toggle="${img.id}" data-active="${img.is_active}">${img.is_active ? "Shown" : "Hidden"}</button>
+              <button class="btn btn-danger btn-sm" data-del="${img.id}">Delete</button>
+            </div>
+          </figcaption>
+        </figure>`).join("") : `<p class="text-muted">No photos yet — add one above.</p>`}
+    </div>`;
+
+  document.getElementById("gi-add").addEventListener("click", async () => {
+    const en = document.getElementById("gi-en").value.trim();
+    const fr = document.getElementById("gi-fr").value.trim();
+    const cat = document.getElementById("gi-cat").value.trim();
+    if (!en) return;
+    const [c1, c2] = DEMO_COLOR_PAIRS[Math.floor(Math.random() * DEMO_COLOR_PAIRS.length)];
+    await sb.from("gallery_images").insert({
+      image_url: placeholderPhoto(en, c1, c2), style_name_en: en, style_name_fr: fr || en,
+      category: cat || null, is_active: true, display_order: (images || []).length + 1,
+    });
+    renderContent();
   });
-  await loadImages();
+
+  main.querySelectorAll("[data-toggle]").forEach((b) => b.addEventListener("click", async () => {
+    await sb.from("gallery_images").update({ is_active: b.dataset.active !== "true" }).eq("id", b.dataset.toggle);
+    renderContent();
+  }));
+  main.querySelectorAll("[data-del]").forEach((b) => b.addEventListener("click", async () => {
+    if (!confirm("Delete this photo?")) return;
+    await sb.from("gallery_images").delete().eq("id", b.dataset.del);
+    renderContent();
+  }));
 }
-document.addEventListener("DOMContentLoaded", () => initAdminPage(renderContent));
+initAdminPage(renderContent);
 </script>
 </body>
 </html>

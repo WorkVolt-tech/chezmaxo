@@ -7,104 +7,52 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/css/styles.css" />
-<style>
-.cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
-.cal-cell { height: 64px; border-radius: 8px; padding: 4px; font-size: 0.75rem; cursor: pointer; display:flex; flex-direction:column; align-items:center; }
-.cal-cell:hover { background: var(--lavender-soft); }
-.cal-cell.selected { background: var(--royal); color: #fff; }
-.cal-dots { display:flex; gap:2px; flex-wrap:wrap; justify-content:center; margin-top:4px; }
-.cal-dot { width:6px; height:6px; border-radius:50%; }
-</style>
 </head>
 <body>
 <div class="admin-shell">
   <aside class="admin-sidebar" id="admin-sidebar"></aside>
-  <main class="admin-main">
-    <h1 id="page-title">Calendar</h1>
-    <div class="grid" style="grid-template-columns:1fr 320px;margin-top:1.25rem;align-items:start">
-      <div class="card">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem">
-          <button class="btn btn-ghost" id="prev-month" style="padding:0.4rem 0.8rem">←</button>
-          <span id="month-label" style="font-family:var(--font-display);font-weight:600;color:var(--royal);font-size:1.1rem"></span>
-          <button class="btn btn-ghost" id="next-month" style="padding:0.4rem 0.8rem">→</button>
-        </div>
-        <div class="cal-grid" id="weekday-row" style="margin-bottom:4px;font-size:0.7rem;color:rgba(45,27,54,0.4);text-align:center"></div>
-        <div class="cal-grid" id="cal-cells"></div>
-      </div>
-      <div class="card">
-        <h3 id="agenda-title"></h3>
-        <ul id="agenda-list" style="margin:0.5rem 0 0;padding-left:1rem;font-size:0.9rem"></ul>
-      </div>
-    </div>
-  </main>
+  <main class="admin-main" id="admin-main"></main>
 </div>
 
 <script src="../assets/js/mock-supabase.js"></script>
 <script src="../assets/js/i18n.js"></script>
+<script src="../assets/js/format.js"></script>
 <script src="../assets/js/admin-shell.js"></script>
 <script>
-const STATUS_DOT = {
-  pending: "#fbbf24", accepted: "#60a5fa", confirmed: "#22c55e", rejected: "#f87171",
-  cancelled_by_client: "#9ca3af", cancelled_by_salon: "#9ca3af", completed: "#10b981",
-  no_show: "#ef4444", reschedule_requested: "#a78bfa",
-};
-let monthCursor = new Date(); monthCursor.setDate(1);
-let appointmentsByDate = {};
-let selectedDate = new Date().toISOString().slice(0, 10);
-
-async function loadMonth() {
-  const lang = getLang();
-  const monthStart = monthCursor.toISOString().slice(0, 10);
-  const monthEndDate = new Date(monthCursor.getFullYear(), monthCursor.getMonth() + 1, 0);
-  const monthEnd = monthEndDate.toISOString().slice(0, 10);
-
-  const { data } = await sb.from("appointments")
-    .select("id, reference_number, appointment_date, start_time, status, clients(full_name)")
-    .gte("appointment_date", monthStart).lte("appointment_date", monthEnd);
-
-  appointmentsByDate = {};
-  (data || []).forEach((a) => { (appointmentsByDate[a.appointment_date] = appointmentsByDate[a.appointment_date] || []).push(a); });
-
-  document.getElementById("month-label").textContent = monthCursor.toLocaleDateString(lang === "fr" ? "fr-CA" : "en-CA", { month: "long", year: "numeric" });
-  document.getElementById("weekday-row").innerHTML = (lang === "fr" ? ["D","L","M","M","J","V","S"] : ["S","M","T","W","T","F","S"]).map((d) => `<div>${d}</div>`).join("");
-
-  const firstWeekday = new Date(monthCursor.getFullYear(), monthCursor.getMonth(), 1).getDay();
-  const daysInMonth = monthEndDate.getDate();
-  let cellsHtml = "";
-  for (let i = 0; i < firstWeekday; i++) cellsHtml += `<div></div>`;
-  for (let d = 1; d <= daysInMonth; d++) {
-    const dateStr = `${monthStart.slice(0, 8)}${String(d).padStart(2, "0")}`;
-    const dayAppointments = appointmentsByDate[dateStr] || [];
-    cellsHtml += `
-      <div class="cal-cell ${selectedDate === dateStr ? "selected" : ""}" data-date="${dateStr}">
-        <span>${d}</span>
-        <div class="cal-dots">${dayAppointments.slice(0, 5).map((a) => `<span class="cal-dot" style="background:${STATUS_DOT[a.status] || "#ccc"}"></span>`).join("")}</div>
-      </div>`;
-  }
-  document.getElementById("cal-cells").innerHTML = cellsHtml;
-  document.querySelectorAll(".cal-cell[data-date]").forEach((cell) => {
-    cell.addEventListener("click", () => { selectedDate = cell.dataset.date; loadMonth(); });
-  });
-  renderAgenda();
-}
-
-function renderAgenda() {
-  const lang = getLang();
-  document.getElementById("agenda-title").textContent = selectedDate;
-  const list = appointmentsByDate[selectedDate] || [];
-  document.getElementById("agenda-list").innerHTML = list.length
-    ? list.map((a) => `<li style="margin-bottom:0.4rem"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${STATUS_DOT[a.status]};margin-right:6px"></span>${a.start_time?.slice(0,5)} — ${a.clients?.full_name || ""}</li>`).join("")
-    : `<li class="text-muted">${lang === "fr" ? "Rien de prévu." : "Nothing scheduled."}</li>`;
-}
-
 async function renderContent() {
-  const lang = getLang();
-  document.getElementById("page-title").textContent = lang === "fr" ? "Calendrier" : "Calendar";
-  document.getElementById("prev-month").addEventListener("click", () => { monthCursor = new Date(monthCursor.getFullYear(), monthCursor.getMonth() - 1, 1); loadMonth(); });
-  document.getElementById("next-month").addEventListener("click", () => { monthCursor = new Date(monthCursor.getFullYear(), monthCursor.getMonth() + 1, 1); loadMonth(); });
-  await loadMonth();
+  const main = document.getElementById("admin-main");
+  const today = new Date().toISOString().slice(0, 10);
+
+  const { data: appts } = await sb
+    .from("appointments")
+    .select("*, clients(full_name, phone_normalized), services(name_en, name_fr)")
+    .gte("appointment_date", today)
+    .order("appointment_date")
+    .order("start_time");
+
+  const active = (appts || []).filter((a) => !["cancelled_by_client", "cancelled_by_salon", "rejected"].includes(a.status));
+  const byDate = {};
+  active.forEach((a) => { (byDate[a.appointment_date] = byDate[a.appointment_date] || []).push(a); });
+  const dates = Object.keys(byDate).sort();
+
+  main.innerHTML = `
+    <div class="admin-page-head"><h2 style="margin:0">Calendar — next 21 days</h2></div>
+    ${dates.length ? dates.map((d) => `
+      <div class="day-group">
+        <h4>${new Date(d + "T00:00:00").toLocaleDateString("en-CA", { weekday: "long", month: "long", day: "numeric" })}</h4>
+        <div style="display:flex;flex-direction:column;gap:0.6rem">
+          ${byDate[d].map((a) => `
+            <div class="card" style="display:flex;justify-content:space-between;align-items:center;padding:0.9rem 1.25rem">
+              <div>
+                <strong>${a.start_time.slice(0,5)}</strong> — ${a.clients ? a.clients.full_name : "—"}
+                <p class="text-muted" style="margin:0.15rem 0 0">${a.services ? a.services.name_en : ""}</p>
+              </div>
+              <span class="badge badge-${a.status}">${a.status.replace(/_/g," ")}</span>
+            </div>`).join("")}
+        </div>
+      </div>`).join("") : `<div class="card"><p class="text-muted" style="margin:0">Nothing scheduled in the next 21 days.</p></div>`}`;
 }
-document.addEventListener("DOMContentLoaded", () => initAdminPage(renderContent));
+initAdminPage(renderContent);
 </script>
 </body>
 </html>

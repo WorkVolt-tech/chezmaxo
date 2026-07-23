@@ -11,16 +11,7 @@
 <body>
 <div class="admin-shell">
   <aside class="admin-sidebar" id="admin-sidebar"></aside>
-  <main class="admin-main">
-    <h1 id="page-title">Services</h1>
-    <div class="grid" style="grid-template-columns:1fr 360px;margin-top:1.25rem;align-items:start">
-      <div>
-        <button class="btn btn-primary" id="new-service-btn" style="margin-bottom:1rem"></button>
-        <div class="card" style="padding:0;overflow-x:auto"><table id="services-table"></table></div>
-      </div>
-      <div id="service-editor"></div>
-    </div>
-  </main>
+  <main class="admin-main" id="admin-main"></main>
 </div>
 
 <script src="../assets/js/mock-supabase.js"></script>
@@ -28,86 +19,128 @@
 <script src="../assets/js/format.js"></script>
 <script src="../assets/js/admin-shell.js"></script>
 <script>
-let services = [];
+let editingServiceId = null;
+let categories = [];
 
-async function loadServices() {
-  const { data } = await sb.from("services").select("*").order("display_order");
-  services = data || [];
-  renderTable();
-}
-
-function renderTable() {
-  const lang = getLang();
-  document.getElementById("services-table").innerHTML = `
-    <thead><tr><th>${lang === "fr" ? "Nom" : "Name"}</th><th>${lang === "fr" ? "Prix" : "Price"}</th><th>${lang === "fr" ? "Durée" : "Duration"}</th><th></th></tr></thead>
-    <tbody>${services.map((s) => `
-      <tr>
-        <td>${lang === "en" ? s.name_en : s.name_fr}</td>
-        <td>${formatPrice(s.price_cents)}</td>
-        <td>${s.duration_minutes} min</td>
-        <td style="text-align:right">
-          <button data-id="${s.id}" class="edit-btn" style="background:none;border:none;color:var(--royal);font-size:0.75rem;cursor:pointer;margin-right:0.5rem">${lang === "fr" ? "Modifier" : "Edit"}</button>
-          <button data-id="${s.id}" data-active="${s.is_active}" class="toggle-btn btn" style="padding:0.2rem 0.6rem;font-size:0.7rem;background:${s.is_active ? "#dcfce7" : "#e5e7eb"};color:${s.is_active ? "#166534" : "#4b5563"}">
-            ${s.is_active ? (lang === "fr" ? "Actif" : "Active") : (lang === "fr" ? "Masqué" : "Hidden")}
-          </button>
-        </td>
-      </tr>`).join("")}</tbody>`;
-  document.querySelectorAll(".edit-btn").forEach((b) => b.addEventListener("click", () => openEditor(services.find((s) => s.id === b.dataset.id))));
-  document.querySelectorAll(".toggle-btn").forEach((b) => b.addEventListener("click", async () => {
-    await sb.from("services").update({ is_active: b.dataset.active !== "true" }).eq("id", b.dataset.id);
-    loadServices();
-  }));
-}
-
-function openEditor(service) {
-  const lang = getLang();
-  const s = service || { name_en: "", name_fr: "", description_en: "", description_fr: "", duration_minutes: 30, price_cents: 0, price_is_starting_at: false };
-  document.getElementById("service-editor").innerHTML = `
-    <div class="card">
-      <h3>${service ? (lang === "fr" ? "Modifier le service" : "Edit service") : (lang === "fr" ? "Nouveau service" : "New service")}</h3>
-      <div class="field"><label>Name (EN)</label><input id="e-name-en" value="${s.name_en}" /></div>
-      <div class="field"><label>Nom (FR)</label><input id="e-name-fr" value="${s.name_fr}" /></div>
-      <div class="field"><label>Description (EN)</label><textarea id="e-desc-en" rows="2">${s.description_en || ""}</textarea></div>
-      <div class="field"><label>Description (FR)</label><textarea id="e-desc-fr" rows="2">${s.description_fr || ""}</textarea></div>
-      <div class="grid grid-2">
-        <div class="field"><label>${lang === "fr" ? "Durée (min)" : "Duration (min)"}</label><input type="number" id="e-duration" value="${s.duration_minutes}" /></div>
-        <div class="field"><label>${lang === "fr" ? "Prix (cents)" : "Price (cents)"}</label><input type="number" id="e-price" value="${s.price_cents}" /></div>
+function serviceFormHtml(svc) {
+  const s = svc || { name_en:"", name_fr:"", description_en:"", description_fr:"", duration_minutes:45, price_cents:0, price_is_starting_at:false, category_id: categories[0] ? categories[0].id : "" };
+  return `
+    <div class="card" style="margin-bottom:1.5rem">
+      <h3 style="font-size:1.05rem;margin-bottom:0.9rem">${svc ? "Edit service" : "Add a new service"}</h3>
+      <div class="mini-form">
+        <div class="field"><label>Category</label><select id="sv-cat">${categories.map((c) => `<option value="${c.id}" ${c.id===s.category_id?"selected":""}>${c.name_en}</option>`).join("")}</select></div>
+        <div class="field"><label>Name (EN)</label><input id="sv-name-en" value="${s.name_en}" /></div>
+        <div class="field"><label>Name (FR)</label><input id="sv-name-fr" value="${s.name_fr}" /></div>
+        <div class="field"><label>Duration (min)</label><input id="sv-duration" type="number" value="${s.duration_minutes}" /></div>
+        <div class="field"><label>Price ($)</label><input id="sv-price" type="number" step="0.01" value="${(s.price_cents/100).toFixed(2)}" /></div>
+        <label style="display:flex;align-items:center;gap:0.4rem;font-weight:400;font-size:0.85rem"><input type="checkbox" id="sv-starting" style="width:auto" ${s.price_is_starting_at?"checked":""}/> "Starting at" price</label>
       </div>
-      <label style="display:flex;gap:0.5rem;align-items:center;font-weight:400;margin-bottom:1rem">
-        <input type="checkbox" id="e-starting" style="width:auto" ${s.price_is_starting_at ? "checked" : ""} />
-        <span>${lang === "fr" ? "Le prix est un prix de départ" : "Price is a starting-at price"}</span>
-      </label>
-      <div style="display:flex;gap:0.5rem">
-        <button class="btn btn-primary" id="save-service">${lang === "fr" ? "Enregistrer" : "Save"}</button>
-        <button class="btn btn-ghost" id="cancel-edit">${lang === "fr" ? "Annuler" : "Cancel"}</button>
+      <div class="field"><label>Description (EN)</label><textarea id="sv-desc-en" rows="2">${s.description_en||""}</textarea></div>
+      <div class="field"><label>Description (FR)</label><textarea id="sv-desc-fr" rows="2">${s.description_fr||""}</textarea></div>
+      <div class="row-actions">
+        <button class="btn btn-primary btn-sm" id="sv-save">${svc ? "Save Changes" : "Add Service"}</button>
+        ${svc ? `<button class="btn btn-ghost btn-sm" id="sv-cancel">Cancel</button>` : ""}
       </div>
     </div>`;
-  document.getElementById("cancel-edit").addEventListener("click", () => { document.getElementById("service-editor").innerHTML = ""; });
-  document.getElementById("save-service").addEventListener("click", async () => {
-    const patch = {
-      name_en: document.getElementById("e-name-en").value,
-      name_fr: document.getElementById("e-name-fr").value,
-      description_en: document.getElementById("e-desc-en").value,
-      description_fr: document.getElementById("e-desc-fr").value,
-      duration_minutes: Number(document.getElementById("e-duration").value),
-      price_cents: Number(document.getElementById("e-price").value),
-      price_is_starting_at: document.getElementById("e-starting").checked,
-    };
-    if (service) await sb.from("services").update(patch).eq("id", service.id);
-    else await sb.from("services").insert(patch);
-    document.getElementById("service-editor").innerHTML = "";
-    loadServices();
-  });
 }
 
 async function renderContent() {
-  const lang = getLang();
-  document.getElementById("page-title").textContent = "Services";
-  document.getElementById("new-service-btn").textContent = lang === "fr" ? "+ Ajouter un service" : "+ Add service";
-  document.getElementById("new-service-btn").addEventListener("click", () => openEditor(null));
-  await loadServices();
+  const main = document.getElementById("admin-main");
+  const [{ data: cats }, { data: services }] = await Promise.all([
+    sb.from("service_categories").select("*").order("display_order"),
+    sb.from("services").select("*, service_categories(name_en)").order("display_order"),
+  ]);
+  categories = cats || [];
+
+  const editingSvc = editingServiceId ? (services || []).find((s) => s.id === editingServiceId) : null;
+
+  main.innerHTML = `
+    <div class="admin-page-head"><h2 style="margin:0">Services</h2></div>
+
+    <div class="card" style="margin-bottom:1.5rem">
+      <h3 style="font-size:1.05rem;margin-bottom:0.9rem">Categories</h3>
+      <div style="margin-bottom:0.9rem">${categories.map((c) => `<span class="slot-chip">${c.name_en} / ${c.name_fr} <button data-delcat="${c.id}">&times;</button></span>`).join("")}</div>
+      <div class="mini-form">
+        <div class="field"><label>New category (EN)</label><input id="cat-en" /></div>
+        <div class="field"><label>New category (FR)</label><input id="cat-fr" /></div>
+        <button class="btn btn-secondary btn-sm" id="cat-add">Add Category</button>
+      </div>
+    </div>
+
+    <div id="service-form-slot">${serviceFormHtml(editingSvc)}</div>
+
+    <div class="card" style="overflow-x:auto">
+      <table>
+        <thead><tr><th>Service</th><th>Category</th><th>Price</th><th>Duration</th><th>Active</th><th></th></tr></thead>
+        <tbody>
+          ${(services || []).length ? services.map((s) => `
+            <tr>
+              <td>${s.name_en}</td>
+              <td>${s.service_categories ? s.service_categories.name_en : "—"}</td>
+              <td>${s.price_is_starting_at ? "From " : ""}${formatPrice(s.price_cents)}</td>
+              <td>${s.duration_minutes} min</td>
+              <td><button class="toggle-pill ${s.is_active ? "on" : "off"}" data-toggle="${s.id}" data-active="${s.is_active}">${s.is_active ? "Active" : "Hidden"}</button></td>
+              <td><div class="row-actions">
+                <button class="btn btn-ghost btn-sm" data-edit="${s.id}">Edit</button>
+                <button class="btn btn-danger btn-sm" data-del="${s.id}">Delete</button>
+              </div></td>
+            </tr>`).join("") : `<tr><td colspan="6" class="text-muted" style="text-align:center;padding:2rem">No services yet.</td></tr>`}
+        </tbody>
+      </table>
+    </div>`;
+
+  document.getElementById("cat-add").addEventListener("click", async () => {
+    const en = document.getElementById("cat-en").value.trim();
+    const fr = document.getElementById("cat-fr").value.trim();
+    if (!en) return;
+    await sb.from("service_categories").insert({ name_en: en, name_fr: fr || en, display_order: categories.length + 1 });
+    renderContent();
+  });
+  main.querySelectorAll("[data-delcat]").forEach((b) => b.addEventListener("click", async () => {
+    if (!confirm("Delete this category? Services in it will be kept but uncategorized.")) return;
+    await sb.from("service_categories").delete().eq("id", b.dataset.delcat);
+    renderContent();
+  }));
+
+  wireServiceForm(editingSvc);
+
+  main.querySelectorAll("[data-edit]").forEach((b) => b.addEventListener("click", () => { editingServiceId = b.dataset.edit; renderContent(); }));
+  main.querySelectorAll("[data-toggle]").forEach((b) => b.addEventListener("click", async () => {
+    await sb.from("services").update({ is_active: b.dataset.active !== "true" }).eq("id", b.dataset.toggle);
+    renderContent();
+  }));
+  main.querySelectorAll("[data-del]").forEach((b) => b.addEventListener("click", async () => {
+    if (!confirm("Delete this service?")) return;
+    await sb.from("services").delete().eq("id", b.dataset.del);
+    renderContent();
+  }));
 }
-document.addEventListener("DOMContentLoaded", () => initAdminPage(renderContent));
+
+function wireServiceForm(editingSvc) {
+  document.getElementById("sv-save").addEventListener("click", async () => {
+    const payload = {
+      category_id: document.getElementById("sv-cat").value,
+      name_en: document.getElementById("sv-name-en").value.trim(),
+      name_fr: document.getElementById("sv-name-fr").value.trim(),
+      description_en: document.getElementById("sv-desc-en").value.trim(),
+      description_fr: document.getElementById("sv-desc-fr").value.trim(),
+      duration_minutes: Number(document.getElementById("sv-duration").value) || 30,
+      price_cents: Math.round(Number(document.getElementById("sv-price").value) * 100) || 0,
+      price_is_starting_at: document.getElementById("sv-starting").checked,
+    };
+    if (!payload.name_en) return;
+    if (editingSvc) {
+      await sb.from("services").update(payload).eq("id", editingSvc.id);
+    } else {
+      await sb.from("services").insert({ ...payload, is_active: true, display_order: 99 });
+    }
+    editingServiceId = null;
+    renderContent();
+  });
+  const cancelBtn = document.getElementById("sv-cancel");
+  if (cancelBtn) cancelBtn.addEventListener("click", () => { editingServiceId = null; renderContent(); });
+}
+initAdminPage(renderContent);
 </script>
 </body>
 </html>

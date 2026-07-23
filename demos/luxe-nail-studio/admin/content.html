@@ -11,68 +11,94 @@
 <body>
 <div class="admin-shell">
   <aside class="admin-sidebar" id="admin-sidebar"></aside>
-  <main class="admin-main">
-    <h1 id="page-title">Website Content</h1>
-    <p id="saved-note" class="success-text hidden"></p>
-    <div class="card" style="margin-top:1rem">
-      <h3 id="settings-title"></h3>
-      <div id="settings-list" style="margin-top:1rem;display:flex;flex-direction:column;gap:0.75rem"></div>
-    </div>
-    <div class="card" style="margin-top:1.5rem">
-      <h3 id="policies-title"></h3>
-      <div id="policies-editor" style="margin-top:1rem;display:flex;flex-direction:column;gap:1.25rem"></div>
-    </div>
-  </main>
+  <main class="admin-main" id="admin-main"></main>
 </div>
 
 <script src="../assets/js/mock-supabase.js"></script>
 <script src="../assets/js/i18n.js"></script>
 <script src="../assets/js/admin-shell.js"></script>
 <script>
-function flashSaved() {
-  const lang = getLang();
-  const el = document.getElementById("saved-note");
-  el.textContent = (lang === "fr" ? "Enregistré · " : "Saved · ") + new Date().toLocaleTimeString();
-  el.classList.remove("hidden");
-}
-
 async function renderContent() {
-  const lang = getLang();
-  document.getElementById("page-title").textContent = lang === "fr" ? "Contenu du site" : "Website Content";
-  document.getElementById("settings-title").textContent = lang === "fr" ? "Paramètres du site" : "Site settings";
-  document.getElementById("policies-title").textContent = lang === "fr" ? "Politiques du salon" : "Salon policies";
+  const main = document.getElementById("admin-main");
+  const [{ data: testimonials }, { data: policies }] = await Promise.all([
+    sb.from("testimonials").select("*").order("display_order"),
+    sb.from("salon_policies").select("*").order("display_order"),
+  ]);
 
-  const { data: settings } = await sb.from("website_settings").select("*");
-  document.getElementById("settings-list").innerHTML = (settings || []).map((s) => `
-    <div class="grid" style="grid-template-columns:120px 1fr 1fr;align-items:center;gap:0.5rem">
-      <span class="text-muted" style="font-size:0.75rem;text-transform:uppercase">${s.key}</span>
-      <input data-key="${s.key}" data-field="value_en" value="${s.value_en || ""}" placeholder="English" />
-      <input data-key="${s.key}" data-field="value_fr" value="${s.value_fr || ""}" placeholder="Français" />
-    </div>`).join("");
-  document.querySelectorAll("#settings-list input").forEach((input) => {
-    input.addEventListener("blur", async () => {
-      await sb.from("website_settings").update({ [input.dataset.field]: input.value }).eq("key", input.dataset.key);
-      flashSaved();
-    });
-  });
+  main.innerHTML = `
+    <div class="admin-page-head"><h2 style="margin:0">Website Content</h2></div>
 
-  const { data: policies } = await sb.from("salon_policies").select("*").order("display_order");
-  document.getElementById("policies-editor").innerHTML = (policies || []).map((p) => `
-    <div style="border-bottom:1px solid var(--lavender-soft);padding-bottom:1rem">
-      <p class="text-muted" style="font-size:0.75rem;text-transform:uppercase;margin-bottom:0.5rem">${p.policy_key}</p>
-      <div class="grid grid-2">
-        <textarea data-id="${p.id}" data-field="body_en" rows="3">${p.body_en}</textarea>
-        <textarea data-id="${p.id}" data-field="body_fr" rows="3">${p.body_fr}</textarea>
+    <h3 style="font-size:1.1rem">Testimonials</h3>
+    <div class="card" style="margin-bottom:1.25rem">
+      <div class="mini-form">
+        <div class="field"><label>Client name</label><input id="ts-name" /></div>
+        <div class="field"><label>Rating (1–5)</label><input id="ts-rating" type="number" min="1" max="5" value="5" /></div>
       </div>
-    </div>`).join("");
-  document.querySelectorAll("#policies-editor textarea").forEach((el) => {
-    el.addEventListener("blur", async () => {
-      await sb.from("salon_policies").update({ [el.dataset.field]: el.value }).eq("id", el.dataset.id);
-      flashSaved();
-    });
+      <div class="field"><label>Quote (EN)</label><textarea id="ts-en" rows="2"></textarea></div>
+      <div class="field"><label>Quote (FR)</label><textarea id="ts-fr" rows="2"></textarea></div>
+      <button class="btn btn-primary btn-sm" id="ts-add">Add Testimonial</button>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:0.6rem;margin-bottom:2.5rem">
+      ${(testimonials || []).length ? testimonials.map((t) => `
+        <div class="card" style="display:flex;justify-content:space-between;align-items:flex-start;gap:1rem">
+          <div>
+            <strong>${t.client_name}</strong> <span style="color:var(--gold)">${"★".repeat(t.rating||5)}</span>
+            <p class="text-muted" style="margin:0.3rem 0 0">${t.quote_en}</p>
+          </div>
+          <div class="row-actions">
+            <button class="toggle-pill ${t.is_active ? "on" : "off"}" data-tstoggle="${t.id}" data-active="${t.is_active}">${t.is_active?"Shown":"Hidden"}</button>
+            <button class="btn btn-danger btn-sm" data-tsdel="${t.id}">Delete</button>
+          </div>
+        </div>`).join("") : `<p class="text-muted">No testimonials yet.</p>`}
+    </div>
+
+    <h3 style="font-size:1.1rem">Salon Policies</h3>
+    <div class="card" style="margin-bottom:1.25rem">
+      <div class="mini-form"><div class="field"><label>Title (EN)</label><input id="pl-title-en" /></div><div class="field"><label>Title (FR)</label><input id="pl-title-fr" /></div></div>
+      <div class="field"><label>Body (EN)</label><textarea id="pl-body-en" rows="2"></textarea></div>
+      <div class="field"><label>Body (FR)</label><textarea id="pl-body-fr" rows="2"></textarea></div>
+      <button class="btn btn-primary btn-sm" id="pl-add">Add Policy</button>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:0.6rem">
+      ${(policies || []).length ? policies.map((p) => `
+        <div class="card" style="display:flex;justify-content:space-between;align-items:flex-start;gap:1rem">
+          <div><strong>${p.title_en}</strong><p class="text-muted" style="margin:0.3rem 0 0">${p.body_en}</p></div>
+          <button class="btn btn-danger btn-sm" data-pldel="${p.id}">Delete</button>
+        </div>`).join("") : `<p class="text-muted">No policies yet.</p>`}
+    </div>`;
+
+  document.getElementById("ts-add").addEventListener("click", async () => {
+    const name = document.getElementById("ts-name").value.trim();
+    const en = document.getElementById("ts-en").value.trim();
+    const fr = document.getElementById("ts-fr").value.trim();
+    if (!name || !en) return;
+    await sb.from("testimonials").insert({ client_name: name, quote_en: en, quote_fr: fr || en, rating: Number(document.getElementById("ts-rating").value) || 5, is_active: true, display_order: (testimonials || []).length + 1 });
+    renderContent();
   });
+  main.querySelectorAll("[data-tstoggle]").forEach((b) => b.addEventListener("click", async () => {
+    await sb.from("testimonials").update({ is_active: b.dataset.active !== "true" }).eq("id", b.dataset.tstoggle);
+    renderContent();
+  }));
+  main.querySelectorAll("[data-tsdel]").forEach((b) => b.addEventListener("click", async () => {
+    await sb.from("testimonials").delete().eq("id", b.dataset.tsdel);
+    renderContent();
+  }));
+
+  document.getElementById("pl-add").addEventListener("click", async () => {
+    const titleEn = document.getElementById("pl-title-en").value.trim();
+    const titleFr = document.getElementById("pl-title-fr").value.trim();
+    const bodyEn = document.getElementById("pl-body-en").value.trim();
+    const bodyFr = document.getElementById("pl-body-fr").value.trim();
+    if (!titleEn || !bodyEn) return;
+    await sb.from("salon_policies").insert({ policy_key: titleEn.toLowerCase().replace(/\s+/g,"_"), title_en: titleEn, title_fr: titleFr || titleEn, body_en: bodyEn, body_fr: bodyFr || bodyEn, display_order: (policies || []).length + 1 });
+    renderContent();
+  });
+  main.querySelectorAll("[data-pldel]").forEach((b) => b.addEventListener("click", async () => {
+    await sb.from("salon_policies").delete().eq("id", b.dataset.pldel);
+    renderContent();
+  }));
 }
-document.addEventListener("DOMContentLoaded", () => initAdminPage(renderContent));
+initAdminPage(renderContent);
 </script>
 </body>
 </html>

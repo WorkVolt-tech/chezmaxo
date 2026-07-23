@@ -8,45 +8,47 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/css/styles.css" />
 </head>
-<body style="display:flex;min-height:100vh;align-items:center;justify-content:center">
-<div class="card" style="width:100%;max-width:360px">
-  <div style="text-align:center;margin-bottom:1.5rem">
-    <div class="logo" style="justify-content:center;display:flex">Luxe Nail Studio</div>
-    <p class="text-muted" id="login-subtitle" style="margin-top:0.25rem"></p>
+<body>
+<section class="section" style="min-height:100vh;display:flex;align-items:center;">
+  <div class="container" style="max-width:420px;">
+    <div style="text-align:center;margin-bottom:1.5rem;">
+      <div class="logo" style="justify-content:center;display:flex;font-size:1.6rem;">Luxe <span>Nail Studio</span></div>
+      <p class="text-muted" style="margin-top:0.25rem;">Admin Dashboard</p>
+    </div>
+    <div class="card">
+      <div class="demo-credentials" id="demo-creds"></div>
+      <form id="login-form">
+        <div class="field"><label>Email</label><input id="lg-email" type="email" required /></div>
+        <div class="field"><label>Password</label><input id="lg-password" type="password" required /></div>
+        <p id="login-error" class="error-text"></p>
+        <button class="btn btn-primary" style="width:100%">Sign In</button>
+      </form>
+    </div>
   </div>
-  <form id="login-form">
-    <div class="field"><label>Email</label><input type="email" id="login-email" required /></div>
-    <div class="field"><label id="pw-label">Password</label><input type="password" id="login-password" required /></div>
-    <p id="login-error" class="error-text"></p>
-    <button class="btn btn-primary" style="width:100%" id="login-submit">Sign in</button>
-  </form>
-  <p style="background:#F3EDFA;border-radius:8px;padding:0.65rem 0.85rem;font-size:0.75rem;color:#4A1D5C;margin-top:1rem;text-align:center">
-    Demo login — email: <strong>demo@luxenailstudio.example</strong><br/>password: <strong>demo1234</strong>
-  </p>
-</div>
+</section>
 
 <script src="../assets/js/mock-supabase.js"></script>
 <script src="../assets/js/i18n.js"></script>
 <script>
-const lang = getLang();
-document.getElementById("login-subtitle").textContent = lang === "fr" ? "Connexion administrateur" : "Administrator sign in";
-document.getElementById("pw-label").textContent = lang === "fr" ? "Mot de passe" : "Password";
-document.getElementById("login-submit").textContent = lang === "fr" ? "Se connecter" : "Sign in";
+document.getElementById("demo-creds").innerHTML =
+  `<strong>Demo mode</strong> — sign in with any of these:<br/>` +
+  `Email: <strong>${DEMO_ADMIN_EMAIL}</strong><br/>Password: <strong>${DEMO_ADMIN_PASSWORD}</strong>`;
 
 document.getElementById("login-form").addEventListener("submit", async (e) => {
   e.preventDefault();
-  const email = document.getElementById("login-email").value.trim();
-  const password = document.getElementById("login-password").value;
+  const email = document.getElementById("lg-email").value.trim();
+  const password = document.getElementById("lg-password").value;
+  const errorEl = document.getElementById("login-error");
+  errorEl.textContent = "";
   const { error } = await sb.auth.signInWithPassword({ email, password });
-  if (error) {
-    document.getElementById("login-error").textContent = lang === "fr" ? "Courriel ou mot de passe invalide." : "Invalid email or password.";
-    return;
-  }
+  if (error) { errorEl.textContent = "Invalid email or password."; return; }
   location.href = "dashboard.html";
 });
 
-// Already logged in? Skip straight to the dashboard.
-sb.auth.getSession().then(({ data }) => { if (data.session) location.href = "dashboard.html"; });
+(async () => {
+  const { data: { session } } = await sb.auth.getSession();
+  if (session) location.href = "dashboard.html";
+})();
 </script>
 </body>
 </html>

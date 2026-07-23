@@ -11,59 +11,60 @@
 <body>
 <div class="admin-shell">
   <aside class="admin-sidebar" id="admin-sidebar"></aside>
-  <main class="admin-main">
-    <h1 id="page-title">Settings</h1>
-    <div class="card" style="margin-top:1.25rem">
-      <h3 id="reminders-title"></h3>
-      <p class="text-muted" id="reminders-sub"></p>
-      <ul id="reminders-list" style="list-style:none;padding:0;margin-top:1rem"></ul>
-    </div>
-    <div class="card" style="margin-top:1.5rem">
-      <h3 id="admins-title"></h3>
-      <p class="text-muted" id="admins-sub"></p>
-      <ul id="admins-list" style="list-style:none;padding:0;margin-top:1rem"></ul>
-    </div>
-  </main>
+  <main class="admin-main" id="admin-main"></main>
 </div>
 
 <script src="../assets/js/mock-supabase.js"></script>
 <script src="../assets/js/i18n.js"></script>
 <script src="../assets/js/admin-shell.js"></script>
 <script>
+const FIELDS = [
+  ["salon_name", "Studio name"],
+  ["phone", "Phone number"],
+  ["email", "Email"],
+  ["address", "Address"],
+  ["hours", "Hours (shown as-is, line breaks OK)"],
+];
+
 async function renderContent() {
-  const lang = getLang();
-  document.getElementById("page-title").textContent = lang === "fr" ? "Paramètres" : "Settings";
-  document.getElementById("reminders-title").textContent = lang === "fr" ? "Rappels de rendez-vous" : "Appointment reminders";
-  document.getElementById("reminders-sub").textContent = lang === "fr"
-    ? "Envoyés automatiquement toutes les 15 minutes par une tâche planifiée dans Supabase (pg_cron) — rien à configurer ailleurs."
-    : "Sent automatically every 15 minutes by a scheduled job inside Supabase (pg_cron) — nothing to configure elsewhere.";
-  document.getElementById("admins-title").textContent = lang === "fr" ? "Administrateurs" : "Administrators";
-  document.getElementById("admins-sub").textContent = lang === "fr"
-    ? "Ajoutez des administrateurs depuis Authentication → Users dans Supabase, puis ajoutez la ligne correspondante dans la table administrators."
-    : "Add new administrators from Authentication → Users in Supabase, then insert a matching row in the administrators table.";
+  const main = document.getElementById("admin-main");
+  const { data: rows } = await sb.from("website_settings").select("*");
+  const map = {};
+  (rows || []).forEach((r) => { map[r.key] = r; });
 
-  const { data: reminders } = await sb.from("reminder_settings").select("*").order("hours_before", { ascending: false });
-  document.getElementById("reminders-list").innerHTML = (reminders || []).map((r) => `
-    <li style="display:flex;justify-content:space-between;background:var(--lavender-soft);border-radius:8px;padding:0.5rem 0.75rem;margin-bottom:0.4rem;font-size:0.9rem">
-      <span>${r.hours_before}h ${lang === "fr" ? "avant" : "before"}</span>
-      <button data-id="${r.id}" data-active="${r.is_active}" class="toggle-reminder btn" style="padding:0.2rem 0.6rem;font-size:0.7rem;background:${r.is_active ? "#dcfce7" : "#e5e7eb"};color:${r.is_active ? "#166534" : "#4b5563"}">
-        ${r.is_active ? (lang === "fr" ? "Activé" : "On") : (lang === "fr" ? "Désactivé" : "Off")}
-      </button>
-    </li>`).join("");
-  document.querySelectorAll(".toggle-reminder").forEach((btn) => {
-    btn.addEventListener("click", async () => {
-      await sb.from("reminder_settings").update({ is_active: btn.dataset.active !== "true" }).eq("id", btn.dataset.id);
-      renderContent();
-    });
+  main.innerHTML = `
+    <div class="admin-page-head"><h2 style="margin:0">Settings</h2></div>
+    <div class="card" style="max-width:640px">
+      <p class="text-muted" style="margin-bottom:1.25rem">These appear in your site's header, footer, and contact page.</p>
+      ${FIELDS.map(([key, label]) => `
+        <div class="field">
+          <label>${label} (English)</label>
+          ${key === "hours" ? `<textarea id="set-${key}-en" rows="2">${map[key] ? map[key].value_en : ""}</textarea>` : `<input id="set-${key}-en" value="${map[key] ? map[key].value_en : ""}" />`}
+        </div>
+        <div class="field">
+          <label>${label} (Français)</label>
+          ${key === "hours" ? `<textarea id="set-${key}-fr" rows="2">${map[key] ? map[key].value_fr : ""}</textarea>` : `<input id="set-${key}-fr" value="${map[key] ? map[key].value_fr : ""}" />`}
+        </div>`).join("")}
+      <button class="btn btn-primary" id="settings-save">Save Settings</button>
+      <p id="settings-msg" class="success-text" style="margin-top:0.75rem"></p>
+    </div>`;
+
+  document.getElementById("settings-save").addEventListener("click", async () => {
+    for (const [key] of FIELDS) {
+      const valueEn = document.getElementById(`set-${key}-en`).value;
+      const valueFr = document.getElementById(`set-${key}-fr`).value;
+      const existing = map[key];
+      if (existing) {
+        await sb.from("website_settings").update({ value_en: valueEn, value_fr: valueFr }).eq("key", key);
+      } else {
+        await sb.from("website_settings").insert({ key, value_en: valueEn, value_fr: valueFr });
+      }
+    }
+    document.getElementById("settings-msg").textContent = "Saved.";
+    setTimeout(() => renderContent(), 600);
   });
-
-  const { data: admins } = await sb.from("administrators").select("*");
-  document.getElementById("admins-list").innerHTML = (admins || []).map((a) => `
-    <li style="display:flex;justify-content:space-between;background:var(--lavender-soft);border-radius:8px;padding:0.5rem 0.75rem;margin-bottom:0.4rem;font-size:0.9rem">
-      <span>${a.full_name}</span><span class="badge" style="background:rgba(74,29,92,0.1);color:var(--royal)">${a.role}</span>
-    </li>`).join("");
 }
-document.addEventListener("DOMContentLoaded", () => initAdminPage(renderContent));
+initAdminPage(renderContent);
 </script>
 </body>
 </html>

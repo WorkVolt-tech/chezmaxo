@@ -11,84 +11,88 @@
 <body>
 <div class="admin-shell">
   <aside class="admin-sidebar" id="admin-sidebar"></aside>
-  <main class="admin-main">
-    <h1 id="page-title">Messages</h1>
-    <div class="grid" style="grid-template-columns:300px 1fr;margin-top:1.25rem;align-items:start">
-      <div class="card" style="padding:0;max-height:600px;overflow-y:auto" id="conversation-list"></div>
-      <div class="card chat-panel" id="chat-area">
-        <p class="text-muted" style="margin:auto" id="empty-chat-note"></p>
-      </div>
-    </div>
-  </main>
+  <main class="admin-main" id="admin-main"></main>
 </div>
 
 <script src="../assets/js/mock-supabase.js"></script>
 <script src="../assets/js/i18n.js"></script>
+<script src="../assets/js/format.js"></script>
 <script src="../assets/js/admin-shell.js"></script>
 <script>
-let activeConversationId = null;
-let activeChannel = null;
+let activeConvId = null;
 
-async function loadConversations() {
-  const { data } = await sb.from("conversations").select("*, appointments(reference_number), clients(full_name)")
-    .order("last_message_at", { ascending: false, nullsFirst: false }).limit(50);
-  const lang = getLang();
-  document.getElementById("conversation-list").innerHTML = (data || []).map((c) => `
-    <button class="conv-item" data-id="${c.id}" style="display:block;width:100%;text-align:left;padding:0.75rem 1rem;border:none;border-bottom:1px solid var(--lavender-soft);background:${activeConversationId === c.id ? "var(--lavender-soft)" : "transparent"};cursor:pointer">
-      <div style="font-weight:500">${c.clients?.full_name || ""}</div>
-      <div class="text-muted" style="font-size:0.75rem">${c.appointments?.reference_number || ""}</div>
-    </button>`).join("") || `<p class="text-muted" style="padding:1rem">${lang === "fr" ? "Aucune conversation." : "No conversations yet."}</p>`;
-  document.querySelectorAll(".conv-item").forEach((btn) => btn.addEventListener("click", () => openConversation(btn.dataset.id)));
+async function renderContent() {
+  const main = document.getElementById("admin-main");
+  const [{ data: convs }, { data: clients }, { data: messages }] = await Promise.all([
+    sb.from("conversations").select("*").order("last_message_at", { ascending: false }),
+    sb.from("clients").select("*"),
+    sb.from("messages").select("*"),
+  ]);
+
+  const clientOf = (id) => (clients || []).find((c) => c.id === id);
+  if (!activeConvId && convs && convs.length) activeConvId = convs[0].id;
+
+  main.innerHTML = `
+    <div class="admin-page-head"><h2 style="margin:0">Messages</h2></div>
+    <div class="card client-thread">
+      <div class="thread-list">
+        ${(convs || []).length ? (convs || []).map((c) => {
+          const client = clientOf(c.client_id);
+          const hasUnread = (messages || []).some((m) => m.conversation_id === c.id && m.sender_type === "client" && !m.is_read_by_admin);
+          return `<div class="thread-item ${c.id === activeConvId ? "active" : ""}" data-conv="${c.id}">
+            ${hasUnread ? `<span class="unread-dot"></span>` : ""}${client ? client.full_name : "Unknown"}
+          </div>`;
+        }).join("") : `<p class="text-muted" style="padding:0.75rem">No conversations yet.</p>`}
+      </div>
+      <div style="flex:1" id="thread-panel"></div>
+    </div>`;
+
+  main.querySelectorAll("[data-conv]").forEach((el) => el.addEventListener("click", () => { activeConvId = el.dataset.conv; renderContent(); }));
+
+  if (activeConvId) await renderThread(activeConvId, clientOf, convs);
 }
 
-async function openConversation(id) {
-  activeConversationId = id;
-  loadConversations();
-  const { data: msgs } = await sb.from("messages").select("*").eq("conversation_id", id).order("created_at");
-  await sb.from("messages").update({ is_read_by_admin: true }).eq("conversation_id", id).eq("sender_type", "client");
+async function renderThread(convId, clientOf, convs) {
+  const panel = document.getElementById("thread-panel");
+  const conv = (convs || []).find((c) => c.id === convId);
+  const { data: msgs } = await sb.from("messages").select("*").eq("conversation_id", convId).order("created_at");
+  const client = conv ? clientOf(conv.client_id) : null;
 
-  document.getElementById("chat-area").innerHTML = `
-    <div class="chat-messages" id="chat-messages">${(msgs || []).map(renderBubble).join("")}</div>
-    <form class="chat-input-row" id="chat-form">
-      <input id="chat-draft" placeholder="${getLang() === "fr" ? "Écrire une réponse…" : "Type a reply…"}" />
-      <button class="btn btn-primary">${getLang() === "fr" ? "Envoyer" : "Send"}</button>
-    </form>`;
-  scrollChatToBottom();
+  panel.innerHTML = `
+    <div class="chat-panel">
+      <div style="padding:0.9rem 1rem;border-bottom:1px solid var(--lavender-soft)">
+        <strong>${client ? client.full_name : "—"}</strong>
+        <p class="text-muted" style="margin:0.15rem 0 0">${client ? (client.phone_normalized || "") : ""} ${client && client.email ? "· " + client.email : ""}</p>
+      </div>
+      <div class="chat-messages" id="admin-chat-messages">
+        ${(msgs || []).map((m) => `<div class="chat-bubble ${m.sender_type === "admin" ? "admin" : "client"}">${m.body || ""}</div>`).join("")}
+      </div>
+      <form class="chat-input-row" id="admin-chat-form">
+        <input id="admin-chat-draft" placeholder="Type a reply…" />
+        <button class="btn btn-primary">Send</button>
+      </form>
+    </div>`;
 
-  document.getElementById("chat-form").addEventListener("submit", async (e) => {
+  const msgsEl = document.getElementById("admin-chat-messages");
+  msgsEl.scrollTop = msgsEl.scrollHeight;
+
+  // mark client messages as read
+  for (const m of (msgs || [])) {
+    if (m.sender_type === "client" && !m.is_read_by_admin) await sb.from("messages").update({ is_read_by_admin: true }).eq("id", m.id);
+  }
+
+  document.getElementById("admin-chat-form").addEventListener("submit", async (e) => {
     e.preventDefault();
-    const input = document.getElementById("chat-draft");
+    const input = document.getElementById("admin-chat-draft");
     const body = input.value.trim();
     if (!body) return;
     input.value = "";
-    await sb.from("messages").insert({ conversation_id: id, sender_type: "admin", body });
-    await sb.from("conversations").update({ last_message_at: new Date().toISOString() }).eq("id", id);
+    await sb.from("messages").insert({ conversation_id: convId, sender_type: "admin", body, image_url: null, is_read_by_admin: true, is_read_by_client: false });
+    await sb.from("conversations").update({ last_message_at: new Date().toISOString() }).eq("id", convId);
+    renderThread(convId, clientOf, convs);
   });
-
-  if (activeChannel) sb.removeChannel(activeChannel);
-  activeChannel = sb.channel(`messages-${id}`)
-    .on("postgres_changes", { event: "INSERT", schema: "public", table: "messages", filter: `conversation_id=eq.${id}` }, (payload) => {
-      const el = document.getElementById("chat-messages");
-      if (el) { el.insertAdjacentHTML("beforeend", renderBubble(payload.new)); scrollChatToBottom(); }
-    })
-    .subscribe();
 }
-
-function renderBubble(m) {
-  return `<div class="chat-bubble ${m.sender_type}">${m.body || ""}</div>`;
-}
-function scrollChatToBottom() {
-  const el = document.getElementById("chat-messages");
-  if (el) el.scrollTop = el.scrollHeight;
-}
-
-async function renderContent() {
-  const lang = getLang();
-  document.getElementById("page-title").textContent = "Messages";
-  document.getElementById("empty-chat-note").textContent = lang === "fr" ? "Sélectionnez une conversation" : "Select a conversation";
-  await loadConversations();
-}
-document.addEventListener("DOMContentLoaded", () => initAdminPage(renderContent));
+initAdminPage(renderContent);
 </script>
 </body>
 </html>
