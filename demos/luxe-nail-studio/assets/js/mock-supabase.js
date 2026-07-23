@@ -1,6 +1,21 @@
+/**
+ * A self-contained, in-browser fake backend for the demo build.
+ * It mimics the small slice of the Supabase JS client this project
+ * uses (`sb.from(...)`, `sb.rpc(...)`, `sb.storage`, `sb.auth`,
+ * `sb.channel`) closely enough that every page's existing code runs
+ * unmodified — the only swap is this file in place of the real
+ * Supabase client. Data lives in the browser's localStorage, seeded
+ * with demo content on first load, so it feels like a working booking
+ * system (you can really book a slot, look it up, and manage it in
+ * the admin dashboard) with zero server anywhere.
+ *
+ * DEMO_ADMIN_EMAIL / DEMO_ADMIN_PASSWORD below are shown on the admin
+ * login page for portfolio visitors to try.
+ */
+
 const DEMO_ADMIN_EMAIL = "demo@luxenailstudio.example";
 const DEMO_ADMIN_PASSWORD = "demo1234";
-const STORAGE_KEY = "luxe_demo_db_v2";
+const STORAGE_KEY = "luxe_demo_db_v3";
 
 function uuid() {
   return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (c) => {
@@ -60,10 +75,10 @@ function seedData() {
   ];
 
   const gallery_images = [
-    { id: uuid(), image_url: "assets/images/gallery/nail-art.jpg", style_name_en: "Lavender Ombré", style_name_fr: "Ombré lavande", category: "Nail Art", is_active: true, display_order: 1 },
-    { id: uuid(), image_url: "assets/images/gallery/gel-set.jpg", style_name_en: "Blush Gel Set", style_name_fr: "Gel rosé", category: "Gel", is_active: true, display_order: 2 },
-    { id: uuid(), image_url: "assets/images/gallery/chrome.jpg", style_name_en: "Gold Chrome", style_name_fr: "Chrome doré", category: "Acrylic", is_active: true, display_order: 3 },
-    { id: uuid(), image_url: "assets/images/gallery/floral.jpg", style_name_en: "Hand-Painted Florals", style_name_fr: "Fleurs peintes à la main", category: "Nail Art", is_active: true, display_order: 4 },
+    { id: uuid(), image_url: "assets/images/gallery/nail-art.webp", style_name_en: "Lavender Ombré", style_name_fr: "Ombré lavande", category: "Nail Art", is_active: true, display_order: 1 },
+    { id: uuid(), image_url: "assets/images/gallery/gel-set.webp", style_name_en: "Blush Gel Set", style_name_fr: "Gel rosé", category: "Gel", is_active: true, display_order: 2 },
+    { id: uuid(), image_url: "assets/images/gallery/chrome.webp", style_name_en: "Gold Chrome", style_name_fr: "Chrome doré", category: "Acrylic", is_active: true, display_order: 3 },
+    { id: uuid(), image_url: "assets/images/gallery/floral.webp", style_name_en: "Hand-Painted Florals", style_name_fr: "Fleurs peintes à la main", category: "Nail Art", is_active: true, display_order: 4 },
   ];
 
   const testimonials = [
