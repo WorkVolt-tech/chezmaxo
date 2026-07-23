@@ -1099,6 +1099,34 @@ const I18N = {
     "en": "Community Organization",
     "fr": "Organisme communautaire"
   },
+  "pf6.svc0": {
+    "en": "Website Design",
+    "fr": "Conception de site"
+  },
+  "pf6.svc1": {
+    "en": "Booking System",
+    "fr": "Système de réservation"
+  },
+  "pf6.svc2": {
+    "en": "Business Care",
+    "fr": "Forfait affaires"
+  },
+  "pf.viewlivedemo": {
+    "en": "View Live Demo",
+    "fr": "Voir la démo en direct"
+  },
+  "pf.placeholder": {
+    "en": "Project photo placeholder",
+    "fr": "Photo du projet à venir"
+  },
+  "pf6.name": {
+    "en": "Luxe Nail Studio",
+    "fr": "Luxe Nail Studio"
+  },
+  "pf6.desc": {
+    "en": "A bilingual booking site with real-time scheduling, live chat, and a full admin console behind it to manage appointments, clients, and content.",
+    "fr": "Un site de réservation bilingue avec horaire en temps réel, clavardage en direct, et une console d'administration complète pour gérer rendez-vous, clientèle et contenu."
+  },
   "pf1.svc0": {
     "en": "Website Design",
     "fr": "Conception de site"
@@ -1107,9 +1135,9 @@ const I18N = {
     "en": "Starter Care",
     "fr": "Forfait de base"
   },
-  "pf.placeholder": {
-    "en": "Project photo placeholder",
-    "fr": "Photo du projet à venir"
+  "pf.viewproject": {
+    "en": "View Project (placeholder)",
+    "fr": "Voir le projet (exemple)"
   },
   "pf1.name": {
     "en": "Maple Street Hardware",
@@ -1118,10 +1146,6 @@ const I18N = {
   "pf1.desc": {
     "en": "A five-page site with service listings, store hours, and a contact form for a family-owned hardware store.",
     "fr": "Un site de cinq pages avec liste de services, heures d'ouverture et formulaire de contact pour une quincaillerie familiale."
-  },
-  "pf.viewproject": {
-    "en": "View Project (placeholder)",
-    "fr": "Voir le projet (exemple)"
   },
   "pf2.svc0": {
     "en": "Website Design",
@@ -1186,26 +1210,6 @@ const I18N = {
   "pf5.desc": {
     "en": "A polished, credibility-focused site with a services page and calendar booking link.",
     "fr": "Un site soigné axé sur la crédibilité, avec page de services et lien de réservation de calendrier."
-  },
-  "pf6.svc0": {
-    "en": "Website Design",
-    "fr": "Conception de site"
-  },
-  "pf6.svc1": {
-    "en": "Booking System",
-    "fr": "Système de réservation"
-  },
-  "pf6.svc2": {
-    "en": "Business Care",
-    "fr": "Forfait affaires"
-  },
-  "pf6.name": {
-    "en": "Luxe Nail Studio",
-    "fr": "Luxe Nail Studio"
-  },
-  "pf6.desc": {
-    "en": "A bilingual (EN/FR) appointment-based studio site with real-time online booking, a self-serve appointment manager with live chat, and a full admin dashboard for calendar, clients, and content.",
-    "fr": "Un site bilingue (FR/EN) pour un studio sur rendez-vous, avec réservation en ligne en temps réel, gestion de rendez-vous en libre-service avec clavardage en direct, et un tableau de bord administratif complet pour le calendrier, la clientèle et le contenu."
   },
   "pf7.svc0": {
     "en": "Website Design",
