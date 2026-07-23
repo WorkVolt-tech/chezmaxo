@@ -76,6 +76,7 @@ function renderSiteFooter() {
       <div class="footer-bottom">
         © ${new Date().getFullYear()} Luxe Nail Studio ·
         <a href="policies.html" style="text-decoration:underline">${lang === "fr" ? "Politiques" : "Policies"}</a>
+        · <a href="admin/login.html" style="text-decoration:underline">${lang === "fr" ? "Connexion admin (démo)" : "Admin Login (demo)"}</a>
       </div>
     </footer>`;
 
