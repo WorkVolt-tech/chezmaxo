@@ -51,10 +51,22 @@ function renderAdminShell(admin) {
       <a href="../index.html" style="display:block;padding:0.5rem 0.75rem;font-size:0.9rem;color:rgba(45,27,54,0.6);text-decoration:none">
         ${lang === "fr" ? "&larr; Voir le site" : "&larr; View Site"}
       </a>
+      <a href="#" id="admin-reset-demo" style="display:block;padding:0.5rem 0.75rem;font-size:0.9rem;color:rgba(45,27,54,0.6);text-decoration:none">
+        ${lang === "fr" ? "Réinitialiser les données" : "Reset Demo Data"}
+      </a>
       <a href="#" id="admin-logout" style="display:block;padding:0.5rem 0.75rem;font-size:0.9rem;color:rgba(45,27,54,0.6);text-decoration:none">
         ${lang === "fr" ? "Déconnexion" : "Log Out"}
       </a>
     </div>`;
+  document.getElementById("admin-reset-demo").addEventListener("click", (e) => {
+    e.preventDefault();
+    const msg = lang === "fr"
+      ? "Ceci effacera toutes les données de démonstration (rendez-vous, clients, messages, modifications) et reviendra aux données de départ. Continuer?"
+      : "This will erase all demo data (appointments, clients, messages, edits) and restore the original starting data. Continue?";
+    if (!confirm(msg)) return;
+    try { localStorage.removeItem(STORAGE_KEY); } catch (err) {}
+    location.href = "dashboard.html";
+  });
   document.getElementById("admin-logout").addEventListener("click", async (e) => {
     e.preventDefault();
     await sb.auth.signOut();
