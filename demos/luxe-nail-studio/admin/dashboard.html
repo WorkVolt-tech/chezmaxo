@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Dashboard — Luxe Nail Studio Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/styles.css" />
+</head>
+<body>
+<div class="admin-shell">
+  <aside class="admin-sidebar" id="admin-sidebar"></aside>
+  <main class="admin-main">
+    <h1 id="page-title">Dashboard</h1>
+    <div id="stats-grid" class="grid" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr));margin-top:1.5rem"></div>
+    <div class="card" style="margin-top:2rem">
+      <h3 id="cancellations-title"></h3>
+      <ul id="cancellations-list" style="margin:0;padding-left:1.1rem;font-size:0.9rem"></ul>
+    </div>
+  </main>
+</div>
+
+<script src="../assets/js/mock-supabase.js"></script>
+<script src="../assets/js/i18n.js"></script>
+<script src="../assets/js/format.js"></script>
+<script src="../assets/js/admin-shell.js"></script>
+<script>
+async function renderContent() {
+  const lang = getLang();
+  document.getElementById("page-title").textContent = lang === "fr" ? "Tableau de bord" : "Dashboard";
+  document.getElementById("cancellations-title").textContent = lang === "fr" ? "Annulations récentes" : "Recent cancellations";
+
+  const today = new Date().toISOString().slice(0, 10);
+  const weekAhead = new Date(Date.now() + 7 * 86400000).toISOString().slice(0, 10);
+
+  const [todayCount, pendingCount, confirmedCount, upcomingCount, unreadCount, cancellations] = await Promise.all([
+    sb.from("appointments").select("*", { count: "exact", head: true }).eq("appointment_date", today),
+    sb.from("appointments").select("*", { count: "exact", head: true }).eq("status", "pending"),
+    sb.from("appointments").select("*", { count: "exact", head: true }).eq("status", "confirmed"),
+    sb.from("appointments").select("*", { count: "exact", head: true }).gte("appointment_date", today).lte("appointment_date", weekAhead).in("status", ["accepted", "confirmed"]),
+    sb.from("messages").select("*", { count: "exact", head: true }).eq("sender_type", "client").eq("is_read_by_admin", false),
+    sb.from("appointments").select("id, reference_number, cancelled_at").in("status", ["cancelled_by_client", "cancelled_by_salon"]).order("cancelled_at", { ascending: false }).limit(5),
+  ]);
+
+  const stats = [
+    { label: lang === "fr" ? "Rendez-vous aujourd'hui" : "Today's appointments", value: todayCount.count || 0 },
+    { label: lang === "fr" ? "Demandes en attente" : "Pending requests", value: pendingCount.count || 0 },
+    { label: lang === "fr" ? "Confirmés" : "Confirmed", value: confirmedCount.count || 0 },
+    { label: lang === "fr" ? "À venir (7 jours)" : "Upcoming (7 days)", value: upcomingCount.count || 0 },
+    { label: lang === "fr" ? "Messages non lus" : "Unread messages", value: unreadCount.count || 0 },
+  ];
+  document.getElementById("stats-grid").innerHTML = stats.map((s) => `
+    <div class="stat-card"><div class="stat-value">${s.value}</div><div class="stat-label">${s.label}</div></div>
+  `).join("");
+
+  const list = cancellations.data || [];
+  document.getElementById("cancellations-list").innerHTML = list.length
+    ? list.map((c) => `<li>${c.reference_number}</li>`).join("")
+    : `<li class="text-muted">${lang === "fr" ? "Aucune pour le moment." : "None yet."}</li>`;
+}
+document.addEventListener("DOMContentLoaded", () => initAdminPage(renderContent));
+</script>
+</body>
+</html>

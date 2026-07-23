@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Manage My Appointment — Luxe Nail Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+<div id="site-header"></div>
+
+<section class="section">
+  <div class="container" style="max-width:520px">
+    <div class="section-heading">
+      <h2 data-i18n="manage_title"></h2>
+      <div class="brush-divider"></div>
+    </div>
+    <div id="stage-lookup" class="card"></div>
+    <div id="stage-verify" class="card hidden"></div>
+    <div id="stage-details" class="hidden"></div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+
+<script src="assets/js/mock-supabase.js"></script>
+<script src="assets/js/i18n.js"></script>
+<script src="assets/js/format.js"></script>
+<script src="assets/js/site-chrome.js"></script>
+<script>
+const flow = { referenceNumber: "", phone: "", accessToken: null, appointment: null, conversationId: null, pollHandle: null };
+
+function showStage(name) {
+  ["lookup", "verify", "details"].forEach((s) => document.getElementById(`stage-${s}`).classList.toggle("hidden", s !== name));
+}
+
+function renderLookup() {
+  document.getElementById("stage-lookup").innerHTML = `
+    <p class="text-muted" data-i18n="lookup_prompt" style="margin-bottom:1rem"></p>
+    <form id="lookup-form">
+      <div class="field"><label data-i18n="reference_number"></label><input id="lk-ref" placeholder="SMN-XXXXXX" required /></div>
+      <div class="field"><label data-i18n="phone"></label><input id="lk-phone" type="tel" required /></div>
+      <p id="lookup-error" class="error-text"></p>
+      <button class="btn btn-primary" style="width:100%" data-i18n="lookup_submit"></button>
+    </form>`;
+  applyTranslations();
+  document.getElementById("lookup-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    flow.referenceNumber = document.getElementById("lk-ref").value.trim().toUpperCase();
+    flow.phone = normalizePhone(document.getElementById("lk-phone").value.trim());
+    const { data } = await sb.rpc("request_appointment_otp", { p_reference_number: flow.referenceNumber, p_phone: flow.phone });
+    renderVerify(data && data.demoCode);
+    showStage("verify");
+  });
+}
+
+function renderVerify(demoCode) {
+  document.getElementById("stage-verify").innerHTML = `
+    <p class="text-muted" style="margin-bottom:1rem">${getLang() === "en" ? "If those details match an appointment, we've emailed a verification code." : "Si ces informations correspondent à un rendez-vous, nous avons envoyé un code par courriel."}</p>
+    ${demoCode ? `<p style="background:#FEF3C7;color:#92400E;border-radius:8px;padding:0.6rem 0.9rem;font-size:0.85rem;margin-bottom:1rem"><strong>${getLang() === "en" ? "Demo mode" : "Mode démo"}:</strong> ${getLang() === "en" ? "no real email was sent — your code is" : "aucun courriel réel n'a été envoyé — votre code est"} <strong style="font-family:monospace">${demoCode}</strong></p>` : ""}
+    <form id="verify-form">
+      <div class="field"><label data-i18n="verify_code"></label><input id="vf-code" inputmode="numeric" maxlength="6" required /></div>
+      <p id="verify-error" class="error-text"></p>
+      <button class="btn btn-primary" style="width:100%" data-i18n="verify_submit"></button>
+    </form>`;
+  applyTranslations();
+  document.getElementById("verify-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const code = document.getElementById("vf-code").value.trim();
+    const { data, error } = await sb.rpc("verify_appointment_otp", {
+      p_reference_number: flow.referenceNumber, p_phone: flow.phone, p_code: code,
+    });
+    if (error) {
+      document.getElementById("verify-error").textContent = getLang() === "en" ? "Invalid or expired code." : "Code invalide ou expiré.";
+      return;
+    }
+    flow.accessToken = data.accessToken;
+    flow.appointment = data.appointment;
+    renderDetails();
+    showStage("details");
+  });
+}
+
+function renderDetails() {
+  const a = flow.appointment;
+  const lang = getLang();
+  const closed = ["cancelled_by_client", "cancelled_by_salon", "completed", "no_show"].includes(a.status);
+  document.getElementById("stage-details").innerHTML = `
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <h3 style="margin:0">${a.referenceNumber}</h3>
+        <span class="badge badge-${a.status}">${t("status_" + a.status)}</span>
+      </div>
+      <p class="text-muted" style="margin-top:0.75rem">
+        ${new Date(a.date + "T00:00:00").toLocaleDateString(lang === "fr" ? "fr-CA" : "en-CA", { weekday: "long", month: "long", day: "numeric" })}
+        · ${a.startTime ? a.startTime.slice(0, 5) : ""}
+      </p>
+      ${a.priceEstimateCents != null ? `<p class="text-muted">${formatPrice(a.priceEstimateCents)}</p>` : ""}
+      ${a.clientVisibleNotes ? `<div class="card" style="background:var(--lavender-soft);margin-top:0.75rem">${a.clientVisibleNotes}</div>` : ""}
+      <p id="details-error" class="error-text"></p>
+      <div style="display:flex;gap:0.75rem;flex-wrap:wrap;margin-top:1.25rem">
+        ${!closed ? `<button class="btn btn-danger" id="cancel-btn" data-i18n="cancel_button"></button>` : ""}
+        <button class="btn btn-primary" id="chat-btn" data-i18n="chat_button"></button>
+      </div>
+    </div>
+    <div id="chat-container" style="margin-top:1.5rem"></div>`;
+  applyTranslations();
+
+  const cancelBtn = document.getElementById("cancel-btn");
+  if (cancelBtn) cancelBtn.addEventListener("click", handleCancel);
+  document.getElementById("chat-btn").addEventListener("click", toggleChat);
+}
+
+async function handleCancel() {
+  const btn = document.getElementById("cancel-btn");
+  btn.disabled = true;
+  const { error } = await sb.rpc("cancel_appointment", { p_appointment_id: flow.appointment.id, p_access_token: flow.accessToken, p_reason: null });
+  const errorEl = document.getElementById("details-error");
+  if (error) {
+    errorEl.textContent = error.message.includes("CUTOFF_PASSED")
+      ? (getLang() === "en" ? "Online cancellation is no longer available for this appointment. Please contact the salon directly." : "L'annulation en ligne n'est plus possible pour ce rendez-vous. Veuillez contacter le salon directement.")
+      : (getLang() === "en" ? "Unable to cancel." : "Annulation impossible.");
+    btn.disabled = false;
+    return;
+  }
+  flow.appointment.status = "cancelled_by_client";
+  renderDetails();
+}
+
+async function toggleChat() {
+  const container = document.getElementById("chat-container");
+  if (container.dataset.open === "true") {
+    container.dataset.open = "false";
+    container.innerHTML = "";
+    if (flow.pollHandle) clearInterval(flow.pollHandle);
+    return;
+  }
+  container.dataset.open = "true";
+  container.innerHTML = `
+    <div class="card chat-panel">
+      <div class="chat-messages" id="chat-messages"></div>
+      <form class="chat-input-row" id="chat-form">
+        <input id="chat-draft" placeholder="${getLang() === "en" ? "Type a message…" : "Écrivez un message…"}" />
+        <button class="btn btn-primary">${getLang() === "en" ? "Send" : "Envoyer"}</button>
+      </form>
+    </div>`;
+
+  async function poll() {
+    const { data } = await sb.rpc("get_appointment_conversation", { p_appointment_id: flow.appointment.id, p_access_token: flow.accessToken });
+    if (!data) return;
+    flow.conversationId = data.conversationId;
+    const messagesEl = document.getElementById("chat-messages");
+    if (!messagesEl) return;
+    messagesEl.innerHTML = data.messages.map((m) => `<div class="chat-bubble ${m.sender_type}">${m.body || ""}</div>`).join("");
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+  }
+  await poll();
+  flow.pollHandle = setInterval(poll, 4000);
+
+  document.getElementById("chat-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const input = document.getElementById("chat-draft");
+    const body = input.value.trim();
+    if (!body) return;
+    input.value = "";
+    await sb.rpc("send_client_message", { p_appointment_id: flow.appointment.id, p_access_token: flow.accessToken, p_body: body });
+    poll();
+  });
+}
+
+document.addEventListener("DOMContentLoaded", () => { renderLookup(); showStage("lookup"); });
+</script>
+</body>
+</html>

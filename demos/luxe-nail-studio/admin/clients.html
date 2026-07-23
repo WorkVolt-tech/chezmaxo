@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Clients — Luxe Nail Studio Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/styles.css" />
+</head>
+<body>
+<div class="admin-shell">
+  <aside class="admin-sidebar" id="admin-sidebar"></aside>
+  <main class="admin-main">
+    <h1 id="page-title">Clients</h1>
+    <div class="grid" style="grid-template-columns:1fr 360px;margin-top:1.25rem;align-items:start">
+      <div>
+        <input id="client-search" style="max-width:280px;margin-bottom:1rem" />
+        <div class="card" style="padding:0;overflow-x:auto"><table id="clients-table"></table></div>
+      </div>
+      <div id="client-profile"></div>
+    </div>
+  </main>
+</div>
+
+<script src="../assets/js/mock-supabase.js"></script>
+<script src="../assets/js/i18n.js"></script>
+<script src="../assets/js/admin-shell.js"></script>
+<script>
+let allClients = [];
+
+function renderClientsTable() {
+  const lang = getLang();
+  const search = document.getElementById("client-search").value.toLowerCase();
+  const rows = allClients.filter((c) => !search || c.full_name?.toLowerCase().includes(search) || c.phone_normalized?.includes(search) || c.email?.toLowerCase().includes(search));
+  document.getElementById("clients-table").innerHTML = `
+    <thead><tr><th>${lang === "fr" ? "Nom" : "Name"}</th><th>${lang === "fr" ? "Téléphone" : "Phone"}</th><th>Email</th><th>${lang === "fr" ? "Langue" : "Language"}</th></tr></thead>
+    <tbody>${rows.map((c) => `
+      <tr class="client-row" data-id="${c.id}" style="cursor:pointer">
+        <td>${c.full_name}</td><td>${c.phone_normalized}</td><td>${c.email || "—"}</td><td style="text-transform:uppercase">${c.preferred_language}</td>
+      </tr>`).join("")}</tbody>`;
+  document.querySelectorAll(".client-row").forEach((row) => row.addEventListener("click", () => openClient(row.dataset.id)));
+}
+
+async function openClient(id) {
+  const lang = getLang();
+  const client = allClients.find((c) => c.id === id);
+  const { data: history } = await sb.from("appointments").select("id, reference_number, appointment_date, status, services(name_en, name_fr)").eq("client_id", id).order("appointment_date", { ascending: false });
+  document.getElementById("client-profile").innerHTML = `
+    <div class="card">
+      <h3>${client.full_name}</h3>
+      <p class="text-muted">${client.phone_normalized} · ${client.email || "—"}</p>
+      <h4 style="font-size:0.75rem;text-transform:uppercase;color:rgba(45,27,54,0.4);margin-top:1rem">${lang === "fr" ? "Historique des rendez-vous" : "Appointment history"}</h4>
+      <ul style="padding-left:0;list-style:none;margin-top:0.5rem">
+        ${(history || []).map((h) => `<li style="display:flex;justify-content:space-between;background:var(--lavender-soft);border-radius:8px;padding:0.5rem 0.75rem;margin-bottom:0.3rem;font-size:0.85rem"><span>${lang === "en" ? h.services?.name_en : h.services?.name_fr}</span><span class="text-muted">${h.appointment_date}</span></li>`).join("") || `<li class="text-muted">${lang === "fr" ? "Aucun historique." : "No history yet."}</li>`}
+      </ul>
+    </div>`;
+}
+
+async function renderContent() {
+  const lang = getLang();
+  document.getElementById("page-title").textContent = lang === "fr" ? "Clientes" : "Clients";
+  document.getElementById("client-search").placeholder = lang === "fr" ? "Rechercher des clientes…" : "Search clients…";
+  document.getElementById("client-search").addEventListener("input", renderClientsTable);
+  const { data } = await sb.from("clients").select("*").order("created_at", { ascending: false }).limit(300);
+  allClients = data || [];
+  renderClientsTable();
+}
+document.addEventListener("DOMContentLoaded", () => initAdminPage(renderContent));
+</script>
+</body>
+</html>

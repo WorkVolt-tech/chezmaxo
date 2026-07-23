@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Services — Luxe Nail Studio Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/styles.css" />
+</head>
+<body>
+<div class="admin-shell">
+  <aside class="admin-sidebar" id="admin-sidebar"></aside>
+  <main class="admin-main">
+    <h1 id="page-title">Services</h1>
+    <div class="grid" style="grid-template-columns:1fr 360px;margin-top:1.25rem;align-items:start">
+      <div>
+        <button class="btn btn-primary" id="new-service-btn" style="margin-bottom:1rem"></button>
+        <div class="card" style="padding:0;overflow-x:auto"><table id="services-table"></table></div>
+      </div>
+      <div id="service-editor"></div>
+    </div>
+  </main>
+</div>
+
+<script src="../assets/js/mock-supabase.js"></script>
+<script src="../assets/js/i18n.js"></script>
+<script src="../assets/js/format.js"></script>
+<script src="../assets/js/admin-shell.js"></script>
+<script>
+let services = [];
+
+async function loadServices() {
+  const { data } = await sb.from("services").select("*").order("display_order");
+  services = data || [];
+  renderTable();
+}
+
+function renderTable() {
+  const lang = getLang();
+  document.getElementById("services-table").innerHTML = `
+    <thead><tr><th>${lang === "fr" ? "Nom" : "Name"}</th><th>${lang === "fr" ? "Prix" : "Price"}</th><th>${lang === "fr" ? "Durée" : "Duration"}</th><th></th></tr></thead>
+    <tbody>${services.map((s) => `
+      <tr>
+        <td>${lang === "en" ? s.name_en : s.name_fr}</td>
+        <td>${formatPrice(s.price_cents)}</td>
+        <td>${s.duration_minutes} min</td>
+        <td style="text-align:right">
+          <button data-id="${s.id}" class="edit-btn" style="background:none;border:none;color:var(--royal);font-size:0.75rem;cursor:pointer;margin-right:0.5rem">${lang === "fr" ? "Modifier" : "Edit"}</button>
+          <button data-id="${s.id}" data-active="${s.is_active}" class="toggle-btn btn" style="padding:0.2rem 0.6rem;font-size:0.7rem;background:${s.is_active ? "#dcfce7" : "#e5e7eb"};color:${s.is_active ? "#166534" : "#4b5563"}">
+            ${s.is_active ? (lang === "fr" ? "Actif" : "Active") : (lang === "fr" ? "Masqué" : "Hidden")}
+          </button>
+        </td>
+      </tr>`).join("")}</tbody>`;
+  document.querySelectorAll(".edit-btn").forEach((b) => b.addEventListener("click", () => openEditor(services.find((s) => s.id === b.dataset.id))));
+  document.querySelectorAll(".toggle-btn").forEach((b) => b.addEventListener("click", async () => {
+    await sb.from("services").update({ is_active: b.dataset.active !== "true" }).eq("id", b.dataset.id);
+    loadServices();
+  }));
+}
+
+function openEditor(service) {
+  const lang = getLang();
+  const s = service || { name_en: "", name_fr: "", description_en: "", description_fr: "", duration_minutes: 30, price_cents: 0, price_is_starting_at: false };
+  document.getElementById("service-editor").innerHTML = `
+    <div class="card">
+      <h3>${service ? (lang === "fr" ? "Modifier le service" : "Edit service") : (lang === "fr" ? "Nouveau service" : "New service")}</h3>
+      <div class="field"><label>Name (EN)</label><input id="e-name-en" value="${s.name_en}" /></div>
+      <div class="field"><label>Nom (FR)</label><input id="e-name-fr" value="${s.name_fr}" /></div>
+      <div class="field"><label>Description (EN)</label><textarea id="e-desc-en" rows="2">${s.description_en || ""}</textarea></div>
+      <div class="field"><label>Description (FR)</label><textarea id="e-desc-fr" rows="2">${s.description_fr || ""}</textarea></div>
+      <div class="grid grid-2">
+        <div class="field"><label>${lang === "fr" ? "Durée (min)" : "Duration (min)"}</label><input type="number" id="e-duration" value="${s.duration_minutes}" /></div>
+        <div class="field"><label>${lang === "fr" ? "Prix (cents)" : "Price (cents)"}</label><input type="number" id="e-price" value="${s.price_cents}" /></div>
+      </div>
+      <label style="display:flex;gap:0.5rem;align-items:center;font-weight:400;margin-bottom:1rem">
+        <input type="checkbox" id="e-starting" style="width:auto" ${s.price_is_starting_at ? "checked" : ""} />
+        <span>${lang === "fr" ? "Le prix est un prix de départ" : "Price is a starting-at price"}</span>
+      </label>
+      <div style="display:flex;gap:0.5rem">
+        <button class="btn btn-primary" id="save-service">${lang === "fr" ? "Enregistrer" : "Save"}</button>
+        <button class="btn btn-ghost" id="cancel-edit">${lang === "fr" ? "Annuler" : "Cancel"}</button>
+      </div>
+    </div>`;
+  document.getElementById("cancel-edit").addEventListener("click", () => { document.getElementById("service-editor").innerHTML = ""; });
+  document.getElementById("save-service").addEventListener("click", async () => {
+    const patch = {
+      name_en: document.getElementById("e-name-en").value,
+      name_fr: document.getElementById("e-name-fr").value,
+      description_en: document.getElementById("e-desc-en").value,
+      description_fr: document.getElementById("e-desc-fr").value,
+      duration_minutes: Number(document.getElementById("e-duration").value),
+      price_cents: Number(document.getElementById("e-price").value),
+      price_is_starting_at: document.getElementById("e-starting").checked,
+    };
+    if (service) await sb.from("services").update(patch).eq("id", service.id);
+    else await sb.from("services").insert(patch);
+    document.getElementById("service-editor").innerHTML = "";
+    loadServices();
+  });
+}
+
+async function renderContent() {
+  const lang = getLang();
+  document.getElementById("page-title").textContent = "Services";
+  document.getElementById("new-service-btn").textContent = lang === "fr" ? "+ Ajouter un service" : "+ Add service";
+  document.getElementById("new-service-btn").addEventListener("click", () => openEditor(null));
+  await loadServices();
+}
+document.addEventListener("DOMContentLoaded", () => initAdminPage(renderContent));
+</script>
+</body>
+</html>

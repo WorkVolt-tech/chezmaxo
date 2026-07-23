@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Services — Luxe Nail Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+<div id="site-header"></div>
+
+<section class="section">
+  <div class="container">
+    <div class="section-heading">
+      <h2 data-i18n="nav_services"></h2>
+      <div class="brush-divider"></div>
+    </div>
+    <div id="services-by-category" style="display:flex;flex-direction:column;gap:3rem"></div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+
+<script src="assets/js/mock-supabase.js"></script>
+<script src="assets/js/i18n.js"></script>
+<script src="assets/js/format.js"></script>
+<script src="assets/js/site-chrome.js"></script>
+<script>
+async function loadServices() {
+  const lang = getLang();
+  const { data: services } = await sb
+    .from("services").select("*, service_categories(name_en, name_fr)")
+    .eq("is_active", true).order("display_order");
+
+  const groups = {};
+  (services || []).forEach((s) => {
+    const key = lang === "en" ? (s.service_categories?.name_en || "Other") : (s.service_categories?.name_fr || "Autre");
+    groups[key] = groups[key] || [];
+    groups[key].push(s);
+  });
+
+  document.getElementById("services-by-category").innerHTML = Object.entries(groups).map(([category, items]) => `
+    <div>
+      <h3>${category}</h3>
+      <div class="grid grid-3" style="margin-top:1rem">
+        ${items.map((s) => `
+          <div class="card">
+            <h4>${lang === "en" ? s.name_en : s.name_fr}</h4>
+            <p class="text-muted">${lang === "en" ? (s.description_en || "") : (s.description_fr || "")}</p>
+            <div style="display:flex;justify-content:space-between;margin:0.75rem 0;font-size:0.9rem">
+              <span style="font-weight:600;color:var(--gold)">${s.price_is_starting_at ? t("from_price") + " " : ""}${formatPrice(s.price_cents)}</span>
+              <span class="text-muted">${s.duration_minutes} min</span>
+            </div>
+            <a href="book.html?service=${s.id}" class="btn btn-secondary" style="width:100%">${t("nav_book")}</a>
+          </div>`).join("")}
+      </div>
+    </div>`).join("");
+}
+document.addEventListener("DOMContentLoaded", loadServices);
+</script>
+</body>
+</html>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Availability — Luxe Nail Studio Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/styles.css" />
+<style>
+.cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+.cal-cell { min-height: 56px; border-radius: 8px; padding: 4px; font-size: 0.75rem; cursor: pointer; display:flex; flex-direction:column; align-items:center; border: 1px solid transparent; }
+.cal-cell:hover { background: var(--lavender-soft); }
+.cal-cell.selected { background: var(--royal); color: #fff; }
+.cal-cell.has-slots:not(.selected) { border-color: var(--gold); }
+.cal-dots { display:flex; gap:2px; flex-wrap:wrap; justify-content:center; margin-top:3px; }
+.cal-dot { width:6px; height:6px; border-radius:50%; background: var(--gold); }
+.cal-cell.selected .cal-dot { background: #fff; }
+.cal-cell.blocked { background: repeating-linear-gradient(45deg, #fee2e2, #fee2e2 4px, #fecaca 4px, #fecaca 8px); }
+</style>
+</head>
+<body>
+<div class="admin-shell">
+  <aside class="admin-sidebar" id="admin-sidebar"></aside>
+  <main class="admin-main">
+    <h1 id="page-title">Availability</h1>
+    <div class="grid" style="grid-template-columns:1fr 340px;margin-top:1.25rem;align-items:start">
+
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem">
+          <button class="btn btn-ghost" id="prev-month" style="padding:0.4rem 0.8rem">←</button>
+          <span id="month-label" style="font-family:var(--font-display);font-weight:600;color:var(--royal);font-size:1.1rem"></span>
+          <button class="btn btn-ghost" id="next-month" style="padding:0.4rem 0.8rem">→</button>
+        </div>
+        <div class="cal-grid" id="weekday-row" style="margin-bottom:4px;font-size:0.7rem;color:rgba(45,27,54,0.4);text-align:center"></div>
+        <div class="cal-grid" id="cal-cells"></div>
+        <p class="text-muted" style="margin-top:0.75rem;font-size:0.75rem">
+          <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--gold);margin-right:4px"></span><span id="legend-slots"></span>
+          &nbsp;&nbsp;
+          <span style="display:inline-block;width:10px;height:10px;background:#fecaca;margin-right:4px;vertical-align:middle"></span><span id="legend-blocked"></span>
+        </p>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:1.25rem">
+        <div class="card">
+          <h3 id="selected-date-title"></h3>
+          <ul id="day-slots-list" style="list-style:none;padding:0;margin:0.75rem 0;max-height:180px;overflow-y:auto"></ul>
+
+          <form id="slot-form" style="border-top:1px solid var(--lavender-soft);padding-top:1rem;margin-top:0.5rem">
+            <p class="text-muted" style="font-size:0.8rem;margin-bottom:0.5rem" id="add-slot-label"></p>
+            <div class="grid grid-2">
+              <div class="field"><label id="lbl-start"></label><input type="time" id="slot-start" value="10:00" required /></div>
+              <div class="field"><label id="lbl-end"></label><input type="time" id="slot-end" value="11:00" required /></div>
+            </div>
+            <div class="field"><label id="lbl-max"></label><input type="number" id="slot-max" value="1" min="1" required /></div>
+            <div class="field"><label id="lbl-note"></label><input id="slot-note" /></div>
+            <button class="btn btn-primary" style="width:100%" id="lbl-add-slot"></button>
+          </form>
+
+          <button class="btn btn-danger" id="block-day-btn" style="width:100%;margin-top:0.75rem"></button>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="../assets/js/mock-supabase.js"></script>
+<script src="../assets/js/i18n.js"></script>
+<script src="../assets/js/admin-shell.js"></script>
+<script>
+let monthCursor = new Date(); monthCursor.setDate(1);
+let slotsByDate = {};
+let blockedDates = new Set();
+let selectedDate = new Date().toISOString().slice(0, 10);
+
+const L = () => getLang() === "fr" ? {
+  legendSlots: "Créneaux disponibles", legendBlocked: "Journée bloquée",
+  addSlotFor: (d) => `Ajouter un créneau pour le ${d}`, start: "Heure de début", end: "Heure de fin",
+  max: "Nombre maximal", note: "Note interne (facultatif)", addSlot: "Ajouter le créneau",
+  blockDay: "Bloquer cette journée", unblockDay: "Débloquer cette journée",
+  active: "Actif", blockedBadge: "Bloqué", noSlots: "Aucun créneau ce jour-là.",
+} : {
+  legendSlots: "Available slots", legendBlocked: "Blocked day",
+  addSlotFor: (d) => `Add a slot for ${d}`, start: "Start time", end: "End time",
+  max: "Max appointments", note: "Internal note (optional)", addSlot: "Add slot",
+  blockDay: "Block this day", unblockDay: "Unblock this day",
+  active: "Active", blockedBadge: "Blocked", noSlots: "Nothing available that day.",
+};
+
+async function loadMonth() {
+  const monthStart = monthCursor.toISOString().slice(0, 10);
+  const monthEndDate = new Date(monthCursor.getFullYear(), monthCursor.getMonth() + 1, 0);
+  const monthEnd = monthEndDate.toISOString().slice(0, 10);
+
+  const [{ data: slots }, { data: blocked }] = await Promise.all([
+    sb.from("availability_slots").select("*").gte("slot_date", monthStart).lte("slot_date", monthEnd).order("start_time"),
+    sb.from("blocked_dates").select("*").gte("blocked_date", monthStart).lte("blocked_date", monthEnd).is("start_time", null),
+  ]);
+
+  slotsByDate = {};
+  (slots || []).forEach((s) => { (slotsByDate[s.slot_date] = slotsByDate[s.slot_date] || []).push(s); });
+  blockedDates = new Set((blocked || []).map((b) => b.blocked_date));
+
+  renderCalendar(monthStart, monthEndDate);
+  renderDayPanel();
+}
+
+function renderCalendar(monthStart, monthEndDate) {
+  const lang = getLang();
+  document.getElementById("month-label").textContent = monthCursor.toLocaleDateString(lang === "fr" ? "fr-CA" : "en-CA", { month: "long", year: "numeric" });
+  document.getElementById("weekday-row").innerHTML = (lang === "fr" ? ["D","L","M","M","J","V","S"] : ["S","M","T","W","T","F","S"]).map((d) => `<div>${d}</div>`).join("");
+
+  const firstWeekday = new Date(monthCursor.getFullYear(), monthCursor.getMonth(), 1).getDay();
+  const daysInMonth = monthEndDate.getDate();
+  let html = "";
+  for (let i = 0; i < firstWeekday; i++) html += `<div></div>`;
+  for (let d = 1; d <= daysInMonth; d++) {
+    const dateStr = `${monthStart.slice(0, 8)}${String(d).padStart(2, "0")}`;
+    const hasSlots = (slotsByDate[dateStr] || []).length > 0;
+    const isBlocked = blockedDates.has(dateStr);
+    html += `
+      <div class="cal-cell ${selectedDate === dateStr ? "selected" : ""} ${hasSlots ? "has-slots" : ""} ${isBlocked ? "blocked" : ""}" data-date="${dateStr}">
+        <span>${d}</span>
+        ${hasSlots ? `<div class="cal-dots">${(slotsByDate[dateStr] || []).slice(0, 4).map(() => `<span class="cal-dot"></span>`).join("")}</div>` : ""}
+      </div>`;
+  }
+  document.getElementById("cal-cells").innerHTML = html;
+  document.querySelectorAll(".cal-cell[data-date]").forEach((cell) => {
+    cell.addEventListener("click", () => { selectedDate = cell.dataset.date; renderCalendar(monthStart, monthEndDate); renderDayPanel(); });
+  });
+}
+
+function renderDayPanel() {
+  const lang = getLang();
+  const t2 = L();
+  const isBlocked = blockedDates.has(selectedDate);
+  document.getElementById("selected-date-title").textContent = new Date(selectedDate + "T00:00:00").toLocaleDateString(lang === "fr" ? "fr-CA" : "en-CA", { weekday: "long", month: "long", day: "numeric" });
+
+  const daySlots = slotsByDate[selectedDate] || [];
+  document.getElementById("day-slots-list").innerHTML = daySlots.length
+    ? daySlots.map((s) => `
+        <li style="display:flex;justify-content:space-between;align-items:center;background:var(--lavender-soft);border-radius:8px;padding:0.4rem 0.6rem;margin-bottom:0.35rem;font-size:0.8rem">
+          <span>${s.start_time.slice(0,5)}–${s.end_time.slice(0,5)} (${s.max_appointments})</span>
+          <button data-id="${s.id}" data-active="${s.is_active}" class="toggle-slot" style="background:none;border:none;font-size:0.7rem;font-weight:600;cursor:pointer;color:${s.is_active ? "#166534" : "#9ca3af"}">
+            ${s.is_active ? t2.active : t2.blockedBadge}
+          </button>
+        </li>`).join("")
+    : `<li class="text-muted" style="font-size:0.85rem">${t2.noSlots}</li>`;
+
+  document.querySelectorAll(".toggle-slot").forEach((btn) => {
+    btn.addEventListener("click", async () => {
+      await sb.from("availability_slots").update({ is_active: btn.dataset.active !== "true" }).eq("id", btn.dataset.id);
+      loadMonth();
+    });
+  });
+
+  document.getElementById("add-slot-label").textContent = t2.addSlotFor(selectedDate);
+  document.getElementById("lbl-start").textContent = t2.start;
+  document.getElementById("lbl-end").textContent = t2.end;
+  document.getElementById("lbl-max").textContent = t2.max;
+  document.getElementById("lbl-note").textContent = t2.note;
+  document.getElementById("lbl-add-slot").textContent = t2.addSlot;
+  document.getElementById("block-day-btn").textContent = isBlocked ? t2.unblockDay : t2.blockDay;
+}
+
+async function renderContent() {
+  const lang = getLang();
+  document.getElementById("page-title").textContent = lang === "fr" ? "Disponibilités" : "Availability";
+  document.getElementById("legend-slots").textContent = L().legendSlots;
+  document.getElementById("legend-blocked").textContent = L().legendBlocked;
+
+  document.getElementById("prev-month").addEventListener("click", () => { monthCursor = new Date(monthCursor.getFullYear(), monthCursor.getMonth() - 1, 1); loadMonth(); });
+  document.getElementById("next-month").addEventListener("click", () => { monthCursor = new Date(monthCursor.getFullYear(), monthCursor.getMonth() + 1, 1); loadMonth(); });
+
+  document.getElementById("slot-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    await sb.from("availability_slots").insert({
+      slot_date: selectedDate,
+      start_time: document.getElementById("slot-start").value,
+      end_time: document.getElementById("slot-end").value,
+      max_appointments: Number(document.getElementById("slot-max").value),
+      internal_note: document.getElementById("slot-note").value || null,
+    });
+    document.getElementById("slot-note").value = "";
+    loadMonth();
+  });
+
+  document.getElementById("block-day-btn").addEventListener("click", async () => {
+    if (blockedDates.has(selectedDate)) {
+      await sb.from("blocked_dates").delete().eq("blocked_date", selectedDate).is("start_time", null);
+    } else {
+      await sb.from("blocked_dates").insert({ blocked_date: selectedDate, start_time: null, end_time: null, reason: null });
+    }
+    loadMonth();
+  });
+
+  await loadMonth();
+}
+document.addEventListener("DOMContentLoaded", () => initAdminPage(renderContent));
+</script>
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Luxe Nail Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+<div id="site-header"></div>
+
+<section class="hero-full">
+  <div class="container">
+    <span class="tagline-pill" data-i18n="tagline_pill"></span>
+    <h1>Luxe Nail Studio</h1>
+    <p class="subtitle" data-i18n="hero_subtitle"></p>
+    <div class="brush-divider"></div>
+    <div style="display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;margin-top:1.5rem">
+      <a href="book.html" class="btn" style="background:var(--gold);color:var(--royal-dark)" data-i18n="book_cta"></a>
+      <a href="services.html" class="btn" style="background:rgba(255,255,255,0.12);color:#fff;border:1px solid rgba(255,255,255,0.4)" data-i18n="nav_services"></a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="numbered-eyebrow"><span class="num">01</span><span class="label" data-i18n="welcome_label"></span></div>
+    <div class="section-heading">
+      <h2 data-i18n="why_title"></h2>
+      <div class="brush-divider"></div>
+      <p class="text-muted" data-i18n="why_subtitle"></p>
+    </div>
+    <div class="feature-grid">
+      <div class="feature-item">
+        <div class="feature-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 21c-2-3-2-7 0-9l7-7 3 3-7 7c-2 2-6 2-9 0"/><path d="M14 5l5 5"/></svg></div>
+        <h4 data-i18n="feat_mani_title"></h4>
+        <p class="text-muted" data-i18n="feat_mani_body"></p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 15c2 3 6 5 8 5s6-2 8-5"/><path d="M12 3v9"/><path d="M8 8l4-5 4 5"/></svg></div>
+        <h4 data-i18n="feat_pedi_title"></h4>
+        <p class="text-muted" data-i18n="feat_pedi_body"></p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2l3 6 6 1-4.5 4.5L18 20l-6-3-6 3 1.5-6.5L3 9l6-1z"/></svg></div>
+        <h4 data-i18n="feat_clean_title"></h4>
+        <p class="text-muted" data-i18n="feat_clean_body"></p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M9 12a3 3 0 1 1 6 0 3 3 0 0 1-6 0"/></svg></div>
+        <h4 data-i18n="feat_art_title"></h4>
+        <p class="text-muted" data-i18n="feat_art_body"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section tinted">
+  <div class="container">
+    <div class="numbered-eyebrow"><span class="num">02</span><span class="label" data-i18n="services_label"></span></div>
+    <div class="section-heading">
+      <h2 data-i18n="featured_services"></h2>
+      <div class="brush-divider"></div>
+    </div>
+    <div id="featured-services" class="grid grid-3"></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="numbered-eyebrow"><span class="num">03</span><span class="label" data-i18n="gallery_label"></span></div>
+    <div class="section-heading">
+      <h2 data-i18n="recent_work"></h2>
+      <div class="brush-divider"></div>
+    </div>
+    <div id="gallery-preview" class="gallery-grid"></div>
+  </div>
+</section>
+
+<section class="section tinted">
+  <div class="container">
+    <div class="numbered-eyebrow"><span class="num">04</span><span class="label" data-i18n="testimonials_label"></span></div>
+    <div class="section-heading">
+      <h2 data-i18n="testimonials"></h2>
+      <div class="brush-divider"></div>
+    </div>
+    <div id="testimonials-list" class="grid grid-3"></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="cta-banner">
+      <div class="numbered-eyebrow"><span class="num" style="border-color:var(--gold);color:var(--gold)">05</span><span class="label" style="color:rgba(255,255,255,0.7)" data-i18n="book_label"></span></div>
+      <h2 data-i18n="cta_title"></h2>
+      <p style="color:rgba(255,255,255,0.85)" data-i18n="cta_subtitle"></p>
+      <div class="cta-contact-row">
+        <div class="cta-contact-item">
+          <span class="icon-circle"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.8.5 2.7.6a2 2 0 0 1 1.7 2Z"/></svg></span>
+          <span id="cta-phone"></span>
+        </div>
+        <div class="cta-contact-item">
+          <span class="icon-circle"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg></span>
+          <span id="cta-email"></span>
+        </div>
+      </div>
+      <div style="margin-top:1.75rem">
+        <a href="book.html" class="btn" style="background:var(--gold);color:var(--royal-dark)" data-i18n="book_cta"></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+
+<script src="assets/js/mock-supabase.js"></script>
+<script src="assets/js/i18n.js"></script>
+<script src="assets/js/format.js"></script>
+<script src="assets/js/site-chrome.js"></script>
+<script>
+async function loadHome() {
+  const lang = getLang();
+
+  const { data: services } = await sb
+    .from("services").select("*, service_categories(name_en, name_fr)")
+    .eq("is_active", true).order("display_order").limit(6);
+  document.getElementById("featured-services").innerHTML = (services || []).map((s) => `
+    <div class="card">
+      <h3>${lang === "en" ? s.name_en : s.name_fr}</h3>
+      <p class="text-muted">${lang === "en" ? (s.description_en || "") : (s.description_fr || "")}</p>
+      <div style="display:flex;justify-content:space-between;margin:0.75rem 0;font-size:0.9rem">
+        <span style="font-weight:600;color:var(--gold)">${s.price_is_starting_at ? t("from_price") + " " : ""}${formatPrice(s.price_cents)}</span>
+        <span class="text-muted">${s.duration_minutes} min</span>
+      </div>
+      <a href="book.html?service=${s.id}" class="btn btn-secondary" style="width:100%">${t("nav_book")}</a>
+    </div>`).join("");
+
+  const { data: gallery } = await sb
+    .from("gallery_images").select("*").eq("is_active", true).order("display_order").limit(8);
+  document.getElementById("gallery-preview").innerHTML = (gallery || []).map((img) => `
+    <figure><img src="${img.image_url}" alt="${lang === "en" ? (img.style_name_en || "") : (img.style_name_fr || "")}" /></figure>
+  `).join("") || `<p class="text-muted">${lang === "fr" ? "Aucune image pour le moment." : "No images yet."}</p>`;
+
+  const { data: settingsRows } = await sb.from("website_settings").select("*");
+  const settings = {};
+  (settingsRows || []).forEach((r) => { settings[r.key] = lang === "fr" ? r.value_fr : r.value_en; });
+  document.getElementById("cta-phone").textContent = settings.phone || "";
+  document.getElementById("cta-email").textContent = settings.email || "";
+
+  const { data: testimonials } = await sb
+    .from("testimonials").select("*").eq("is_active", true).order("display_order").limit(3);
+  document.getElementById("testimonials-list").innerHTML = (testimonials || []).map((tst) => `
+    <div class="card testimonial-card">
+      <span class="quote-mark">&ldquo;</span>
+      <div class="stars">${"★".repeat(tst.rating || 5)}</div>
+      <p style="font-style:italic">${lang === "en" ? tst.quote_en : tst.quote_fr}</p>
+      <p style="font-weight:600;color:var(--royal);margin-top:0.75rem">— ${tst.client_name}</p>
+    </div>`).join("") || "";
+}
+document.addEventListener("DOMContentLoaded", loadHome);
+</script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Website Content — Luxe Nail Studio Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/styles.css" />
+</head>
+<body>
+<div class="admin-shell">
+  <aside class="admin-sidebar" id="admin-sidebar"></aside>
+  <main class="admin-main">
+    <h1 id="page-title">Website Content</h1>
+    <p id="saved-note" class="success-text hidden"></p>
+    <div class="card" style="margin-top:1rem">
+      <h3 id="settings-title"></h3>
+      <div id="settings-list" style="margin-top:1rem;display:flex;flex-direction:column;gap:0.75rem"></div>
+    </div>
+    <div class="card" style="margin-top:1.5rem">
+      <h3 id="policies-title"></h3>
+      <div id="policies-editor" style="margin-top:1rem;display:flex;flex-direction:column;gap:1.25rem"></div>
+    </div>
+  </main>
+</div>
+
+<script src="../assets/js/mock-supabase.js"></script>
+<script src="../assets/js/i18n.js"></script>
+<script src="../assets/js/admin-shell.js"></script>
+<script>
+function flashSaved() {
+  const lang = getLang();
+  const el = document.getElementById("saved-note");
+  el.textContent = (lang === "fr" ? "Enregistré · " : "Saved · ") + new Date().toLocaleTimeString();
+  el.classList.remove("hidden");
+}
+
+async function renderContent() {
+  const lang = getLang();
+  document.getElementById("page-title").textContent = lang === "fr" ? "Contenu du site" : "Website Content";
+  document.getElementById("settings-title").textContent = lang === "fr" ? "Paramètres du site" : "Site settings";
+  document.getElementById("policies-title").textContent = lang === "fr" ? "Politiques du salon" : "Salon policies";
+
+  const { data: settings } = await sb.from("website_settings").select("*");
+  document.getElementById("settings-list").innerHTML = (settings || []).map((s) => `
+    <div class="grid" style="grid-template-columns:120px 1fr 1fr;align-items:center;gap:0.5rem">
+      <span class="text-muted" style="font-size:0.75rem;text-transform:uppercase">${s.key}</span>
+      <input data-key="${s.key}" data-field="value_en" value="${s.value_en || ""}" placeholder="English" />
+      <input data-key="${s.key}" data-field="value_fr" value="${s.value_fr || ""}" placeholder="Français" />
+    </div>`).join("");
+  document.querySelectorAll("#settings-list input").forEach((input) => {
+    input.addEventListener("blur", async () => {
+      await sb.from("website_settings").update({ [input.dataset.field]: input.value }).eq("key", input.dataset.key);
+      flashSaved();
+    });
+  });
+
+  const { data: policies } = await sb.from("salon_policies").select("*").order("display_order");
+  document.getElementById("policies-editor").innerHTML = (policies || []).map((p) => `
+    <div style="border-bottom:1px solid var(--lavender-soft);padding-bottom:1rem">
+      <p class="text-muted" style="font-size:0.75rem;text-transform:uppercase;margin-bottom:0.5rem">${p.policy_key}</p>
+      <div class="grid grid-2">
+        <textarea data-id="${p.id}" data-field="body_en" rows="3">${p.body_en}</textarea>
+        <textarea data-id="${p.id}" data-field="body_fr" rows="3">${p.body_fr}</textarea>
+      </div>
+    </div>`).join("");
+  document.querySelectorAll("#policies-editor textarea").forEach((el) => {
+    el.addEventListener("blur", async () => {
+      await sb.from("salon_policies").update({ [el.dataset.field]: el.value }).eq("id", el.dataset.id);
+      flashSaved();
+    });
+  });
+}
+document.addEventListener("DOMContentLoaded", () => initAdminPage(renderContent));
+</script>
+</body>
+</html>

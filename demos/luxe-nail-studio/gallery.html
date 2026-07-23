@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Gallery — Luxe Nail Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+<div id="site-header"></div>
+
+<section class="section">
+  <div class="container">
+    <div class="section-heading">
+      <h2 data-i18n="recent_work"></h2>
+      <div class="brush-divider"></div>
+    </div>
+    <div id="gallery-grid" class="gallery-grid"></div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+
+<script src="assets/js/mock-supabase.js"></script>
+<script src="assets/js/i18n.js"></script>
+<script src="assets/js/format.js"></script>
+<script src="assets/js/site-chrome.js"></script>
+<script>
+async function loadGallery() {
+  const lang = getLang();
+  const { data } = await sb.from("gallery_images").select("*").eq("is_active", true).order("display_order");
+  document.getElementById("gallery-grid").innerHTML = (data || []).map((img) => `
+    <figure>
+      <img src="${img.image_url}" alt="${lang === "en" ? (img.style_name_en || "") : (img.style_name_fr || "")}" />
+      ${img.style_name_en || img.category ? `
+        <figcaption style="padding:0.75rem;font-size:0.85rem">
+          <p style="font-weight:600;color:var(--royal)">${lang === "en" ? (img.style_name_en || "") : (img.style_name_fr || "")}</p>
+          ${img.category ? `<p class="text-muted">${img.category}</p>` : ""}
+          ${img.instagram_url ? `<a href="${img.instagram_url}" style="color:var(--blossom-dark);text-decoration:underline">Instagram</a>` : ""}
+        </figcaption>` : ""}
+    </figure>`).join("");
+}
+document.addEventListener("DOMContentLoaded", loadGallery);
+</script>
+</body>
+</html>

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Book — Luxe Nail Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+<div id="site-header"></div>
+
+<section class="section">
+  <div class="container" style="max-width:760px">
+    <div class="section-heading">
+      <h2 data-i18n="book_cta"></h2>
+      <div class="brush-divider"></div>
+    </div>
+
+    <ol class="step-indicator" id="step-indicator"></ol>
+
+    <div id="step-service"></div>
+    <div id="step-datetime" class="hidden"></div>
+    <div id="step-details" class="hidden"></div>
+    <div id="step-review" class="hidden"></div>
+    <div id="step-confirmation" class="hidden"></div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+
+<script src="assets/js/mock-supabase.js"></script>
+<script src="assets/js/i18n.js"></script>
+<script src="assets/js/format.js"></script>
+<script src="assets/js/site-chrome.js"></script>
+<script>
+const STEPS = ["service", "datetime", "details", "review"];
+const state = {
+  step: "service",
+  serviceId: new URLSearchParams(location.search).get("service") || null,
+  slotId: null,
+  services: [], slots: [], policies: [],
+  name: "", phone: "", email: "", preferredLanguage: getLang(), notes: "",
+  file: null, agreed: false,
+};
+
+function renderStepIndicator() {
+  document.getElementById("step-indicator").innerHTML = STEPS.map((s, i) => `
+    <li class="step ${state.step === s ? "active" : ""}">${i + 1}. ${t("step_" + s)}</li>
+  `).join("");
+}
+
+function showStep(step) {
+  state.step = step;
+  STEPS.forEach((s) => document.getElementById(`step-${s}`).classList.toggle("hidden", s !== step));
+  renderStepIndicator();
+  render();
+}
+
+function selectedService() { return state.services.find((s) => s.id === state.serviceId); }
+function selectedSlot() { return state.slots.find((s) => s.id === state.slotId); }
+
+function render() {
+  if (state.step === "service") renderServiceStep();
+  if (state.step === "datetime") renderDateTimeStep();
+  if (state.step === "details") renderDetailsStep();
+  if (state.step === "review") renderReviewStep();
+}
+
+function renderServiceStep() {
+  const lang = getLang();
+  document.getElementById("step-service").innerHTML = `
+    <div class="grid grid-2">
+      ${state.services.map((s) => `
+        <button class="service-pick ${state.serviceId === s.id ? "selected" : ""}" data-id="${s.id}">
+          <h4>${lang === "en" ? s.name_en : s.name_fr}</h4>
+          <p class="text-muted">${s.duration_minutes} min · ${formatPrice(s.price_cents)}</p>
+        </button>`).join("")}
+    </div>`;
+  document.querySelectorAll(".service-pick").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      state.serviceId = btn.dataset.id;
+      showStep("datetime");
+    });
+  });
+}
+
+function renderDateTimeStep() {
+  const byDate = {};
+  state.slots.forEach((s) => { (byDate[s.slot_date] = byDate[s.slot_date] || []).push(s); });
+  const dates = Object.keys(byDate);
+  const selectedDate = state._selectedDate || dates[0];
+  state._selectedDate = selectedDate;
+
+  document.getElementById("step-datetime").innerHTML = `
+    <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1.5rem" id="date-pills">
+      ${dates.map((d) => `<button class="date-pill ${d === selectedDate ? "selected" : ""}" data-date="${d}">
+        ${new Date(d + "T00:00:00").toLocaleDateString(getLang() === "fr" ? "fr-CA" : "en-CA", { weekday: "short", month: "short", day: "numeric" })}
+      </button>`).join("")}
+    </div>
+    <div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(90px,1fr))" id="time-slots">
+      ${(byDate[selectedDate] || []).map((s) => `
+        <button class="slot-pick ${state.slotId === s.id ? "selected" : ""}" data-id="${s.id}" style="text-align:center">
+          ${s.start_time.slice(0, 5)}
+        </button>`).join("")}
+    </div>
+    <div style="margin-top:2rem"><button class="btn btn-ghost" id="back-to-service" data-i18n="back"></button></div>`;
+
+  document.querySelectorAll("#date-pills button").forEach((btn) => {
+    btn.addEventListener("click", () => { state._selectedDate = btn.dataset.date; renderDateTimeStep(); });
+  });
+  document.querySelectorAll("#time-slots button").forEach((btn) => {
+    btn.addEventListener("click", () => { state.slotId = btn.dataset.id; showStep("details"); });
+  });
+  document.getElementById("back-to-service").addEventListener("click", () => showStep("service"));
+  applyTranslations();
+}
+
+function renderDetailsStep() {
+  document.getElementById("step-details").innerHTML = `
+    <div class="field"><label data-i18n="name"></label><input id="f-name" value="${state.name}" required /></div>
+    <div class="field"><label data-i18n="phone"></label><input id="f-phone" type="tel" value="${state.phone}" required /></div>
+    <div class="field"><label data-i18n="email_optional"></label><input id="f-email" type="email" value="${state.email}" /></div>
+    <div class="field"><label data-i18n="preferred_language"></label>
+      <select id="f-lang">
+        <option value="en" ${state.preferredLanguage === "en" ? "selected" : ""}>English</option>
+        <option value="fr" ${state.preferredLanguage === "fr" ? "selected" : ""}>Français</option>
+      </select>
+    </div>
+    <div class="field"><label data-i18n="notes"></label><textarea id="f-notes" rows="3">${state.notes}</textarea></div>
+    <div class="field"><label data-i18n="inspiration_photo"></label><input id="f-file" type="file" accept="image/*" /></div>
+    <div style="display:flex;gap:0.75rem">
+      <button class="btn btn-ghost" id="back-to-datetime" data-i18n="back"></button>
+      <button class="btn btn-primary" id="to-review" data-i18n="continue_label"></button>
+    </div>`;
+  applyTranslations();
+  document.getElementById("back-to-datetime").addEventListener("click", () => showStep("datetime"));
+  document.getElementById("to-review").addEventListener("click", () => {
+    state.name = document.getElementById("f-name").value.trim();
+    state.phone = document.getElementById("f-phone").value.trim();
+    state.email = document.getElementById("f-email").value.trim();
+    state.preferredLanguage = document.getElementById("f-lang").value;
+    state.notes = document.getElementById("f-notes").value.trim();
+    state.file = document.getElementById("f-file").files[0] || null;
+    if (!state.name || !state.phone) return;
+    showStep("review");
+  });
+}
+
+function renderReviewStep() {
+  const lang = getLang();
+  const service = selectedService();
+  const slot = selectedSlot();
+  document.getElementById("step-review").innerHTML = `
+    <div class="card" style="margin-bottom:1.5rem">
+      <h4>${lang === "en" ? "Your appointment" : "Votre rendez-vous"}</h4>
+      <p class="text-muted">${service ? (lang === "en" ? service.name_en : service.name_fr) : ""}</p>
+      <p class="text-muted">${slot ? new Date(slot.slot_date + "T00:00:00").toLocaleDateString(lang === "fr" ? "fr-CA" : "en-CA", { weekday: "long", month: "long", day: "numeric" }) + " · " + slot.start_time.slice(0, 5) : ""}</p>
+      <p class="text-muted">${state.name} · ${state.phone}</p>
+    </div>
+    <div class="card" style="max-height:200px;overflow-y:auto;margin-bottom:1.5rem;font-size:0.85rem">
+      ${state.policies.map((p) => `<p><strong style="color:var(--royal)">${lang === "en" ? p.title_en : p.title_fr}</strong><br/>${lang === "en" ? p.body_en : p.body_fr}</p>`).join("")}
+    </div>
+    <label style="display:flex;gap:0.6rem;align-items:flex-start;font-weight:400;font-size:0.9rem">
+      <input type="checkbox" id="f-agree" style="width:auto;margin-top:3px" />
+      <span data-i18n="agree_policies"></span>
+    </label>
+    <p id="review-error" class="error-text" style="margin-top:0.75rem"></p>
+    <div style="display:flex;gap:0.75rem;margin-top:1rem">
+      <button class="btn btn-ghost" id="back-to-details" data-i18n="back"></button>
+      <button class="btn btn-primary" id="submit-booking" style="flex:1" data-i18n="submit_request"></button>
+    </div>`;
+  applyTranslations();
+  document.getElementById("back-to-details").addEventListener("click", () => showStep("details"));
+  document.getElementById("submit-booking").addEventListener("click", submitBooking);
+}
+
+async function submitBooking() {
+  const agree = document.getElementById("f-agree").checked;
+  const errorEl = document.getElementById("review-error");
+  if (!agree) { errorEl.textContent = getLang() === "en" ? "Please agree to the policies first." : "Veuillez accepter les politiques d'abord."; return; }
+
+  const submitBtn = document.getElementById("submit-booking");
+  submitBtn.disabled = true;
+  submitBtn.textContent = "…";
+
+  let inspirationImageUrl = null;
+  if (state.file) {
+    const path = `${crypto.randomUUID()}.${state.file.name.split(".").pop()}`;
+    const { error: uploadError } = await sb.storage.from("inspiration").upload(path, state.file);
+    if (!uploadError) inspirationImageUrl = path;
+  }
+
+  const { data, error } = await sb.rpc("create_appointment", {
+    p_slot_id: state.slotId,
+    p_service_id: state.serviceId,
+    p_addon_ids: [],
+    p_client_name: state.name,
+    p_client_phone: normalizePhone(state.phone),
+    p_client_email: state.email || null,
+    p_preferred_language: state.preferredLanguage,
+    p_client_notes: state.notes || null,
+    p_inspiration_image_url: inspirationImageUrl,
+    p_agreed_to_policies: true,
+  });
+
+  if (error) {
+    errorEl.textContent = error.message.includes("SLOT_FULL") || error.message.includes("SLOT_UNAVAILABLE")
+      ? (getLang() === "en" ? "That time was just taken — please pick another." : "Ce créneau vient d'être pris — veuillez en choisir un autre.")
+      : (getLang() === "en" ? "Something went wrong. Please try again." : "Une erreur est survenue. Veuillez réessayer.");
+    submitBtn.disabled = false;
+    submitBtn.textContent = t("submit_request");
+    return;
+  }
+
+  document.getElementById("step-review").classList.add("hidden");
+  const confirmEl = document.getElementById("step-confirmation");
+  confirmEl.classList.remove("hidden");
+  confirmEl.innerHTML = `
+    <div class="card" style="text-align:center">
+      <div class="logo" style="justify-content:center;display:flex;margin-bottom:0.75rem">Luxe Nail Studio</div>
+      <h3>${getLang() === "en" ? "Request received" : "Demande reçue"}</h3>
+      <p class="text-muted">${t("pending_notice")}</p>
+      <p class="text-muted" style="margin-top:1.5rem">${t("reference_label")}</p>
+      <p style="font-family:monospace;font-size:1.5rem;font-weight:600;color:var(--gold);letter-spacing:0.05em">${data.reference_number}</p>
+      <a href="manage-appointment.html" class="btn btn-primary" style="margin-top:1rem" data-i18n="nav_manage"></a>
+    </div>`;
+  applyTranslations();
+}
+
+async function init() {
+  const lang = getLang();
+  const today = new Date().toISOString().slice(0, 10);
+
+  const [{ data: services }, { data: slots }, { data: policies }] = await Promise.all([
+    sb.from("services").select("*").eq("is_active", true).order("display_order"),
+    sb.from("public_available_slots").select("*").gt("spots_remaining", 0).gte("slot_date", today).order("slot_date").order("start_time"),
+    sb.from("salon_policies").select("*").order("display_order"),
+  ]);
+  state.services = services || [];
+  state.slots = slots || [];
+  state.policies = policies || [];
+
+  if (state.serviceId) showStep("datetime"); else showStep("service");
+}
+document.addEventListener("DOMContentLoaded", init);
+</script>
+</body>
+</html>

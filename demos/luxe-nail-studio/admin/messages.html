@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Messages — Luxe Nail Studio Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/styles.css" />
+</head>
+<body>
+<div class="admin-shell">
+  <aside class="admin-sidebar" id="admin-sidebar"></aside>
+  <main class="admin-main">
+    <h1 id="page-title">Messages</h1>
+    <div class="grid" style="grid-template-columns:300px 1fr;margin-top:1.25rem;align-items:start">
+      <div class="card" style="padding:0;max-height:600px;overflow-y:auto" id="conversation-list"></div>
+      <div class="card chat-panel" id="chat-area">
+        <p class="text-muted" style="margin:auto" id="empty-chat-note"></p>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="../assets/js/mock-supabase.js"></script>
+<script src="../assets/js/i18n.js"></script>
+<script src="../assets/js/admin-shell.js"></script>
+<script>
+let activeConversationId = null;
+let activeChannel = null;
+
+async function loadConversations() {
+  const { data } = await sb.from("conversations").select("*, appointments(reference_number), clients(full_name)")
+    .order("last_message_at", { ascending: false, nullsFirst: false }).limit(50);
+  const lang = getLang();
+  document.getElementById("conversation-list").innerHTML = (data || []).map((c) => `
+    <button class="conv-item" data-id="${c.id}" style="display:block;width:100%;text-align:left;padding:0.75rem 1rem;border:none;border-bottom:1px solid var(--lavender-soft);background:${activeConversationId === c.id ? "var(--lavender-soft)" : "transparent"};cursor:pointer">
+      <div style="font-weight:500">${c.clients?.full_name || ""}</div>
+      <div class="text-muted" style="font-size:0.75rem">${c.appointments?.reference_number || ""}</div>
+    </button>`).join("") || `<p class="text-muted" style="padding:1rem">${lang === "fr" ? "Aucune conversation." : "No conversations yet."}</p>`;
+  document.querySelectorAll(".conv-item").forEach((btn) => btn.addEventListener("click", () => openConversation(btn.dataset.id)));
+}
+
+async function openConversation(id) {
+  activeConversationId = id;
+  loadConversations();
+  const { data: msgs } = await sb.from("messages").select("*").eq("conversation_id", id).order("created_at");
+  await sb.from("messages").update({ is_read_by_admin: true }).eq("conversation_id", id).eq("sender_type", "client");
+
+  document.getElementById("chat-area").innerHTML = `
+    <div class="chat-messages" id="chat-messages">${(msgs || []).map(renderBubble).join("")}</div>
+    <form class="chat-input-row" id="chat-form">
+      <input id="chat-draft" placeholder="${getLang() === "fr" ? "Écrire une réponse…" : "Type a reply…"}" />
+      <button class="btn btn-primary">${getLang() === "fr" ? "Envoyer" : "Send"}</button>
+    </form>`;
+  scrollChatToBottom();
+
+  document.getElementById("chat-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const input = document.getElementById("chat-draft");
+    const body = input.value.trim();
+    if (!body) return;
+    input.value = "";
+    await sb.from("messages").insert({ conversation_id: id, sender_type: "admin", body });
+    await sb.from("conversations").update({ last_message_at: new Date().toISOString() }).eq("id", id);
+  });
+
+  if (activeChannel) sb.removeChannel(activeChannel);
+  activeChannel = sb.channel(`messages-${id}`)
+    .on("postgres_changes", { event: "INSERT", schema: "public", table: "messages", filter: `conversation_id=eq.${id}` }, (payload) => {
+      const el = document.getElementById("chat-messages");
+      if (el) { el.insertAdjacentHTML("beforeend", renderBubble(payload.new)); scrollChatToBottom(); }
+    })
+    .subscribe();
+}
+
+function renderBubble(m) {
+  return `<div class="chat-bubble ${m.sender_type}">${m.body || ""}</div>`;
+}
+function scrollChatToBottom() {
+  const el = document.getElementById("chat-messages");
+  if (el) el.scrollTop = el.scrollHeight;
+}
+
+async function renderContent() {
+  const lang = getLang();
+  document.getElementById("page-title").textContent = "Messages";
+  document.getElementById("empty-chat-note").textContent = lang === "fr" ? "Sélectionnez une conversation" : "Select a conversation";
+  await loadConversations();
+}
+document.addEventListener("DOMContentLoaded", () => initAdminPage(renderContent));
+</script>
+</body>
+</html>

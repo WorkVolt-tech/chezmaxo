@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Contact — Luxe Nail Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+<div id="site-header"></div>
+
+<section class="section">
+  <div class="container">
+    <div class="section-heading">
+      <h2 data-i18n="nav_contact"></h2>
+      <div class="brush-divider"></div>
+    </div>
+    <div class="grid grid-2">
+      <div class="card">
+        <dl style="font-size:0.9rem">
+          <dt style="font-weight:600;color:var(--royal)">Phone</dt>
+          <dd id="contact-phone" class="text-muted" style="margin:0 0 0.75rem"></dd>
+          <dt style="font-weight:600;color:var(--royal)">Email</dt>
+          <dd id="contact-email" class="text-muted" style="margin:0 0 0.75rem"></dd>
+          <dt style="font-weight:600;color:var(--royal)">Address</dt>
+          <dd id="contact-address" class="text-muted" style="margin:0 0 0.75rem"></dd>
+          <dt style="font-weight:600;color:var(--royal)" data-i18n="hours"></dt>
+          <dd id="contact-hours" class="text-muted" style="white-space:pre-line;margin:0"></dd>
+        </dl>
+      </div>
+      <div class="card">
+        <form id="contact-form">
+          <!-- Honeypot: real visitors never see or fill this in; bots that
+               auto-fill every field will, and we silently drop those. -->
+          <input type="text" name="website" autocomplete="off" tabindex="-1" style="position:absolute;left:-9999px" aria-hidden="true" />
+          <div class="field"><label data-i18n="name"></label><input name="name" required /></div>
+          <div class="field"><label>Email</label><input type="email" name="email" required /></div>
+          <div class="field"><label data-i18n="notes"></label><textarea name="message" rows="4" required></textarea></div>
+          <button type="submit" class="btn btn-primary" style="width:100%" data-i18n="contact_send"></button>
+          <p id="contact-status" style="margin-top:0.75rem"></p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+
+<script src="assets/js/mock-supabase.js"></script>
+<script src="assets/js/i18n.js"></script>
+<script src="assets/js/site-chrome.js"></script>
+<script>
+async function loadContactInfo() {
+  const lang = getLang();
+  const { data } = await sb.from("website_settings").select("*");
+  const map = {};
+  (data || []).forEach((r) => { map[r.key] = lang === "fr" ? r.value_fr : r.value_en; });
+  document.getElementById("contact-phone").textContent = map.phone || "";
+  document.getElementById("contact-email").textContent = map.email || "";
+  document.getElementById("contact-address").textContent = map.address || "";
+  document.getElementById("contact-hours").textContent = map.hours || "";
+}
+
+document.getElementById("contact-form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const form = new FormData(e.target);
+  const statusEl = document.getElementById("contact-status");
+  if (form.get("website")) return; // honeypot tripped — silently drop
+  statusEl.textContent = "…";
+  const { error } = await sb.rpc("submit_contact_form", {
+    p_name: form.get("name"), p_email: form.get("email"), p_message: form.get("message"),
+  });
+  if (error) {
+    statusEl.className = "error-text";
+    statusEl.textContent = t("contact_error");
+  } else {
+    statusEl.className = "success-text";
+    statusEl.textContent = t("contact_sent");
+    e.target.reset();
+  }
+});
+
+document.addEventListener("DOMContentLoaded", loadContactInfo);
+</script>
+</body>
+</html>

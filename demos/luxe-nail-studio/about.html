@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>About — Luxe Nail Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+<div id="site-header"></div>
+
+<section class="section">
+  <div class="container">
+    <div class="section-heading">
+      <h2 data-i18n="about_title"></h2>
+      <div class="brush-divider"></div>
+    </div>
+    <div style="max-width:700px;margin:0 auto;display:flex;flex-direction:column;gap:1.25rem">
+      <div class="card"><p id="about-story"></p></div>
+      <div class="card">
+        <h3 id="about-training-title"></h3>
+        <p id="about-training-body" class="text-muted"></p>
+      </div>
+      <div class="card">
+        <h3 id="about-clean-title"></h3>
+        <p id="about-clean-body" class="text-muted"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+
+<script src="assets/js/mock-supabase.js"></script>
+<script src="assets/js/i18n.js"></script>
+<script src="assets/js/site-chrome.js"></script>
+<script>
+// Placeholder brand copy — edit directly here, or move into
+// website_settings and load it the way the footer does, once real
+// bio/story text is ready.
+const ABOUT_COPY = {
+  en: {
+    story: "Luxe Nail Studio began as a one-chair studio built on a simple idea: nail care should feel unhurried, precise, and genuinely relaxing. The studio specializes in manicures and pedicures, with every appointment paced to give hands and feet the attention they deserve.",
+    trainingTitle: "Training & Experience",
+    trainingBody: "Certified in nail technology with ongoing education in manicure, pedicure, gel, acrylic, and nail art application, plus infection-control best practices.",
+    cleanTitle: "Cleanliness & Sanitation",
+    cleanBody: "All tools are hospital-grade sterilized or single-use, workstations are sanitized between every client, and disposable liners are used for every pedicure.",
+  },
+  fr: {
+    story: "Luxe Nail Studio est né d'une idée simple : le soin des ongles doit être précis, apaisant et sans précipitation. Le studio se spécialise en manucure et pédicure, chaque rendez-vous étant rythmé pour offrir aux mains et aux pieds toute l'attention qu'ils méritent.",
+    trainingTitle: "Formation et expérience",
+    trainingBody: "Certifiée en soins des ongles avec formation continue en manucure, pédicure, gel, acrylique, nail art et bonnes pratiques de contrôle des infections.",
+    cleanTitle: "Propreté et hygiène",
+    cleanBody: "Tous les outils sont stérilisés selon les normes hospitalières ou à usage unique, les postes sont désinfectés entre chaque cliente, et des doublures jetables sont utilisées pour chaque pédicure.",
+  },
+};
+document.addEventListener("DOMContentLoaded", () => {
+  const c = ABOUT_COPY[getLang()];
+  document.getElementById("about-story").textContent = c.story;
+  document.getElementById("about-training-title").textContent = c.trainingTitle;
+  document.getElementById("about-training-body").textContent = c.trainingBody;
+  document.getElementById("about-clean-title").textContent = c.cleanTitle;
+  document.getElementById("about-clean-body").textContent = c.cleanBody;
+});
+</script>
+</body>
+</html>
