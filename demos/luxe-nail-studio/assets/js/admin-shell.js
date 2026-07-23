@@ -11,6 +11,12 @@ const ADMIN_NAV = [
   { href: "settings.html", en: "Settings", fr: "Paramètres" },
 ];
 
+// Every admin page (other than login.html) calls this before rendering
+// its own content. It's a client-side check only — the real security
+// boundary is Row Level Security in the database (see 0003_rls.sql),
+// which rejects any query from a session that isn't in the
+// `administrators` table. This guard just avoids flashing the page at
+// a logged-out visitor before the redirect happens.
 async function requireAdmin() {
   const { data: { session } } = await sb.auth.getSession();
   if (!session) {
@@ -33,6 +39,10 @@ function renderAdminShell(admin) {
     <div style="padding:0 0.75rem 1.5rem">
       <div class="logo" style="font-size:1.1rem">Luxe Nail Studio</div>
       <p class="text-muted" style="font-size:0.75rem;margin-top:0.25rem">${admin.full_name}</p>
+      <div class="lang-toggle" style="margin-top:0.9rem">
+        <button class="${lang === "en" ? "active" : ""}" onclick="setLang('en')">EN</button>
+        <button class="${lang === "fr" ? "active" : ""}" onclick="setLang('fr')">FR</button>
+      </div>
     </div>
     <nav>
       ${ADMIN_NAV.map((item) => `<a href="${item.href}" class="${current === item.href ? "active" : ""}">${lang === "fr" ? item.fr : item.en}</a>`).join("")}
