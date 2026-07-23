@@ -15,7 +15,7 @@
 
 const DEMO_ADMIN_EMAIL = "demo@luxenailstudio.example";
 const DEMO_ADMIN_PASSWORD = "demo1234";
-const STORAGE_KEY = "luxe_demo_db_v3";
+const STORAGE_KEY = "luxe_demo_db_v4";
 
 function uuid() {
   return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (c) => {
@@ -102,6 +102,71 @@ function seedData() {
     { key: "hours", value_en: "Tue–Sat: 10am–6pm, Sun–Mon: Closed", value_fr: "Mar–Sam : 10h–18h, Dim–Lun : Fermé" },
   ];
 
+  // ---------- demo bookings, so the admin dashboard isn't empty on first login ----------
+  const slots = generateSlots();
+  const serviceIdByName = (n) => services.find((s) => s.name_en === n).id;
+  const isoNow = () => new Date().toISOString();
+  const daysAgoIso = (n) => new Date(Date.now() - n * 86400000).toISOString();
+
+  const demoClients = [
+    { id: uuid(), full_name: "Émilie Bouchard", phone_normalized: "+15145551201", email: "emilie.bouchard@example.com", preferred_language: "fr", created_at: daysAgoIso(20) },
+    { id: uuid(), full_name: "Sarah Cohen", phone_normalized: "+15145551202", email: "sarah.cohen@example.com", preferred_language: "en", created_at: daysAgoIso(14) },
+    { id: uuid(), full_name: "Marie Tremblay", phone_normalized: "+15145551203", email: null, preferred_language: "fr", created_at: daysAgoIso(9) },
+    { id: uuid(), full_name: "Chloé Roy", phone_normalized: "+15145551204", email: "chloe.roy@example.com", preferred_language: "fr", created_at: daysAgoIso(6) },
+    { id: uuid(), full_name: "Isabelle Gagnon", phone_normalized: "+15145551205", email: null, preferred_language: "fr", created_at: daysAgoIso(30) },
+    { id: uuid(), full_name: "Léa Fortin", phone_normalized: "+15145551206", email: "lea.fortin@example.com", preferred_language: "fr", created_at: daysAgoIso(11) },
+  ];
+  const [c1, c2, c3, c4, c5, c6] = demoClients;
+
+  // pick a handful of the generated upcoming slots for the demo appointments to occupy
+  const s1 = slots[2], s2 = slots[6], s3 = slots[10], s4 = slots[14], s5 = slots[18];
+
+  function demoAppt({ id, ref, client, serviceName, slot, status, extra }) {
+    const service = services.find((s) => s.id === serviceIdByName(serviceName));
+    return {
+      id, reference_number: ref, client_id: client.id, service_id: service.id, addon_ids: [],
+      slot_id: slot ? slot.id : uuid(),
+      appointment_date: slot ? slot.slot_date : daysAgoIso(2).slice(0, 10),
+      start_time: slot ? slot.start_time : "14:00:00",
+      end_time: slot ? slot.end_time : "15:00:00",
+      status, preferred_language: client.preferred_language,
+      client_notes: null, admin_notes: null, client_visible_notes: null,
+      inspiration_image_url: null, price_estimate_cents: service.price_cents,
+      hold_expires_at: null, agreed_to_policies: true, verification_status: "verified",
+      cancellation_reason: null, cancelled_at: null, cancelled_by: null,
+      created_at: isoNow(), updated_at: isoNow(),
+      ...extra,
+    };
+  }
+
+  const a1id = uuid(), a2id = uuid(), a3id = uuid();
+
+  const demoAppointments = [
+    demoAppt({ id: a1id, ref: "LNS-DEMO01", client: c1, serviceName: "Classic Manicure", slot: s1, status: "pending" }),
+    demoAppt({ id: uuid(), ref: "LNS-DEMO02", client: c2, serviceName: "Gel Manicure", slot: s2, status: "pending" }),
+    demoAppt({ id: a3id, ref: "LNS-DEMO03", client: c3, serviceName: "Spa Pedicure", slot: s3, status: "accepted" }),
+    demoAppt({ id: uuid(), ref: "LNS-DEMO04", client: c4, serviceName: "Acrylic Full Set", slot: s4, status: "confirmed" }),
+    demoAppt({
+      id: uuid(), ref: "LNS-DEMO05", client: c5, serviceName: "Gel Removal", slot: null, status: "completed",
+      extra: { appointment_date: daysAgoIso(3).slice(0, 10), start_time: "11:00:00", end_time: "11:20:00" },
+    }),
+    demoAppt({
+      id: uuid(), ref: "LNS-DEMO06", client: c6, serviceName: "Custom Nail Art", slot: s5, status: "cancelled_by_client",
+      extra: { cancelled_at: daysAgoIso(1), cancelled_by: "client", cancellation_reason: "Schedule conflict" },
+    }),
+  ];
+
+  const conv1 = uuid(), conv3 = uuid();
+  const demoConversations = [
+    { id: conv1, appointment_id: a1id, client_id: c1.id, is_open: true, last_message_at: daysAgoIso(0), created_at: daysAgoIso(1) },
+    { id: conv3, appointment_id: a3id, client_id: c3.id, is_open: true, last_message_at: daysAgoIso(2), created_at: daysAgoIso(3) },
+  ];
+  const demoMessages = [
+    { id: uuid(), conversation_id: conv1, sender_type: "client", body: "Hi! Is it okay if I'm five minutes late?", image_url: null, is_read_by_admin: false, is_read_by_client: true, created_at: daysAgoIso(0) },
+    { id: uuid(), conversation_id: conv3, sender_type: "client", body: "Could I add a bit of nail art to my pedicure?", image_url: null, is_read_by_admin: true, is_read_by_client: true, created_at: daysAgoIso(2) },
+    { id: uuid(), conversation_id: conv3, sender_type: "admin", body: "Of course! We'll take care of it when you're in.", image_url: null, is_read_by_admin: true, is_read_by_client: false, created_at: daysAgoIso(2) },
+  ];
+
   return {
     service_categories: categories,
     services,
@@ -109,13 +174,13 @@ function seedData() {
     testimonials,
     salon_policies,
     website_settings,
-    availability_slots: generateSlots(),
+    availability_slots: slots,
     blocked_dates: [],
-    appointments: [],
-    clients: [],
+    appointments: demoAppointments,
+    clients: demoClients,
     administrators: [{ id: "demo-admin-id", full_name: "Demo Admin", role: "owner" }],
-    conversations: [],
-    messages: [],
+    conversations: demoConversations,
+    messages: demoMessages,
     reminder_settings: [
       { id: uuid(), hours_before: 48, is_active: true },
       { id: uuid(), hours_before: 24, is_active: true },
