@@ -1311,6 +1311,10 @@ const I18N = {
     "en": "Based in",
     "fr": "Situé à"
   },
+  "about.ticket.basedval": {
+    "en": "Montreal, QC",
+    "fr": "Montréal, QC"
+  },
   "about.story.eyebrow": {
     "en": "Our story",
     "fr": "Notre histoire"
@@ -1320,12 +1324,16 @@ const I18N = {
     "fr": "Créé pour régler un problème familier."
   },
   "about.story.p1": {
-    "en": "[OWNER STORY PLACEHOLDER — Replace this paragraph with your own story: what you did before starting this business, why small-business websites matter to you, and what led you to offer both website design and ongoing care.]",
-    "fr": "[HISTOIRE DU PROPRIÉTAIRE À REMPLACER — Remplacez ce paragraphe par votre propre histoire : ce que vous faisiez avant de démarrer cette entreprise, pourquoi les sites web de petites entreprises vous tiennent à cœur, et ce qui vous a mené à offrir à la fois la conception de sites et l'entretien continu.]"
+    "en": "I was born in Montreal and raised in Brooklyn, New York, where I finished high school and earned an Associate Degree in Computer Information Systems. After returning to Canada in 2011, I started at an insurance company's help desk in 2012, and over time grew into a CMDB role working with ServiceNow — spending the last few years writing scripts, building solutions, and troubleshooting technical issues for a living.",
+    "fr": "Je suis né à Montréal et j'ai grandi à Brooklyn, à New York, où j'ai terminé mes études secondaires et obtenu un diplôme d'associé en systèmes d'information. De retour au Canada en 2011, j'ai commencé au service d'assistance d'une compagnie d'assurance en 2012, avant d'évoluer vers un rôle en gestion de CMDB avec ServiceNow — passant ces dernières années à écrire des scripts, développer des solutions et résoudre des problèmes techniques."
   },
   "about.story.p2": {
-    "en": "Too many small-business owners are stuck choosing between an expensive agency, an unreliable freelancer, or a do-it-yourself website builder they never have time to maintain. Chezmaxo was created as a middle ground: a professional website, built properly, with straightforward ongoing support — for a price that actually makes sense for a small business.",
-    "fr": "Trop de propriétaires de petites entreprises sont coincés entre une agence coûteuse, un pigiste peu fiable ou un constructeur de site à faire soi-même qu'ils n'ont jamais le temps d'entretenir. Chezmaxo a été créé comme solution intermédiaire : un site web professionnel, bien construit, avec un soutien continu simple — à un prix logique pour une petite entreprise."
+    "en": "Web design has always been something I enjoyed — I built websites as personal projects for years, just for practice. As my scripting and development skills grew through my day job, I realized I'd quietly become a genuinely capable web developer. That's what led me to create Chezmaxo: a chance to put that experience to use helping small businesses get professional, modern websites without the stress, confusion, or high costs that usually come with it.",
+    "fr": "La conception de sites web m'a toujours intéressé — j'en ai créé plusieurs comme projets personnels, simplement pour le plaisir et la pratique. À mesure que mes compétences en programmation se sont renforcées grâce à mon travail, j'ai réalisé que j'étais devenu, sans m'en rendre compte, un développeur web réellement compétent. C'est ce constat qui m'a mené à créer Chezmaxo : l'occasion de mettre cette expérience au service des petites entreprises, pour leur offrir des sites web professionnels et modernes sans le stress, la confusion ou les coûts élevés qui accompagnent souvent ce processus."
+  },
+  "about.story.p3": {
+    "en": "My goal is simple: build websites that are attractive, practical, mobile-friendly, and built around what each business actually needs, then keep supporting them after launch through affordable care plans. Chezmaxo is years of technical experience, problem-solving, and a genuine interest in helping small businesses build a stronger online presence, all in one place.",
+    "fr": "Mon objectif est simple : créer des sites web attrayants, pratiques, adaptés aux mobiles et pensés pour les besoins réels de chaque entreprise, puis continuer à les soutenir après le lancement grâce à des forfaits d'entretien abordables. Chezmaxo, c'est des années d'expérience technique, de résolution de problèmes et un intérêt sincère pour aider les petites entreprises à bâtir une présence en ligne plus forte — le tout réuni en un seul endroit."
   },
   "about.care.eyebrow": {
     "en": "What we care about",
