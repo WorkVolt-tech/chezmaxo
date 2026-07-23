@@ -44,6 +44,9 @@ function renderAdminShell(admin) {
       ${ADMIN_NAV.map((item) => `<a href="${item.href}" class="${current === item.href ? "active" : ""}">${lang === "fr" ? item.fr : item.en}</a>`).join("")}
     </nav>
     <div style="margin-top:1.5rem">
+      <a href="../index.html" style="display:block;padding:0.5rem 0.75rem;font-size:0.9rem;color:rgba(45,27,54,0.6);text-decoration:none">
+        ${lang === "fr" ? "&larr; Voir le site" : "&larr; View Site"}
+      </a>
       <a href="#" id="admin-logout" style="display:block;padding:0.5rem 0.75rem;font-size:0.9rem;color:rgba(45,27,54,0.6);text-decoration:none">
         ${lang === "fr" ? "Déconnexion" : "Log Out"}
       </a>
