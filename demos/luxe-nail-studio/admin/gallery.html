@@ -20,6 +20,16 @@
 <script>
 const DEMO_COLOR_PAIRS = [["#B497D6","#4A1D5C"],["#F2C6D8","#6B3480"],["#C9A227","#4A1D5C"],["#E29CBB","#33123F"],["#4A1D5C","#C9A227"]];
 
+function resolveImgSrc(url) {
+  // Stored image_url values are relative to the site root (e.g.
+  // "assets/images/gallery/x.webp"), but admin pages live one folder
+  // deeper (admin/), so plain relative/root paths need "../" prepended.
+  // Data URIs (from placeholderPhoto) and absolute URLs are left as-is.
+  if (!url) return "";
+  if (url.startsWith("data:") || url.startsWith("http") || url.startsWith("../")) return url;
+  return "../" + url;
+}
+
 async function renderContent() {
   const main = document.getElementById("admin-main");
   const { data: images } = await sb.from("gallery_images").select("*").order("display_order");
@@ -41,7 +51,7 @@ async function renderContent() {
     <div class="gallery-grid">
       ${(images || []).length ? images.map((img, i) => `
         <figure style="position:relative">
-          <img src="${img.image_url}" alt="${img.style_name_en||""}" />
+          <img src="${resolveImgSrc(img.image_url)}" alt="${img.style_name_en||""}" />
           <figcaption style="padding:0.75rem;font-size:0.85rem">
             <p style="font-weight:600;color:var(--royal)">${img.style_name_en || "Untitled"}</p>
             ${img.category ? `<p class="text-muted">${img.category}</p>` : ""}
