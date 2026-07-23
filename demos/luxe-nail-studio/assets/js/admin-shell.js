@@ -11,12 +11,6 @@ const ADMIN_NAV = [
   { href: "settings.html", en: "Settings", fr: "Paramètres" },
 ];
 
-// Every admin page (other than login.html) calls this before rendering
-// its own content. It's a client-side check only — the real security
-// boundary is Row Level Security in the database (see 0003_rls.sql),
-// which rejects any query from a session that isn't in the
-// `administrators` table. This guard just avoids flashing the page at
-// a logged-out visitor before the redirect happens.
 async function requireAdmin() {
   const { data: { session } } = await sb.auth.getSession();
   if (!session) {
