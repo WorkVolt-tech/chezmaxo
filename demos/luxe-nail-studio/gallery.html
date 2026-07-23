@@ -3,90 +3,46 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Gallery — Luxe Nail Studio Admin</title>
+<title>Gallery — Luxe Nail Studio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/css/styles.css" />
+<link rel="stylesheet" href="assets/css/styles.css" />
 </head>
 <body>
-<div class="admin-shell">
-  <aside class="admin-sidebar" id="admin-sidebar"></aside>
-  <main class="admin-main" id="admin-main"></main>
-</div>
+<div id="site-header"></div>
 
-<script src="../assets/js/mock-supabase.js"></script>
-<script src="../assets/js/i18n.js"></script>
-<script src="../assets/js/admin-shell.js"></script>
-<script>
-const DEMO_COLOR_PAIRS = [["#B497D6","#4A1D5C"],["#F2C6D8","#6B3480"],["#C9A227","#4A1D5C"],["#E29CBB","#33123F"],["#4A1D5C","#C9A227"]];
-
-function resolveImgSrc(url) {
-  // Stored image_url values are relative to the site root (e.g.
-  // "assets/images/gallery/x.webp"), but admin pages live one folder
-  // deeper (admin/), so plain relative/root paths need "../" prepended.
-  // Data URIs (from placeholderPhoto) and absolute URLs are left as-is.
-  if (!url) return "";
-  if (url.startsWith("data:") || url.startsWith("http") || url.startsWith("../")) return url;
-  return "../" + url;
-}
-
-async function renderContent() {
-  const main = document.getElementById("admin-main");
-  const { data: images } = await sb.from("gallery_images").select("*").order("display_order");
-
-  main.innerHTML = `
-    <div class="admin-page-head"><h2 style="margin:0">Gallery</h2></div>
-
-    <div class="card" style="margin-bottom:1.5rem">
-      <h3 style="font-size:1.05rem;margin-bottom:0.9rem">Add a photo</h3>
-      <p class="text-muted" style="margin-bottom:0.9rem">This demo generates a placeholder image from a label — in the real system, you'd upload an actual photo here.</p>
-      <div class="mini-form">
-        <div class="field"><label>Style name (EN)</label><input id="gi-en" /></div>
-        <div class="field"><label>Style name (FR)</label><input id="gi-fr" /></div>
-        <div class="field"><label>Category</label><input id="gi-cat" placeholder="e.g. Gel, Acrylic, Nail Art" /></div>
-        <button class="btn btn-primary btn-sm" id="gi-add">Add to Gallery</button>
-      </div>
+<section class="section">
+  <div class="container">
+    <div class="section-heading">
+      <h2 data-i18n="recent_work"></h2>
+      <div class="brush-divider"></div>
     </div>
+    <div id="gallery-grid" class="gallery-grid"></div>
+  </div>
+</section>
 
-    <div class="gallery-grid">
-      ${(images || []).length ? images.map((img, i) => `
-        <figure style="position:relative">
-          <img src="${resolveImgSrc(img.image_url)}" alt="${img.style_name_en||""}" />
-          <figcaption style="padding:0.75rem;font-size:0.85rem">
-            <p style="font-weight:600;color:var(--royal)">${img.style_name_en || "Untitled"}</p>
-            ${img.category ? `<p class="text-muted">${img.category}</p>` : ""}
-            <div class="row-actions" style="margin-top:0.5rem">
-              <button class="toggle-pill ${img.is_active ? "on" : "off"}" data-toggle="${img.id}" data-active="${img.is_active}">${img.is_active ? "Shown" : "Hidden"}</button>
-              <button class="btn btn-danger btn-sm" data-del="${img.id}">Delete</button>
-            </div>
-          </figcaption>
-        </figure>`).join("") : `<p class="text-muted">No photos yet — add one above.</p>`}
-    </div>`;
+<div id="site-footer"></div>
 
-  document.getElementById("gi-add").addEventListener("click", async () => {
-    const en = document.getElementById("gi-en").value.trim();
-    const fr = document.getElementById("gi-fr").value.trim();
-    const cat = document.getElementById("gi-cat").value.trim();
-    if (!en) return;
-    const [c1, c2] = DEMO_COLOR_PAIRS[Math.floor(Math.random() * DEMO_COLOR_PAIRS.length)];
-    await sb.from("gallery_images").insert({
-      image_url: placeholderPhoto(en, c1, c2), style_name_en: en, style_name_fr: fr || en,
-      category: cat || null, is_active: true, display_order: (images || []).length + 1,
-    });
-    renderContent();
-  });
-
-  main.querySelectorAll("[data-toggle]").forEach((b) => b.addEventListener("click", async () => {
-    await sb.from("gallery_images").update({ is_active: b.dataset.active !== "true" }).eq("id", b.dataset.toggle);
-    renderContent();
-  }));
-  main.querySelectorAll("[data-del]").forEach((b) => b.addEventListener("click", async () => {
-    if (!confirm("Delete this photo?")) return;
-    await sb.from("gallery_images").delete().eq("id", b.dataset.del);
-    renderContent();
-  }));
+<script src="assets/js/mock-supabase.js"></script>
+<script src="assets/js/i18n.js"></script>
+<script src="assets/js/format.js"></script>
+<script src="assets/js/site-chrome.js"></script>
+<script>
+async function loadGallery() {
+  const lang = getLang();
+  const { data } = await sb.from("gallery_images").select("*").eq("is_active", true).order("display_order");
+  document.getElementById("gallery-grid").innerHTML = (data || []).map((img) => `
+    <figure>
+      <img src="${img.image_url}" alt="${lang === "en" ? (img.style_name_en || "") : (img.style_name_fr || "")}" />
+      ${img.style_name_en || img.category ? `
+        <figcaption style="padding:0.75rem;font-size:0.85rem">
+          <p style="font-weight:600;color:var(--royal)">${lang === "en" ? (img.style_name_en || "") : (img.style_name_fr || "")}</p>
+          ${img.category ? `<p class="text-muted">${img.category}</p>` : ""}
+          ${img.instagram_url ? `<a href="${img.instagram_url}" style="color:var(--blossom-dark);text-decoration:underline">Instagram</a>` : ""}
+        </figcaption>` : ""}
+    </figure>`).join("");
 }
-initAdminPage(renderContent);
+document.addEventListener("DOMContentLoaded", loadGallery);
 </script>
 </body>
 </html>
