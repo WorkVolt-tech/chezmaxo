@@ -18,8 +18,8 @@
     <div class="card">
       <div class="demo-credentials" id="demo-creds"></div>
       <form id="login-form">
-        <div class="field"><label>Email</label><input id="lg-email" type="email" required /></div>
-        <div class="field"><label>Password</label><input id="lg-password" type="password" required /></div>
+        <div class="field"><label>Email</label><input id="lg-email" type="email" value="demo@luxenailstudio.example" required /></div>
+        <div class="field"><label>Password</label><input id="lg-password" type="password" value="demo1234" required /></div>
         <p id="login-error" class="error-text"></p>
         <button class="btn btn-primary" style="width:100%">Sign In</button>
       </form>
@@ -31,8 +31,7 @@
 <script src="../assets/js/i18n.js"></script>
 <script>
 document.getElementById("demo-creds").innerHTML =
-  `<strong>Demo mode</strong> — sign in with any of these:<br/>` +
-  `Email: <strong>${DEMO_ADMIN_EMAIL}</strong><br/>Password: <strong>${DEMO_ADMIN_PASSWORD}</strong>`;
+  `<strong>Demo mode</strong> — the fields below are pre-filled. Just click Sign In to explore the admin dashboard.`;
 
 document.getElementById("login-form").addEventListener("submit", async (e) => {
   e.preventDefault();
