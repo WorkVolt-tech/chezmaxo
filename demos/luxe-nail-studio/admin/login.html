@@ -12,17 +12,21 @@
 <section class="section" style="min-height:100vh;display:flex;align-items:center;">
   <div class="container" style="max-width:420px;">
     <div style="text-align:center;margin-bottom:1.5rem;">
-      <a href="../index.html" class="btn-ghost btn btn-sm" style="margin-bottom:1rem;">&larr; Back to Site</a>
+      <a href="../index.html" class="btn-ghost btn btn-sm" style="margin-bottom:1rem;">&larr; <span id="lg-back">Back to Site</span></a>
       <div class="logo" style="justify-content:center;display:flex;font-size:1.6rem;">Luxe <span>Nail Studio</span></div>
       <p class="text-muted" style="margin-top:0.25rem;">Admin Dashboard</p>
+      <div class="lang-toggle" style="justify-content:center;margin-top:0.9rem;display:inline-flex;">
+        <button id="lg-lang-en" onclick="setLang('en')">EN</button>
+        <button id="lg-lang-fr" onclick="setLang('fr')">FR</button>
+      </div>
     </div>
     <div class="card">
       <div class="demo-credentials" id="demo-creds"></div>
       <form id="login-form">
-        <div class="field"><label>Email</label><input id="lg-email" type="email" value="demo@luxenailstudio.example" required /></div>
-        <div class="field"><label>Password</label><input id="lg-password" type="password" value="demo1234" required /></div>
+        <div class="field"><label id="lg-label-email">Email</label><input id="lg-email" type="email" value="demo@luxenailstudio.example" required /></div>
+        <div class="field"><label id="lg-label-password">Password</label><input id="lg-password" type="password" value="demo1234" required /></div>
         <p id="login-error" class="error-text"></p>
-        <button class="btn btn-primary" style="width:100%">Sign In</button>
+        <button class="btn btn-primary" style="width:100%" id="lg-submit">Sign In</button>
       </form>
     </div>
   </div>
@@ -31,8 +35,27 @@
 <script src="../assets/js/mock-supabase.js"></script>
 <script src="../assets/js/i18n.js"></script>
 <script>
-document.getElementById("demo-creds").innerHTML =
-  `<strong>Demo mode</strong> — the fields below are pre-filled. Just click Sign In to explore the admin dashboard.`;
+const LOGIN_STRINGS = {
+  en: { back: "Back to Site", email: "Email", password: "Password", submit: "Sign In",
+        demoLabel: "Demo mode", demoBody: "the fields below are pre-filled. Just click Sign In to explore the admin dashboard.",
+        invalid: "Invalid email or password." },
+  fr: { back: "Voir le site", email: "Courriel", password: "Mot de passe", submit: "Se connecter",
+        demoLabel: "Mode démo", demoBody: "les champs ci-dessous sont pré-remplis. Cliquez sur Se connecter pour explorer le tableau de bord.",
+        invalid: "Courriel ou mot de passe invalide." },
+};
+
+function applyLoginLang() {
+  const lang = getLang();
+  const s = LOGIN_STRINGS[lang];
+  document.getElementById("lg-back").textContent = s.back;
+  document.getElementById("lg-label-email").textContent = s.email;
+  document.getElementById("lg-label-password").textContent = s.password;
+  document.getElementById("lg-submit").textContent = s.submit;
+  document.getElementById("demo-creds").innerHTML = `<strong>${s.demoLabel}</strong> — ${s.demoBody}`;
+  document.getElementById("lg-lang-en").classList.toggle("active", lang === "en");
+  document.getElementById("lg-lang-fr").classList.toggle("active", lang === "fr");
+  document.documentElement.lang = lang;
+}
 
 document.getElementById("login-form").addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -41,9 +64,11 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
   const errorEl = document.getElementById("login-error");
   errorEl.textContent = "";
   const { error } = await sb.auth.signInWithPassword({ email, password });
-  if (error) { errorEl.textContent = "Invalid email or password."; return; }
+  if (error) { errorEl.textContent = LOGIN_STRINGS[getLang()].invalid; return; }
   location.href = "dashboard.html";
 });
+
+applyLoginLang();
 
 (async () => {
   const { data: { session } } = await sb.auth.getSession();
