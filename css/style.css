@@ -317,8 +317,8 @@ section{ padding: 88px 0; }
   margin-bottom: 26px;
   box-shadow: var(--shadow-lg);
 }
-.hero-logo-card img{ height: 64px; width:auto; display:block; }
-@media (max-width: 500px){ .hero-logo-card img{ height:48px; } }
+.hero-logo-card img{ height: 130px; width:auto; display:block; }
+@media (max-width: 500px){ .hero-logo-card img{ height:90px; } }
 
 .hero-badge{
   display:inline-flex; align-items:center; gap:10px;
