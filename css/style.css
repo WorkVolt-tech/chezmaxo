@@ -309,6 +309,17 @@ section{ padding: 88px 0; }
   margin-bottom: 28px;
 }
 .hero-actions{ display:flex; gap:14px; flex-wrap:wrap; margin-bottom: 22px; }
+.hero-logo-card{
+  display:inline-flex;
+  background:#fff;
+  border-radius: 18px;
+  padding: 18px 26px;
+  margin-bottom: 26px;
+  box-shadow: var(--shadow-lg);
+}
+.hero-logo-card img{ height: 64px; width:auto; display:block; }
+@media (max-width: 500px){ .hero-logo-card img{ height:48px; } }
+
 .hero-badge{
   display:inline-flex; align-items:center; gap:10px;
   font-family: var(--font-mono);
