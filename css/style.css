@@ -318,7 +318,7 @@ section{ padding: 88px 0; }
   box-shadow: var(--shadow-lg);
   width: fit-content;
 }
-.hero-logo-card img{ height: 300px; width:auto; display:block; }
+.hero-logo-card img{ height: 400px; width:auto; display:block; }
 @media (max-width: 500px){ .hero-logo-card img{ height:250px; } }
 
 .hero-badge{
