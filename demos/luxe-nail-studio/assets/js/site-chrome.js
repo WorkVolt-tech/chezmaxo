@@ -77,8 +77,22 @@ function renderSiteFooter() {
         © ${new Date().getFullYear()} Luxe Nail Studio ·
         <a href="policies.html" style="text-decoration:underline">${lang === "fr" ? "Politiques" : "Policies"}</a>
         · <a href="admin/login.html" style="text-decoration:underline">${lang === "fr" ? "Connexion admin (démo)" : "Admin Login (demo)"}</a>
+        · <a href="#" id="public-reset-demo" style="text-decoration:underline">${lang === "fr" ? "Réinitialiser mes données de test" : "Reset My Test Data"}</a>
       </div>
     </footer>`;
+
+  const resetLink = document.getElementById("public-reset-demo");
+  if (resetLink) {
+    resetLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      const msg = lang === "fr"
+        ? "Ceci effacera tous les rendez-vous, messages et modifications que vous avez faits durant vos tests, et reviendra aux données de démonstration de départ. Continuer?"
+        : "This will erase any appointments, messages, and changes you made while testing, and restore the original starting demo data. Continue?";
+      if (!confirm(msg)) return;
+      try { localStorage.removeItem(STORAGE_KEY); } catch (err) {}
+      location.href = "index.html";
+    });
+  }
 
   sb.from("website_settings").select("*").then(({ data }) => {
     const map = {};
