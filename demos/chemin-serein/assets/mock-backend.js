@@ -693,7 +693,7 @@
     var mini = document.createElement("button");
     mini.id = "csDemoMiniReset";
     mini.textContent = "🔄 Reset Demo";
-    mini.style.cssText = "position:fixed;bottom:14px;right:14px;z-index:99999;background:#2B2A28;color:#F7F3EC;border:1px solid #B08D49;padding:8px 14px;border-radius:20px;cursor:pointer;font-family:sans-serif;font-size:.78rem;box-shadow:0 2px 10px rgba(0,0,0,.2)";
+    mini.style.cssText = "position:fixed;bottom:14px;left:14px;z-index:99999;background:#2B2A28;color:#F7F3EC;border:1px solid #B08D49;padding:8px 14px;border-radius:20px;cursor:pointer;font-family:sans-serif;font-size:.78rem;box-shadow:0 2px 10px rgba(0,0,0,.2)";
     mini.addEventListener("click", function () {
       if (confirm("Reset all demo data back to its original state? This clears anything you've added or changed (bookings, messages, etc.) and reloads the page.")) {
         resetDemoData();
