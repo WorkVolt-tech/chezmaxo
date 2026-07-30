@@ -1063,41 +1063,21 @@ const I18N = {
     "en": "A sample of the small businesses we've built for.",
     "fr": "Un aperçu des petites entreprises pour qui nous avons travaillé."
   },
-  "pf.lede": {
-    "en": "Every project below is a placeholder — swap in real client screenshots, names, and links once your first projects are live. See the README for how.",
-    "fr": "Chaque projet ci-dessous est un exemple — remplacez-le par de vraies captures d'écran, noms et liens de clients une fois vos premiers projets en ligne. Voir le README pour savoir comment."
+  "pf.lede2": {
+    "en": "A look at real projects we've built.",
+    "fr": "Un aperçu de projets réels que nous avons réalisés."
   },
   "cat.all": {
     "en": "All Projects",
     "fr": "Tous les projets"
   },
-  "cat.local": {
-    "en": "Local Business",
-    "fr": "Entreprise locale"
-  },
-  "cat.restaurant": {
-    "en": "Restaurant",
-    "fr": "Restaurant"
-  },
-  "cat.contractor": {
-    "en": "Contractor",
-    "fr": "Entrepreneur"
-  },
-  "cat.event": {
-    "en": "Event Professional",
-    "fr": "Professionnel de l'événementiel"
-  },
-  "cat.consultant": {
-    "en": "Consultant",
-    "fr": "Consultant"
-  },
   "cat.beauty": {
     "en": "Beauty & Wellness",
     "fr": "Beauté et bien-être"
   },
-  "cat.community": {
-    "en": "Community Organization",
-    "fr": "Organisme communautaire"
+  "cat.consultant": {
+    "en": "Consultant",
+    "fr": "Consultant"
   },
   "pf6.svc0": {
     "en": "Website Design",
@@ -1123,145 +1103,33 @@ const I18N = {
     "en": "A bilingual booking site with real-time scheduling, live chat, and a full admin console behind it to manage appointments, clients, and content.",
     "fr": "Un site de réservation bilingue avec horaire en temps réel, clavardage en direct, et une console d'administration complète pour gérer rendez-vous, clientèle et contenu."
   },
-  "pf1.svc0": {
+  "pf10.svc0": {
     "en": "Website Design",
     "fr": "Conception de site"
   },
-  "pf1.svc1": {
-    "en": "Starter Care",
-    "fr": "Forfait de base"
+  "pf10.svc1": {
+    "en": "Booking System",
+    "fr": "Système de réservation"
   },
-  "pf.viewproject": {
-    "en": "View Project (placeholder)",
-    "fr": "Voir le projet (exemple)"
+  "pf10.svc2": {
+    "en": "Client Portal",
+    "fr": "Portail client"
   },
   "pf.placeholder": {
     "en": "Project photo placeholder",
     "fr": "Photo du projet à venir"
   },
-  "pf1.name": {
-    "en": "Maple Street Hardware",
-    "fr": "Quincaillerie Maple Street"
+  "pf10.name": {
+    "en": "Chemin Serein",
+    "fr": "Chemin Serein"
   },
-  "pf1.desc": {
-    "en": "A five-page site with service listings, store hours, and a contact form for a family-owned hardware store.",
-    "fr": "Un site de cinq pages avec liste de services, heures d'ouverture et formulaire de contact pour une quincaillerie familiale."
+  "pf10.desc": {
+    "en": "A bilingual funeral coordination platform with public booking, live chat, a family client portal, and a full staff dashboard for managing inquiries, jobs, invoicing, and more.",
+    "fr": "Une plateforme bilingue de coordination funéraire avec réservation publique, clavardage en direct, un portail client pour les familles, et un tableau de bord complet pour gérer les demandes, les dossiers, la facturation et plus encore."
   },
-  "pf2.svc0": {
-    "en": "Website Design",
-    "fr": "Conception de site"
-  },
-  "pf2.svc1": {
-    "en": "Monthly Support",
-    "fr": "Soutien mensuel"
-  },
-  "pf2.name": {
-    "en": "Rosa's Kitchen",
-    "fr": "Cuisine de Rosa"
-  },
-  "pf2.desc": {
-    "en": "A warm, photo-forward site with an online menu, hours, and location details for a family restaurant.",
-    "fr": "Un site chaleureux et photogénique avec menu en ligne, heures et emplacement pour un restaurant familial."
-  },
-  "pf3.svc0": {
-    "en": "Website Design",
-    "fr": "Conception de site"
-  },
-  "pf3.svc1": {
-    "en": "Monthly Support",
-    "fr": "Soutien mensuel"
-  },
-  "pf3.name": {
-    "en": "Precision Home Repairs",
-    "fr": "Précision Rénovations"
-  },
-  "pf3.desc": {
-    "en": "A trust-building site with a services breakdown, project gallery, and quote-request form.",
-    "fr": "Un site rassurant avec détail des services, galerie de projets et formulaire de demande de devis."
-  },
-  "pf4.svc0": {
-    "en": "Website Design",
-    "fr": "Conception de site"
-  },
-  "pf4.svc1": {
-    "en": "Starter Care",
-    "fr": "Forfait de base"
-  },
-  "pf4.name": {
-    "en": "DJ Marco Live",
-    "fr": "DJ Marco Live"
-  },
-  "pf4.desc": {
-    "en": "A bold, media-rich site with an event gallery, booking inquiry form, and social links.",
-    "fr": "Un site audacieux et riche en médias avec galerie d'événements, formulaire de réservation et liens sociaux."
-  },
-  "pf5.svc0": {
-    "en": "Website Design",
-    "fr": "Conception de site"
-  },
-  "pf5.svc1": {
-    "en": "Business Care",
-    "fr": "Forfait affaires"
-  },
-  "pf5.name": {
-    "en": "Clearview Business Advisors",
-    "fr": "Conseillers d'affaires Clearview"
-  },
-  "pf5.desc": {
-    "en": "A polished, credibility-focused site with a services page and calendar booking link.",
-    "fr": "Un site soigné axé sur la crédibilité, avec page de services et lien de réservation de calendrier."
-  },
-  "pf7.svc0": {
-    "en": "Website Design",
-    "fr": "Conception de site"
-  },
-  "pf7.svc1": {
-    "en": "Starter Care",
-    "fr": "Forfait de base"
-  },
-  "pf7.name": {
-    "en": "Riverside Neighborhood Alliance",
-    "fr": "Alliance de quartier Riverside"
-  },
-  "pf7.desc": {
-    "en": "An accessible, easy-to-update site for event announcements and volunteer sign-ups.",
-    "fr": "Un site accessible et facile à mettre à jour pour les annonces d'événements et les inscriptions de bénévoles."
-  },
-  "pf8.svc0": {
-    "en": "Website Design",
-    "fr": "Conception de site"
-  },
-  "pf8.svc1": {
-    "en": "Business Care",
-    "fr": "Forfait affaires"
-  },
-  "pf8.name": {
-    "en": "Sunrise Cleaning Co.",
-    "fr": "Nettoyage Sunrise"
-  },
-  "pf8.desc": {
-    "en": "A straightforward service site with pricing tiers, testimonials, and a quote request form.",
-    "fr": "Un site de services simple avec paliers de prix, témoignages et formulaire de demande de devis."
-  },
-  "pf9.svc0": {
-    "en": "Website Design",
-    "fr": "Conception de site"
-  },
-  "pf9.svc1": {
-    "en": "Monthly Support",
-    "fr": "Soutien mensuel"
-  },
-  "pf9.name": {
-    "en": "Bright Beginnings Daycare",
-    "fr": "Garderie Bright Beginnings"
-  },
-  "pf9.desc": {
-    "en": "A friendly, parent-focused site with enrollment info, a photo gallery, and staff bios.",
-    "fr": "Un site convivial axé sur les parents avec infos d'inscription, galerie photo et bios du personnel."
-  },
-  "pf.note": {
-    "en": "All projects on this page are placeholders for demonstration. Replace names, descriptions, and thumbnail images with real client work (with permission) before launch.",
-    "fr": "Tous les projets sur cette page sont des exemples de démonstration. Remplacez les noms, descriptions et images par de vrais travaux de clients (avec permission) avant le lancement."
+  "pf.note2": {
+    "en": "More projects coming soon.",
+    "fr": "D'autres projets à venir."
   },
   "pf.cta.h2": {
     "en": "Want your business featured here next?",
