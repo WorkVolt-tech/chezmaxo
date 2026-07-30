@@ -675,15 +675,52 @@
   // ======================================================================
   // 13. A small, dismissible on-page banner so visitors know what they're
   //     looking at, without having to touch all 18 pages individually.
+  //     A reset control stays available even after the banner itself is
+  //     dismissed, since testing usually means resetting more than once.
   // ======================================================================
+  function resetDemoData() {
+    try {
+      sessionStorage.removeItem(STORE_KEY);
+      sessionStorage.removeItem("csDemoSession");
+      // banner dismissal state intentionally NOT cleared — resetting the
+      // data shouldn't force the info banner to reappear every time
+    } catch (e) {}
+    location.reload();
+  }
+
+  function showMiniResetButton() {
+    if (document.getElementById("csDemoMiniReset")) return;
+    var mini = document.createElement("button");
+    mini.id = "csDemoMiniReset";
+    mini.textContent = "🔄 Reset Demo";
+    mini.style.cssText = "position:fixed;bottom:14px;right:14px;z-index:99999;background:#2B2A28;color:#F7F3EC;border:1px solid #B08D49;padding:8px 14px;border-radius:20px;cursor:pointer;font-family:sans-serif;font-size:.78rem;box-shadow:0 2px 10px rgba(0,0,0,.2)";
+    mini.addEventListener("click", function () {
+      if (confirm("Reset all demo data back to its original state? This clears anything you've added or changed (bookings, messages, etc.) and reloads the page.")) {
+        resetDemoData();
+      }
+    });
+    document.body.appendChild(mini);
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
-    if (sessionStorage.getItem("csDemoBannerDismissed")) return;
+    if (sessionStorage.getItem("csDemoBannerDismissed")) {
+      showMiniResetButton();
+      return;
+    }
     var bar = document.createElement("div");
     bar.style.cssText = "position:fixed;bottom:0;left:0;right:0;z-index:99999;background:#2B2A28;color:#F7F3EC;font-family:sans-serif;font-size:.82rem;padding:10px 16px;display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;box-shadow:0 -2px 10px rgba(0,0,0,.2)";
-    bar.innerHTML = '<span>🎭 Portfolio demo — no real data, nothing you do here is saved beyond this visit.</span><button style="background:#B08D49;border:0;color:#fff;padding:5px 12px;border-radius:14px;cursor:pointer;font-size:.78rem">Got it</button>';
-    bar.querySelector("button").addEventListener("click", function () {
+    bar.innerHTML = '<span>🎭 Portfolio demo — no real data, nothing you do here is saved beyond this visit.</span>'
+      + '<button id="csDemoResetBtn" style="background:transparent;border:1px solid #B08D49;color:#F7F3EC;padding:5px 12px;border-radius:14px;cursor:pointer;font-size:.78rem">🔄 Reset Demo</button>'
+      + '<button id="csDemoGotItBtn" style="background:#B08D49;border:0;color:#fff;padding:5px 12px;border-radius:14px;cursor:pointer;font-size:.78rem">Got it</button>';
+    bar.querySelector("#csDemoResetBtn").addEventListener("click", function () {
+      if (confirm("Reset all demo data back to its original state? This clears anything you've added or changed (bookings, messages, etc.) and reloads the page.")) {
+        resetDemoData();
+      }
+    });
+    bar.querySelector("#csDemoGotItBtn").addEventListener("click", function () {
       bar.remove();
       try { sessionStorage.setItem("csDemoBannerDismissed", "1"); } catch (e) {}
+      showMiniResetButton();
     });
     document.body.appendChild(bar);
   });
