@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Réserver une consultation — Chemin Serein</title>
+<meta name="description" content="Réservez une consultation gratuite avec notre équipe. Choisissez un moment qui vous convient — aucun frais, aucun engagement.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css?v=5">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="assets/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="assets/favicon-16x16.png" sizes="16x16" type="image/png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<style>
+  .bk-wrap { max-width: 780px; }
+  .bk-week { display:flex; align-items:center; gap:10px; margin-bottom:26px; }
+  .bk-week button.bk-nav { background:none; border:1px solid var(--line); border-radius:50%; width:38px; height:38px; cursor:pointer; font-size:1rem; color:var(--ink); flex-shrink:0; }
+  .bk-week button.bk-nav:disabled { opacity:.35; cursor:default; }
+  .bk-days { display:grid; grid-template-columns:repeat(7,1fr); gap:8px; flex:1; }
+  .bk-day { border:1px solid var(--line); border-radius:8px; padding:10px 4px; text-align:center; cursor:pointer; background:#fff; transition:all .15s; }
+  .bk-day .dow { display:block; font-size:.68rem; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-soft); }
+  .bk-day .dnum { display:block; font-family:var(--serif); font-size:1.3rem; margin-top:2px; color:var(--ink); }
+  .bk-day .dcount { display:block; font-size:.65rem; color:var(--gold-deep); margin-top:2px; min-height:14px; }
+  .bk-day:hover { border-color:var(--gold); }
+  .bk-day.selected { background:var(--ink); border-color:var(--ink); }
+  .bk-day.selected .dow, .bk-day.selected .dnum { color:#fff; }
+  .bk-day.selected .dcount { color:var(--gold); }
+  .bk-day.empty { opacity:.4; cursor:default; }
+  .bk-day.past { opacity:.3; cursor:default; pointer-events:none; }
+
+  .bk-slots { display:flex; flex-wrap:wrap; gap:10px; min-height:60px; margin-bottom:10px; }
+  .bk-slot { border:1px solid var(--line); border-radius:6px; padding:10px 18px; background:#fff; cursor:pointer; font-size:.92rem; color:var(--ink); transition:all .15s; }
+  .bk-slot:hover { border-color:var(--gold); color:var(--gold-deep); }
+  .bk-slot.selected { background:var(--gold); border-color:var(--gold); color:#fff; }
+  .bk-empty-msg, .bk-loading { color:var(--ink-soft); font-size:.94rem; padding:10px 0; }
+
+  .bk-form { border:1px solid var(--line); border-radius:8px; padding:26px; margin-top:22px; background:var(--cream-deep,#f5f1e8); display:none; }
+  .bk-form.show { display:block; }
+  .bk-form .field { margin-bottom:16px; }
+  .bk-form label { display:block; font-size:.74rem; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:6px; }
+  .bk-form input, .bk-form textarea { width:100%; padding:11px 13px; border:1px solid var(--line); border-radius:6px; font-family:var(--sans); font-size:.95rem; }
+  .bk-form textarea { min-height:80px; resize:vertical; }
+  .bk-confirmed, .bk-error { display:none; padding:18px 22px; border-radius:8px; margin-top:20px; }
+  .bk-confirmed.show { display:block; background:rgba(90,120,90,.1); border:1px solid rgba(90,120,90,.3); }
+  .bk-error.show { display:block; background:rgba(168,64,45,.08); border:1px solid rgba(168,64,45,.3); color:#a8402d; }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    <div class="nav-center-group">
+      <a class="nav-logo-link" href="index.html"><img class="nav-logo" src="assets/crest-dark.webp" alt="Chemin Serein"></a>
+      <nav class="nav">
+      <a class="navlink" href="index.html"><span data-lang="fr">Accueil</span><span data-lang="en">Home</span></a>
+      <a class="navlink" href="about.html"><span data-lang="fr">À propos</span><span data-lang="en">About</span></a>
+      <a class="navlink" href="story.html"><span data-lang="fr">Notre histoire</span><span data-lang="en">Our Story</span></a>
+      <a class="navlink" href="services.html"><span data-lang="fr">Services</span><span data-lang="en">Services</span></a>
+      <a class="navlink" href="packages.html"><span data-lang="fr">Forfaits</span><span data-lang="en">Packages</span></a>
+      <a class="navlink" href="faq.html"><span data-lang="fr">FAQ</span><span data-lang="en">FAQ</span></a>
+      <a class="navlink" href="resources.html"><span data-lang="fr">Ressources</span><span data-lang="en">Resources</span></a>
+      <a class="navlink" href="contact.html"><span data-lang="fr">Contact</span><span data-lang="en">Contact</span></a>
+      </nav>
+    </div>
+          <div class="lang-toggle">
+        <button data-set-lang="fr">FR</button>
+        <button data-set-lang="en">EN</button>
+      </div>
+  </div>
+</header>
+
+<section class="block alt">
+  <div class="wrap">
+    <div class="section-head" style="margin-bottom:0">
+      <p class="eyebrow"><span data-lang="fr">Consultation gratuite</span><span data-lang="en">Free consultation</span></p>
+      <h1 data-lang="fr">Réservez un moment pour parler</h1>
+      <h1 data-lang="en">Book a time to talk</h1>
+      <p data-lang="fr">Choisissez un moment qui vous convient ci-dessous. Aucun frais, aucun engagement — c'est simplement l'occasion de poser vos questions.</p>
+      <p data-lang="en">Choose whatever time works for you below. No cost, no obligation — just a chance to ask your questions.</p>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap bk-wrap">
+
+    <div class="bk-week">
+      <button class="bk-nav" id="bkPrev" aria-label="Previous week">←</button>
+      <div class="bk-days" id="bkDays"></div>
+      <button class="bk-nav" id="bkNext" aria-label="Next week">→</button>
+    </div>
+
+    <div id="bkSlotsArea">
+      <p class="bk-loading" data-lang="fr">Sélectionnez une journée ci-dessus.</p>
+      <p class="bk-loading" data-lang="en">Select a day above.</p>
+    </div>
+
+    <form class="bk-form" id="bkForm">
+      <h3 style="margin-top:0"><span data-lang="fr">Vos coordonnées</span><span data-lang="en">Your details</span></h3>
+      <div class="field">
+        <label><span data-lang="fr">Nom complet</span><span data-lang="en">Full name</span></label>
+        <input type="text" id="bkName" required>
+      </div>
+      <div class="field">
+        <label><span data-lang="fr">Téléphone</span><span data-lang="en">Phone</span></label>
+        <input type="tel" id="bkPhone" required>
+      </div>
+      <div class="field">
+        <label><span data-lang="fr">Courriel (optionnel)</span><span data-lang="en">Email (optional)</span></label>
+        <input type="email" id="bkEmail">
+      </div>
+      <div class="field">
+        <label><span data-lang="fr">Comment pouvons-nous vous aider ? (optionnel)</span><span data-lang="en">How can we help? (optional)</span></label>
+        <textarea id="bkReason"></textarea>
+      </div>
+      <label class="consent-check">
+        <input type="checkbox" id="bkConsent" required>
+        <span data-lang="fr">J'ai lu la <a href="privacy.html" target="_blank">Politique de confidentialité</a> et j'autorise Chemin Serein à utiliser ces renseignements pour répondre à ma demande.</span>
+        <span data-lang="en">I have read the <a href="privacy.html" target="_blank">Privacy Policy</a> and authorize Chemin Serein to use this information to respond to my request.</span>
+      </label>
+      <button type="submit" class="btn btn--solid" id="bkSubmit">
+        <span data-lang="fr">Confirmer la demande</span><span data-lang="en">Confirm request</span>
+      </button>
+    </form>
+
+    <div class="bk-confirmed" id="bkConfirmed">
+      <p data-lang="fr"><strong>Merci.</strong> Votre demande a été reçue — nous vous contacterons sous peu pour confirmer.</p>
+      <p data-lang="en"><strong>Thank you.</strong> Your request has been received — we'll reach out shortly to confirm.</p>
+      <p id="bkRefDisplay" style="display:none;margin-top:16px;padding:16px 18px;background:#fff;border:2px solid var(--gold);border-radius:8px;text-align:center"></p>
+    </div>
+    <div class="bk-error" id="bkError">
+      <p data-lang="fr">Ce moment vient d'être réservé par quelqu'un d'autre. Veuillez choisir un autre moment.</p>
+      <p data-lang="en">That time was just booked by someone else. Please choose another time.</p>
+    </div>
+
+  </div>
+</section>
+
+<section class="block alt">
+  <div class="wrap" style="max-width:640px">
+    <h2><span data-lang="fr">Gérer ma consultation</span><span data-lang="en">Manage my consultation</span></h2>
+    <p style="color:var(--ink-soft)">
+      <span data-lang="fr">Entrez votre numéro de référence et votre numéro de téléphone pour annuler ou changer votre rendez-vous.</span>
+      <span data-lang="en">Enter your reference number and phone number to cancel or reschedule your appointment.</span>
+    </p>
+    <div class="bk-form show" style="margin-top:20px">
+      <div class="field">
+        <label><span data-lang="fr">Numéro de référence</span><span data-lang="en">Reference number</span></label>
+        <input type="text" id="mgRef" placeholder="ABC123">
+      </div>
+      <div class="field">
+        <label><span data-lang="fr">Téléphone</span><span data-lang="en">Phone</span></label>
+        <input type="tel" id="mgPhone">
+      </div>
+      <button type="button" class="btn btn--solid" id="mgLookupBtn"><span data-lang="fr">Trouver ma réservation</span><span data-lang="en">Find my booking</span></button>
+      <p id="mgMsg" style="display:none;margin-top:12px;font-size:.9rem"></p>
+    </div>
+
+    <div id="mgResult" style="display:none;margin-top:20px;border:1px solid var(--line);border-radius:8px;padding:20px;background:#fff">
+      <p id="mgDetails" style="margin-top:0"></p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <button type="button" class="btn btn--ghost" id="mgCancelBtn" style="color:#a8402d;border-color:#a8402d">
+          <span data-lang="fr">Annuler le rendez-vous</span><span data-lang="en">Cancel appointment</span>
+        </button>
+        <button type="button" class="btn btn--ghost" id="mgRescheduleToggle">
+          <span data-lang="fr">Changer la date/l'heure</span><span data-lang="en">Reschedule</span>
+        </button>
+      </div>
+
+      <div id="mgRescheduleArea" style="display:none;margin-top:20px;border-top:1px solid var(--line);padding-top:20px">
+        <div class="field">
+          <label><span data-lang="fr">Nouvelle date</span><span data-lang="en">New date</span></label>
+          <input type="date" id="mgNewDate">
+        </div>
+        <div id="mgNewSlots"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <img class="foot-logo" src="assets/crest-white.webp" alt="Chemin Serein">
+        <p data-lang="fr">Accompagnement funéraire humain et professionnel pour les familles du Grand Montréal.</p>
+        <p data-lang="en">Compassionate, professional funeral support for families across Greater Montréal.</p>
+      </div>
+      <div>
+        <h4><span data-lang="fr">Navigation</span><span data-lang="en">Navigation</span></h4>
+        <a href="index.html"><span data-lang="fr">Accueil</span><span data-lang="en">Home</span></a>
+        <a href="about.html"><span data-lang="fr">À propos</span><span data-lang="en">About</span></a>
+        <a href="services.html"><span data-lang="fr">Services</span><span data-lang="en">Services</span></a>
+        <a href="packages.html"><span data-lang="fr">Forfaits</span><span data-lang="en">Packages</span></a>
+        <a href="faq.html">FAQ</a>
+        <a href="resources.html"><span data-lang="fr">Ressources</span><span data-lang="en">Resources</span></a>
+        <a href="contact.html"><span data-lang="fr">Contact</span><span data-lang="en">Contact</span></a>
+      </div>
+      <div>
+        <h4><span data-lang="fr">Nous joindre</span><span data-lang="en">Contact</span></h4>
+        <p><a href="tel:+15140000000">+1 (514) 000-0000</a></p>
+        <p><a href="mailto:info@cheminserein.ca">info@cheminserein.ca</a></p>
+        <p data-lang="fr">Grand Montréal, Québec</p>
+        <p data-lang="en">Greater Montréal, Quebec</p>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Chemin Serein · Serene Path · <a href="dashboard.html" style="color:rgba(247,243,236,.45)">Personnel / Staff</a></span>
+      <span data-lang="fr">Service de coordination — nous ne sommes pas une maison funéraire.</span>
+      <span data-lang="en">Coordination service — we are not a funeral home.</span>
+      <span class="foot-legal"><a href="privacy.html" style="color:rgba(247,243,236,.45)"><span data-lang="fr">Politique de confidentialité</span><span data-lang="en">Privacy Policy</span></a> · <a href="terms.html" style="color:rgba(247,243,236,.45)"><span data-lang="fr">Conditions d'utilisation</span><span data-lang="en">Terms of Service</span></a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/config.js"></script>
+<script src="assets/mock-backend.js"></script>
+<script src="assets/site.js"></script>
+<script src="assets/livechat.js"></script>
+<script>
+(function(){
+  var cfg = window.HDV_CONFIG || {};
+  var configured = cfg.SUPABASE_URL && cfg.SUPABASE_URL.indexOf("YOUR-")===-1 && cfg.SUPABASE_ANON_KEY && cfg.SUPABASE_ANON_KEY.indexOf("YOUR-")===-1;
+  var base = configured ? cfg.SUPABASE_URL.replace(/\/+$/,"") : "";
+  var LANG = (document.documentElement.getAttribute("lang")||"fr");
+  try { LANG = localStorage.getItem("hdv-lang") || LANG; } catch(e){}
+
+  var DOW_FR = ["DIM","LUN","MAR","MER","JEU","VEN","SAM"];
+  var DOW_EN = ["SUN","MON","TUE","WED","THU","FRI","SAT"];
+
+  var weekStart = startOfWeek(new Date());
+  var selectedDate = null;
+  var selectedSlotTime = null; // e.g. "09:00:00" — server picks any available staff at that time
+  var slotsCache = {}; // dateStr -> array of slots or "loading"
+
+  function startOfWeek(d){
+    var x = new Date(d.getFullYear(), d.getMonth(), d.getDate());
+    var day = x.getDay();
+    x.setDate(x.getDate() - day); // back up to Sunday
+    return x;
+  }
+  function fmtISO(d){
+    return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+  }
+  function isPast(d){
+    var today = new Date(); today.setHours(0,0,0,0);
+    return d < today;
+  }
+  function fmtTime(t){
+    // t like "14:30:00" -> "2:30 PM" / "14 h 30"
+    var parts = t.split(":"); var h = parseInt(parts[0],10); var m = parts[1];
+    if (LANG === "fr") return h + " h " + m;
+    var suffix = h >= 12 ? "PM" : "AM"; var h12 = h % 12; if (h12===0) h12=12;
+    return h12 + ":" + m + " " + suffix;
+  }
+
+  function renderDays(){
+    var el = document.getElementById("bkDays");
+    el.innerHTML = "";
+    var dow = LANG === "fr" ? DOW_FR : DOW_EN;
+    for (var i=0;i<7;i++){
+      var d = new Date(weekStart); d.setDate(d.getDate()+i);
+      var iso = fmtISO(d);
+      var past = isPast(d);
+      var div = document.createElement("div");
+      div.className = "bk-day" + (past ? " past" : "") + (selectedDate===iso ? " selected" : "");
+      div.innerHTML = '<span class="dow">'+dow[d.getDay()]+'</span><span class="dnum">'+d.getDate()+'</span><span class="dcount" data-count-for="'+iso+'"></span>';
+      if (!past){
+        div.addEventListener("click", function(dateIso){ return function(){ selectDate(dateIso); }; }(iso));
+      }
+      el.appendChild(div);
+      if (!past) loadCountForDay(iso);
+    }
+    document.getElementById("bkPrev").disabled = isPast(new Date(weekStart.getTime()-1));
+  }
+
+  function loadCountForDay(iso){
+    if (!configured) return;
+    fetch(base + "/rest/v1/booking_slots?slot_date=eq."+iso+"&status=eq.open&select=start_time", {
+      headers: { "apikey": cfg.SUPABASE_ANON_KEY, "Authorization": "Bearer "+cfg.SUPABASE_ANON_KEY }
+    }).then(function(r){ return r.json(); }).then(function(rows){
+      var distinctTimes = {};
+      rows.forEach(function(r){ distinctTimes[r.start_time] = true; });
+      var count = Object.keys(distinctTimes).length;
+      var span = document.querySelector('[data-count-for="'+iso+'"]');
+      if (span) span.textContent = count ? (count + (LANG==="fr" ? " dispo" : " open")) : "";
+    }).catch(function(){});
+  }
+
+  function selectDate(iso){
+    selectedDate = iso; selectedSlotTime = null;
+    document.getElementById("bkForm").classList.remove("show");
+    document.getElementById("bkConfirmed").classList.remove("show");
+    document.getElementById("bkError").classList.remove("show");
+    renderDays();
+    loadSlots(iso);
+  }
+
+  function loadSlots(iso){
+    var area = document.getElementById("bkSlotsArea");
+    area.innerHTML = '<p class="bk-loading">' + (LANG==="fr" ? "Chargement…" : "Loading…") + '</p>';
+    if (!configured){
+      area.innerHTML = '<p class="bk-loading">Configuration missing (assets/config.js).</p>';
+      return;
+    }
+    fetch(base + "/rest/v1/booking_slots?slot_date=eq."+iso+"&status=eq.open&select=*&order=start_time.asc", {
+      headers: { "apikey": cfg.SUPABASE_ANON_KEY, "Authorization": "Bearer "+cfg.SUPABASE_ANON_KEY }
+    }).then(function(r){ return r.json(); }).then(function(rows){
+      if (!rows.length){
+        area.innerHTML = '<p class="bk-empty-msg">' + (LANG==="fr" ? "Aucune plage disponible cette journée. Essayez une autre date." : "No openings that day. Try another date.") + '</p>';
+        return;
+      }
+      // Multiple staff can be open at the same time — the family picks a
+      // TIME, not a person, so collapse duplicates down to one button per
+      // distinct start_time. The server picks whichever staff is free
+      // when the booking is actually submitted.
+      var seen = {};
+      var distinctTimes = [];
+      rows.forEach(function(s){
+        if (!seen[s.start_time]){ seen[s.start_time] = true; distinctTimes.push(s.start_time); }
+      });
+      var html = '<div class="bk-slots">';
+      distinctTimes.forEach(function(t){
+        html += '<button type="button" class="bk-slot" data-time="'+t+'">'+fmtTime(t)+'</button>';
+      });
+      html += '</div>';
+      area.innerHTML = html;
+      document.querySelectorAll(".bk-slot").forEach(function(btn){
+        btn.addEventListener("click", function(){
+          document.querySelectorAll(".bk-slot").forEach(function(b){ b.classList.remove("selected"); });
+          btn.classList.add("selected");
+          selectedSlotTime = btn.getAttribute("data-time");
+          document.getElementById("bkForm").classList.add("show");
+          document.getElementById("bkConfirmed").classList.remove("show");
+          document.getElementById("bkError").classList.remove("show");
+        });
+      });
+    }).catch(function(){
+      area.innerHTML = '<p class="bk-empty-msg">' + (LANG==="fr" ? "Erreur de chargement. Réessayez." : "Couldn't load times. Please try again.") + '</p>';
+    });
+  }
+
+  document.getElementById("bkPrev").addEventListener("click", function(){
+    weekStart.setDate(weekStart.getDate()-7); renderDays();
+  });
+  document.getElementById("bkNext").addEventListener("click", function(){
+    weekStart.setDate(weekStart.getDate()+7); renderDays();
+  });
+
+  // Keep the widget in sync if the person switches FR/EN after the page loads.
+  document.querySelectorAll("[data-set-lang]").forEach(function(b){
+    b.addEventListener("click", function(){
+      LANG = b.getAttribute("data-set-lang");
+      renderDays();
+      if (selectedDate) loadSlots(selectedDate);
+    });
+  });
+
+  document.getElementById("bkForm").addEventListener("submit", function(e){
+    e.preventDefault();
+    if (!selectedSlotTime || !selectedDate || !configured) return;
+    var btn = document.getElementById("bkSubmit"); btn.disabled = true;
+    fetch(base + "/rest/v1/rpc/request_booking", {
+      method: "POST",
+      headers: {
+        "apikey": cfg.SUPABASE_ANON_KEY, "Authorization": "Bearer "+cfg.SUPABASE_ANON_KEY,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        p_slot_date: selectedDate,
+        p_start_time: selectedSlotTime,
+        p_name: document.getElementById("bkName").value.trim(),
+        p_phone: document.getElementById("bkPhone").value.trim(),
+        p_email: document.getElementById("bkEmail").value.trim() || null,
+        p_reason: document.getElementById("bkReason").value.trim() || null
+      })
+    }).then(function(r){ return r.json(); }).then(function(res){
+      btn.disabled = false;
+      if (res && res.success){
+        document.getElementById("bkForm").classList.remove("show");
+        document.getElementById("bkConfirmed").classList.add("show");
+        document.getElementById("bkForm").reset();
+        var refEl = document.getElementById("bkRefDisplay");
+        if (res.reference_code) {
+          refEl.style.display = "block";
+          refEl.innerHTML = (LANG === "fr"
+            ? '<span style="display:block;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:6px">Votre numéro de référence</span>'
+              + '<span style="display:block;font-size:1.8rem;font-weight:600;letter-spacing:.08em;color:var(--ink)">' + res.reference_code + '</span>'
+              + '<span style="display:block;font-size:.85rem;color:var(--ink-soft);margin-top:8px">Veuillez noter ce numéro ou prendre une capture d\'écran — vous en aurez besoin pour annuler ou changer votre rendez-vous.</span>'
+            : '<span style="display:block;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:6px">Your reference number</span>'
+              + '<span style="display:block;font-size:1.8rem;font-weight:600;letter-spacing:.08em;color:var(--ink)">' + res.reference_code + '</span>'
+              + '<span style="display:block;font-size:.85rem;color:var(--ink-soft);margin-top:8px">Please save this number or take a screenshot — you\'ll need it to cancel or reschedule your appointment.</span>');
+        }
+      } else {
+        document.getElementById("bkError").classList.add("show");
+        if (selectedDate) loadSlots(selectedDate); // refresh — that time is gone
+      }
+    }).catch(function(){
+      btn.disabled = false;
+      document.getElementById("bkError").classList.add("show");
+    });
+  });
+
+  // ---------- Manage my consultation (cancel / reschedule) ----------
+  var mgCurrentRef = null, mgCurrentPhone = null, mgNewSelectedTime = null;
+
+  function mgShowMsg(text, isError){
+    var el = document.getElementById("mgMsg");
+    el.textContent = text;
+    el.style.color = isError ? "#a8402d" : "#3d7a4d";
+    el.style.display = "block";
+    el.style.padding = ""; el.style.background = ""; el.style.border = ""; el.style.borderRadius = ""; el.style.textAlign = "";
+  }
+
+  function mgShowRefBox(newRef){
+    var el = document.getElementById("mgMsg");
+    el.style.display = "block";
+    el.style.color = "";
+    el.style.padding = "16px 18px";
+    el.style.background = "#fff";
+    el.style.border = "2px solid var(--gold)";
+    el.style.borderRadius = "8px";
+    el.style.textAlign = "center";
+    el.innerHTML = (LANG === "fr"
+      ? '<span style="display:block;font-size:.85rem;color:#3d7a4d;margin-bottom:8px">Rendez-vous déplacé avec succès.</span>'
+        + '<span style="display:block;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:6px">Votre nouveau numéro de référence</span>'
+        + '<span style="display:block;font-size:1.8rem;font-weight:600;letter-spacing:.08em;color:var(--ink)">' + newRef + '</span>'
+        + '<span style="display:block;font-size:.85rem;color:var(--ink-soft);margin-top:8px">Veuillez noter ce numéro ou prendre une capture d\'écran — l\'ancien numéro n\'est plus valide.</span>'
+      : '<span style="display:block;font-size:.85rem;color:#3d7a4d;margin-bottom:8px">Appointment rescheduled successfully.</span>'
+        + '<span style="display:block;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:6px">Your new reference number</span>'
+        + '<span style="display:block;font-size:1.8rem;font-weight:600;letter-spacing:.08em;color:var(--ink)">' + newRef + '</span>'
+        + '<span style="display:block;font-size:.85rem;color:var(--ink-soft);margin-top:8px">Please save this number or take a screenshot — your old reference number is no longer valid.</span>');
+  }
+
+  document.getElementById("mgLookupBtn").addEventListener("click", function(){
+    var ref = document.getElementById("mgRef").value.trim();
+    var phone = document.getElementById("mgPhone").value.trim();
+    if (!ref || !phone){ mgShowMsg(LANG==="fr" ? "Veuillez remplir les deux champs." : "Please fill in both fields.", true); return; }
+    var btn = this; btn.disabled = true;
+    fetch(base + "/rest/v1/rpc/find_booking", {
+      method: "POST",
+      headers: { "apikey": cfg.SUPABASE_ANON_KEY, "Authorization": "Bearer "+cfg.SUPABASE_ANON_KEY, "Content-Type": "application/json" },
+      body: JSON.stringify({ p_reference_code: ref, p_phone: phone })
+    }).then(function(r){ return r.json(); }).then(function(res){
+      btn.disabled = false;
+      if (!res || !res.success){
+        document.getElementById("mgResult").style.display = "none";
+        mgShowMsg(LANG==="fr" ? "Aucune réservation trouvée avec ces informations." : "No booking found with that information.", true);
+        return;
+      }
+      document.getElementById("mgMsg").style.display = "none";
+      mgCurrentRef = ref; mgCurrentPhone = phone;
+      var statusLabel = { pending:{fr:"En attente",en:"Pending"}, confirmed:{fr:"Confirmé",en:"Confirmed"}, cancelled:{fr:"Annulé",en:"Cancelled"}, completed:{fr:"Terminé",en:"Completed"} };
+      var s = statusLabel[res.status] || { fr: res.status, en: res.status };
+      document.getElementById("mgDetails").innerHTML = (LANG==="fr"
+        ? "Rendez-vous le <strong>" + res.slot_date + "</strong> à <strong>" + res.start_time + "</strong> — Statut : " + s.fr
+        : "Appointment on <strong>" + res.slot_date + "</strong> at <strong>" + res.start_time + "</strong> — Status: " + s.en);
+      document.getElementById("mgResult").style.display = "block";
+      document.getElementById("mgRescheduleArea").style.display = "none";
+      var cancelBtn = document.getElementById("mgCancelBtn");
+      var rescheduleBtn = document.getElementById("mgRescheduleToggle");
+      var canModify = (res.status === "pending" || res.status === "confirmed");
+      cancelBtn.style.display = canModify ? "inline-block" : "none";
+      rescheduleBtn.style.display = canModify ? "inline-block" : "none";
+    }).catch(function(){
+      btn.disabled = false;
+      mgShowMsg(LANG==="fr" ? "Erreur. Veuillez réessayer." : "Error. Please try again.", true);
+    });
+  });
+
+  document.getElementById("mgCancelBtn").addEventListener("click", function(){
+    if (!confirm(LANG==="fr" ? "Confirmer l'annulation de ce rendez-vous ?" : "Confirm cancelling this appointment?")) return;
+    var btn = this; btn.disabled = true;
+    fetch(base + "/rest/v1/rpc/cancel_booking", {
+      method: "POST",
+      headers: { "apikey": cfg.SUPABASE_ANON_KEY, "Authorization": "Bearer "+cfg.SUPABASE_ANON_KEY, "Content-Type": "application/json" },
+      body: JSON.stringify({ p_reference_code: mgCurrentRef, p_phone: mgCurrentPhone })
+    }).then(function(r){ return r.json(); }).then(function(res){
+      btn.disabled = false;
+      if (res && res.success){
+        document.getElementById("mgResult").style.display = "none";
+        mgShowMsg(LANG==="fr" ? "Votre rendez-vous a été annulé." : "Your appointment has been cancelled.", false);
+      } else {
+        mgShowMsg(LANG==="fr" ? "Erreur lors de l'annulation." : "Error cancelling appointment.", true);
+      }
+    }).catch(function(){ btn.disabled = false; mgShowMsg(LANG==="fr" ? "Erreur. Veuillez réessayer." : "Error. Please try again.", true); });
+  });
+
+  document.getElementById("mgRescheduleToggle").addEventListener("click", function(){
+    var area = document.getElementById("mgRescheduleArea");
+    area.style.display = (area.style.display === "none") ? "block" : "none";
+  });
+
+  document.getElementById("mgNewDate").addEventListener("change", function(){
+    var iso = this.value;
+    var area = document.getElementById("mgNewSlots");
+    if (!iso){ area.innerHTML = ""; return; }
+    area.innerHTML = '<p class="bk-loading">' + (LANG==="fr" ? "Chargement…" : "Loading…") + '</p>';
+    fetch(base + "/rest/v1/booking_slots?slot_date=eq."+iso+"&status=eq.open&select=*&order=start_time.asc", {
+      headers: { "apikey": cfg.SUPABASE_ANON_KEY, "Authorization": "Bearer "+cfg.SUPABASE_ANON_KEY }
+    }).then(function(r){ return r.json(); }).then(function(rows){
+      if (!rows.length){
+        area.innerHTML = '<p class="bk-empty-msg">' + (LANG==="fr" ? "Aucune plage disponible cette journée." : "No openings that day.") + '</p>';
+        return;
+      }
+      var seen = {}, distinctTimes = [];
+      rows.forEach(function(s){ if (!seen[s.start_time]){ seen[s.start_time]=true; distinctTimes.push(s.start_time); } });
+      var html = '<div class="bk-slots">';
+      distinctTimes.forEach(function(t){ html += '<button type="button" class="bk-slot" data-time="'+t+'">'+fmtTime(t)+'</button>'; });
+      html += '</div><button type="button" class="btn btn--solid" id="mgConfirmReschedule" style="margin-top:14px;display:none"><span data-lang="fr">Confirmer le changement</span><span data-lang="en">Confirm reschedule</span></button>';
+      area.innerHTML = html;
+      area.querySelectorAll(".bk-slot").forEach(function(btn){
+        btn.addEventListener("click", function(){
+          area.querySelectorAll(".bk-slot").forEach(function(b){ b.classList.remove("selected"); });
+          btn.classList.add("selected");
+          mgNewSelectedTime = btn.getAttribute("data-time");
+          document.getElementById("mgConfirmReschedule").style.display = "inline-block";
+        });
+      });
+      document.getElementById("mgConfirmReschedule").addEventListener("click", function(){
+        var btn = this; btn.disabled = true;
+        fetch(base + "/rest/v1/rpc/reschedule_booking", {
+          method: "POST",
+          headers: { "apikey": cfg.SUPABASE_ANON_KEY, "Authorization": "Bearer "+cfg.SUPABASE_ANON_KEY, "Content-Type": "application/json" },
+          body: JSON.stringify({ p_reference_code: mgCurrentRef, p_phone: mgCurrentPhone, p_new_slot_date: iso, p_new_start_time: mgNewSelectedTime })
+        }).then(function(r){ return r.json(); }).then(function(res){
+          btn.disabled = false;
+          if (res && res.success){
+            document.getElementById("mgResult").style.display = "none";
+            mgCurrentRef = res.reference_code; // old reference is now cancelled, this is the new one
+            mgShowRefBox(res.reference_code);
+          } else {
+            mgShowMsg(LANG==="fr" ? "Ce moment n'est plus disponible. Veuillez en choisir un autre." : "That time is no longer available. Please choose another.", true);
+          }
+        }).catch(function(){ btn.disabled = false; mgShowMsg(LANG==="fr" ? "Erreur. Veuillez réessayer." : "Error. Please try again.", true); });
+      });
+    }).catch(function(){
+      area.innerHTML = '<p class="bk-empty-msg">' + (LANG==="fr" ? "Erreur de chargement." : "Couldn't load times.") + '</p>';
+    });
+  });
+
+  renderDays();
+})();
+</script>
+</body>
+</html>

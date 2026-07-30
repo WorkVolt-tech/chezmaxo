@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact — Chemin Serein</title>
+<meta name="description" content="Joignez Chemin Serein pour une consultation. Contact us for a compassionate funeral planning consultation.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css?v=5">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="assets/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="assets/favicon-16x16.png" sizes="16x16" type="image/png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    <div class="nav-center-group">
+      <a class="nav-logo-link" href="index.html"><img class="nav-logo" src="assets/crest-dark.webp" alt="Chemin Serein"></a>
+      <nav class="nav">
+      <a class="navlink" href="index.html"><span data-lang="fr">Accueil</span><span data-lang="en">Home</span></a>
+      <a class="navlink" href="about.html"><span data-lang="fr">À propos</span><span data-lang="en">About</span></a>
+      <a class="navlink" href="story.html"><span data-lang="fr">Notre histoire</span><span data-lang="en">Our Story</span></a>
+      <a class="navlink" href="services.html"><span data-lang="fr">Services</span><span data-lang="en">Services</span></a>
+      <a class="navlink" href="packages.html"><span data-lang="fr">Forfaits</span><span data-lang="en">Packages</span></a>
+      <a class="navlink" href="faq.html"><span data-lang="fr">FAQ</span><span data-lang="en">FAQ</span></a>
+      <a class="navlink" href="resources.html"><span data-lang="fr">Ressources</span><span data-lang="en">Resources</span></a>
+      <a class="navlink active" href="contact.html"><span data-lang="fr">Contact</span><span data-lang="en">Contact</span></a>
+      </nav>
+    </div>
+          <div class="lang-toggle">
+        <button data-set-lang="fr">FR</button>
+        <button data-set-lang="en">EN</button>
+      </div>
+  </div>
+</header>
+
+<section class="block alt">
+  <div class="wrap">
+    <div class="section-head" style="margin-bottom:0">
+      <p class="eyebrow"><span data-lang="fr">Contact</span><span data-lang="en">Contact</span></p>
+      <h1 data-lang="fr">Nous sommes là pour vous</h1>
+      <h1 data-lang="en">We are here for you</h1>
+      <p data-lang="fr">Écrivez-nous ou appelez-nous. Nous vous répondrons avec attention et discrétion.</p>
+      <p data-lang="en">Write or call us. We'll respond with care and discretion.</p>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <div class="contact-grid">
+
+      <div class="contact-info">
+        <div class="info-item">
+          <div class="label"><span data-lang="fr">Téléphone</span><span data-lang="en">Phone</span></div>
+          <div class="val"><a href="tel:+15140000000">+1 (514) 000-0000</a></div>
+        </div>
+        <div class="info-item">
+          <div class="label"><span data-lang="fr">Courriel</span><span data-lang="en">Email</span></div>
+          <div class="val"><a href="mailto:info@cheminserein.ca">info@cheminserein.ca</a></div>
+        </div>
+        <div class="info-item">
+          <div class="label"><span data-lang="fr">Zone desservie</span><span data-lang="en">Service area</span></div>
+          <div class="val"><span data-lang="fr">Grand Montréal, Québec</span><span data-lang="en">Greater Montréal, Quebec</span></div>
+        </div>
+        <div class="info-item">
+          <div class="label"><span data-lang="fr">Disponibilité</span><span data-lang="en">Availability</span></div>
+          <div class="val"><span data-lang="fr">7 jours sur 7</span><span data-lang="en">7 days a week</span></div>
+        </div>
+        <p style="color:var(--ink-soft);margin-top:30px;font-size:.95rem">
+          <span data-lang="fr">Vous préférez être rappelé ? Indiquez-le dans le formulaire et nous vous contacterons au moment qui vous convient.</span>
+          <span data-lang="en">Prefer a callback? Note it in the form and we'll reach you at a time that suits you.</span>
+        </p>
+      </div>
+
+      <form data-contact id="contactForm" novalidate>
+        <!-- Honeypot: hidden from people, bots tend to fill it. Leave empty. -->
+        <div class="hp-field" aria-hidden="true">
+          <label>Website</label>
+          <input type="text" name="website" tabindex="-1" autocomplete="off">
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label><span data-lang="fr">Nom</span><span data-lang="en">Name</span></label>
+            <input type="text" name="name" required>
+            <span class="field-error" data-for="name">
+              <span data-lang="fr">Veuillez entrer votre nom.</span>
+              <span data-lang="en">Please enter your name.</span>
+            </span>
+          </div>
+          <div class="field">
+            <label><span data-lang="fr">Téléphone</span><span data-lang="en">Phone</span></label>
+            <input type="tel" name="phone">
+          </div>
+        </div>
+        <div class="field">
+          <label><span data-lang="fr">Courriel</span><span data-lang="en">Email</span></label>
+          <input type="email" name="email" required>
+          <span class="field-error" data-for="email">
+            <span data-lang="fr">Veuillez entrer une adresse courriel valide.</span>
+            <span data-lang="en">Please enter a valid email address.</span>
+          </span>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label><span data-lang="fr">Contact préféré</span><span data-lang="en">Preferred contact</span></label>
+            <select name="preferred">
+              <option data-lang="fr" value="Téléphone">Téléphone</option>
+              <option data-lang="fr" value="Courriel">Courriel</option>
+              <option data-lang="en" value="Phone">Phone</option>
+              <option data-lang="en" value="Email">Email</option>
+            </select>
+          </div>
+          <div class="field">
+            <label><span data-lang="fr">Date de consultation souhaitée</span><span data-lang="en">Preferred consultation date</span></label>
+            <input type="date" name="date">
+          </div>
+        </div>
+        <div class="field">
+          <label><span data-lang="fr">Comment pouvons-nous vous aider ?</span><span data-lang="en">How can we support you?</span></label>
+          <textarea name="message"></textarea>
+        </div>
+        <label class="consent-check">
+          <input type="checkbox" name="consent" required>
+          <span data-lang="fr">J'ai lu la <a href="privacy.html" target="_blank">Politique de confidentialité</a> et j'autorise Chemin Serein à utiliser ces renseignements pour répondre à ma demande.</span>
+          <span data-lang="en">I have read the <a href="privacy.html" target="_blank">Privacy Policy</a> and authorize Chemin Serein to use this information to respond to my request.</span>
+        </label>
+        <button class="btn btn--solid" type="submit"><span data-lang="fr">Envoyer la demande</span><span data-lang="en">Send request</span></button>
+        <p class="form-msg" style="display:none;margin-top:18px;color:var(--gold-deep)">
+          <span data-lang="fr">Merci. Votre demande a été reçue — nous vous contacterons sous peu.</span>
+          <span data-lang="en">Thank you. Your request has been received — we'll be in touch shortly.</span>
+        </p>
+        <p class="form-err" style="display:none;margin-top:18px;color:#a8402d">
+          <span data-lang="fr">Une erreur est survenue. Veuillez réessayer ou nous appeler directement.</span>
+          <span data-lang="en">Something went wrong. Please try again or call us directly.</span>
+        </p>
+      </form>
+
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <img class="foot-logo" src="assets/crest-white.webp" alt="Chemin Serein">
+        <p data-lang="fr">Accompagnement funéraire humain et professionnel pour les familles du Grand Montréal.</p>
+        <p data-lang="en">Compassionate, professional funeral support for families across Greater Montréal.</p>
+      </div>
+      <div>
+        <h4><span data-lang="fr">Navigation</span><span data-lang="en">Navigation</span></h4>
+        <a href="index.html"><span data-lang="fr">Accueil</span><span data-lang="en">Home</span></a>
+        <a href="about.html"><span data-lang="fr">À propos</span><span data-lang="en">About</span></a>
+        <a href="services.html"><span data-lang="fr">Services</span><span data-lang="en">Services</span></a>
+        <a href="packages.html"><span data-lang="fr">Forfaits</span><span data-lang="en">Packages</span></a>
+        <a href="faq.html">FAQ</a>
+        <a href="resources.html"><span data-lang="fr">Ressources</span><span data-lang="en">Resources</span></a>
+        <a href="careers.html"><span data-lang="fr">Carrières</span><span data-lang="en">Careers</span></a>
+        <a href="portal.html"><span data-lang="fr">Portail famille</span><span data-lang="en">Family Portal</span></a>
+        <a href="contact.html"><span data-lang="fr">Contact</span><span data-lang="en">Contact</span></a>
+        <a href="booking.html"><span data-lang="fr">Réserver</span><span data-lang="en">Book a Consultation</span></a>
+      </div>
+      <div>
+        <h4><span data-lang="fr">Nous joindre</span><span data-lang="en">Contact</span></h4>
+        <p><a href="tel:+15140000000">+1 (514) 000-0000</a></p>
+        <p><a href="mailto:info@cheminserein.ca">info@cheminserein.ca</a></p>
+        <p data-lang="fr">Grand Montréal, Québec</p>
+        <p data-lang="en">Greater Montréal, Quebec</p>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Chemin Serein · Serene Path · <a href="dashboard.html" style="color:rgba(247,243,236,.45)">Personnel / Staff</a></span>
+      <span data-lang="fr">Service de coordination — nous ne sommes pas une maison funéraire.</span>
+      <span data-lang="en">Coordination service — we are not a funeral home.</span>
+      <span class="foot-legal"><a href="privacy.html" style="color:rgba(247,243,236,.45)"><span data-lang="fr">Politique de confidentialité</span><span data-lang="en">Privacy Policy</span></a> · <a href="terms.html" style="color:rgba(247,243,236,.45)"><span data-lang="fr">Conditions d'utilisation</span><span data-lang="en">Terms of Service</span></a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/config.js"></script>
+<script src="assets/mock-backend.js"></script>
+<script src="assets/site.js"></script>
+<script src="assets/livechat.js"></script>
+</body>
+</html>

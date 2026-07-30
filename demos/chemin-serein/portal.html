@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portail famille — Chemin Serein</title>
+<meta name="description" content="Accédez à votre dossier : échéancier, documents et facture. Access your file: timeline, documents, and invoice.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css?v=5">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="assets/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="assets/favicon-16x16.png" sizes="16x16" type="image/png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<style>
+  .pf-wrap { max-width: 640px; }
+  .pf-card { border:1px solid var(--line); border-radius:8px; padding:32px 30px; background:#fff; }
+  .pf-tabs { display:flex; gap:8px; margin-bottom:24px; }
+  .pf-tabs button { flex:1; padding:10px; border:1px solid var(--line); background:#fff; border-radius:6px; cursor:pointer; font-family:var(--sans); font-size:.85rem; letter-spacing:.05em; text-transform:uppercase; color:var(--ink-soft); }
+  .pf-tabs button.active { background:var(--ink); color:#fff; border-color:var(--ink); }
+  .pf-field { margin-bottom:16px; }
+  .pf-field label { display:block; font-size:.74rem; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:6px; }
+  .pf-field input, .pf-field select { width:100%; padding:11px 13px; border:1px solid var(--line); border-radius:6px; font-family:var(--sans); font-size:.95rem; background:#fff; }
+  .pf-err { color:#a8402d; font-size:.85rem; margin-top:10px; display:none; }
+  .pf-err.show { display:block; }
+  .pf-hint { font-size:.85rem; color:var(--ink-soft); margin-bottom:20px; }
+
+  .pf-section { margin-bottom:40px; }
+  .pf-section h2 { font-size:1.4rem; margin-bottom:16px; }
+  .tl-item { display:flex; gap:14px; padding:12px 0; border-bottom:1px solid rgba(43,42,40,.08); align-items:flex-start; }
+  .tl-icon { width:26px; height:26px; border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:.8rem; margin-top:2px; }
+  .tl-icon.done { background:#3d7a4d; color:#fff; }
+  .tl-icon.in_progress { background:var(--gold); color:#fff; }
+  .tl-icon.pending { border:2px solid var(--line); color:transparent; }
+  .tl-label { font-weight:500; }
+  .tl-date { font-size:.85rem; color:var(--ink-soft); margin-top:2px; }
+
+  .doc-item, .inv-line { display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid rgba(43,42,40,.08); font-size:.94rem; }
+  .inv-total-row { display:flex; justify-content:space-between; padding:6px 0; font-size:.94rem; }
+  .inv-total-row.grand { font-weight:600; font-size:1.05rem; border-top:1px solid var(--line); margin-top:6px; padding-top:12px; }
+  .inv-balance { padding:14px 18px; border-radius:6px; margin-top:14px; font-weight:600; }
+  .inv-balance.owing { background:rgba(168,64,45,.08); color:#a8402d; }
+  .inv-balance.paid { background:rgba(61,122,77,.1); color:#3d7a4d; }
+  .pf-empty { color:var(--ink-soft); font-size:.92rem; }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    <div class="nav-center-group">
+      <a class="nav-logo-link" href="index.html"><img class="nav-logo" src="assets/crest-dark.webp" alt="Chemin Serein"></a>
+      <nav class="nav">
+      <a class="navlink" href="index.html"><span data-lang="fr">Accueil</span><span data-lang="en">Home</span></a>
+      <a class="navlink" href="about.html"><span data-lang="fr">À propos</span><span data-lang="en">About</span></a>
+      <a class="navlink" href="story.html"><span data-lang="fr">Notre histoire</span><span data-lang="en">Our Story</span></a>
+      <a class="navlink" href="services.html"><span data-lang="fr">Services</span><span data-lang="en">Services</span></a>
+      <a class="navlink" href="packages.html"><span data-lang="fr">Forfaits</span><span data-lang="en">Packages</span></a>
+      <a class="navlink" href="faq.html"><span data-lang="fr">FAQ</span><span data-lang="en">FAQ</span></a>
+      <a class="navlink" href="resources.html"><span data-lang="fr">Ressources</span><span data-lang="en">Resources</span></a>
+      <a class="navlink" href="contact.html"><span data-lang="fr">Contact</span><span data-lang="en">Contact</span></a>
+      </nav>
+    </div>
+          <div class="lang-toggle">
+        <button data-set-lang="fr">FR</button>
+        <button data-set-lang="en">EN</button>
+      </div>
+  </div>
+</header>
+
+<section class="block alt">
+  <div class="wrap">
+    <div class="section-head" style="margin-bottom:0">
+      <p class="eyebrow"><span data-lang="fr">Portail privé</span><span data-lang="en">Private portal</span></p>
+      <h1 data-lang="fr">Votre dossier</h1>
+      <h1 data-lang="en">Your file</h1>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap pf-wrap">
+
+    <!-- AUTH VIEW -->
+    <div id="pfAuth">
+      <div class="pf-card">
+        <div class="pf-tabs">
+          <button type="button" id="pfTabSignin" class="active"><span data-lang="fr">Connexion</span><span data-lang="en">Sign in</span></button>
+          <button type="button" id="pfTabSignup"><span data-lang="fr">Première visite</span><span data-lang="en">First time here</span></button>
+        </div>
+
+        <form id="pfSigninForm">
+          <div class="pf-field">
+            <label><span data-lang="fr">Courriel</span><span data-lang="en">Email</span></label>
+            <input type="email" id="siEmail" required value="julie.bernard@example.com">
+          </div>
+          <div class="pf-field">
+            <label><span data-lang="fr">Mot de passe</span><span data-lang="en">Password</span></label>
+            <input type="password" id="siPassword" required value="demo1234">
+          </div>
+          <button type="submit" class="btn btn--solid" style="width:100%"><span data-lang="fr">Se connecter</span><span data-lang="en">Sign in</span></button>
+          <p class="pf-err" id="siErr"><span data-lang="fr">Identifiants invalides.</span><span data-lang="en">Invalid credentials.</span></p>
+        </form>
+
+        <form id="pfSignupForm" style="display:none">
+          <p class="pf-hint"><span data-lang="fr">Entrez le courriel que notre équipe a associé à votre dossier pour créer votre accès.</span><span data-lang="en">Enter the email our team has on file for you to set up your access.</span></p>
+          <div class="pf-field">
+            <label><span data-lang="fr">Courriel</span><span data-lang="en">Email</span></label>
+            <input type="email" id="suEmail" required>
+          </div>
+          <div class="pf-field">
+            <label><span data-lang="fr">Choisir un mot de passe</span><span data-lang="en">Choose a password</span></label>
+            <input type="password" id="suPassword" minlength="8" required>
+          </div>
+          <div class="pf-field">
+            <label><span data-lang="fr">Confirmer le mot de passe</span><span data-lang="en">Confirm password</span></label>
+            <input type="password" id="suPassword2" minlength="8" required>
+          </div>
+          <button type="submit" class="btn btn--solid" style="width:100%" id="suSubmit"><span data-lang="fr">Créer mon accès</span><span data-lang="en">Create my access</span></button>
+          <p class="pf-err" id="suErr"></p>
+        </form>
+      </div>
+      <p style="text-align:center;margin-top:20px;color:var(--ink-soft);font-size:.9rem">
+        <span data-lang="fr">Besoin d'aide ? </span><span data-lang="en">Need help? </span><a href="contact.html"><span data-lang="fr">Contactez-nous</span><span data-lang="en">Contact us</span></a>
+      </p>
+    </div>
+
+    <!-- PORTAL VIEW -->
+    <div id="pfPortal" style="display:none">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:30px">
+        <h2 style="margin:0;font-size:1.6rem" id="pfWelcome"></h2>
+        <button class="btn btn--ghost" id="pfSignout"><span data-lang="fr">Déconnexion</span><span data-lang="en">Sign out</span></button>
+      </div>
+
+      <div class="pf-section">
+        <h2><span data-lang="fr">Échéancier</span><span data-lang="en">Timeline</span></h2>
+        <div id="pfTimeline"></div>
+      </div>
+
+      <div class="pf-section">
+        <h2><span data-lang="fr">Documents</span><span data-lang="en">Documents</span></h2>
+        <div id="pfDocuments"></div>
+      </div>
+
+      <div class="pf-section">
+        <h2><span data-lang="fr">Téléverser un document</span><span data-lang="en">Upload a document</span></h2>
+        <div id="pfUploadsList" style="margin-bottom:18px"></div>
+        <div style="border:1px solid var(--line);border-radius:8px;padding:20px;background:#fff">
+          <div class="pf-field">
+            <label><span data-lang="fr">Catégorie</span><span data-lang="en">Category</span></label>
+            <select id="pfUploadKind">
+              <option value="photo" data-lang="fr">Photo</option>
+              <option value="obituary" data-lang="fr">Nécrologie</option>
+              <option value="other" data-lang="fr">Autre</option>
+              <option value="photo" data-lang="en">Photo</option>
+              <option value="obituary" data-lang="en">Obituary</option>
+              <option value="other" data-lang="en">Other</option>
+            </select>
+          </div>
+          <div class="pf-field">
+            <label><span data-lang="fr">Fichier</span><span data-lang="en">File</span></label>
+            <input type="file" id="pfUploadFile" accept="image/jpeg,image/png,image/webp,image/heic,application/pdf,.doc,.docx">
+          </div>
+          <div class="pf-field">
+            <label><span data-lang="fr">Description (optionnel)</span><span data-lang="en">Description (optional)</span></label>
+            <input type="text" id="pfUploadDesc" placeholder="">
+          </div>
+          <p style="font-size:.82rem;color:var(--ink-soft);margin:0 0 14px">
+            <span data-lang="fr">Formats acceptés : JPG, PNG, WEBP, HEIC, PDF, DOC/DOCX — 20 Mo maximum.</span>
+            <span data-lang="en">Accepted formats: JPG, PNG, WEBP, HEIC, PDF, DOC/DOCX — 20MB max.</span>
+          </p>
+          <button class="btn btn--solid" id="pfUploadBtn"><span data-lang="fr">Téléverser</span><span data-lang="en">Upload</span></button>
+          <p id="pfUploadMsg" style="display:none;margin-top:12px;font-size:.9rem"></p>
+        </div>
+      </div>
+
+      <div class="pf-section">
+        <h2><span data-lang="fr">Facture</span><span data-lang="en">Invoice</span></h2>
+        <div id="pfInvoice"></div>
+      </div>
+
+      <div class="pf-section">
+        <h2><span data-lang="fr">Messages</span><span data-lang="en">Messages</span></h2>
+        <div id="pfMessages" style="max-height:340px;overflow:auto;display:flex;flex-direction:column;gap:10px;margin-bottom:14px"></div>
+        <div style="display:flex;gap:8px">
+          <input type="text" id="pfMsgInput" placeholder="Écrire un message… / Write a message…" style="flex:1;padding:11px 13px;border:1px solid var(--line);border-radius:6px;font-family:var(--sans);font-size:.95rem">
+          <button class="btn btn--solid" id="pfMsgSend"><span data-lang="fr">Envoyer</span><span data-lang="en">Send</span></button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-bottom" style="border:none;padding-top:0">
+      <span>© 2026 Chemin Serein · Serene Path</span>
+      <span class="foot-legal"><a href="privacy.html" style="color:rgba(247,243,236,.6)"><span data-lang="fr">Confidentialité</span><span data-lang="en">Privacy</span></a> · <a href="terms.html" style="color:rgba(247,243,236,.6)"><span data-lang="fr">Conditions</span><span data-lang="en">Terms</span></a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/config.js"></script>
+<script src="assets/mock-backend.js"></script>
+<script src="assets/site.js"></script>
+<script>
+(function(){
+  var cfg = window.HDV_CONFIG || {};
+  if (!cfg.SUPABASE_URL || cfg.SUPABASE_URL.indexOf("YOUR-")!==-1){ return; }
+  var sb = supabase.createClient(cfg.SUPABASE_URL, cfg.SUPABASE_ANON_KEY);
+  var LANG = "fr";
+  try { LANG = localStorage.getItem("hdv-lang") || "fr"; } catch(e){}
+
+  var DOC_TYPE_LABELS = {
+    death_cert:{fr:"Certificat de décès",en:"Death certificate"},
+    id:{fr:"Pièce d'identité",en:"ID"},
+    insurance:{fr:"Assurance",en:"Insurance"},
+    will:{fr:"Testament",en:"Will"},
+    other:{fr:"Autre",en:"Other"}
+  };
+  function docLabel(type){ var e=DOC_TYPE_LABELS[type]||DOC_TYPE_LABELS.other; return e[LANG]||e.fr; }
+
+  function esc(s){ return (s==null?"":String(s)).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];}); }
+  function money(n){ return "$"+(Math.round((n||0)*100)/100).toFixed(2); }
+  function fmtDate(d){ if(!d) return "—"; return new Date(d+"T00:00:00").toLocaleDateString(LANG==="fr"?"fr-CA":"en-CA",{year:"numeric",month:"long",day:"numeric"}); }
+  function fmtDateTime(d){ if(!d) return "—"; return new Date(d).toLocaleString(LANG==="fr"?"fr-CA":"en-CA",{year:"numeric",month:"short",day:"numeric",hour:"2-digit",minute:"2-digit"}); }
+
+  // ---------- Tabs ----------
+  document.getElementById("pfTabSignin").addEventListener("click", function(){
+    document.getElementById("pfTabSignin").classList.add("active");
+    document.getElementById("pfTabSignup").classList.remove("active");
+    document.getElementById("pfSigninForm").style.display="block";
+    document.getElementById("pfSignupForm").style.display="none";
+  });
+  document.getElementById("pfTabSignup").addEventListener("click", function(){
+    document.getElementById("pfTabSignup").classList.add("active");
+    document.getElementById("pfTabSignin").classList.remove("active");
+    document.getElementById("pfSignupForm").style.display="block";
+    document.getElementById("pfSigninForm").style.display="none";
+  });
+
+  // ---------- Sign in ----------
+  document.getElementById("pfSigninForm").addEventListener("submit", function(e){
+    e.preventDefault();
+    document.getElementById("siErr").classList.remove("show");
+    sb.auth.signInWithPassword({
+      email: document.getElementById("siEmail").value.trim(),
+      password: document.getElementById("siPassword").value
+    }).then(function(res){
+      if (res.error){ document.getElementById("siErr").classList.add("show"); return; }
+      showPortal();
+    });
+  });
+
+  // ---------- Sign up (gated via Edge Function) ----------
+  document.getElementById("pfSignupForm").addEventListener("submit", function(e){
+    e.preventDefault();
+    var errEl = document.getElementById("suErr");
+    errEl.classList.remove("show");
+    var email = document.getElementById("suEmail").value.trim();
+    var pw = document.getElementById("suPassword").value;
+    var pw2 = document.getElementById("suPassword2").value;
+    if (pw !== pw2){
+      errEl.textContent = LANG==="fr" ? "Les mots de passe ne correspondent pas." : "Passwords don't match.";
+      errEl.classList.add("show"); return;
+    }
+    if (pw.length < 8){
+      errEl.textContent = LANG==="fr" ? "Le mot de passe doit contenir au moins 8 caractères." : "Password must be at least 8 characters.";
+      errEl.classList.add("show"); return;
+    }
+    var btn = document.getElementById("suSubmit"); btn.disabled = true;
+    sb.functions.invoke("portal-signup", { body:{ email: email, password: pw } }).then(function(res){
+      btn.disabled = false;
+      var ok = res.data && res.data.success;
+      if (!ok){
+        var code = (res.data && res.data.error) || "error";
+        errEl.textContent = code === "no_match"
+          ? (LANG==="fr" ? "Nous n'avons trouvé aucun dossier avec ce courriel. Vérifiez l'adresse ou contactez-nous." : "We couldn't find a file matching that email. Double-check it or contact us.")
+          : (LANG==="fr" ? "Une erreur est survenue. Réessayez." : "Something went wrong. Please try again.");
+        errEl.classList.add("show");
+        return;
+      }
+      // Signed up successfully — now sign in.
+      sb.auth.signInWithPassword({ email: email, password: pw }).then(function(){ showPortal(); });
+    }).catch(function(){
+      btn.disabled = false;
+      errEl.textContent = LANG==="fr" ? "Une erreur est survenue. Réessayez." : "Something went wrong. Please try again.";
+      errEl.classList.add("show");
+    });
+  });
+
+  document.getElementById("pfSignout").addEventListener("click", function(){
+    sb.auth.signOut().then(function(){ location.reload(); });
+  });
+
+  // ---------- Portal data ----------
+  function showPortal(){
+    document.getElementById("pfAuth").style.display = "none";
+    document.getElementById("pfPortal").style.display = "block";
+    loadPortalData();
+  }
+
+  var currentFile = null;
+
+  function loadPortalData(){
+    sb.from("coordination_files").select("*").then(function(res){
+      var file = res.data && res.data[0];
+      if (!file){ return; }
+      currentFile = file;
+      document.getElementById("pfWelcome").textContent =
+        (LANG==="fr" ? "Bonjour, famille " : "Hello, ") + (file.family_name || "");
+
+      Promise.all([
+        sb.from("family_timeline_events").select("*").eq("coordination_id", file.id).order("position", {ascending:true}),
+        sb.from("family_documents").select("*").eq("coordination_id", file.id).order("created_at", {ascending:false}),
+        sb.from("invoices").select("*").eq("coordination_id", file.id).neq("status","draft").order("created_at",{ascending:false}),
+        sb.from("family_messages").select("*").eq("coordination_id", file.id).order("created_at",{ascending:true}),
+        sb.from("family_uploads").select("*").eq("coordination_id", file.id).order("created_at",{ascending:false})
+      ]).then(function(results){
+        renderTimeline(results[0].data || []);
+        renderDocuments(results[1].data || []);
+        renderMessages(results[3].data || []);
+        renderUploads(results[4].data || []);
+        var invoices = results[2].data || [];
+        if (invoices.length){
+          var inv = invoices[0];
+          Promise.all([
+            sb.from("invoice_items").select("*").eq("invoice_id", inv.id).order("position",{ascending:true}),
+            sb.from("payments").select("*").eq("invoice_id", inv.id)
+          ]).then(function(r2){ renderInvoice(inv, r2[0].data||[], r2[1].data||[]); });
+        } else {
+          renderInvoice(null, [], []);
+        }
+      });
+
+      // Live updates: see staff replies (or timeline/document changes) without refreshing.
+      sb.channel("portal-"+file.id)
+        .on("postgres_changes", {event:"*", schema:"public", table:"family_messages", filter:"coordination_id=eq."+file.id}, function(){
+          sb.from("family_messages").select("*").eq("coordination_id", file.id).order("created_at",{ascending:true}).then(function(r){ renderMessages(r.data||[]); });
+        })
+        .on("postgres_changes", {event:"*", schema:"public", table:"family_timeline_events", filter:"coordination_id=eq."+file.id}, function(){
+          sb.from("family_timeline_events").select("*").eq("coordination_id", file.id).order("position",{ascending:true}).then(function(r){ renderTimeline(r.data||[]); });
+        })
+        .subscribe();
+    });
+  }
+
+  function renderMessages(msgs){
+    var el = document.getElementById("pfMessages");
+    if (!msgs.length){ el.innerHTML = '<p class="pf-empty">'+(LANG==="fr"?"Aucun message pour le moment.":"No messages yet.")+'</p>'; return; }
+    el.innerHTML = msgs.map(function(msg){
+      var mine = msg.sender_role === "family";
+      return '<div style="align-self:'+(mine?"flex-end":"flex-start")+';max-width:78%;background:'+(mine?"var(--gold)":"#fff")+';color:'+(mine?"#fff":"var(--ink)")+';border:1px solid var(--line);border-radius:8px;padding:10px 14px">'
+        +'<div style="font-size:.72rem;opacity:.75;margin-bottom:3px">'+esc(msg.sender_name||(mine?"":"Chemin Serein"))+' · '+esc(fmtDateTime(msg.created_at))+'</div>'
+        +'<div style="font-size:.92rem;white-space:pre-wrap">'+esc(msg.body)+'</div></div>';
+    }).join('');
+    el.scrollTop = el.scrollHeight;
+  }
+
+  function sendPortalMessage(){
+    var input = document.getElementById("pfMsgInput");
+    var body = (input.value||"").trim();
+    if (!body || !currentFile) return;
+    var btn = document.getElementById("pfMsgSend"); btn.disabled = true;
+    sb.from("family_messages").insert({
+      coordination_id: currentFile.id, sender_role: "family",
+      sender_name: currentFile.family_name || "", body: body
+    }).then(function(res){
+      btn.disabled = false;
+      if (res.error){ alert(res.error.message); return; }
+      input.value = "";
+      sb.from("family_messages").select("*").eq("coordination_id", currentFile.id).order("created_at",{ascending:true}).then(function(r){ renderMessages(r.data||[]); });
+    });
+  }
+  document.getElementById("pfMsgSend").addEventListener("click", sendPortalMessage);
+  document.getElementById("pfMsgInput").addEventListener("keydown", function(e){ if(e.key==="Enter") sendPortalMessage(); });
+
+  function renderTimeline(events){
+    var el = document.getElementById("pfTimeline");
+    if (!events.length){ el.innerHTML = '<p class="pf-empty">'+(LANG==="fr"?"Votre échéancier sera bientôt disponible.":"Your timeline will be available soon.")+'</p>'; return; }
+    var iconChar = { done:"✓", in_progress:"", pending:"" };
+    el.innerHTML = events.map(function(ev){
+      return '<div class="tl-item"><div class="tl-icon '+ev.status+'">'+(iconChar[ev.status]||"")+'</div>'
+        +'<div><div class="tl-label">'+esc(ev.label)+'</div>'
+        +(ev.event_date ? '<div class="tl-date">'+esc(fmtDate(ev.event_date))+'</div>' : '')
+        +'</div></div>';
+    }).join('');
+  }
+
+  function renderDocuments(docs){
+    var el = document.getElementById("pfDocuments");
+    if (!docs.length){ el.innerHTML = '<p class="pf-empty">'+(LANG==="fr"?"Aucun document pour le moment.":"No documents yet.")+'</p>'; return; }
+    el.innerHTML = docs.map(function(d){
+      var label = (d.label && d.label.trim()) ? d.label : docLabel(d.doc_type);
+      return '<div class="doc-item"><span>📎 '+esc(label)+'</span><a class="btn btn--ghost" href="'+esc(d.drive_url||"#")+'" target="_blank" rel="noopener">'+(LANG==="fr"?"Voir":"View")+'</a></div>';
+    }).join('');
+  }
+
+  var KIND_LABELS = {
+    photo: {fr:"Photo", en:"Photo"},
+    obituary: {fr:"Nécrologie", en:"Obituary"},
+    other: {fr:"Autre", en:"Other"}
+  };
+  function renderUploads(uploads){
+    var el = document.getElementById("pfUploadsList");
+    if (!uploads.length){ el.innerHTML = '<p class="pf-empty">'+(LANG==="fr"?"Aucun fichier téléversé pour le moment.":"No files uploaded yet.")+'</p>'; return; }
+    el.innerHTML = uploads.map(function(u){
+      var kindLabel = (KIND_LABELS[u.kind]||KIND_LABELS.other)[LANG] || u.kind;
+      var statusLabel = u.review_status === "reviewed"
+        ? (LANG==="fr" ? "Consulté par l'équipe" : "Reviewed by our team")
+        : (LANG==="fr" ? "En attente de révision" : "Pending review");
+      return '<div class="doc-item">'
+        + '<span>📎 '+esc(u.file_name)+' <span style="color:var(--ink-soft);font-size:.85rem">— '+esc(kindLabel)+(u.description?' · '+esc(u.description):'')+' · '+esc(statusLabel)+'</span></span>'
+        + '<span style="display:flex;gap:6px">'
+        + '<button class="btn btn--ghost" data-view-upload="'+esc(u.id)+'" data-path="'+esc(u.file_path)+'">'+(LANG==="fr"?"Voir":"View")+'</button>'
+        + '<button class="btn btn--ghost" data-delete-upload="'+esc(u.id)+'" style="color:#a8402d">'+(LANG==="fr"?"Supprimer":"Delete")+'</button>'
+        + '</span></div>';
+    }).join('');
+
+    el.querySelectorAll('[data-view-upload]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var path = btn.getAttribute('data-path');
+        sb.storage.from('family-uploads').createSignedUrl(path, 300).then(function(res){
+          if (res.error || !res.data){ alert(LANG==="fr"?"Impossible d'ouvrir ce fichier.":"Couldn't open this file."); return; }
+          window.open(res.data.signedUrl, '_blank');
+        });
+      });
+    });
+    el.querySelectorAll('[data-delete-upload]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        if (!confirm(LANG==="fr" ? "Supprimer ce fichier ?" : "Delete this file?")) return;
+        var id = btn.getAttribute('data-delete-upload');
+        var row = uploads.filter(function(u){ return String(u.id)===String(id); })[0];
+        if (!row) return;
+        sb.storage.from('family-uploads').remove([row.file_path]).then(function(){
+          sb.from('family_uploads').delete().eq('id', id).then(function(){ loadPortalData(); });
+        });
+      });
+    });
+  }
+
+  document.getElementById('pfUploadBtn').addEventListener('click', function(){
+    var msgEl = document.getElementById('pfUploadMsg');
+    msgEl.style.display = 'none';
+    if (!currentFile){ return; }
+    var fileInput = document.getElementById('pfUploadFile');
+    var file = fileInput.files && fileInput.files[0];
+    if (!file){
+      msgEl.textContent = LANG==="fr" ? "Veuillez choisir un fichier." : "Please choose a file.";
+      msgEl.style.color = '#a8402d'; msgEl.style.display = 'block';
+      return;
+    }
+    if (file.size > 20 * 1024 * 1024){
+      msgEl.textContent = LANG==="fr" ? "Le fichier dépasse la limite de 20 Mo." : "File exceeds the 20MB limit.";
+      msgEl.style.color = '#a8402d'; msgEl.style.display = 'block';
+      return;
+    }
+    var kind = document.getElementById('pfUploadKind').value;
+    var description = document.getElementById('pfUploadDesc').value.trim();
+    var btn = document.getElementById('pfUploadBtn');
+    btn.disabled = true;
+
+    // Path prefix must be the coordination_id — that's what the storage
+    // policies check to scope access to this family's own folder only.
+    var safeName = file.name.replace(/[^A-Za-z0-9._-]/g, '_');
+    var path = currentFile.id + '/' + Date.now() + '_' + safeName;
+
+    sb.storage.from('family-uploads').upload(path, file, { upsert: false }).then(function(uploadRes){
+      if (uploadRes.error){
+        btn.disabled = false;
+        msgEl.textContent = (LANG==="fr" ? "Erreur : " : "Error: ") + uploadRes.error.message;
+        msgEl.style.color = '#a8402d'; msgEl.style.display = 'block';
+        return;
+      }
+      sb.from('family_uploads').insert({
+        coordination_id: currentFile.id,
+        file_path: path,
+        file_name: file.name,
+        kind: kind,
+        description: description || null,
+        uploaded_by_role: 'family'
+      }).then(function(insertRes){
+        btn.disabled = false;
+        if (insertRes.error){
+          msgEl.textContent = (LANG==="fr" ? "Erreur : " : "Error: ") + insertRes.error.message;
+          msgEl.style.color = '#a8402d'; msgEl.style.display = 'block';
+          return;
+        }
+        fileInput.value = '';
+        document.getElementById('pfUploadDesc').value = '';
+        msgEl.textContent = LANG==="fr" ? "Téléversé avec succès." : "Uploaded successfully.";
+        msgEl.style.color = '#3d7a4d'; msgEl.style.display = 'block';
+        loadPortalData();
+      });
+    });
+  });
+
+  function renderInvoice(inv, items, payments){
+    var el = document.getElementById("pfInvoice");
+    if (!inv){ el.innerHTML = '<p class="pf-empty">'+(LANG==="fr"?"Aucune facture pour le moment.":"No invoice yet.")+'</p>'; return; }
+    var subtotal = items.reduce(function(s,it){ return s + (Number(it.quantity)||0)*(Number(it.unit_price)||0); }, 0);
+    var gst = inv.apply_gst ? subtotal*(Number(inv.gst_rate)||0)/100 : 0;
+    var qst = inv.apply_qst ? subtotal*(Number(inv.qst_rate)||0)/100 : 0;
+    var total = subtotal + gst + qst;
+    var paid = payments.reduce(function(s,p){ return s + (Number(p.amount)||0); }, 0);
+    var balance = total - paid;
+
+    var html = '<div style="font-size:.85rem;color:var(--ink-soft);margin-bottom:14px">'+(LANG==="fr"?"Facture":"Invoice")+' #'+esc(inv.invoice_number)+'</div>';
+    html += items.map(function(it){
+      return '<div class="inv-line"><span>'+esc(it.description||"")+' '+(it.quantity!==1?'× '+it.quantity:'')+'</span><span>'+money((Number(it.quantity)||0)*(Number(it.unit_price)||0))+'</span></div>';
+    }).join('');
+    html += '<div class="inv-total-row"><span>'+(LANG==="fr"?"Sous-total":"Subtotal")+'</span><span>'+money(subtotal)+'</span></div>';
+    if (inv.apply_gst) html += '<div class="inv-total-row"><span>TPS / GST</span><span>'+money(gst)+'</span></div>';
+    if (inv.apply_qst) html += '<div class="inv-total-row"><span>TVQ / QST</span><span>'+money(qst)+'</span></div>';
+    html += '<div class="inv-total-row grand"><span>'+(LANG==="fr"?"Total":"Total")+'</span><span>'+money(total)+'</span></div>';
+    if (paid > 0) html += '<div class="inv-total-row"><span>'+(LANG==="fr"?"Payé":"Paid")+'</span><span>'+money(paid)+'</span></div>';
+    html += '<div class="inv-balance '+(balance>0.005?"owing":"paid")+'">'+(balance>0.005 ? (LANG==="fr"?"Solde dû : ":"Balance due: ")+money(balance) : (LANG==="fr"?"Entièrement payée":"Fully paid"))+'</div>';
+    el.innerHTML = html;
+  }
+
+  // ---------- On load: already signed in? ----------
+  sb.auth.getSession().then(function(res){
+    if (res.data && res.data.session){ showPortal(); }
+  });
+})();
+</script>
+</body>
+</html>

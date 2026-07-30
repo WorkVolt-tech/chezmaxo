@@ -1,0 +1,690 @@
+/* =========================================================================
+   Chemin Serein — DEMO MOCK BACKEND
+   -------------------------------------------------------------------------
+   This file completely replaces Supabase for the portfolio demo. There is
+   no real database, no real network calls, no real credentials anywhere.
+   Everything lives in this file and in the browser's sessionStorage, which
+   means: it behaves like a real, working backend while you click around,
+   but resets to a clean state the moment you open a new tab/visit.
+
+   Two things get intercepted:
+     1. window.supabase.createClient(...) — used by most pages via the
+        supabase-js library pattern (sb.from(), sb.rpc(), sb.auth, etc.)
+     2. window.fetch(...) — a few pages (booking.html, livechat.js, the
+        contact/application forms) talk to Supabase's REST API directly
+        with fetch() instead of going through the library. Both paths
+        share the exact same fake data, so everything stays consistent
+        with itself no matter which page you're on.
+   ========================================================================= */
+(function () {
+  "use strict";
+
+  // ======================================================================
+  // 0. Small utilities
+  // ======================================================================
+  function uuid() {
+    return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
+      var r = (Math.random() * 16) | 0, v = c === "x" ? r : (r & 0x3) | 0x8;
+      return v.toString(16);
+    });
+  }
+  function nowISO() { return new Date().toISOString(); }
+  function daysFromNow(n) {
+    var d = new Date();
+    d.setDate(d.getDate() + n);
+    return d.toISOString().slice(0, 10);
+  }
+  function clone(x) { return JSON.parse(JSON.stringify(x)); }
+
+  // ======================================================================
+  // 1. Seed data — realistic fake content for every table in the app
+  // ======================================================================
+  function buildSeed() {
+    var staff1 = uuid(), staff2 = uuid(), admin1 = uuid(), family1 = uuid();
+    var coord1 = uuid(), coord2 = uuid();
+    var slot1 = uuid(), slot2 = uuid(), slot3 = uuid();
+    var conv1 = uuid();
+    var inv1 = uuid();
+
+    return {
+      profiles: [
+        { id: admin1, full_name: "Sophie Tremblay", role: "admin", email: "sophie@demo.local", created_at: daysFromNow(-200), can_manage_intake: true, can_manage_finances: true, can_manage_reviews: true, can_manage_staff: true, _demo_password: "demo123" },
+        { id: staff1, full_name: "Marc-André Roy", role: "staff", email: "marc@demo.local", created_at: daysFromNow(-150), can_manage_intake: true, can_manage_finances: false, can_manage_reviews: false, can_manage_staff: false, _demo_password: "demo123" },
+        { id: staff2, full_name: "Isabelle Côté", role: "photographer", email: "isabelle@demo.local", created_at: daysFromNow(-90), can_manage_intake: false, can_manage_finances: false, can_manage_reviews: false, can_manage_staff: false, _demo_password: "demo123" },
+        { id: family1, full_name: "Julie Bernard", role: "family", email: "julie.bernard@example.com", created_at: daysFromNow(-3), can_manage_intake: false, can_manage_finances: false, can_manage_reviews: false, can_manage_staff: false, _demo_password: "demo1234" }
+      ],
+      contact_submissions: [
+        { id: uuid(), created_at: daysFromNow(-2), name: "Julie Bernard", phone: "514-555-0142", email: "julie.bernard@example.com", preferred: "Téléphone", consultation_date: daysFromNow(5), message: "Bonjour, mon père est décédé hier soir. Nous aimerions parler à quelqu'un dès que possible.", lang: "fr", status: "new", assigned_to: null, staff_notes: null, updated_at: daysFromNow(-2) },
+        { id: uuid(), created_at: daysFromNow(-5), name: "Robert Chen", phone: "514-555-0198", email: "robert.chen@example.com", preferred: "Email", consultation_date: null, message: "Looking for information about pre-arrangement options for myself.", lang: "en", status: "contacted", assigned_to: staff1, staff_notes: "Called back, booking consultation for next week.", updated_at: daysFromNow(-1) },
+        { id: uuid(), created_at: daysFromNow(-8), name: "Nathalie Gagnon", phone: "514-555-0117", email: "nathalie.g@example.com", preferred: "Téléphone", consultation_date: daysFromNow(-3), message: "Merci pour votre accompagnement, tout s'est bien déroulé.", lang: "fr", status: "closed", assigned_to: staff1, staff_notes: "Dossier complété avec succès.", updated_at: daysFromNow(-3) }
+      ],
+      coordination_files: [
+        { id: coord1, created_at: daysFromNow(-4), updated_at: daysFromNow(-1), family_name: "Famille Bernard", primary_contact: "Julie Bernard", phone: "514-555-0142", email: "julie.bernard@example.com", package_key: "serenite", status: "active", source_submission: null, intake: { contact_name: "Julie Bernard", contact_email: "julie.bernard@example.com", contact_phone: "514-555-0142", contact_language: "fr", relationship: "Fille", deceased_name: "Henri Bernard", burial_or_cremation: "inhumation", religion: "chretienne" }, intake_notes: {}, intake_progress: { contact: true, deceased: true }, portal_user_id: family1, portal_email: "julie.bernard@example.com", portal_created_at: daysFromNow(-3), assigned_to: staff1 },
+        { id: coord2, created_at: daysFromNow(-20), updated_at: daysFromNow(-15), family_name: "Famille Gagnon", primary_contact: "Nathalie Gagnon", phone: "514-555-0117", email: "nathalie.g@example.com", package_key: "heritage", status: "active", source_submission: null, intake: { contact_name: "Nathalie Gagnon", contact_email: "nathalie.g@example.com", contact_phone: "514-555-0117", contact_language: "fr" }, intake_notes: {}, intake_progress: { contact: true }, portal_user_id: null, portal_email: null, portal_created_at: null, assigned_to: staff1 }
+      ],
+      package_templates: [
+        { id: uuid(), package_key: "essentiel", position: 1, task_fr: "Confirmer les coordonnées de la famille", task_en: "Confirm family contact details", created_at: daysFromNow(-300) },
+        { id: uuid(), package_key: "essentiel", position: 2, task_fr: "Envoyer la liste de vérification", task_en: "Send the checklist", created_at: daysFromNow(-300) },
+        { id: uuid(), package_key: "serenite", position: 1, task_fr: "Confirmer les coordonnées de la famille", task_en: "Confirm family contact details", created_at: daysFromNow(-300) },
+        { id: uuid(), package_key: "serenite", position: 2, task_fr: "Coordonner avec la maison funéraire", task_en: "Coordinate with the funeral home", created_at: daysFromNow(-300) },
+        { id: uuid(), package_key: "heritage", position: 1, task_fr: "Confirmer les coordonnées de la famille", task_en: "Confirm family contact details", created_at: daysFromNow(-300) },
+        { id: uuid(), package_key: "heritage", position: 2, task_fr: "Planifier le montage vidéo", task_en: "Plan the video montage", created_at: daysFromNow(-300) }
+      ],
+      jobs: [
+        { id: uuid(), created_at: daysFromNow(-3), updated_at: daysFromNow(-3), job_type: "photographer", title: "Cérémonie — Famille Bernard", family_name: "Famille Bernard", job_date: daysFromNow(6), job_time: "14:00", location: "Complexe funéraire St-Laurent", details: "Cérémonie familiale privée, discrétion demandée.", pay_amount: 250, cook_list: null, food_budget: null, status: "open", assigned_to: null, assigned_name: null, source_submission: null, package_key: "serenite", coordination_id: coord1 },
+        { id: uuid(), created_at: daysFromNow(-18), updated_at: daysFromNow(-16), job_type: "caterer", title: "Réception — Famille Gagnon", family_name: "Famille Gagnon", job_date: daysFromNow(-14), job_time: "16:00", location: "Salle communautaire Rosemont", details: "Réception pour environ 40 personnes.", pay_amount: 600, cook_list: "Sandwichs, café, desserts", food_budget: 400, status: "done", assigned_to: staff2, assigned_name: "Isabelle Côté", source_submission: null, package_key: "heritage", coordination_id: coord2 }
+      ],
+      job_checklist_items: [],
+      applications: [
+        { id: uuid(), created_at: daysFromNow(-6), full_name: "Marc Dubois", email: "marc.dubois@example.com", phone: "514-555-0177", role_wanted: "photographer", experience: "5 ans de photographie événementielle, incluant des cérémonies commémoratives.", portfolio: null, status: "pending", notes: null, ig_handle: "marcdubois_photo", fb_handle: null, tt_handle: null },
+        { id: uuid(), created_at: daysFromNow(-12), full_name: "Christine Wong", email: "christine.w@example.com", phone: "514-555-0133", role_wanted: "driver", experience: "10 ans d'expérience comme chauffeur professionnel.", portfolio: null, status: "pending", notes: null, ig_handle: null, fb_handle: null, tt_handle: null }
+      ],
+      archive: [],
+      board_cards: [
+        { id: uuid(), created_at: daysFromNow(-10), updated_at: daysFromNow(-10), column_key: "todo", position: 1, body: "Renouveler l'entente avec le fleuriste partenaire", color: "#f2e6c9", created_by: "Sophie Tremblay" },
+        { id: uuid(), created_at: daysFromNow(-5), updated_at: daysFromNow(-5), column_key: "doing", position: 1, body: "Mettre à jour la liste des maisons funéraires partenaires", color: "#d9e8d8", created_by: "Marc-André Roy" }
+      ],
+      notes: [],
+      invoices: [
+        { id: inv1, created_at: daysFromNow(-3), updated_at: daysFromNow(-3), invoice_number: "CS-2026-0001", coordination_id: coord1, client_name: "Julie Bernard", client_email: "julie.bernard@example.com", issue_date: daysFromNow(-3), due_date: daysFromNow(11), status: "sent", apply_gst: true, apply_qst: true, gst_rate: 5.0, qst_rate: 9.975, notes: null, created_by: "Sophie Tremblay" }
+      ],
+      invoice_items: [
+        { id: uuid(), invoice_id: inv1, position: 1, description: "Forfait Sérénité — coordination complète", quantity: 1, unit_price: 1350 },
+        { id: uuid(), invoice_id: inv1, position: 2, description: "Coordination florale additionnelle", quantity: 1, unit_price: 120 }
+      ],
+      payments: [],
+      family_documents: [
+        { id: uuid(), created_at: daysFromNow(-2), coordination_id: coord1, doc_type: "certificate", label: "Certificat de décès", drive_url: "#", added_by: "Marc-André Roy" }
+      ],
+      reviews: [
+        { id: uuid(), created_at: daysFromNow(-25), author_name: null, rating: 5, body: "Une équipe d'une gentillesse remarquable dans un moment très difficile. Tout a été pris en charge avec soin.", status: "approved", lang: "fr", reviewer_name: "Famille Leclerc", email: null, known_contact: true, reply: "Merci beaucoup pour votre confiance, ce fut un honneur de vous accompagner." },
+        { id: uuid(), created_at: daysFromNow(-40), author_name: null, rating: 5, body: "Professional, warm, and incredibly organized. They handled everything so we could focus on grieving as a family.", status: "approved", lang: "en", reviewer_name: "The Andersons", email: null, known_contact: true, reply: null },
+        { id: uuid(), created_at: daysFromNow(-1), author_name: null, rating: 4, body: "Très bon service, quelques délais de communication mais dans l'ensemble une belle expérience.", status: "pending", lang: "fr", reviewer_name: "M. Simard", email: "simard@example.com", known_contact: false, reply: null }
+      ],
+      booking_slots: [
+        { id: slot1, slot_date: daysFromNow(2), start_time: "09:00", end_time: "09:30", status: "open", created_by: admin1, created_at: daysFromNow(-10), staff_id: staff1 },
+        { id: slot2, slot_date: daysFromNow(2), start_time: "10:00", end_time: "10:30", status: "open", created_by: admin1, created_at: daysFromNow(-10), staff_id: staff1 },
+        { id: slot3, slot_date: daysFromNow(3), start_time: "13:00", end_time: "13:30", status: "open", created_by: admin1, created_at: daysFromNow(-10), staff_id: staff1 }
+      ],
+      booking_requests: [],
+      family_timeline_events: [
+        { id: uuid(), coordination_id: coord1, label: "Consultation initiale complétée", status: "done", event_date: daysFromNow(-3), position: 1, created_at: daysFromNow(-3), updated_at: daysFromNow(-3) },
+        { id: uuid(), coordination_id: coord1, label: "Coordination avec la maison funéraire", status: "in_progress", event_date: null, position: 2, created_at: daysFromNow(-2), updated_at: daysFromNow(-1) },
+        { id: uuid(), coordination_id: coord1, label: "Cérémonie", status: "pending", event_date: daysFromNow(6), position: 3, created_at: daysFromNow(-2), updated_at: daysFromNow(-2) }
+      ],
+      family_messages: [
+        { id: uuid(), coordination_id: coord1, sender_role: "staff", sender_name: "Marc-André Roy", body: "Bonjour Julie, je vous confirme que la cérémonie est prévue pour le " + daysFromNow(6) + " à 14h.", created_at: daysFromNow(-1), read_by_staff: true, read_by_family: true },
+        { id: uuid(), coordination_id: coord1, sender_role: "family", sender_name: null, body: "Merci beaucoup, est-ce que le fleuriste est confirmé aussi ?", created_at: daysFromNow(0), read_by_staff: false, read_by_family: true }
+      ],
+      family_uploads: [],
+      chat_conversations: [
+        { id: conv1, visitor_name: "Visiteur", page_url: "index.html", status: "closed", created_at: daysFromNow(-1), last_message_at: daysFromNow(-1) }
+      ],
+      chat_messages: [
+        { id: uuid(), conversation_id: conv1, sender_type: "visitor", sender_name: "Visiteur", body: "Combien ça coûte ?", created_at: daysFromNow(-1), read_by_staff: true },
+        { id: uuid(), conversation_id: conv1, sender_type: "auto", sender_name: null, body: "Les coûts varient selon le type de service et les options choisies. Réservez un moment gratuit ici : booking.html", created_at: daysFromNow(-1), read_by_staff: true }
+      ],
+      chat_keyword_responses: [
+        { id: uuid(), keywords: "urgent,urgence,vient de mourir,just passed,emergency,décès,died", response_fr: "Nous sommes vraiment désolés. Nous sommes là pour vous aider dès maintenant — appelez-nous ou laissez-nous un message ici.", response_en: "We're so sorry. We're here to help right now — call us or leave a message here.", active: true, position: 0, created_at: daysFromNow(-300) },
+        { id: uuid(), keywords: "bonjour,allo,salut,hello,hi,hey", response_fr: "Bonjour, merci de nous écrire. Comment pouvons-nous vous aider aujourd'hui ?", response_en: "Hello, thank you for reaching out. How can we help you today?", active: true, position: 1, created_at: daysFromNow(-300) },
+        { id: uuid(), keywords: "prix,coût,combien,tarif,price,cost,how much", response_fr: "Les coûts varient selon le type de service et les options choisies. Réservez un moment gratuit ici : booking.html", response_en: "Costs vary depending on the service and options chosen. Book a free time here: booking.html", active: true, position: 2, created_at: daysFromNow(-300) },
+        { id: uuid(), keywords: "rendez-vous,consultation,réserver,booking,appointment,book", response_fr: "Vous pouvez réserver une consultation gratuite directement ici : booking.html", response_en: "You can book a free consultation directly here: booking.html", active: true, position: 3, created_at: daysFromNow(-300) },
+        { id: uuid(), keywords: "parler à quelqu'un,parler avec quelqu'un,personne réelle,humain,speak to someone,talk to a human,real person", response_fr: "Bien sûr — un membre de notre équipe peut vous répondre directement ici.", response_en: "Of course — a member of our team can respond to you directly here.", active: true, position: 4, created_at: daysFromNow(-300) }
+      ]
+    };
+  }
+
+  // ======================================================================
+  // 2. Persistent store — sessionStorage-backed, resets on a fresh visit
+  // ======================================================================
+  var STORE_KEY = "csDemoDB_v1";
+  var DB;
+  (function loadOrSeed() {
+    try {
+      var saved = sessionStorage.getItem(STORE_KEY);
+      if (saved) { DB = JSON.parse(saved); return; }
+    } catch (e) {}
+    DB = buildSeed();
+  })();
+  function persist() {
+    try { sessionStorage.setItem(STORE_KEY, JSON.stringify(DB)); } catch (e) {}
+  }
+  function table(name) {
+    if (!DB[name]) DB[name] = [];
+    return DB[name];
+  }
+
+  // ======================================================================
+  // 3. Generic filter/order/limit engine (mimics PostgREST query params)
+  // ======================================================================
+  function matchesFilter(row, col, op, val) {
+    var rv = row[col];
+    switch (op) {
+      case "eq": return String(rv) === String(val);
+      case "neq": return String(rv) !== String(val);
+      case "gte": return rv >= val;
+      case "lte": return rv >= val ? rv <= val : false;
+      case "gt": return rv > val;
+      case "lt": return rv < val;
+      case "in": return val.indexOf(rv) !== -1;
+      case "like":
+      case "ilike":
+        var pattern = String(val).replace(/%/g, "").toLowerCase();
+        return String(rv || "").toLowerCase().indexOf(pattern) !== -1;
+      case "is": return val === "null" ? (rv === null || rv === undefined) : String(rv) === String(val);
+      default: return true;
+    }
+  }
+  function runFilters(rows, filters) {
+    return rows.filter(function (row) {
+      return filters.every(function (f) { return matchesFilter(row, f.col, f.op, f.val); });
+    });
+  }
+  function runOrder(rows, orders) {
+    if (!orders.length) return rows;
+    var out = rows.slice();
+    out.sort(function (a, b) {
+      for (var i = 0; i < orders.length; i++) {
+        var o = orders[i];
+        var av = a[o.col], bv = b[o.col];
+        if (av === bv) continue;
+        var cmp = av > bv ? 1 : -1;
+        return o.ascending ? cmp : -cmp;
+      }
+      return 0;
+    });
+    return out;
+  }
+
+  // ======================================================================
+  // 4. Query builder — mimics the chainable, thenable supabase-js API
+  // ======================================================================
+  function makeQueryBuilder(tableName) {
+    var state = { filters: [], orders: [], limitN: null, mode: "select", payload: null, single: false, maybeSingleFlag: false, selectAfterWrite: false };
+
+    var qb = {
+      select: function () { state.selectAfterWrite = true; if (state.mode === "select0") state.mode = "select"; return qb; },
+      eq: function (c, v) { state.filters.push({ col: c, op: "eq", val: v }); return qb; },
+      neq: function (c, v) { state.filters.push({ col: c, op: "neq", val: v }); return qb; },
+      gte: function (c, v) { state.filters.push({ col: c, op: "gte", val: v }); return qb; },
+      lte: function (c, v) { state.filters.push({ col: c, op: "lte", val: v }); return qb; },
+      gt: function (c, v) { state.filters.push({ col: c, op: "gt", val: v }); return qb; },
+      lt: function (c, v) { state.filters.push({ col: c, op: "lt", val: v }); return qb; },
+      in: function (c, v) { state.filters.push({ col: c, op: "in", val: v }); return qb; },
+      like: function (c, v) { state.filters.push({ col: c, op: "like", val: v }); return qb; },
+      ilike: function (c, v) { state.filters.push({ col: c, op: "ilike", val: v }); return qb; },
+      is: function (c, v) { state.filters.push({ col: c, op: "is", val: v }); return qb; },
+      order: function (c, opts) { state.orders.push({ col: c, ascending: !opts || opts.ascending !== false }); return qb; },
+      limit: function (n) { state.limitN = n; return qb; },
+      single: function () { state.single = true; return qb; },
+      maybeSingle: function () { state.single = true; state.maybeSingleFlag = true; return qb; },
+      insert: function (payload) { state.mode = "insert"; state.payload = payload; return qb; },
+      update: function (payload) { state.mode = "update"; state.payload = payload; return qb; },
+      delete: function () { state.mode = "delete"; return qb; },
+      upsert: function (payload) { state.mode = "upsert"; state.payload = payload; return qb; },
+
+      then: function (resolve, reject) {
+        var result;
+        try { result = execute(); } catch (err) { result = { data: null, error: { message: String(err && err.message || err) } }; }
+        return Promise.resolve(result).then(resolve, reject);
+      },
+      catch: function (fn) { return this.then(undefined, fn); }
+    };
+
+    function execute() {
+      var rows = table(tableName);
+
+      if (state.mode === "insert" || state.mode === "upsert") {
+        var toInsert = Array.isArray(state.payload) ? state.payload : [state.payload];
+        var inserted = toInsert.map(function (row) {
+          var full = Object.assign({ id: uuid(), created_at: nowISO() }, row);
+          rows.push(full);
+          return full;
+        });
+        persist();
+        var data = state.selectAfterWrite ? (state.single ? inserted[0] : inserted) : null;
+        return { data: data, error: null };
+      }
+
+      if (state.mode === "update") {
+        var matched = runFilters(rows, state.filters);
+        matched.forEach(function (row) { Object.assign(row, state.payload); });
+        persist();
+        var udata = state.selectAfterWrite ? (state.single ? matched[0] : matched) : null;
+        return { data: udata, error: null };
+      }
+
+      if (state.mode === "delete") {
+        var toDelete = runFilters(rows, state.filters);
+        var deleteIds = toDelete.map(function (r) { return r.id; });
+        DB[tableName] = rows.filter(function (r) { return deleteIds.indexOf(r.id) === -1; });
+        persist();
+        return { data: null, error: null };
+      }
+
+      // select
+      var result = runFilters(rows, state.filters);
+      result = runOrder(result, state.orders);
+      if (state.limitN != null) result = result.slice(0, state.limitN);
+      // never leak the fake password field
+      result = result.map(function (r) {
+        if (r && r._demo_password !== undefined) {
+          var copy = Object.assign({}, r);
+          delete copy._demo_password;
+          return copy;
+        }
+        return r;
+      });
+      if (state.single) {
+        if (!result.length) {
+          return state.maybeSingleFlag ? { data: null, error: null } : { data: null, error: { message: "No rows found" } };
+        }
+        return { data: result[0], error: null };
+      }
+      return { data: result, error: null };
+    }
+
+    return qb;
+  }
+
+  // ======================================================================
+  // 5. RPC implementations — real logic, matching what the actual
+  //    Postgres functions do, just written in JS against the fake tables
+  // ======================================================================
+  function shortRef() {
+    var chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+    var s = "";
+    for (var i = 0; i < 6; i++) s += chars[Math.floor(Math.random() * chars.length)];
+    return s;
+  }
+
+  var RPCS = {
+    request_booking: function (p) {
+      var slots = table("booking_slots");
+      var slot = slots.find(function (s) { return s.slot_date === p.p_slot_date && s.start_time === p.p_start_time && s.status === "open"; });
+      if (!slot) return { success: false, error: "slot_unavailable" };
+      slot.status = "booked";
+      var ref = shortRef();
+      var reqRow = { id: uuid(), slot_id: slot.id, family_name: p.p_name, phone: p.p_phone, email: p.p_email, reason: p.p_reason, status: "pending", created_at: nowISO(), confirmed_by: null, confirmed_at: null, reference_code: ref };
+      table("booking_requests").push(reqRow);
+      persist();
+      return { success: true, request_id: reqRow.id, reference_code: ref };
+    },
+    find_booking: function (p) {
+      var reqs = table("booking_requests");
+      var req = reqs.find(function (r) { return String(r.reference_code).toUpperCase() === String(p.p_reference_code).trim().toUpperCase() && String(r.phone).replace(/\D/g, "") === String(p.p_phone).replace(/\D/g, ""); });
+      if (!req) return { success: false, error: "not_found" };
+      var slot = table("booking_slots").find(function (s) { return s.id === req.slot_id; });
+      return { success: true, status: req.status, slot_date: slot ? slot.slot_date : null, start_time: slot ? slot.start_time : null, end_time: slot ? slot.end_time : null, family_name: req.family_name, reference_code: req.reference_code };
+    },
+    cancel_booking: function (p) {
+      var reqs = table("booking_requests");
+      var req = reqs.find(function (r) { return String(r.reference_code).toUpperCase() === String(p.p_reference_code).trim().toUpperCase() && String(r.phone).replace(/\D/g, "") === String(p.p_phone).replace(/\D/g, ""); });
+      if (!req) return { success: false, error: "not_found" };
+      if (req.status === "cancelled") return { success: false, error: "already_cancelled" };
+      if (req.status === "completed") return { success: false, error: "already_completed" };
+      req.status = "cancelled";
+      var slot = table("booking_slots").find(function (s) { return s.id === req.slot_id; });
+      if (slot && slot.status === "booked") slot.status = "open";
+      persist();
+      return { success: true };
+    },
+    reschedule_booking: function (p) {
+      var reqs = table("booking_requests");
+      var oldReq = reqs.find(function (r) { return String(r.reference_code).toUpperCase() === String(p.p_reference_code).trim().toUpperCase() && String(r.phone).replace(/\D/g, "") === String(p.p_phone).replace(/\D/g, ""); });
+      if (!oldReq) return { success: false, error: "not_found" };
+      if (oldReq.status === "cancelled" || oldReq.status === "completed") return { success: false, error: "cannot_reschedule" };
+      var newSlot = table("booking_slots").find(function (s) { return s.slot_date === p.p_new_slot_date && s.start_time === p.p_new_start_time && s.status === "open"; });
+      if (!newSlot) return { success: false, error: "slot_unavailable" };
+      newSlot.status = "booked";
+      var newRef = shortRef();
+      var newReq = { id: uuid(), slot_id: newSlot.id, family_name: oldReq.family_name, phone: oldReq.phone, email: oldReq.email, reason: oldReq.reason, status: "pending", created_at: nowISO(), confirmed_by: null, confirmed_at: null, reference_code: newRef };
+      reqs.push(newReq);
+      oldReq.status = "cancelled";
+      var oldSlot = table("booking_slots").find(function (s) { return s.id === oldReq.slot_id; });
+      if (oldSlot && oldSlot.status === "booked") oldSlot.status = "open";
+      persist();
+      return { success: true, reference_code: newRef, slot_date: p.p_new_slot_date, start_time: p.p_new_start_time };
+    },
+
+    start_chat_conversation: function (p) {
+      var convId = uuid();
+      table("chat_conversations").push({ id: convId, visitor_name: p.p_visitor_name || null, page_url: p.p_page_url || null, status: "new", created_at: nowISO(), last_message_at: nowISO() });
+      table("chat_messages").push({ id: uuid(), conversation_id: convId, sender_type: "visitor", sender_name: p.p_visitor_name || null, body: p.p_message, created_at: nowISO(), read_by_staff: false });
+      var autoReply = findKeywordReply(p.p_message, p.p_lang);
+      if (!autoReply) {
+        autoReply = p.p_lang === "en"
+          ? "I don't have a precise answer to that one yet — let me get a member of our team to help you directly. In the meantime, feel free to book a free consultation: booking.html"
+          : "Je n'ai pas encore de réponse précise à cette question — laissez-moi obtenir l'aide d'un membre de notre équipe. Entretemps, n'hésitez pas à réserver une consultation gratuite : booking.html";
+      }
+      table("chat_messages").push({ id: uuid(), conversation_id: convId, sender_type: "auto", sender_name: null, body: autoReply, created_at: nowISO(), read_by_staff: false });
+      persist();
+      return { conversation_id: convId, auto_reply: autoReply };
+    },
+    send_chat_message: function (p) {
+      var conv = table("chat_conversations").find(function (c) { return c.id === p.p_conversation_id; });
+      if (!conv) return { success: false, error: "conversation_not_found" };
+      table("chat_messages").push({ id: uuid(), conversation_id: p.p_conversation_id, sender_type: "visitor", sender_name: null, body: p.p_message, created_at: nowISO(), read_by_staff: false });
+      var autoReply = findKeywordReply(p.p_message, p.p_lang);
+      if (!autoReply) {
+        autoReply = p.p_lang === "en"
+          ? "I don't have a precise answer to that one — let me get a member of our team to step in and reply to you directly."
+          : "Je n'ai pas de réponse précise à cette question — laissez-moi obtenir l'aide d'un membre de notre équipe.";
+      }
+      table("chat_messages").push({ id: uuid(), conversation_id: p.p_conversation_id, sender_type: "auto", sender_name: null, body: autoReply, created_at: nowISO(), read_by_staff: false });
+      conv.last_message_at = nowISO();
+      if (conv.status === "new") conv.status = "active";
+      persist();
+      return { success: true, auto_reply: autoReply };
+    },
+    get_chat_messages: function (p) {
+      return table("chat_messages")
+        .filter(function (m) { return m.conversation_id === p.p_conversation_id; })
+        .sort(function (a, b) { return new Date(a.created_at) - new Date(b.created_at); });
+    },
+
+    submit_review: function (p) {
+      if (!p.p_rating || p.p_rating < 1 || p.p_rating > 5) throw new Error("Rating must be 1..5");
+      if (!p.p_body || !p.p_name) throw new Error("Name and comment are required");
+      table("reviews").push({ id: uuid(), created_at: nowISO(), author_name: null, rating: p.p_rating, body: p.p_body, status: "pending", lang: p.p_lang, reviewer_name: p.p_name, email: p.p_email || null, known_contact: false, reply: null });
+      persist();
+      return null;
+    },
+    archive_and_remove: function (p) {
+      var row = table(p.p_table).find(function (r) { return r.id === p.p_id; });
+      if (row) {
+        table("archive").push({ id: uuid(), archived_at: nowISO(), archived_by: "Demo Admin", source_table: p.p_table, label: p.p_label, data: row });
+        DB[p.p_table] = table(p.p_table).filter(function (r) { return r.id !== p.p_id; });
+        persist();
+      }
+      return null;
+    },
+    apply_package_to_job: function (p) {
+      var tpls = table("package_templates").filter(function (t) { return t.package_key === p.p_package_key; }).sort(function (a, b) { return a.position - b.position; });
+      DB.job_checklist_items = table("job_checklist_items").filter(function (c) { return c.job_id !== p.p_job_id; });
+      tpls.forEach(function (t) {
+        table("job_checklist_items").push({ id: uuid(), job_id: p.p_job_id, position: t.position, task_fr: t.task_fr, task_en: t.task_en, done: false, done_by: null, done_at: null, created_at: nowISO() });
+      });
+      persist();
+      return null;
+    },
+    next_invoice_number: function () {
+      var yr = new Date().getFullYear();
+      var n = table("invoices").filter(function (i) { return i.invoice_number.indexOf("CS-" + yr + "-") === 0; }).length + 1;
+      return "CS-" + yr + "-" + String(n).padStart(4, "0");
+    }
+  };
+
+  function findKeywordReply(message, lang) {
+    var responses = table("chat_keyword_responses").filter(function (r) { return r.active; }).sort(function (a, b) { return a.position - b.position; });
+    var lower = String(message).toLowerCase();
+    for (var i = 0; i < responses.length; i++) {
+      var kws = responses[i].keywords.split(",");
+      for (var j = 0; j < kws.length; j++) {
+        var kw = kws[j].trim().toLowerCase();
+        if (kw && lower.indexOf(kw) !== -1) {
+          return lang === "en" ? (responses[i].response_en || responses[i].response_fr) : responses[i].response_fr;
+        }
+      }
+    }
+    return null;
+  }
+
+  // ======================================================================
+  // 6. Fake auth — a handful of demo logins, no real security since
+  //    there's nothing real behind it
+  // ======================================================================
+  var currentSession = null;
+  (function restoreSession() {
+    try {
+      var saved = sessionStorage.getItem("csDemoSession");
+      if (saved) currentSession = JSON.parse(saved);
+    } catch (e) {}
+  })();
+  function saveSession() {
+    try {
+      if (currentSession) sessionStorage.setItem("csDemoSession", JSON.stringify(currentSession));
+      else sessionStorage.removeItem("csDemoSession");
+    } catch (e) {}
+  }
+
+  var authListeners = [];
+
+  var auth = {
+    signInWithPassword: function (opts) {
+      var user = table("profiles").find(function (p) { return p.email === opts.email && p._demo_password === opts.password; });
+      if (!user) return Promise.resolve({ data: null, error: { message: "Invalid login credentials" } });
+      currentSession = { user: { id: user.id, email: user.email } };
+      saveSession();
+      authListeners.forEach(function (cb) { cb("SIGNED_IN", currentSession); });
+      return Promise.resolve({ data: currentSession, error: null });
+    },
+    signOut: function () {
+      currentSession = null;
+      saveSession();
+      authListeners.forEach(function (cb) { cb("SIGNED_OUT", null); });
+      return Promise.resolve({ error: null });
+    },
+    getSession: function () {
+      return Promise.resolve({ data: { session: currentSession }, error: null });
+    },
+    getUser: function () {
+      return Promise.resolve({ data: { user: currentSession ? currentSession.user : null }, error: null });
+    },
+    onAuthStateChange: function (cb) {
+      authListeners.push(cb);
+      return { data: { subscription: { unsubscribe: function () { authListeners = authListeners.filter(function (x) { return x !== cb; }); } } } };
+    },
+    admin: {
+      updateUserById: function (id, patch) {
+        // used by the admin password reset feature - no real password to change here
+        return Promise.resolve({ data: { user: { id: id } }, error: null });
+      }
+    }
+  };
+
+  // ======================================================================
+  // 7. Fake storage — uploads are just remembered by name, no real files
+  // ======================================================================
+  function makeStorageBucket() {
+    return {
+      upload: function (path, file) {
+        return Promise.resolve({ data: { path: path }, error: null });
+      },
+      createSignedUrl: function (path) {
+        // A tiny inline placeholder "document" so the View button always works.
+        var svg = '<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300"><rect width="400" height="300" fill="%23f4f0e6"/><text x="200" y="140" font-family="sans-serif" font-size="16" fill="%232B2A28" text-anchor="middle">Demo file preview</text><text x="200" y="165" font-family="sans-serif" font-size="12" fill="%235B574F" text-anchor="middle">' + encodeURIComponent(path.split("/").pop()) + '</text></svg>';
+        return Promise.resolve({ data: { signedUrl: "data:image/svg+xml," + svg }, error: null });
+      },
+      remove: function () { return Promise.resolve({ data: null, error: null }); },
+      list: function () { return Promise.resolve({ data: [], error: null }); }
+    };
+  }
+
+  // ======================================================================
+  // 8. Fake Edge Functions
+  // ======================================================================
+  function invokeFunction(name, opts) {
+    var body = (opts && opts.body) || {};
+    if (name === "portal-signup") {
+      var file = table("coordination_files").find(function (f) { return f.email && f.email.toLowerCase() === String(body.email).toLowerCase() && !f.portal_user_id; });
+      if (!file) return Promise.resolve({ data: { success: false, error: "no_match" }, error: null });
+      var uid = uuid();
+      table("profiles").push({ id: uid, full_name: file.primary_contact, role: "family", email: body.email, created_at: nowISO(), _demo_password: body.password });
+      file.portal_user_id = uid;
+      file.portal_email = body.email;
+      file.portal_created_at = nowISO();
+      persist();
+      return Promise.resolve({ data: { success: true }, error: null });
+    }
+    if (name === "portal-revoke") {
+      var f2 = table("coordination_files").find(function (x) { return x.id === body.coordination_id; });
+      if (f2) { f2.portal_user_id = null; f2.portal_email = null; f2.portal_created_at = null; persist(); }
+      return Promise.resolve({ data: { success: true }, error: null });
+    }
+    if (name === "admin-reset-password") {
+      return Promise.resolve({ data: { success: true }, error: null });
+    }
+    if (name === "add-staff") {
+      var newId = uuid();
+      table("profiles").push({ id: newId, full_name: body.full_name, role: body.role, email: body.email, created_at: nowISO(), can_manage_intake: false, can_manage_finances: false, can_manage_reviews: false, can_manage_staff: false, _demo_password: body.temp_password });
+      persist();
+      return Promise.resolve({ data: { success: true }, error: null });
+    }
+    if (name === "delete-staff-login") {
+      DB.profiles = table("profiles").filter(function (p) { return p.id !== body.user_id; });
+      persist();
+      return Promise.resolve({ data: { success: true }, error: null });
+    }
+    if (name === "log-deletion") {
+      return Promise.resolve({ data: { success: true }, error: null }); // pretend the Sheet write happened
+    }
+    return Promise.resolve({ data: null, error: { message: "Unknown demo function: " + name } });
+  }
+
+  // ======================================================================
+  // 9. Fake realtime — no other visitors exist in a demo, so this is a
+  //    harmless no-op rather than a real subscription
+  // ======================================================================
+  function fakeChannel() {
+    var ch = {
+      on: function () { return ch; },
+      subscribe: function (cb) { if (cb) cb("SUBSCRIBED"); return ch; }
+    };
+    return ch;
+  }
+
+  // ======================================================================
+  // 10. The fake supabase-js client itself
+  // ======================================================================
+  function createClient() {
+    return {
+      from: function (t) { return makeQueryBuilder(t); },
+      rpc: function (name, params) {
+        var fn = RPCS[name];
+        if (!fn) return Promise.resolve({ data: null, error: { message: "Unknown demo RPC: " + name } });
+        try {
+          var result = fn(params || {});
+          return Promise.resolve({ data: result, error: null });
+        } catch (err) {
+          return Promise.resolve({ data: null, error: { message: String(err.message || err) } });
+        }
+      },
+      auth: auth,
+      storage: { from: function () { return makeStorageBucket(); } },
+      functions: { invoke: invokeFunction },
+      channel: function () { return fakeChannel(); },
+      removeChannel: function () {}
+    };
+  }
+  window.supabase = { createClient: createClient };
+
+  // ======================================================================
+  // 11. Fetch interceptor — for pages that call the REST API directly
+  //     instead of going through the supabase-js client
+  // ======================================================================
+  var realFetch = window.fetch.bind(window);
+  window.fetch = function (url, opts) {
+    if (typeof url !== "string" || url.indexOf("/rest/v1/") === -1) {
+      return realFetch(url, opts);
+    }
+    opts = opts || {};
+    var afterRest = url.split("/rest/v1/")[1];
+    var method = (opts.method || "GET").toUpperCase();
+
+    // RPC calls: /rest/v1/rpc/<function_name>
+    if (afterRest.indexOf("rpc/") === 0) {
+      var fnName = afterRest.slice(4).split("?")[0];
+      var params = {};
+      try { params = opts.body ? JSON.parse(opts.body) : {}; } catch (e) {}
+      var fn = RPCS[fnName];
+      var resultBody;
+      try {
+        resultBody = fn ? fn(params) : { success: false, error: "unknown_function" };
+      } catch (err) {
+        resultBody = { success: false, error: String(err.message || err) };
+      }
+      return Promise.resolve(new Response(JSON.stringify(resultBody), { status: 200, headers: { "Content-Type": "application/json" } }));
+    }
+
+    // Table calls: /rest/v1/<table>?col=eq.val&...
+    var parts = afterRest.split("?");
+    var tableName = parts[0];
+    var qs = new URLSearchParams(parts[1] || "");
+    var filters = [];
+    var orders = [];
+    var selectCols = "*";
+    qs.forEach(function (val, key) {
+      if (key === "select") { selectCols = val; return; }
+      if (key === "order") {
+        val.split(",").forEach(function (part) {
+          var bits = part.split(".");
+          orders.push({ col: bits[0], ascending: bits[1] !== "desc" });
+        });
+        return;
+      }
+      if (key === "limit") return;
+      var opMatch = val.match(/^([a-z]+)\.(.*)$/);
+      if (opMatch) {
+        var op = opMatch[1], v = opMatch[2];
+        if (op === "in") v = v.replace(/^\(|\)$/g, "").split(",");
+        filters.push({ col: key, op: op, val: v });
+      }
+    });
+
+    if (method === "GET") {
+      var rows = runFilters(table(tableName), filters);
+      rows = runOrder(rows, orders);
+      return Promise.resolve(new Response(JSON.stringify(rows), { status: 200, headers: { "Content-Type": "application/json" } }));
+    }
+
+    if (method === "POST") {
+      var body;
+      try { body = JSON.parse(opts.body); } catch (e) { body = {}; }
+      var row = Object.assign({ id: uuid(), created_at: nowISO(), updated_at: nowISO(), status: body.status || "new" }, body);
+      table(tableName).push(row);
+      persist();
+      return Promise.resolve(new Response(null, { status: 201 }));
+    }
+
+    if (method === "PATCH") {
+      var patchBody;
+      try { patchBody = JSON.parse(opts.body); } catch (e) { patchBody = {}; }
+      var matched = runFilters(table(tableName), filters);
+      matched.forEach(function (r) { Object.assign(r, patchBody); });
+      persist();
+      return Promise.resolve(new Response(null, { status: 204 }));
+    }
+
+    if (method === "DELETE") {
+      var toDelete = runFilters(table(tableName), filters).map(function (r) { return r.id; });
+      DB[tableName] = table(tableName).filter(function (r) { return toDelete.indexOf(r.id) === -1; });
+      persist();
+      return Promise.resolve(new Response(null, { status: 204 }));
+    }
+
+    return realFetch(url, opts);
+  };
+
+  // ======================================================================
+  // 12. A little console note so anyone poking at devtools understands
+  //     what they're looking at
+  // ======================================================================
+  console.log("%cChemin Serein — DEMO MODE", "font-weight:bold;color:#927235", "\nThis is a portfolio demo. There is no real database — everything you see and do here is fake, sandboxed to your browser tab, and resets on your next visit.");
+
+  // ======================================================================
+  // 13. A small, dismissible on-page banner so visitors know what they're
+  //     looking at, without having to touch all 18 pages individually.
+  // ======================================================================
+  document.addEventListener("DOMContentLoaded", function () {
+    if (sessionStorage.getItem("csDemoBannerDismissed")) return;
+    var bar = document.createElement("div");
+    bar.style.cssText = "position:fixed;bottom:0;left:0;right:0;z-index:99999;background:#2B2A28;color:#F7F3EC;font-family:sans-serif;font-size:.82rem;padding:10px 16px;display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;box-shadow:0 -2px 10px rgba(0,0,0,.2)";
+    bar.innerHTML = '<span>🎭 Portfolio demo — no real data, nothing you do here is saved beyond this visit.</span><button style="background:#B08D49;border:0;color:#fff;padding:5px 12px;border-radius:14px;cursor:pointer;font-size:.78rem">Got it</button>';
+    bar.querySelector("button").addEventListener("click", function () {
+      bar.remove();
+      try { sessionStorage.setItem("csDemoBannerDismissed", "1"); } catch (e) {}
+    });
+    document.body.appendChild(bar);
+  });
+})();
