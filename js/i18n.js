@@ -1115,10 +1115,6 @@ const I18N = {
     "en": "Client Portal",
     "fr": "Portail client"
   },
-  "pf.placeholder": {
-    "en": "Project photo placeholder",
-    "fr": "Photo du projet à venir"
-  },
   "pf10.name": {
     "en": "Chemin Serein",
     "fr": "Chemin Serein"
@@ -1456,8 +1452,12 @@ const I18N = {
     "fr": "Remplissez le formulaire ci-dessous et nous vous ferons parvenir un devis gratuit, sans pression. Aucune obligation, aucun appel de vente insistant."
   },
   "contact.success": {
-    "en": "Thanks — your request has been received! This is a front-end demo, so nothing was actually sent yet. See the note in the README about connecting this form to email.",
-    "fr": "Merci — votre demande a été reçue! Ceci est une démonstration, rien n'a encore été envoyé. Consultez la note du README pour connecter ce formulaire à un courriel."
+    "en": "Thanks — your request has been received! We'll follow up within one to two business days.",
+    "fr": "Merci — votre demande a été reçue! Nous vous répondrons dans un délai d'un à deux jours ouvrables."
+  },
+  "contact.error": {
+    "en": "Something went wrong sending your request. Please try again, or email us directly at marxanc@outlook.com.",
+    "fr": "Une erreur est survenue lors de l'envoi de votre demande. Veuillez réessayer, ou nous écrire directement à marxanc@outlook.com."
   },
   "contact.f.name": {
     "en": "Full name",
