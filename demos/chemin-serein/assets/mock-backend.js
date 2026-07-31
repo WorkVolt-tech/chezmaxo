@@ -183,7 +183,7 @@
         { id: uuid(), keywords: "sens de la vie,meaning of life,what is the meaning of life,why are we here", response_fr: "C'est une grande question ! Je peux surtout vous aider avec celles liées à nos services de coordination funéraire.", response_en: "That's a big question! I'm mainly able to help with the ones related to our funeral coordination services.", active: true, position: 55, created_at: daysFromNow(-300) },
         { id: uuid(), keywords: "ceci fonctionne,ça marche,just testing,is this working,does this work,test test", response_fr: "👋 Oui, ça fonctionne ! N'hésitez pas à poser une vraie question, ou un membre de notre équipe peut vous répondre directement.", response_en: "👋 Yes, this is working! Feel free to ask a real question, or a member of our team can reply to you directly.", active: true, position: 56, created_at: daysFromNow(-300) },
         { id: uuid(), keywords: "fuck,fucking,shit,bullshit,asshole,bitch,goddamn,wtf,stfu,tabarnak,tabarnac,câlisse,calisse,criss,crisse,esti,estie,osti,ostie,ciboire,sacrament,câliss", response_fr: "Je comprends que ce moment puisse être difficile. Un membre de notre équipe peut vous parler directement — appelez-nous au +1 (514) 000-0000, ou je peux les avertir pour qu'ils vous répondent ici.", response_en: "I understand this can be a genuinely hard moment. A member of our team can speak with you directly — call us at +1 (514) 000-0000, or I can let them know to reply to you here.", active: true, position: 57, created_at: daysFromNow(-300) },
-        { id: uuid(), keywords: "je t'aime,je vous aime,on vous aime,nous vous aimons,je t'adore,je vous adore,on vous adore,i love you,we love you,i adore you,we adore you,love this,love your service,love your site,love you guys,you're amazing,you guys are amazing,you're the best,vous êtes les meilleurs,vous êtes incroyables", response_fr: "C'est très gentil, merci ! Nous sommes contents de pouvoir vous aider. Comment puis-je vous être utile aujourd'hui ?", response_en: "That's very kind, thank you! We're glad we can help. How can I assist you today?", active: true, position: 58, created_at: daysFromNow(-300) }
+        { id: uuid(), keywords: "je t'aime,je vous aime,on vous aime,nous vous aimons,je t'adore,je vous adore,on vous adore,i love you,we love you,i adore you,we adore you,love this,love your service,love your site,love you guys,you're amazing,you guys are amazing,you're the best,vous êtes les meilleurs,vous êtes incroyables,love you,t'aime,vous aime", response_fr: "C'est très gentil, merci ! Nous sommes contents de pouvoir vous aider. Comment puis-je vous être utile aujourd'hui ?", response_en: "That's very kind, thank you! We're glad we can help. How can I assist you today?", active: true, position: 58, created_at: daysFromNow(-300) }
       ]
     };
   }
@@ -191,7 +191,7 @@
   // ======================================================================
   // 2. Persistent store — sessionStorage-backed, resets on a fresh visit
   // ======================================================================
-  var STORE_KEY = "csDemoDB_v4";
+  var STORE_KEY = "csDemoDB_v5";
   var DB;
   (function loadOrSeed() {
     try {
