@@ -67,7 +67,8 @@
   <div class="container">
     <div class="grid-2" style="align-items:flex-start;">
       <div>
-        <div id="form-success" class="form-success" data-i18n="contact.success">Thanks — your request has been received! This is a front-end demo, so nothing was actually sent yet. See the note in the README about connecting this form to email.</div>
+        <div id="form-success" class="form-success" data-i18n="contact.success">Thanks — your request has been received! We'll follow up within one to two business days.</div>
+        <div id="form-error" class="form-error-box" data-i18n="contact.error">Something went wrong sending your request. Please try again, or email us directly at marxanc@outlook.com.</div>
         <form id="contact-form" novalidate>
           <div class="form-grid">
             <div class="field">
@@ -175,6 +176,13 @@
     </div>
   </div>
 </section>
+
+<script>
+// Same Supabase project as your dashboard app — paste the same values
+// from app/js/config.js here so this form can actually submit.
+const CONTACT_SUPABASE_URL = "YOUR_SUPABASE_PROJECT_URL";
+const CONTACT_SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_KEY";
+</script>
 
 
 <script>
