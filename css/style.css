@@ -318,8 +318,8 @@ section{ padding: 88px 0; }
   box-shadow: var(--shadow-lg);
   width: fit-content;
 }
-.hero-logo-card img{ height: 400px; width:auto; display:block; }
-@media (max-width: 500px){ .hero-logo-card img{ height:250px; } }
+.hero-logo-card img{ height: 210px; width:auto; display:block; }
+@media (max-width: 500px){ .hero-logo-card img{ height:130px; } }
 
 .hero-badge{
   display:inline-flex; align-items:center; gap:10px;
@@ -628,6 +628,17 @@ section{ padding: 88px 0; }
   margin-bottom:24px;
 }
 .form-success.show{ display:block; }
+.form-error-box{
+  display:none;
+  background: #FBEAEA;
+  border: 1px dashed #C23B3B;
+  border-radius: var(--radius-md);
+  padding: 22px;
+  color: #C23B3B;
+  font-weight:600;
+  margin-bottom:24px;
+}
+.form-error-box.show{ display:block; }
 
 /* ---------------------------------- CTA band ---------------------------------- */
 .cta-band{
