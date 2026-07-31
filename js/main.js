@@ -133,14 +133,70 @@ document.addEventListener('DOMContentLoaded', function () {
         return;
       }
 
-      /* Front-end only demo: no backend is connected yet.
-         See README.md → "Connecting the contact form" for real setup
-         (Formspree, Netlify Forms, a serverless function, etc). */
-      if (successBox) {
-        successBox.classList.add('show');
-        successBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      var submitBtn = form.querySelector('button[type="submit"]');
+      var errorBox = document.getElementById('form-error');
+
+      // CONTACT_SUPABASE_URL / CONTACT_SUPABASE_ANON_KEY are defined inline
+      // on contact.html only. If they're still placeholders (not filled
+      // in), fall back to the old front-end-only demo behavior instead of
+      // silently failing.
+      var configured = typeof CONTACT_SUPABASE_URL !== 'undefined' &&
+        CONTACT_SUPABASE_URL.indexOf('YOUR_') === -1 &&
+        CONTACT_SUPABASE_ANON_KEY.indexOf('YOUR_') === -1;
+
+      if (!configured) {
+        if (successBox) {
+          successBox.classList.add('show');
+          successBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+        form.reset();
+        return;
       }
-      form.reset();
+
+      var needsChecked = Array.prototype.slice.call(form.querySelectorAll('input[name="needs"]:checked'))
+        .map(function (cb) { return cb.value; }).join(', ');
+
+      var payload = {
+        full_name: form.elements.fullName.value.trim(),
+        business_name: form.elements.businessName.value.trim(),
+        email: form.elements.email.value.trim(),
+        phone: form.elements.phone.value.trim(),
+        website: form.elements.website.value.trim(),
+        business_type: form.elements.businessType.value.trim(),
+        budget: form.elements.budget.value,
+        launch_date: form.elements.launchDate.value.trim(),
+        contact_method: form.elements.contactMethod.value,
+        needs: needsChecked,
+        description: form.elements.description.value.trim()
+      };
+
+      if (submitBtn) submitBtn.disabled = true;
+      if (errorBox) errorBox.classList.remove('show');
+
+      fetch(CONTACT_SUPABASE_URL + '/rest/v1/contact_submissions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': CONTACT_SUPABASE_ANON_KEY,
+          'Authorization': 'Bearer ' + CONTACT_SUPABASE_ANON_KEY,
+          'Prefer': 'return=minimal'
+        },
+        body: JSON.stringify(payload)
+      }).then(function (res) {
+        if (submitBtn) submitBtn.disabled = false;
+        if (!res.ok) throw new Error('submit failed');
+        if (successBox) {
+          successBox.classList.add('show');
+          successBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+        form.reset();
+      }).catch(function () {
+        if (submitBtn) submitBtn.disabled = false;
+        if (errorBox) {
+          errorBox.classList.add('show');
+          errorBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      });
     });
   }
 
