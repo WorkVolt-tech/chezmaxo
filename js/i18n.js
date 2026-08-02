@@ -23,6 +23,10 @@ const I18N = {
     "en": "Contact",
     "fr": "Contact"
   },
+  "footer.clientlogin": {
+    "en": "Client Login",
+    "fr": "Connexion client"
+  },
   "footer.services": {
     "en": "Services",
     "fr": "Services"
