@@ -392,8 +392,8 @@ const I18N = {
     "fr": "Une petite mise à jour / mois"
   },
   "home.plan.monthly.f3": {
-    "en": "Up to 15 minutes of work monthly",
-    "fr": "Jusqu'à 15 minutes de travail par mois"
+    "en": "Up to 45 minutes of work monthly",
+    "fr": "Jusqu'à 45 minutes de travail par mois"
   },
   "plan.business.name": {
     "en": "Business Care",
@@ -408,8 +408,8 @@ const I18N = {
     "fr": "Tout ce qui est inclus dans le soutien mensuel"
   },
   "home.plan.business.f2": {
-    "en": "Up to 45 minutes of work monthly",
-    "fr": "Jusqu'à 45 minutes de travail par mois"
+    "en": "Up to 2 hours of work monthly",
+    "fr": "Jusqu'à 2 heures de travail par mois"
   },
   "home.plan.business.f3": {
     "en": "Priority, faster turnaround",
@@ -1940,8 +1940,8 @@ const I18N = {
     "fr": "Une petite mise à jour par mois"
   },
   "care.p2.m.li2": {
-    "en": "Up to 15 minutes of website work per month",
-    "fr": "Jusqu'à 15 minutes de travail sur le site par mois"
+    "en": "Up to 45 minutes of website work per month",
+    "fr": "Jusqu'à 45 minutes de travail sur le site par mois"
   },
   "care.p2.m.li3": {
     "en": "Content and image replacements within the existing website layout",
@@ -1952,8 +1952,8 @@ const I18N = {
     "fr": "Délai de traitement habituel de trois à cinq jours ouvrables"
   },
   "care.p2.m.note": {
-    "en": "The monthly update and the included 15 minutes of work are not separate allowances. Together, they represent a maximum of 15 minutes of included website work per billing period.",
-    "fr": "La mise à jour mensuelle et les 15 minutes de travail incluses ne constituent pas des allocations distinctes. Ensemble, elles représentent un maximum de 15 minutes de travail inclus sur le site par période de facturation."
+    "en": "The monthly update and the included 45 minutes of work are not separate allowances. Together, they represent a maximum of 45 minutes of included website work per billing period.",
+    "fr": "La mise à jour mensuelle et les 45 minutes de travail incluses ne constituent pas des allocations distinctes. Ensemble, elles représentent un maximum de 45 minutes de travail inclus sur le site par période de facturation."
   },
   "care.h3.business": {
     "en": "Business Care — $80 per month",
@@ -1964,8 +1964,8 @@ const I18N = {
     "fr": "Le forfait affaires comprend tout ce qui est inclus dans le soutien mensuel, plus :"
   },
   "care.p2.b.li1": {
-    "en": "Up to 45 minutes of website work per month",
-    "fr": "Jusqu'à 45 minutes de travail sur le site par mois"
+    "en": "Up to 2 hours of website work per month",
+    "fr": "Jusqu'à 2 heures de travail sur le site par mois"
   },
   "care.p2.b.li2": {
     "en": "Priority support",
