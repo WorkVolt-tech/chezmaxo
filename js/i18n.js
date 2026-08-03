@@ -2027,18 +2027,6 @@ const I18N = {
     "en": "Website Care Plans do not include:",
     "fr": "Les forfaits d'entretien de site web n'incluent pas :"
   },
-  "care.p4.li1": {
-    "en": "New website pages",
-    "fr": "De nouvelles pages de site web"
-  },
-  "care.p4.li2": {
-    "en": "Complete section redesigns",
-    "fr": "La refonte complète de sections"
-  },
-  "care.p4.li3": {
-    "en": "Full website redesigns",
-    "fr": "La refonte complète du site web"
-  },
   "care.p4.li4": {
     "en": "New booking or appointment systems",
     "fr": "De nouveaux systèmes de réservation ou de rendez-vous"
@@ -2114,6 +2102,18 @@ const I18N = {
   "care.p4.outro": {
     "en": "These services are considered additional work and will be quoted separately.",
     "fr": "Ces services sont considérés comme du travail supplémentaire et feront l'objet d'un devis distinct."
+  },
+  "care.p4.discretion1": {
+    "en": "As an exception, Chezmaxo may choose to accept a new website page or a complete section redesign as part of an active Care Plan, at its sole discretion and depending on current workload. These requests are not subject to the turnaround times in Section 6 and may take up to one to three months to complete.",
+    "fr": "À titre d'exception, Chezmaxo peut choisir d'accepter une nouvelle page de site web ou la refonte complète d'une section dans le cadre d'un forfait d'entretien actif, à sa seule discrétion et selon la charge de travail en cours. Ces demandes ne sont pas assujetties aux délais de traitement prévus à la section 6 et peuvent prendre jusqu'à un à trois mois."
+  },
+  "care.p4.discretion2": {
+    "en": "A full website redesign may also be accepted under the same discretionary basis, but given its significantly larger scope, it may take considerably longer — typically three to six months, depending on current workload.",
+    "fr": "Une refonte complète du site web peut également être acceptée sur cette même base discrétionnaire, mais étant donné son ampleur beaucoup plus grande, elle peut prendre considérablement plus de temps — habituellement de trois à six mois, selon la charge de travail en cours."
+  },
+  "care.p4.discretion3": {
+    "en": "In either case, Chezmaxo may instead offer a separately-quoted, faster timeline if the client prefers not to wait. Chezmaxo is never obligated to accept these requests under a Care Plan and may direct the client to request a separate quote at any time.",
+    "fr": "Dans les deux cas, Chezmaxo peut plutôt offrir un délai plus rapide moyennant un devis distinct, si le client préfère ne pas attendre. Chezmaxo n'est jamais tenue d'accepter ces demandes dans le cadre d'un forfait d'entretien et peut à tout moment diriger le client vers une demande de devis distincte."
   },
   "care.h2.5": {
     "en": "5. Submitting Requests",
