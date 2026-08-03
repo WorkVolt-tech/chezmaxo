@@ -1831,169 +1831,1125 @@ const I18N = {
     "en": "Website Care Plan Terms",
     "fr": "Conditions du forfait d'entretien"
   },
+  "care.intro1": {
+    "en": "These Website Care Plan Terms govern the recurring website maintenance and support services provided by Chezmaxo.",
+    "fr": "Les présentes Conditions du forfait d'entretien régissent les services récurrents d'entretien et de soutien de site web fournis par Chezmaxo."
+  },
+  "care.intro2": {
+    "en": "By purchasing or continuing to use a Website Care Plan, the client agrees to these terms, together with any applicable proposal, service agreement or statement of work provided by Chezmaxo.",
+    "fr": "En achetant ou en continuant d'utiliser un forfait d'entretien de site web, le client accepte les présentes conditions, ainsi que toute proposition, entente de service ou énoncé de travaux applicable fourni par Chezmaxo."
+  },
   "care.h2.1": {
     "en": "1. Plans Covered",
     "fr": "1. Forfaits couverts"
   },
-  "care.p.1": {
-    "en": "These terms apply to the Starter Care ($15/month), Monthly Support ($30/month), and Business Care ($80/month) plans described on our Pricing page.",
-    "fr": "Ces conditions s'appliquent aux forfaits de base (15 $/mois), soutien mensuel (30 $/mois) et affaires (80 $/mois) décrits sur notre page Tarifs."
+  "care.p1a": {
+    "en": "These terms apply to the following Website Care Plans:",
+    "fr": "Les présentes conditions s'appliquent aux forfaits d'entretien de site web suivants :"
+  },
+  "care.p1.li1": {
+    "en": "Starter Care — $15 per month",
+    "fr": "Forfait de base — 15 $ par mois"
+  },
+  "care.p1.li2": {
+    "en": "Monthly Support — $30 per month",
+    "fr": "Soutien mensuel — 30 $ par mois"
+  },
+  "care.p1.li3": {
+    "en": "Business Care — $80 per month",
+    "fr": "Forfait affaires — 80 $ par mois"
+  },
+  "care.p1b": {
+    "en": "All prices are in Canadian dollars unless otherwise stated. Applicable taxes may be added where required.",
+    "fr": "Tous les prix sont en dollars canadiens sauf indication contraire. Les taxes applicables peuvent s'ajouter, le cas échéant."
+  },
+  "care.p1c": {
+    "en": "Each plan covers only the services specifically listed below. Website development, redesigns and larger upgrades are separate services.",
+    "fr": "Chaque forfait ne couvre que les services expressément énumérés ci-dessous. Le développement de site web, les refontes et les améliorations majeures sont des services distincts."
   },
   "care.h2.2": {
-    "en": "2. What's Included",
-    "fr": "2. Ce qui est inclus"
+    "en": "2. Services Included",
+    "fr": "2. Services inclus"
   },
-  "care.starter": {
-    "en": "Starter Care:",
-    "fr": "Forfait de base :"
+  "care.h3.starter": {
+    "en": "Starter Care — $15 per month",
+    "fr": "Forfait de base — 15 $ par mois"
   },
-  "care.li.2a": {
-    "en": "basic monitoring, basic backups, email support, minor technical fixes, and one very small content update every three months.",
-    "fr": "surveillance de base, sauvegardes de base, soutien par courriel, petites corrections techniques et une très petite mise à jour de contenu tous les trois mois."
+  "care.p2.starter.intro": {
+    "en": "Starter Care includes:",
+    "fr": "Le forfait de base comprend :"
   },
-  "care.monthly": {
-    "en": "Monthly Support:",
-    "fr": "Soutien mensuel :"
+  "care.p2.s.li1": {
+    "en": "Basic website monitoring",
+    "fr": "Surveillance de base du site web"
   },
-  "care.li.2b": {
-    "en": "everything in Starter Care, plus one small update per month and up to 15 minutes of website work monthly.",
-    "fr": "tout ce qui est inclus dans le forfait de base, plus une petite mise à jour par mois et jusqu'à 15 minutes de travail sur le site par mois."
+  "care.p2.s.li2": {
+    "en": "Basic website backups, where supported by the website and hosting environment",
+    "fr": "Sauvegardes de base du site web, lorsque le site et l'environnement d'hébergement le permettent"
   },
-  "care.business": {
-    "en": "Business Care:",
-    "fr": "Forfait affaires :"
+  "care.p2.s.li3": {
+    "en": "Email support",
+    "fr": "Soutien par courriel"
   },
-  "care.li.2c": {
-    "en": "everything in Monthly Support, plus up to 45 minutes of website work monthly, priority support, and basic performance reviews.",
-    "fr": "tout ce qui est inclus dans le soutien mensuel, plus jusqu'à 45 minutes de travail sur le site par mois, un soutien prioritaire et des bilans de performance de base."
+  "care.p2.s.li4": {
+    "en": "Minor technical fixes",
+    "fr": "Petites corrections techniques"
+  },
+  "care.p2.s.li5": {
+    "en": "One very small content update every three months",
+    "fr": "Une très petite mise à jour de contenu tous les trois mois"
+  },
+  "care.p2.s.li6": {
+    "en": "Standard response and turnaround time",
+    "fr": "Délai de réponse et de traitement standard"
+  },
+  "care.p2.s.small": {
+    "en": "A very small content update generally means one simple change that can reasonably be completed within approximately 10 minutes.",
+    "fr": "Une très petite mise à jour de contenu signifie généralement un changement simple pouvant raisonnablement être effectué en environ 10 minutes."
+  },
+  "care.p2.s.examples": {
+    "en": "Examples include:",
+    "fr": "Exemples :"
+  },
+  "care.p2.s.ex1": {
+    "en": "Correcting a small amount of text",
+    "fr": "Corriger un court passage de texte"
+  },
+  "care.p2.s.ex2": {
+    "en": "Updating business hours",
+    "fr": "Mettre à jour les heures d'ouverture"
+  },
+  "care.p2.s.ex3": {
+    "en": "Changing a phone number or email address",
+    "fr": "Changer un numéro de téléphone ou une adresse courriel"
+  },
+  "care.p2.s.ex4": {
+    "en": "Replacing one existing image",
+    "fr": "Remplacer une image existante"
+  },
+  "care.p2.s.ex5": {
+    "en": "Updating one price",
+    "fr": "Mettre à jour un prix"
+  },
+  "care.p2.s.ex6": {
+    "en": "Adding or removing a brief announcement",
+    "fr": "Ajouter ou retirer une courte annonce"
+  },
+  "care.p2.s.norollover": {
+    "en": "The included update does not accumulate and does not roll over if it is not used.",
+    "fr": "La mise à jour incluse ne s'accumule pas et n'est pas reportée si elle n'est pas utilisée."
+  },
+  "care.h3.monthly": {
+    "en": "Monthly Support — $30 per month",
+    "fr": "Soutien mensuel — 30 $ par mois"
+  },
+  "care.p2.m.intro": {
+    "en": "Monthly Support includes everything in Starter Care, plus:",
+    "fr": "Le soutien mensuel comprend tout ce qui est inclus dans le forfait de base, plus :"
+  },
+  "care.p2.m.li1": {
+    "en": "One small update per month",
+    "fr": "Une petite mise à jour par mois"
+  },
+  "care.p2.m.li2": {
+    "en": "Up to 15 minutes of website work per month",
+    "fr": "Jusqu'à 15 minutes de travail sur le site par mois"
+  },
+  "care.p2.m.li3": {
+    "en": "Content and image replacements within the existing website layout",
+    "fr": "Remplacement de contenu et d'images dans la mise en page existante du site"
+  },
+  "care.p2.m.li4": {
+    "en": "Typical turnaround within three to five business days",
+    "fr": "Délai de traitement habituel de trois à cinq jours ouvrables"
+  },
+  "care.p2.m.note": {
+    "en": "The monthly update and the included 15 minutes of work are not separate allowances. Together, they represent a maximum of 15 minutes of included website work per billing period.",
+    "fr": "La mise à jour mensuelle et les 15 minutes de travail incluses ne constituent pas des allocations distinctes. Ensemble, elles représentent un maximum de 15 minutes de travail inclus sur le site par période de facturation."
+  },
+  "care.h3.business": {
+    "en": "Business Care — $80 per month",
+    "fr": "Forfait affaires — 80 $ par mois"
+  },
+  "care.p2.b.intro": {
+    "en": "Business Care includes everything in Monthly Support, plus:",
+    "fr": "Le forfait affaires comprend tout ce qui est inclus dans le soutien mensuel, plus :"
+  },
+  "care.p2.b.li1": {
+    "en": "Up to 45 minutes of website work per month",
+    "fr": "Jusqu'à 45 minutes de travail sur le site par mois"
+  },
+  "care.p2.b.li2": {
+    "en": "Priority support",
+    "fr": "Soutien prioritaire"
+  },
+  "care.p2.b.li3": {
+    "en": "Typical turnaround within one to three business days",
+    "fr": "Délai de traitement habituel d'un à trois jours ouvrables"
+  },
+  "care.p2.b.li4": {
+    "en": "Minor adjustments to existing layouts",
+    "fr": "Petits ajustements aux mises en page existantes"
+  },
+  "care.p2.b.li5": {
+    "en": "More frequent content updates within the monthly time allowance",
+    "fr": "Mises à jour de contenu plus fréquentes dans la limite du temps mensuel alloué"
+  },
+  "care.p2.b.li6": {
+    "en": "Basic website performance reviews",
+    "fr": "Bilans de performance de base du site web"
+  },
+  "care.p2.b.note": {
+    "en": "Business Care does not include emergency, after-hours or guaranteed same-day support unless separately agreed to in writing.",
+    "fr": "Le forfait affaires n'inclut pas de soutien d'urgence, en dehors des heures d'ouverture, ou garanti le jour même, sauf entente écrite distincte."
   },
   "care.h2.3": {
-    "en": "3. What's Excluded",
-    "fr": "3. Ce qui est exclu"
+    "en": "3. Meaning of Website Work",
+    "fr": "3. Signification du travail sur le site web"
   },
-  "care.p.3": {
-    "en": "Care plans do not include new pages, section redesigns, booking or payment system additions, online stores, custom forms, membership or login systems, large content writing, major SEO work, or full redesigns. These are considered larger changes and are quoted separately under our Website Upgrades service.",
-    "fr": "Les forfaits d'entretien n'incluent pas les nouvelles pages, les refontes de sections, l'ajout de systèmes de réservation ou de paiement, les boutiques en ligne, les formulaires personnalisés, les systèmes d'adhésion ou de connexion, la rédaction de contenu volumineux, un travail SEO majeur ou les refontes complètes. Ceux-ci sont considérés comme des changements majeurs et sont chiffrés séparément dans le cadre de notre service d'améliorations de site."
+  "care.p3.1": {
+    "en": "Included website work is measured using the actual time reasonably required to review, prepare, complete, test and communicate about a request.",
+    "fr": "Le travail inclus sur le site est mesuré selon le temps réel raisonnablement nécessaire pour examiner, préparer, réaliser, tester et communiquer au sujet d'une demande."
+  },
+  "care.p3.2": {
+    "en": "A request may use the client's full monthly allowance even when the visible change appears small, particularly when the request requires troubleshooting, image preparation, mobile testing, third-party coordination or correction of conflicting website code.",
+    "fr": "Une demande peut utiliser la totalité de l'allocation mensuelle du client même lorsque le changement visible semble minime, particulièrement lorsque la demande nécessite du dépannage, la préparation d'images, des tests sur mobile, une coordination avec des tiers ou la correction de code de site en conflit."
+  },
+  "care.p3.3": {
+    "en": "Chezmaxo will inform the client when a request is expected to exceed the included allowance.",
+    "fr": "Chezmaxo informera le client lorsqu'une demande devrait dépasser l'allocation incluse."
   },
   "care.h2.4": {
-    "en": "4. Response Times",
-    "fr": "4. Délais de réponse"
+    "en": "4. Services Not Included",
+    "fr": "4. Services non inclus"
   },
-  "care.p.4": {
-    "en": "Starter Care follows a standard response time. Monthly Support requests are typically completed within 3–5 business days. Business Care includes priority, faster turnaround. [SPECIFIC SLA HOURS/DAYS PLACEHOLDER]",
-    "fr": "Le forfait de base suit un délai de réponse standard. Les demandes de soutien mensuel sont généralement traitées en 3 à 5 jours ouvrables. Le forfait affaires inclut un traitement prioritaire et plus rapide. [DÉLAIS SLA SPÉCIFIQUES À REMPLACER]"
+  "care.p4.intro": {
+    "en": "Website Care Plans do not include:",
+    "fr": "Les forfaits d'entretien de site web n'incluent pas :"
+  },
+  "care.p4.li1": {
+    "en": "New website pages",
+    "fr": "De nouvelles pages de site web"
+  },
+  "care.p4.li2": {
+    "en": "Complete section redesigns",
+    "fr": "La refonte complète de sections"
+  },
+  "care.p4.li3": {
+    "en": "Full website redesigns",
+    "fr": "La refonte complète du site web"
+  },
+  "care.p4.li4": {
+    "en": "New booking or appointment systems",
+    "fr": "De nouveaux systèmes de réservation ou de rendez-vous"
+  },
+  "care.p4.li5": {
+    "en": "New payment systems",
+    "fr": "De nouveaux systèmes de paiement"
+  },
+  "care.p4.li6": {
+    "en": "Online-store development",
+    "fr": "Le développement de boutique en ligne"
+  },
+  "care.p4.li7": {
+    "en": "Custom forms or advanced form logic",
+    "fr": "Des formulaires personnalisés ou une logique de formulaire avancée"
+  },
+  "care.p4.li8": {
+    "en": "Membership or login systems",
+    "fr": "Des systèmes d'adhésion ou de connexion"
+  },
+  "care.p4.li9": {
+    "en": "Customer portals",
+    "fr": "Des portails clients"
+  },
+  "care.p4.li10": {
+    "en": "Custom applications or advanced functionality",
+    "fr": "Des applications personnalisées ou des fonctionnalités avancées"
+  },
+  "care.p4.li11": {
+    "en": "Large content-writing projects",
+    "fr": "Des projets importants de rédaction de contenu"
+  },
+  "care.p4.li12": {
+    "en": "Product or service data entry",
+    "fr": "La saisie de données de produits ou services"
+  },
+  "care.p4.li13": {
+    "en": "Professional photography or graphic design",
+    "fr": "La photographie professionnelle ou le graphisme"
+  },
+  "care.p4.li14": {
+    "en": "Major search-engine optimization work",
+    "fr": "Un travail majeur d'optimisation pour les moteurs de recherche"
+  },
+  "care.p4.li15": {
+    "en": "Advertising or social-media management",
+    "fr": "La gestion de publicité ou des réseaux sociaux"
+  },
+  "care.p4.li16": {
+    "en": "Domain registration fees",
+    "fr": "Les frais d'enregistrement de domaine"
+  },
+  "care.p4.li17": {
+    "en": "Website hosting fees, unless specifically included in writing",
+    "fr": "Les frais d'hébergement de site web, sauf inclusion écrite spécifique"
+  },
+  "care.p4.li18": {
+    "en": "Premium themes, plugins, licences or subscriptions",
+    "fr": "Les thèmes, extensions, licences ou abonnements premium"
+  },
+  "care.p4.li19": {
+    "en": "Repairs required because of changes made by the client or another service provider",
+    "fr": "Les réparations requises en raison de changements effectués par le client ou un autre fournisseur de services"
+  },
+  "care.p4.li20": {
+    "en": "Malware removal or cybersecurity incident recovery, unless separately agreed",
+    "fr": "La suppression de logiciels malveillants ou la récupération après un incident de cybersécurité, sauf entente distincte"
+  },
+  "care.p4.li21": {
+    "en": "Work on services or systems not controlled by Chezmaxo",
+    "fr": "Le travail sur des services ou systèmes non contrôlés par Chezmaxo"
+  },
+  "care.p4.outro": {
+    "en": "These services are considered additional work and will be quoted separately.",
+    "fr": "Ces services sont considérés comme du travail supplémentaire et feront l'objet d'un devis distinct."
   },
   "care.h2.5": {
-    "en": "5. Monthly Support Limits",
-    "fr": "5. Limites de soutien mensuel"
+    "en": "5. Submitting Requests",
+    "fr": "5. Soumission des demandes"
   },
-  "care.p.5": {
-    "en": "Each plan includes a defined amount of update time or update frequency per month, as described above. Requests beyond this limit will be completed the following month or quoted as an additional-work item, at the client's choice.",
-    "fr": "Chaque forfait comprend une quantité définie de temps ou de fréquence de mise à jour par mois, tel que décrit ci-dessus. Les demandes au-delà de cette limite seront traitées le mois suivant ou chiffrées comme travail supplémentaire, au choix du client."
+  "care.p5.1": {
+    "en": "Support and update requests must be submitted by email to:",
+    "fr": "Les demandes de soutien et de mise à jour doivent être soumises par courriel à :"
+  },
+  "care.p5.2": {
+    "en": "Requests should include:",
+    "fr": "Les demandes devraient inclure :"
+  },
+  "care.p5.li1": {
+    "en": "A clear description of the requested change",
+    "fr": "Une description claire du changement demandé"
+  },
+  "care.p5.li2": {
+    "en": "The page or section affected",
+    "fr": "La page ou la section concernée"
+  },
+  "care.p5.li3": {
+    "en": "Final text, images or other content to be used",
+    "fr": "Le texte final, les images ou autre contenu à utiliser"
+  },
+  "care.p5.li4": {
+    "en": "Any relevant login, account or reference information",
+    "fr": "Tout renseignement pertinent de connexion, de compte ou de référence"
+  },
+  "care.p5.3": {
+    "en": "Turnaround time begins after Chezmaxo has received all required information, content, approvals and access.",
+    "fr": "Le délai de traitement débute une fois que Chezmaxo a reçu tous les renseignements, le contenu, les approbations et les accès nécessaires."
+  },
+  "care.p5.4": {
+    "en": "Multiple changes submitted together may be treated as one larger request and may exceed the client's included monthly allowance.",
+    "fr": "Plusieurs changements soumis ensemble peuvent être traités comme une seule demande plus importante et peuvent dépasser l'allocation mensuelle incluse du client."
   },
   "care.h2.6": {
-    "en": "6. No Rollover of Unused Time",
-    "fr": "6. Aucun report du temps non utilisé"
+    "en": "6. Response and Turnaround Times",
+    "fr": "6. Délais de réponse et de traitement"
   },
-  "care.p.6": {
-    "en": "Unused updates or support time from any billing period do not carry over to future periods.",
-    "fr": "Les mises à jour ou le temps de soutien non utilisés d'une période de facturation ne sont pas reportés aux périodes suivantes."
+  "care.p6.intro": {
+    "en": "The following turnaround times are service targets and not guarantees:",
+    "fr": "Les délais de traitement suivants sont des objectifs de service et non des garanties :"
+  },
+  "care.p6.li1": {
+    "en": "Starter Care: typically within five business days",
+    "fr": "Forfait de base : habituellement dans un délai de cinq jours ouvrables"
+  },
+  "care.p6.li2": {
+    "en": "Monthly Support: typically within three to five business days",
+    "fr": "Soutien mensuel : habituellement dans un délai de trois à cinq jours ouvrables"
+  },
+  "care.p6.li3": {
+    "en": "Business Care: typically within one to three business days",
+    "fr": "Forfait affaires : habituellement dans un délai d'un à trois jours ouvrables"
+  },
+  "care.p6.holidays": {
+    "en": "Business days exclude weekends, Quebec statutory holidays and announced business closures.",
+    "fr": "Les jours ouvrables excluent les fins de semaine, les jours fériés légaux du Québec et les fermetures annoncées de l'entreprise."
+  },
+  "care.p6.affected": {
+    "en": "Turnaround times may be affected by:",
+    "fr": "Les délais de traitement peuvent être affectés par :"
+  },
+  "care.p6.a.li1": {
+    "en": "The size or complexity of the request",
+    "fr": "La taille ou la complexité de la demande"
+  },
+  "care.p6.a.li2": {
+    "en": "Missing information or content",
+    "fr": "Des renseignements ou du contenu manquant"
+  },
+  "care.p6.a.li3": {
+    "en": "Delayed client responses",
+    "fr": "Des réponses tardives du client"
+  },
+  "care.p6.a.li4": {
+    "en": "Third-party service issues",
+    "fr": "Des problèmes de services tiers"
+  },
+  "care.p6.a.li5": {
+    "en": "Hosting or domain-provider outages",
+    "fr": "Des pannes du fournisseur d'hébergement ou de domaine"
+  },
+  "care.p6.a.li6": {
+    "en": "Emergencies or unusually high request volumes",
+    "fr": "Des urgences ou un volume de demandes inhabituellement élevé"
+  },
+  "care.p6.priority": {
+    "en": "Priority support means that Business Care requests are normally reviewed ahead of non-priority requests. It does not guarantee immediate or same-day completion.",
+    "fr": "Le soutien prioritaire signifie que les demandes du forfait affaires sont normalement examinées avant les demandes non prioritaires. Cela ne garantit pas un traitement immédiat ou le jour même."
   },
   "care.h2.7": {
-    "en": "7. Additional-Work Approval",
-    "fr": "7. Approbation des travaux supplémentaires"
+    "en": "7. Monthly Support Limits",
+    "fr": "7. Limites de soutien mensuel"
   },
-  "care.p.7": {
-    "en": "Any work beyond what is included in a client's care plan will be scoped, quoted, and confirmed in writing before work begins. No additional charges will be applied without the client's approval.",
-    "fr": "Tout travail dépassant ce qui est inclus dans le forfait d'entretien d'un client sera évalué, chiffré et confirmé par écrit avant le début des travaux. Aucun frais supplémentaire ne sera appliqué sans l'approbation du client."
+  "care.p7.1": {
+    "en": "Each plan includes only the update frequency or work allowance stated in Section 2.",
+    "fr": "Chaque forfait comprend uniquement la fréquence de mise à jour ou l'allocation de travail indiquée à la section 2."
+  },
+  "care.p7.2": {
+    "en": "When a request exceeds the client's available allowance, the client may choose to:",
+    "fr": "Lorsqu'une demande dépasse l'allocation disponible du client, celui-ci peut choisir de :"
+  },
+  "care.p7.li1": {
+    "en": "Receive a separate quote for the additional work;",
+    "fr": "Recevoir un devis distinct pour le travail supplémentaire;"
+  },
+  "care.p7.li2": {
+    "en": "Authorize additional work at Chezmaxo's current hourly rate; or",
+    "fr": "Autoriser du travail supplémentaire au taux horaire courant de Chezmaxo; ou"
+  },
+  "care.p7.li3": {
+    "en": "Postpone eligible work until a future billing period.",
+    "fr": "Reporter le travail admissible à une période de facturation future."
+  },
+  "care.p7.3": {
+    "en": "Work will not be postponed automatically. Chezmaxo and the client must agree on how the additional request will be handled.",
+    "fr": "Le travail ne sera pas reporté automatiquement. Chezmaxo et le client doivent s'entendre sur la façon dont la demande supplémentaire sera traitée."
+  },
+  "care.p7.4": {
+    "en": "Urgent work may require an additional fee and remains subject to availability.",
+    "fr": "Le travail urgent peut nécessiter des frais supplémentaires et demeure sujet à disponibilité."
   },
   "care.h2.8": {
-    "en": "8. Third-Party Costs",
-    "fr": "8. Coûts tiers"
+    "en": "8. No Rollover",
+    "fr": "8. Aucun report"
   },
-  "care.p.8": {
-    "en": "Domain registration, premium themes or plugins, paid software, email hosting, and other third-party subscriptions are not included in care plan pricing and are billed separately, either directly to the client or passed through at cost. [THIRD-PARTY BILLING DETAILS PLACEHOLDER]",
-    "fr": "L'enregistrement de domaine, les thèmes ou extensions premium, les logiciels payants, l'hébergement courriel et autres abonnements tiers ne sont pas inclus dans le prix du forfait d'entretien et sont facturés séparément, soit directement au client, soit refacturés au coût. [DÉTAILS DE FACTURATION TIERCE À REMPLACER]"
+  "care.p8.1": {
+    "en": "Unused updates, minutes or support allowances do not carry over to future billing periods.",
+    "fr": "Les mises à jour, minutes ou allocations de soutien non utilisées ne sont pas reportées aux périodes de facturation futures."
+  },
+  "care.p8.2": {
+    "en": "Each allowance expires at the end of the billing period in which it was provided.",
+    "fr": "Chaque allocation expire à la fin de la période de facturation au cours de laquelle elle a été fournie."
   },
   "care.h2.9": {
-    "en": "9. Payment Terms",
-    "fr": "9. Modalités de paiement"
+    "en": "9. Additional-Work Approval",
+    "fr": "9. Approbation des travaux supplémentaires"
   },
-  "care.p.9": {
-    "en": "Care plans are billed monthly in advance. [BILLING METHOD / DUE DATE PLACEHOLDER] Failure to pay may result in paused support or plan suspension.",
-    "fr": "Les forfaits d'entretien sont facturés mensuellement à l'avance. [MÉTHODE DE FACTURATION/ÉCHÉANCE À REMPLACER] Le défaut de paiement peut entraîner une suspension du soutien ou du forfait."
+  "care.p9.1": {
+    "en": "Work outside the client's plan will be described and priced before it begins.",
+    "fr": "Le travail hors du forfait du client sera décrit et chiffré avant son début."
+  },
+  "care.p9.2": {
+    "en": "The client's written approval by email, electronic message, signed quotation or accepted invoice is sufficient authorization to proceed.",
+    "fr": "L'approbation écrite du client par courriel, message électronique, devis signé ou facture acceptée constitue une autorisation suffisante pour procéder."
+  },
+  "care.p9.3": {
+    "en": "Chezmaxo will not intentionally charge the client for additional work without prior approval.",
+    "fr": "Chezmaxo ne facturera pas intentionnellement de travail supplémentaire au client sans approbation préalable."
   },
   "care.h2.10": {
-    "en": "10. Cancellation Terms",
-    "fr": "10. Conditions d'annulation"
+    "en": "10. Client-Owned Hosting and Third-Party Services",
+    "fr": "10. Hébergement appartenant au client et services tiers"
   },
-  "care.p.10": {
-    "en": "Cancellation terms depend on the plan and client agreement in place at the time of signup. [NOTICE PERIOD / REFUND POLICY PLACEHOLDER — this section should be finalized with legal guidance before publishing.]",
-    "fr": "Les conditions d'annulation dépendent du forfait et de l'entente client en vigueur au moment de l'inscription. [PRÉAVIS/POLITIQUE DE REMBOURSEMENT À REMPLACER — cette section devrait être finalisée avec un conseiller juridique avant publication.]"
+  "care.p10.1": {
+    "en": "The client is responsible for purchasing, owning, renewing and paying for all third-party products and services required for their website.",
+    "fr": "Le client est responsable de l'achat, de la possession, du renouvellement et du paiement de tous les produits et services tiers requis pour son site web."
+  },
+  "care.p10.2": {
+    "en": "These services may include:",
+    "fr": "Ces services peuvent inclure :"
+  },
+  "care.p10.li1": {
+    "en": "Website hosting",
+    "fr": "L'hébergement du site web"
+  },
+  "care.p10.li2": {
+    "en": "Domain-name registration and renewal",
+    "fr": "L'enregistrement et le renouvellement du nom de domaine"
+  },
+  "care.p10.li3": {
+    "en": "Business email hosting",
+    "fr": "L'hébergement de courriel d'entreprise"
+  },
+  "care.p10.li4": {
+    "en": "Premium themes or plugins",
+    "fr": "Les thèmes ou extensions premium"
+  },
+  "care.p10.li5": {
+    "en": "Software licences",
+    "fr": "Les licences de logiciels"
+  },
+  "care.p10.li6": {
+    "en": "Booking platforms",
+    "fr": "Les plateformes de réservation"
+  },
+  "care.p10.li7": {
+    "en": "Payment-processing services",
+    "fr": "Les services de traitement des paiements"
+  },
+  "care.p10.li8": {
+    "en": "E-commerce services",
+    "fr": "Les services de commerce électronique"
+  },
+  "care.p10.li9": {
+    "en": "Security or backup services",
+    "fr": "Les services de sécurité ou de sauvegarde"
+  },
+  "care.p10.li10": {
+    "en": "Stock photographs",
+    "fr": "Les photos libres de droits"
+  },
+  "care.p10.li11": {
+    "en": "Other external subscriptions or integrations",
+    "fr": "D'autres abonnements ou intégrations externes"
+  },
+  "care.p10.3": {
+    "en": "Whenever possible, all third-party accounts must be created using the client's legal name, business information, email address and payment method.",
+    "fr": "Dans la mesure du possible, tous les comptes tiers doivent être créés en utilisant le nom légal, les informations d'entreprise, l'adresse courriel et le mode de paiement du client."
+  },
+  "care.p10.4": {
+    "en": "Chezmaxo may recommend suitable providers and assist the client with setup, but Chezmaxo will not normally purchase, own or maintain payment responsibility for these services.",
+    "fr": "Chezmaxo peut recommander des fournisseurs appropriés et aider le client avec la configuration, mais Chezmaxo n'achètera normalement pas, ne possédera pas et n'assumera pas la responsabilité de paiement de ces services."
+  },
+  "care.p10.5": {
+    "en": "The client remains responsible for:",
+    "fr": "Le client demeure responsable de :"
+  },
+  "care.p10.li12": {
+    "en": "Keeping payment information current",
+    "fr": "Maintenir à jour les renseignements de paiement"
+  },
+  "care.p10.li13": {
+    "en": "Paying renewal charges",
+    "fr": "Payer les frais de renouvellement"
+  },
+  "care.p10.li14": {
+    "en": "Reviewing third-party pricing and terms",
+    "fr": "Examiner les tarifs et conditions des tiers"
+  },
+  "care.p10.li15": {
+    "en": "Maintaining access to their accounts",
+    "fr": "Maintenir l'accès à ses comptes"
+  },
+  "care.p10.li16": {
+    "en": "Cancelling services they no longer require",
+    "fr": "Annuler les services dont il n'a plus besoin"
+  },
+  "care.p10.li17": {
+    "en": "Responding to notices from third-party providers",
+    "fr": "Répondre aux avis des fournisseurs tiers"
+  },
+  "care.p10.6": {
+    "en": "Chezmaxo is not responsible for a website, domain, email account or other service being suspended because of an expired payment method, missed payment, cancelled subscription or failure by the client to renew a service.",
+    "fr": "Chezmaxo n'est pas responsable de la suspension d'un site web, d'un domaine, d'un compte courriel ou d'un autre service en raison d'un mode de paiement expiré, d'un paiement manqué, d'un abonnement annulé ou de l'omission du client de renouveler un service."
+  },
+  "care.p10.7": {
+    "en": "Third-party providers may change their prices, features, policies or availability at any time. Chezmaxo is not responsible for these changes.",
+    "fr": "Les fournisseurs tiers peuvent modifier leurs prix, fonctionnalités, politiques ou disponibilité en tout temps. Chezmaxo n'est pas responsable de ces changements."
   },
   "care.h2.11": {
-    "en": "11. Website Access",
-    "fr": "11. Accès au site web"
+    "en": "11. Website and Account Access",
+    "fr": "11. Accès au site web et aux comptes"
   },
-  "care.p.11": {
-    "en": "Clients agree to provide Chezmaxo with the access needed (such as hosting or content-management credentials) to perform monitoring, backups, and updates under their plan.",
-    "fr": "Les clients acceptent de fournir à Chezmaxo les accès nécessaires (comme les identifiants d'hébergement ou de gestion de contenu) pour effectuer la surveillance, les sauvegardes et les mises à jour prévues à leur forfait."
+  "care.p11.1": {
+    "en": "The client agrees to provide Chezmaxo with the access reasonably required to build, monitor, maintain and update the website.",
+    "fr": "Le client accepte de fournir à Chezmaxo l'accès raisonnablement requis pour construire, surveiller, entretenir et mettre à jour le site web."
+  },
+  "care.p11.2": {
+    "en": "Whenever the service provider supports it, the client should provide Chezmaxo with a separate administrator, collaborator, developer or delegated-access account.",
+    "fr": "Lorsque le fournisseur de services le permet, le client devrait fournir à Chezmaxo un compte distinct d'administrateur, de collaborateur, de développeur ou d'accès délégué."
+  },
+  "care.p11.3": {
+    "en": "The client should not provide Chezmaxo with access to the client's personal payment information unless it is absolutely necessary for an authorized task.",
+    "fr": "Le client ne devrait pas fournir à Chezmaxo l'accès à ses renseignements de paiement personnels, sauf si cela est absolument nécessaire pour une tâche autorisée."
+  },
+  "care.p11.4": {
+    "en": "Access may be required for:",
+    "fr": "L'accès peut être requis pour :"
+  },
+  "care.p11.li1": {
+    "en": "The website-hosting account",
+    "fr": "Le compte d'hébergement du site web"
+  },
+  "care.p11.li2": {
+    "en": "The website content-management system",
+    "fr": "Le système de gestion de contenu du site web"
+  },
+  "care.p11.li3": {
+    "en": "Domain and DNS settings",
+    "fr": "Les paramètres de domaine et DNS"
+  },
+  "care.p11.li4": {
+    "en": "Website databases",
+    "fr": "Les bases de données du site web"
+  },
+  "care.p11.li5": {
+    "en": "Analytics services",
+    "fr": "Les services d'analyse"
+  },
+  "care.p11.li6": {
+    "en": "Plugins and integrations",
+    "fr": "Les extensions et intégrations"
+  },
+  "care.p11.li7": {
+    "en": "Booking or payment platforms",
+    "fr": "Les plateformes de réservation ou de paiement"
+  },
+  "care.p11.li8": {
+    "en": "Other website-related services",
+    "fr": "D'autres services liés au site web"
+  },
+  "care.p11.5": {
+    "en": "The client remains the owner and primary account holder of these services.",
+    "fr": "Le client demeure le propriétaire et le titulaire principal de ces comptes de services."
+  },
+  "care.p11.6": {
+    "en": "Chezmaxo will use the provided access only for authorized website work and will take reasonable measures to protect account credentials.",
+    "fr": "Chezmaxo utilisera l'accès fourni uniquement pour du travail autorisé sur le site web et prendra des mesures raisonnables pour protéger les identifiants de compte."
+  },
+  "care.p11.7": {
+    "en": "The client must notify Chezmaxo when passwords, permissions or account settings are changed in a way that could affect the services.",
+    "fr": "Le client doit informer Chezmaxo lorsque des mots de passe, permissions ou paramètres de compte sont modifiés d'une manière pouvant affecter les services."
+  },
+  "care.p11.8": {
+    "en": "The client may remove Chezmaxo's access after the service relationship ends, provided that all outstanding work and account-transfer responsibilities have been completed.",
+    "fr": "Le client peut retirer l'accès de Chezmaxo une fois la relation de service terminée, à condition que tout le travail en suspens et les responsabilités de transfert de compte aient été complétés."
   },
   "care.h2.12": {
-    "en": "12. Client Responsibilities",
-    "fr": "12. Responsabilités du client"
+    "en": "12. Hosting and Domain Responsibility",
+    "fr": "12. Responsabilité d'hébergement et de domaine"
   },
-  "care.p.12": {
-    "en": "Clients are responsible for providing accurate update requests, reasonable response time to questions, and timely payment. Delays caused by missing information or access may affect turnaround times.",
-    "fr": "Les clients sont responsables de fournir des demandes de mise à jour exactes, un délai de réponse raisonnable aux questions et un paiement en temps opportun. Les retards causés par des renseignements ou accès manquants peuvent affecter les délais de traitement."
+  "care.p12.1": {
+    "en": "Website hosting and domain registration are not included in the monthly Website Care Plan price unless explicitly stated otherwise in writing.",
+    "fr": "L'hébergement du site web et l'enregistrement de domaine ne sont pas inclus dans le prix mensuel du forfait d'entretien, sauf indication écrite contraire explicite."
+  },
+  "care.p12.2": {
+    "en": "The client is responsible for selecting and purchasing an appropriate hosting plan and domain name.",
+    "fr": "Le client est responsable de choisir et d'acheter un forfait d'hébergement et un nom de domaine appropriés."
+  },
+  "care.p12.3": {
+    "en": "Chezmaxo may:",
+    "fr": "Chezmaxo peut :"
+  },
+  "care.p12.li1": {
+    "en": "Recommend a hosting provider",
+    "fr": "Recommander un fournisseur d'hébergement"
+  },
+  "care.p12.li2": {
+    "en": "Help the client choose an appropriate plan",
+    "fr": "Aider le client à choisir un forfait approprié"
+  },
+  "care.p12.li3": {
+    "en": "Assist with the initial setup",
+    "fr": "Aider à la configuration initiale"
+  },
+  "care.p12.li4": {
+    "en": "Connect the domain to the website",
+    "fr": "Connecter le domaine au site web"
+  },
+  "care.p12.li5": {
+    "en": "Configure basic website settings",
+    "fr": "Configurer les paramètres de base du site web"
+  },
+  "care.p12.li6": {
+    "en": "Communicate with the provider when technical assistance is needed",
+    "fr": "Communiquer avec le fournisseur lorsqu'une assistance technique est nécessaire"
+  },
+  "care.p12.4": {
+    "en": "However, the hosting and domain accounts will remain under the client's ownership and payment responsibility.",
+    "fr": "Toutefois, les comptes d'hébergement et de domaine demeureront sous la propriété et la responsabilité de paiement du client."
+  },
+  "care.p12.5": {
+    "en": "Chezmaxo does not guarantee the performance, security, availability or continued operation of any third-party hosting or domain provider.",
+    "fr": "Chezmaxo ne garantit pas la performance, la sécurité, la disponibilité ou le fonctionnement continu de tout fournisseur tiers d'hébergement ou de domaine."
   },
   "care.h2.13": {
-    "en": "13. Backup Limitations",
-    "fr": "13. Limites des sauvegardes"
+    "en": "13. Billing and Payment",
+    "fr": "13. Facturation et paiement"
   },
-  "care.p.13": {
-    "en": "Backups are performed on a regular basis as a precaution but are not a guarantee against all forms of data loss. [BACKUP FREQUENCY / RETENTION PLACEHOLDER] Clients are encouraged to keep their own copies of key content where possible.",
-    "fr": "Les sauvegardes sont effectuées régulièrement par précaution, mais ne garantissent pas contre toute forme de perte de données. [FRÉQUENCE/CONSERVATION DES SAUVEGARDES À REMPLACER] Les clients sont encouragés à conserver leurs propres copies du contenu clé lorsque possible."
+  "care.p13.1": {
+    "en": "Care Plans are billed monthly in advance using the payment method selected during signup or stated on the client's invoice.",
+    "fr": "Les forfaits d'entretien sont facturés mensuellement à l'avance selon le mode de paiement sélectionné lors de l'inscription ou indiqué sur la facture du client."
+  },
+  "care.p13.2": {
+    "en": "Payment is due on the invoice date unless another due date is shown on the invoice or agreed to in writing.",
+    "fr": "Le paiement est dû à la date de la facture, sauf si une autre échéance est indiquée sur la facture ou convenue par écrit."
+  },
+  "care.p13.3": {
+    "en": "The client authorizes recurring monthly charges when enrolling in automatic billing.",
+    "fr": "Le client autorise des frais mensuels récurrents en s'inscrivant à la facturation automatique."
+  },
+  "care.p13.4": {
+    "en": "If payment is declined, overdue or otherwise unsuccessful, Chezmaxo may:",
+    "fr": "Si le paiement est refusé, en retard ou autrement infructueux, Chezmaxo peut :"
+  },
+  "care.p13.li1": {
+    "en": "Pause new update and support requests;",
+    "fr": "Suspendre les nouvelles demandes de mise à jour et de soutien;"
+  },
+  "care.p13.li2": {
+    "en": "Suspend Care Plan services;",
+    "fr": "Suspendre les services du forfait d'entretien;"
+  },
+  "care.p13.li3": {
+    "en": "Remove services paid for directly by Chezmaxo; or",
+    "fr": "Retirer les services payés directement par Chezmaxo; ou"
+  },
+  "care.p13.li4": {
+    "en": "Cancel the Care Plan after providing reasonable notice.",
+    "fr": "Annuler le forfait d'entretien après un préavis raisonnable."
+  },
+  "care.p13.5": {
+    "en": "The client remains responsible for approved work and third-party costs incurred before suspension or cancellation.",
+    "fr": "Le client demeure responsable du travail approuvé et des coûts tiers engagés avant la suspension ou l'annulation."
   },
   "care.h2.14": {
-    "en": "14. Service Interruptions",
-    "fr": "14. Interruptions de service"
+    "en": "14. Cancellation",
+    "fr": "14. Annulation"
   },
-  "care.p.14": {
-    "en": "Chezmaxo is not responsible for outages caused by hosting providers, domain registrars, or other third-party services outside of our direct control, though we will assist in resolving such issues where possible.",
-    "fr": "Chezmaxo n'est pas responsable des pannes causées par les fournisseurs d'hébergement, les registraires de domaine ou d'autres services tiers hors de notre contrôle direct, bien que nous aidions à résoudre ces problèmes lorsque possible."
+  "care.p14.1": {
+    "en": "Care Plans operate on a month-to-month basis unless a different term is stated in the client's service agreement.",
+    "fr": "Les forfaits d'entretien fonctionnent sur une base mensuelle, sauf si une autre durée est indiquée dans l'entente de service du client."
+  },
+  "care.p14.2": {
+    "en": "A client may request cancellation by emailing marxanc@outlook.com before the next billing date.",
+    "fr": "Un client peut demander l'annulation en écrivant à marxanc@outlook.com avant la prochaine date de facturation."
+  },
+  "care.p14.3": {
+    "en": "Cancellation takes effect at the end of the client's current paid billing period unless the parties agree to an earlier date or applicable law requires otherwise.",
+    "fr": "L'annulation prend effet à la fin de la période de facturation payée en cours du client, sauf si les parties conviennent d'une date antérieure ou que la loi applicable l'exige autrement."
+  },
+  "care.p14.4": {
+    "en": "The client will continue to receive the plan's regular services until the effective cancellation date, provided the account remains in good standing.",
+    "fr": "Le client continuera de recevoir les services réguliers du forfait jusqu'à la date d'annulation effective, à condition que le compte demeure en règle."
+  },
+  "care.p14.5": {
+    "en": "Fees already paid for the current billing period are generally non-refundable, except where required by applicable law or where Chezmaxo agrees otherwise in writing.",
+    "fr": "Les frais déjà payés pour la période de facturation en cours sont généralement non remboursables, sauf si la loi applicable l'exige ou si Chezmaxo en convient autrement par écrit."
+  },
+  "care.p14.6": {
+    "en": "Cancellation of a Care Plan does not automatically cancel third-party products or subscriptions owned or billed directly to the client. The client remains responsible for cancelling those services.",
+    "fr": "L'annulation d'un forfait d'entretien n'annule pas automatiquement les produits ou abonnements tiers appartenant au client ou facturés directement à celui-ci. Le client demeure responsable d'annuler ces services."
   },
   "care.h2.15": {
-    "en": "15. Ownership Terms",
-    "fr": "15. Conditions de propriété"
+    "en": "15. Client Responsibilities",
+    "fr": "15. Responsabilités du client"
   },
-  "care.p.15": {
-    "en": "Website ownership terms are addressed in the client's individual service agreement. [OWNERSHIP TERMS PLACEHOLDER]",
-    "fr": "Les conditions de propriété du site sont précisées dans l'entente de service individuelle du client. [CONDITIONS DE PROPRIÉTÉ À REMPLACER]"
+  "care.p15.intro": {
+    "en": "The client is responsible for:",
+    "fr": "Le client est responsable de :"
+  },
+  "care.p15.li1": {
+    "en": "Providing accurate and complete instructions",
+    "fr": "Fournir des instructions exactes et complètes"
+  },
+  "care.p15.li2": {
+    "en": "Supplying final and legally usable text, images and other content",
+    "fr": "Fournir du texte, des images et autre contenu finaux et légalement utilisables"
+  },
+  "care.p15.li3": {
+    "en": "Responding to questions and approval requests within a reasonable time",
+    "fr": "Répondre aux questions et demandes d'approbation dans un délai raisonnable"
+  },
+  "care.p15.li4": {
+    "en": "Maintaining valid billing information",
+    "fr": "Maintenir des renseignements de facturation valides"
+  },
+  "care.p15.li5": {
+    "en": "Providing the required website and account access",
+    "fr": "Fournir l'accès requis au site web et aux comptes"
+  },
+  "care.p15.li6": {
+    "en": "Reviewing completed changes and reporting concerns promptly",
+    "fr": "Examiner les changements complétés et signaler rapidement toute préoccupation"
+  },
+  "care.p15.li7": {
+    "en": "Maintaining appropriate rights or licences for submitted content",
+    "fr": "Maintenir les droits ou licences appropriés pour le contenu soumis"
+  },
+  "care.p15.li8": {
+    "en": "Keeping independent copies of important business content and records",
+    "fr": "Conserver des copies indépendantes du contenu et des dossiers d'affaires importants"
+  },
+  "care.p15.li9": {
+    "en": "Informing Chezmaxo of changes made by the client or another service provider",
+    "fr": "Informer Chezmaxo des changements effectués par le client ou un autre fournisseur de services"
+  },
+  "care.p15.outro": {
+    "en": "Chezmaxo is not responsible for delays, errors or additional work caused by incomplete instructions, missing access, inaccurate content or unauthorized third-party changes.",
+    "fr": "Chezmaxo n'est pas responsable des retards, erreurs ou travaux supplémentaires causés par des instructions incomplètes, un accès manquant, du contenu inexact ou des changements non autorisés par des tiers."
   },
   "care.h2.16": {
-    "en": "16. Acceptable Use",
-    "fr": "16. Utilisation acceptable"
+    "en": "16. Backups",
+    "fr": "16. Sauvegardes"
   },
-  "care.p.16": {
-    "en": "Care plans may not be used to request illegal content, content that violates third-party rights, or work outside the scope of standard small-business website maintenance.",
-    "fr": "Les forfaits d'entretien ne peuvent pas être utilisés pour demander du contenu illégal, du contenu qui viole les droits de tiers, ou un travail hors de la portée de l'entretien standard de site web pour petite entreprise."
+  "care.p16.1": {
+    "en": "Backups are performed only where they are supported by the client's website, hosting provider and selected plan.",
+    "fr": "Les sauvegardes sont effectuées uniquement lorsqu'elles sont prises en charge par le site web du client, le fournisseur d'hébergement et le forfait sélectionné."
+  },
+  "care.p16.2": {
+    "en": "Unless otherwise agreed in writing:",
+    "fr": "Sauf entente écrite contraire :"
+  },
+  "care.p16.li1": {
+    "en": "Chezmaxo does not guarantee continuous or real-time backups;",
+    "fr": "Chezmaxo ne garantit pas des sauvegardes continues ou en temps réel;"
+  },
+  "care.p16.li2": {
+    "en": "Backup availability may depend on third-party systems;",
+    "fr": "La disponibilité des sauvegardes peut dépendre de systèmes tiers;"
+  },
+  "care.p16.li3": {
+    "en": "Backups may not contain the most recent website changes;",
+    "fr": "Les sauvegardes peuvent ne pas contenir les changements les plus récents du site web;"
+  },
+  "care.p16.li4": {
+    "en": "Not every backup can be guaranteed to restore successfully; and",
+    "fr": "La restauration réussie de chaque sauvegarde ne peut être garantie; et"
+  },
+  "care.p16.li5": {
+    "en": "Care Plan backups are not a substitute for the client's own record-retention practices.",
+    "fr": "Les sauvegardes du forfait d'entretien ne remplacent pas les propres pratiques de conservation des dossiers du client."
+  },
+  "care.p16.3": {
+    "en": "Chezmaxo will make reasonable efforts to assist with restoration when a usable backup is available. Significant restoration or recovery work may be quoted separately.",
+    "fr": "Chezmaxo déploiera des efforts raisonnables pour aider à la restauration lorsqu'une sauvegarde utilisable est disponible. Un travail important de restauration ou de récupération peut faire l'objet d'un devis distinct."
   },
   "care.h2.17": {
-    "en": "17. Changes to These Terms",
-    "fr": "17. Modifications de ces conditions"
+    "en": "17. Monitoring and Technical Fixes",
+    "fr": "17. Surveillance et corrections techniques"
   },
-  "care.p.17": {
-    "en": "These terms may be updated from time to time. Continued use of a care plan after changes are posted constitutes acceptance of the updated terms.",
-    "fr": "Ces conditions peuvent être mises à jour de temps à autre. L'utilisation continue d'un forfait d'entretien après la publication de modifications constitue une acceptation des conditions mises à jour."
+  "care.p17.1": {
+    "en": "Basic monitoring is intended to help identify obvious website availability or operational problems. It does not guarantee uninterrupted availability, complete security or detection of every issue.",
+    "fr": "La surveillance de base vise à aider à repérer les problèmes évidents de disponibilité ou de fonctionnement du site web. Elle ne garantit pas une disponibilité ininterrompue, une sécurité complète ou la détection de tous les problèmes."
+  },
+  "care.p17.2": {
+    "en": "Minor technical fixes generally cover small issues affecting an existing Chezmaxo-supported website.",
+    "fr": "Les petites corrections techniques couvrent généralement des problèmes mineurs affectant un site web existant pris en charge par Chezmaxo."
+  },
+  "care.p17.3": {
+    "en": "They do not include:",
+    "fr": "Elles n'incluent pas :"
+  },
+  "care.p17.li1": {
+    "en": "Rebuilding damaged website sections",
+    "fr": "La reconstruction de sections endommagées du site web"
+  },
+  "care.p17.li2": {
+    "en": "Repairing unsupported or abandoned software",
+    "fr": "La réparation de logiciels non pris en charge ou abandonnés"
+  },
+  "care.p17.li3": {
+    "en": "Malware removal",
+    "fr": "La suppression de logiciels malveillants"
+  },
+  "care.p17.li4": {
+    "en": "Recovery from hacking or data loss",
+    "fr": "La récupération après un piratage ou une perte de données"
+  },
+  "care.p17.li5": {
+    "en": "Server administration",
+    "fr": "L'administration de serveur"
+  },
+  "care.p17.li6": {
+    "en": "Problems caused by client changes",
+    "fr": "Les problèmes causés par des changements du client"
+  },
+  "care.p17.li7": {
+    "en": "Problems caused by another developer or provider",
+    "fr": "Les problèmes causés par un autre développeur ou fournisseur"
+  },
+  "care.p17.li8": {
+    "en": "Major compatibility or software-upgrade projects",
+    "fr": "Les projets majeurs de compatibilité ou de mise à niveau logicielle"
+  },
+  "care.p17.4": {
+    "en": "Chezmaxo will advise the client when an issue falls outside the Care Plan.",
+    "fr": "Chezmaxo avisera le client lorsqu'un problème dépasse le cadre du forfait d'entretien."
   },
   "care.h2.18": {
-    "en": "18. Contact Us",
-    "fr": "18. Nous contacter"
+    "en": "18. Third-Party Interruptions",
+    "fr": "18. Interruptions attribuables à des tiers"
   },
-  "care.p.18": {
-    "en": "Questions about your care plan can be sent to marxanc@outlook.com.",
-    "fr": "Les questions concernant votre forfait d'entretien peuvent être envoyées à marxanc@outlook.com."
+  "care.p18.1": {
+    "en": "Chezmaxo is not responsible for outages, interruptions, data loss, security incidents or service changes caused by third parties outside its reasonable control.",
+    "fr": "Chezmaxo n'est pas responsable des pannes, interruptions, pertes de données, incidents de sécurité ou changements de service causés par des tiers hors de son contrôle raisonnable."
+  },
+  "care.p18.2": {
+    "en": "This includes issues involving:",
+    "fr": "Cela inclut les problèmes concernant :"
+  },
+  "care.p18.li1": {
+    "en": "Hosting companies",
+    "fr": "Les entreprises d'hébergement"
+  },
+  "care.p18.li2": {
+    "en": "Domain registrars",
+    "fr": "Les registraires de domaine"
+  },
+  "care.p18.li3": {
+    "en": "Internet providers",
+    "fr": "Les fournisseurs Internet"
+  },
+  "care.p18.li4": {
+    "en": "Email providers",
+    "fr": "Les fournisseurs de courriel"
+  },
+  "care.p18.li5": {
+    "en": "Payment processors",
+    "fr": "Les processeurs de paiement"
+  },
+  "care.p18.li6": {
+    "en": "Plugin developers",
+    "fr": "Les développeurs d'extensions"
+  },
+  "care.p18.li7": {
+    "en": "Software platforms",
+    "fr": "Les plateformes logicielles"
+  },
+  "care.p18.li8": {
+    "en": "Content-delivery networks",
+    "fr": "Les réseaux de diffusion de contenu"
+  },
+  "care.p18.li9": {
+    "en": "External APIs or integrations",
+    "fr": "Les API ou intégrations externes"
+  },
+  "care.p18.3": {
+    "en": "Chezmaxo will make reasonable efforts to assist the client in identifying or communicating about such issues. Additional recovery, migration or repair work may be quoted separately.",
+    "fr": "Chezmaxo déploiera des efforts raisonnables pour aider le client à identifier ces problèmes ou à communiquer à leur sujet. Un travail supplémentaire de récupération, de migration ou de réparation peut faire l'objet d'un devis distinct."
+  },
+  "care.h2.19": {
+    "en": "19. Website Ownership",
+    "fr": "19. Propriété du site web"
+  },
+  "care.p19.1": {
+    "en": "Website ownership, source-code ownership and licensing terms are governed by the client's website-development agreement, proposal or other written service agreement.",
+    "fr": "La propriété du site web, la propriété du code source et les conditions de licence sont régies par l'entente de développement de site web du client, la proposition ou toute autre entente de service écrite."
+  },
+  "care.p19.2": {
+    "en": "Payment for a Website Care Plan does not transfer ownership of third-party software, themes, plugins, fonts, photographs, subscriptions or other licensed materials.",
+    "fr": "Le paiement d'un forfait d'entretien de site web ne transfère pas la propriété de logiciels, thèmes, extensions, polices, photographies, abonnements ou autres éléments sous licence appartenant à des tiers."
+  },
+  "care.p19.3": {
+    "en": "Unless otherwise agreed in writing, cancelling a Care Plan does not remove the client's ownership rights in content or deliverables that were previously transferred to the client.",
+    "fr": "Sauf entente écrite contraire, l'annulation d'un forfait d'entretien ne retire pas les droits de propriété du client sur le contenu ou les livrables qui lui ont été précédemment transférés."
+  },
+  "care.h2.20": {
+    "en": "20. Acceptable Use",
+    "fr": "20. Utilisation acceptable"
+  },
+  "care.p20.intro": {
+    "en": "Care Plans may not be used to request or support:",
+    "fr": "Les forfaits d'entretien ne peuvent pas être utilisés pour demander ou soutenir :"
+  },
+  "care.p20.li1": {
+    "en": "Illegal activity or illegal content",
+    "fr": "Des activités ou du contenu illégaux"
+  },
+  "care.p20.li2": {
+    "en": "Fraudulent or deceptive activity",
+    "fr": "Des activités frauduleuses ou trompeuses"
+  },
+  "care.p20.li3": {
+    "en": "Intellectual-property infringement",
+    "fr": "La violation de propriété intellectuelle"
+  },
+  "care.p20.li4": {
+    "en": "Harassment, threats or abuse",
+    "fr": "Le harcèlement, les menaces ou les abus"
+  },
+  "care.p20.li5": {
+    "en": "Malicious software",
+    "fr": "Des logiciels malveillants"
+  },
+  "care.p20.li6": {
+    "en": "Unauthorized access to systems or data",
+    "fr": "L'accès non autorisé à des systèmes ou des données"
+  },
+  "care.p20.li7": {
+    "en": "Content or activity that violates third-party rights",
+    "fr": "Du contenu ou des activités qui violent les droits de tiers"
+  },
+  "care.p20.li8": {
+    "en": "Work outside the normal scope of small-business website maintenance",
+    "fr": "Un travail hors de la portée normale de l'entretien de site web pour petite entreprise"
+  },
+  "care.p20.outro": {
+    "en": "Chezmaxo may refuse or discontinue a request that it reasonably believes violates these rules or applicable law.",
+    "fr": "Chezmaxo peut refuser ou cesser une demande qu'elle croit raisonnablement enfreindre ces règles ou la loi applicable."
+  },
+  "care.h2.21": {
+    "en": "21. Confidentiality and Privacy",
+    "fr": "21. Confidentialité et vie privée"
+  },
+  "care.p21.1": {
+    "en": "Chezmaxo may receive access to confidential business information and website-account information while providing services.",
+    "fr": "Chezmaxo peut avoir accès à des renseignements commerciaux confidentiels et à des informations de compte de site web dans le cadre de la prestation des services."
+  },
+  "care.p21.2": {
+    "en": "Chezmaxo will use such information only as reasonably necessary to provide the requested services, administer the client relationship, process payments and comply with legal obligations.",
+    "fr": "Chezmaxo n'utilisera ces renseignements que dans la mesure raisonnablement nécessaire pour fournir les services demandés, administrer la relation client, traiter les paiements et se conformer aux obligations légales."
+  },
+  "care.p21.3": {
+    "en": "The client should avoid sending passwords or sensitive personal information through insecure communication methods.",
+    "fr": "Le client devrait éviter d'envoyer des mots de passe ou des renseignements personnels sensibles par des moyens de communication non sécurisés."
+  },
+  "care.p21.4": {
+    "en": "The collection and handling of personal information are also governed by the Chezmaxo Privacy Policy.",
+    "fr": "La collecte et le traitement des renseignements personnels sont également régis par la politique de confidentialité de Chezmaxo."
+  },
+  "care.h2.22": {
+    "en": "22. Limitation of Service",
+    "fr": "22. Limitation de service"
+  },
+  "care.p22.intro": {
+    "en": "Website Care Plans are maintenance and support services. They are not guarantees that a website will:",
+    "fr": "Les forfaits d'entretien de site web sont des services d'entretien et de soutien. Ils ne garantissent pas qu'un site web :"
+  },
+  "care.p22.li1": {
+    "en": "Operate without interruption or error",
+    "fr": "Fonctionnera sans interruption ni erreur"
+  },
+  "care.p22.li2": {
+    "en": "Be protected from every security threat",
+    "fr": "Sera protégé contre toute menace de sécurité"
+  },
+  "care.p22.li3": {
+    "en": "Achieve a particular search-engine position",
+    "fr": "Atteindra un positionnement particulier dans les moteurs de recherche"
+  },
+  "care.p22.li4": {
+    "en": "Produce a particular number of visitors, leads or sales",
+    "fr": "Générera un nombre particulier de visiteurs, de prospects ou de ventes"
+  },
+  "care.p22.li5": {
+    "en": "Remain compatible with every future browser, device or third-party service",
+    "fr": "Demeurera compatible avec tout futur navigateur, appareil ou service tiers"
+  },
+  "care.p22.outro1": {
+    "en": "Chezmaxo will provide the services with reasonable care but cannot guarantee outcomes controlled by visitors, search engines, external providers or other third parties.",
+    "fr": "Chezmaxo fournira les services avec un soin raisonnable, mais ne peut garantir des résultats contrôlés par les visiteurs, les moteurs de recherche, les fournisseurs externes ou d'autres tiers."
+  },
+  "care.p22.outro2": {
+    "en": "Nothing in these terms excludes any right, warranty or remedy that cannot legally be excluded.",
+    "fr": "Rien dans les présentes conditions n'exclut un droit, une garantie ou un recours qui ne peut être exclu légalement."
+  },
+  "care.h2.23": {
+    "en": "23. Changes to Plans, Prices or Terms",
+    "fr": "23. Modifications des forfaits, des prix ou des conditions"
+  },
+  "care.p23.1": {
+    "en": "Chezmaxo may update these terms, plan features or pricing when reasonably necessary.",
+    "fr": "Chezmaxo peut mettre à jour les présentes conditions, les caractéristiques des forfaits ou les prix lorsque cela est raisonnablement nécessaire."
+  },
+  "care.p23.2": {
+    "en": "For material changes affecting an active client's price or included services, Chezmaxo will provide written notice before the change takes effect.",
+    "fr": "Pour tout changement important affectant le prix ou les services inclus d'un client actif, Chezmaxo fournira un avis écrit avant l'entrée en vigueur du changement."
+  },
+  "care.p23.3": {
+    "en": "The notice will state:",
+    "fr": "L'avis indiquera :"
+  },
+  "care.p23.li1": {
+    "en": "The nature of the change",
+    "fr": "La nature du changement"
+  },
+  "care.p23.li2": {
+    "en": "The effective date",
+    "fr": "La date d'entrée en vigueur"
+  },
+  "care.p23.li3": {
+    "en": "Any action required from the client",
+    "fr": "Toute action requise de la part du client"
+  },
+  "care.p23.li4": {
+    "en": "The client's available cancellation options",
+    "fr": "Les options d'annulation offertes au client"
+  },
+  "care.p23.4": {
+    "en": "Changes will not apply retroactively to services already paid for unless required by law or agreed to by the client.",
+    "fr": "Les changements ne s'appliqueront pas rétroactivement aux services déjà payés, sauf si la loi l'exige ou que le client y consent."
+  },
+  "care.p23.5": {
+    "en": "Continued use of the Care Plan after the effective date may indicate acceptance of the updated terms, subject to applicable law.",
+    "fr": "L'utilisation continue du forfait d'entretien après la date d'entrée en vigueur peut indiquer l'acceptation des conditions mises à jour, sous réserve de la loi applicable."
+  },
+  "care.h2.24": {
+    "en": "24. Relationship With Other Agreements",
+    "fr": "24. Relation avec d'autres ententes"
+  },
+  "care.p24.1": {
+    "en": "If these terms conflict with a signed service agreement, accepted proposal or statement of work, the following order of priority applies:",
+    "fr": "Si les présentes conditions entrent en conflit avec une entente de service signée, une proposition acceptée ou un énoncé de travaux, l'ordre de priorité suivant s'applique :"
+  },
+  "care.p24.li1": {
+    "en": "The signed service agreement",
+    "fr": "L'entente de service signée"
+  },
+  "care.p24.li2": {
+    "en": "The accepted proposal or statement of work",
+    "fr": "La proposition acceptée ou l'énoncé de travaux"
+  },
+  "care.p24.li3": {
+    "en": "These Website Care Plan Terms",
+    "fr": "Les présentes conditions du forfait d'entretien"
+  },
+  "care.p24.li4": {
+    "en": "General website information or marketing materials",
+    "fr": "Les renseignements généraux du site web ou le matériel marketing"
+  },
+  "care.h2.25": {
+    "en": "25. Governing Law",
+    "fr": "25. Loi applicable"
+  },
+  "care.p25.1": {
+    "en": "These terms are governed by the laws applicable in the Province of Quebec and the federal laws of Canada applicable there.",
+    "fr": "Les présentes conditions sont régies par les lois applicables dans la province de Québec et les lois fédérales du Canada qui s'y appliquent."
+  },
+  "care.p25.2": {
+    "en": "Nothing in these terms limits any mandatory rights available under applicable law.",
+    "fr": "Rien dans les présentes conditions ne limite les droits impératifs prévus par la loi applicable."
+  },
+  "care.h2.26": {
+    "en": "26. Contact Information",
+    "fr": "26. Coordonnées"
+  },
+  "care.p26.1": {
+    "en": "Questions, requests and cancellation notices regarding Website Care Plans may be sent to:",
+    "fr": "Les questions, demandes et avis d'annulation concernant les forfaits d'entretien de site web peuvent être envoyés à :"
+  },
+  "care.p26.email": {
+    "en": "Email:",
+    "fr": "Courriel :"
+  },
+  "care.p26.address": {
+    "en": "Business address:",
+    "fr": "Adresse d'affaires :"
+  },
+  "care.p26.phone": {
+    "en": "Telephone:",
+    "fr": "Téléphone :"
   },
   "title.home": {
     "en": "Chezmaxo | Affordable Website Design & Care Plans for Small Businesses",
