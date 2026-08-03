@@ -1635,6 +1635,10 @@ const I18N = {
     "en": "Last updated: August 3, 2026",
     "fr": "Dernière mise à jour : 3 août 2026"
   },
+  "terms.updated": {
+    "en": "Last updated: August 3, 2026",
+    "fr": "Dernière mise à jour : 3 août 2026"
+  },
   "legal.breadcrumb": {
     "en": "LEGAL — TEMPLATE",
     "fr": "JURIDIQUE — MODÈLE"
@@ -1775,51 +1779,115 @@ const I18N = {
     "en": "Reviewing and approving deliverables at each project stage",
     "fr": "Réviser et approuver les livrables à chaque étape du projet"
   },
+  "terms.p.4b": {
+    "en": "Approval of deliverables may be given by email, electronic message, or another method agreed to in writing. The client should identify who is authorized to approve work and request changes on their behalf, to avoid disputes involving employees or other individuals acting without authorization.",
+    "fr": "L'approbation des livrables peut être donnée par courriel, message électronique ou toute autre méthode convenue par écrit. Le client devrait indiquer qui est autorisé à approuver le travail et à demander des changements en son nom, afin d'éviter tout différend impliquant des employés ou d'autres personnes agissant sans autorisation."
+  },
   "terms.h2.5": {
     "en": "5. Payment Terms",
     "fr": "5. Modalités de paiement"
   },
-  "terms.p.5": {
-    "en": "[PAYMENT TERMS PLACEHOLDER — describe deposit requirements, invoicing schedule, accepted payment methods, and late-payment policy.]",
-    "fr": "[MODALITÉS DE PAIEMENT À REMPLACER — décrivez les exigences de dépôt, l'échéancier de facturation, les méthodes de paiement acceptées et la politique de retard de paiement.]"
+  "terms.p.5.1": {
+    "en": "Chezmaxo generally requires full payment before work on a project begins, and does not begin or continue work on a project until payment has been received. This protects both parties by avoiding disputes about scope or completion after work has already been delivered.",
+    "fr": "Chezmaxo exige généralement le paiement complet avant le début des travaux sur un projet, et ne commence ni ne poursuit les travaux tant que le paiement n'a pas été reçu. Cette pratique protège les deux parties en évitant les différends au sujet de la portée ou de l'achèvement des travaux une fois ceux-ci livrés."
+  },
+  "terms.p.5.2": {
+    "en": "In some cases, a payment plan or milestone-based schedule may be arranged instead, as agreed in writing between Chezmaxo and the client before work begins.",
+    "fr": "Dans certains cas, un plan de paiement ou un échéancier par étapes peut être convenu à la place, tel qu'établi par écrit entre Chezmaxo et le client avant le début des travaux."
+  },
+  "terms.p.5.3": {
+    "en": "Accepted payment methods are specified on the client's invoice or quote.",
+    "fr": "Les méthodes de paiement acceptées sont précisées sur la facture ou le devis du client."
+  },
+  "terms.p.5.4": {
+    "en": "If a client cancels before work has begun, amounts paid will generally be refunded in full. If work has already begun, amounts paid will be applied to work completed and time reasonably reserved, and any refund or outstanding balance will be determined under the applicable agreement and mandatory law.",
+    "fr": "Si un client annule avant le début des travaux, les montants payés seront généralement remboursés en totalité. Si les travaux ont déjà commencé, les montants payés seront appliqués au travail complété et au temps raisonnablement réservé, et tout remboursement ou solde impayé sera déterminé selon l'entente applicable et la loi d'ordre public."
+  },
+  "terms.p.5.5": {
+    "en": "Recurring Website Care Plan billing, payment, and cancellation are governed separately by the Website Care Plan Terms.",
+    "fr": "La facturation, le paiement et l'annulation récurrents des forfaits d'entretien de site web sont régis séparément par les Conditions du forfait d'entretien."
   },
   "terms.h2.6": {
     "en": "6. Intellectual Property",
     "fr": "6. Propriété intellectuelle"
   },
-  "terms.p.6": {
-    "en": "Ownership of final website deliverables will be addressed in your individual client agreement. Until full payment is received, Chezmaxo retains rights to work in progress. [OWNERSHIP TERMS PLACEHOLDER]",
-    "fr": "La propriété des livrables finaux du site sera précisée dans votre entente client individuelle. Jusqu'à réception du paiement complet, Chezmaxo conserve les droits sur le travail en cours. [CONDITIONS DE PROPRIÉTÉ À REMPLACER]"
+  "terms.p.6.1": {
+    "en": "Ownership of custom final deliverables — the completed website files — transfers to the client once full payment has been received and the client has approved that the website is working as intended. Before that point, Chezmaxo retains ownership of work in progress.",
+    "fr": "La propriété des livrables finaux personnalisés — les fichiers du site web complété — est transférée au client une fois le paiement complet reçu et une fois que le client a approuvé le bon fonctionnement du site. Avant ce point, Chezmaxo conserve la propriété du travail en cours."
+  },
+  "terms.p.6.2": {
+    "en": "Chezmaxo retains ownership of its own pre-existing tools, code templates, and reusable components, and may reuse general code patterns and techniques across projects for other clients. This does not include the client's specific content, branding, or the finished design created for the client.",
+    "fr": "Chezmaxo conserve la propriété de ses propres outils préexistants, gabarits de code et composants réutilisables, et peut réutiliser des modèles et techniques de code généraux pour d'autres clients. Cela n'inclut pas le contenu spécifique du client, son image de marque ni le design final créé pour le client."
+  },
+  "terms.p.6.3": {
+    "en": "Third-party software, themes, plugins, fonts, stock photographs, and other licensed materials remain governed by their own separate licence terms and are not owned by either party.",
+    "fr": "Les logiciels, thèmes, extensions, polices, photos libres de droits et autres éléments sous licence de tiers demeurent régis par leurs propres conditions de licence et n'appartiennent à aucune des parties."
   },
   "terms.h2.7": {
-    "en": "7. Limitation of Liability",
-    "fr": "7. Limitation de responsabilité"
+    "en": "7. Portfolio Use",
+    "fr": "7. Utilisation à des fins de portfolio"
   },
   "terms.p.7": {
-    "en": "Chezmaxo is not liable for indirect, incidental, or consequential damages arising from use of this website or our services, to the fullest extent permitted by law. [JURISDICTION-SPECIFIC LANGUAGE PLACEHOLDER]",
-    "fr": "Chezmaxo n'est pas responsable des dommages indirects, accessoires ou consécutifs découlant de l'utilisation de ce site ou de nos services, dans toute la mesure permise par la loi. [LIBELLÉ SPÉCIFIQUE À LA JURIDICTION À REMPLACER]"
+    "en": "Chezmaxo may display a completed, publicly-launched website — including screenshots and a general description of the work — in its own portfolio and marketing materials, unless the client requests confidentiality in writing before or at project completion.",
+    "fr": "Chezmaxo peut présenter un site web complété et publiquement lancé — y compris des captures d'écran et une description générale du travail — dans son propre portfolio et son matériel promotionnel, à moins que le client ne demande la confidentialité par écrit avant ou à la fin du projet."
   },
   "terms.h2.8": {
-    "en": "8. Termination",
-    "fr": "8. Résiliation"
+    "en": "8. Project Activity and Inactivity",
+    "fr": "8. Activité et inactivité du projet"
   },
-  "terms.p.8": {
+  "terms.p.8.1": {
+    "en": "If a client does not respond to Chezmaxo for 30 days during an active project, Chezmaxo may send a written inactivity notice and pause the project.",
+    "fr": "Si un client ne répond pas à Chezmaxo pendant 30 jours durant un projet actif, Chezmaxo peut envoyer un avis écrit d'inactivité et suspendre le projet."
+  },
+  "terms.p.8.2": {
+    "en": "The project may be treated as abandoned only after a further written notice and a reasonable opportunity for the client to respond. Treating a project as abandoned does not automatically cause the client to lose amounts already paid for work that was completed, or deliverables that were already provided.",
+    "fr": "Le projet ne peut être considéré comme abandonné qu'après un second avis écrit et une occasion raisonnable pour le client de répondre. Le fait de considérer un projet comme abandonné ne fait pas automatiquement perdre au client les montants déjà payés pour le travail complété, ni les livrables déjà fournis."
+  },
+  "terms.h2.9": {
+    "en": "9. Indemnification",
+    "fr": "9. Indemnisation"
+  },
+  "terms.p.9": {
+    "en": "The client agrees to indemnify and hold Chezmaxo harmless from claims, damages, or costs arising from content, instructions, or materials the client provides, to the extent such claims result from that content or from the client's misuse of the completed website.",
+    "fr": "Le client accepte d'indemniser et de tenir Chezmaxo indemne de toute réclamation, dommage ou coût découlant du contenu, des instructions ou du matériel fourni par le client, dans la mesure où ces réclamations résultent de ce contenu ou d'une mauvaise utilisation du site complété par le client."
+  },
+  "terms.h2.10": {
+    "en": "10. Limitation of Liability",
+    "fr": "10. Limitation de responsabilité"
+  },
+  "terms.p.10.1": {
+    "en": "Chezmaxo is not liable for indirect, incidental, or consequential damages arising from use of this website or our services, to the fullest extent permitted by law.",
+    "fr": "Chezmaxo n'est pas responsable des dommages indirects, accessoires ou consécutifs découlant de l'utilisation de ce site ou de nos services, dans toute la mesure permise par la loi."
+  },
+  "terms.p.10.2": {
+    "en": "Chezmaxo's total liability for any claim will not exceed the amount paid for the specific service giving rise to the claim.",
+    "fr": "La responsabilité totale de Chezmaxo pour toute réclamation ne dépassera pas le montant payé pour le service spécifique à l'origine de la réclamation."
+  },
+  "terms.p.10.3": {
+    "en": "This limitation does not exclude or limit any liability that cannot legally be excluded or limited, including certain consequences of intentional or gross fault.",
+    "fr": "Cette limitation n'exclut ni ne limite une responsabilité qui ne peut légalement être exclue ou limitée, y compris certaines conséquences d'une faute intentionnelle ou lourde."
+  },
+  "terms.h2.11": {
+    "en": "11. Termination",
+    "fr": "11. Résiliation"
+  },
+  "terms.p.11": {
     "en": "Either party may end a service arrangement according to the terms outlined in the relevant client agreement or care plan terms.",
     "fr": "Chaque partie peut mettre fin à une entente de service selon les modalités décrites dans l'entente client ou les conditions du forfait d'entretien applicables."
   },
-  "terms.h2.9": {
-    "en": "9. Governing Law",
-    "fr": "9. Loi applicable"
+  "terms.h2.12": {
+    "en": "12. Governing Law",
+    "fr": "12. Loi applicable"
   },
-  "terms.p.9": {
-    "en": "These terms are governed by the laws of [STATE/PROVINCE/COUNTRY PLACEHOLDER].",
-    "fr": "Ces conditions sont régies par les lois de [PROVINCE/PAYS À REMPLACER]."
+  "terms.p.12": {
+    "en": "These terms are governed by the laws applicable in the Province of Quebec and the federal laws of Canada applicable there.",
+    "fr": "Les présentes conditions sont régies par les lois applicables dans la province de Québec et les lois fédérales du Canada qui s'y appliquent."
   },
-  "terms.h2.10": {
-    "en": "10. Contact Us",
-    "fr": "10. Nous contacter"
+  "terms.h2.13": {
+    "en": "13. Contact Us",
+    "fr": "13. Nous contacter"
   },
-  "terms.p.10": {
+  "terms.p.13": {
     "en": "Questions about these terms can be sent to marxanc@outlook.com.",
     "fr": "Les questions concernant ces conditions peuvent être envoyées à marxanc@outlook.com."
   },
