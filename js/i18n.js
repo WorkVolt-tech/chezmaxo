@@ -1844,50 +1844,422 @@ const I18N = {
     "fr": "Le projet ne peut être considéré comme abandonné qu'après un second avis écrit et une occasion raisonnable pour le client de répondre. Le fait de considérer un projet comme abandonné ne fait pas automatiquement perdre au client les montants déjà payés pour le travail complété, ni les livrables déjà fournis."
   },
   "terms.h2.9": {
-    "en": "9. Indemnification",
-    "fr": "9. Indemnisation"
+    "en": "9. Client-Provided Content and Third-Party Claims",
+    "fr": "9. Contenu fourni par le client et réclamations de tiers"
   },
-  "terms.p.9": {
-    "en": "The client agrees to indemnify and hold Chezmaxo harmless from claims, damages, or costs arising from content, instructions, or materials the client provides, to the extent such claims result from that content or from the client's misuse of the completed website.",
-    "fr": "Le client accepte d'indemniser et de tenir Chezmaxo indemne de toute réclamation, dommage ou coût découlant du contenu, des instructions ou du matériel fourni par le client, dans la mesure où ces réclamations résultent de ce contenu ou d'une mauvaise utilisation du site complété par le client."
+  "terms.p.9.1": {
+    "en": "The client confirms that they own or have obtained all permissions, licences and authorizations required to use the text, photographs, videos, logos, trademarks, graphics and other materials they provide to Chezmaxo.",
+    "fr": "Le client confirme qu'il possède ou a obtenu toutes les permissions, licences et autorisations nécessaires pour utiliser le texte, les photographies, les vidéos, les logos, les marques de commerce, les graphiques et autre matériel qu'il fournit à Chezmaxo."
+  },
+  "terms.p.9.2": {
+    "en": "The client is responsible for ensuring that client-provided materials, instructions, products, services and business activities do not violate applicable laws or the rights of another person or organization.",
+    "fr": "Le client est responsable de s'assurer que le matériel, les instructions, les produits, les services et les activités commerciales fournis par le client ne violent pas les lois applicables ni les droits d'une autre personne ou organisation."
+  },
+  "terms.p.9.3": {
+    "en": "To the extent permitted by applicable law, the client is responsible for claims, losses, damages and reasonable expenses arising from:",
+    "fr": "Dans la mesure permise par la loi applicable, le client est responsable des réclamations, pertes, dommages et dépenses raisonnables découlant :"
+  },
+  "terms.p9.li1": {
+    "en": "Materials supplied or approved by the client",
+    "fr": "Du matériel fourni ou approuvé par le client"
+  },
+  "terms.p9.li2": {
+    "en": "Instructions provided by the client",
+    "fr": "Des instructions fournies par le client"
+  },
+  "terms.p9.li3": {
+    "en": "The client's products, services or business practices",
+    "fr": "Des produits, services ou pratiques commerciales du client"
+  },
+  "terms.p9.li4": {
+    "en": "The client's unauthorized use of another party's intellectual property",
+    "fr": "De l'utilisation non autorisée par le client de la propriété intellectuelle d'un tiers"
+  },
+  "terms.p9.li5": {
+    "en": "False, misleading or unlawful claims supplied or approved by the client",
+    "fr": "De réclamations fausses, trompeuses ou illégales fournies ou approuvées par le client"
+  },
+  "terms.p9.li6": {
+    "en": "The client's misuse of the website",
+    "fr": "D'une mauvaise utilisation du site par le client"
+  },
+  "terms.p9.li7": {
+    "en": "Changes made after delivery by the client or another service provider",
+    "fr": "De changements effectués après la livraison par le client ou un autre fournisseur de services"
+  },
+  "terms.p.9.4": {
+    "en": "Chezmaxo will notify the client within a reasonable time after becoming aware of a relevant third-party claim and will provide reasonable cooperation in addressing it.",
+    "fr": "Chezmaxo avisera le client dans un délai raisonnable après avoir pris connaissance d'une réclamation pertinente de tiers et offrira une collaboration raisonnable pour y répondre."
+  },
+  "terms.p.9.5": {
+    "en": "The client may not settle a claim in a manner that admits fault on behalf of Chezmaxo or creates an obligation for Chezmaxo without Chezmaxo's prior written approval.",
+    "fr": "Le client ne peut régler une réclamation d'une manière qui admet une faute au nom de Chezmaxo ou qui crée une obligation pour Chezmaxo sans l'approbation écrite préalable de Chezmaxo."
+  },
+  "terms.p.9.6": {
+    "en": "The client will not be responsible to the extent that a claim was caused directly by Chezmaxo's own unlawful conduct, intentional fault or gross fault.",
+    "fr": "Le client ne sera pas responsable dans la mesure où une réclamation a été directement causée par la conduite illégale, la faute intentionnelle ou la faute lourde de Chezmaxo elle-même."
+  },
+  "terms.p.9.7": {
+    "en": "Nothing in this section creates an obligation that cannot legally be imposed under applicable law.",
+    "fr": "Rien dans la présente section ne crée une obligation qui ne peut légalement être imposée en vertu de la loi applicable."
   },
   "terms.h2.10": {
     "en": "10. Limitation of Liability",
     "fr": "10. Limitation de responsabilité"
   },
   "terms.p.10.1": {
-    "en": "Chezmaxo is not liable for indirect, incidental, or consequential damages arising from use of this website or our services, to the fullest extent permitted by law.",
-    "fr": "Chezmaxo n'est pas responsable des dommages indirects, accessoires ou consécutifs découlant de l'utilisation de ce site ou de nos services, dans toute la mesure permise par la loi."
+    "en": "Chezmaxo will perform the agreed services with reasonable care. However, websites and digital services may depend on hosting companies, domain registrars, software providers, plugins, payment processors, internet services and other third parties outside Chezmaxo's direct control.",
+    "fr": "Chezmaxo exécutera les services convenus avec un soin raisonnable. Toutefois, les sites web et services numériques peuvent dépendre d'entreprises d'hébergement, de registraires de domaine, de fournisseurs de logiciels, d'extensions, de processeurs de paiement, de services Internet et d'autres tiers hors du contrôle direct de Chezmaxo."
   },
   "terms.p.10.2": {
-    "en": "Chezmaxo's total liability for any claim will not exceed the amount paid for the specific service giving rise to the claim.",
-    "fr": "La responsabilité totale de Chezmaxo pour toute réclamation ne dépassera pas le montant payé pour le service spécifique à l'origine de la réclamation."
+    "en": "To the fullest extent permitted by applicable law, Chezmaxo will not be liable for indirect, incidental, special, punitive or consequential losses arising from the website or services.",
+    "fr": "Dans toute la mesure permise par la loi applicable, Chezmaxo ne sera pas responsable des pertes indirectes, accessoires, spéciales, punitives ou consécutives découlant du site web ou des services."
   },
   "terms.p.10.3": {
-    "en": "This limitation does not exclude or limit any liability that cannot legally be excluded or limited, including certain consequences of intentional or gross fault.",
-    "fr": "Cette limitation n'exclut ni ne limite une responsabilité qui ne peut légalement être exclue ou limitée, y compris certaines conséquences d'une faute intentionnelle ou lourde."
+    "en": "This includes, where legally permitted, losses involving:",
+    "fr": "Cela comprend, lorsque la loi le permet, les pertes liées :"
+  },
+  "terms.p10.li1": {
+    "en": "Profits or revenue",
+    "fr": "Aux profits ou revenus"
+  },
+  "terms.p10.li2": {
+    "en": "Business opportunities",
+    "fr": "Aux occasions d'affaires"
+  },
+  "terms.p10.li3": {
+    "en": "Customers or potential customers",
+    "fr": "Aux clients ou clients potentiels"
+  },
+  "terms.p10.li4": {
+    "en": "Data or content",
+    "fr": "Aux données ou au contenu"
+  },
+  "terms.p10.li5": {
+    "en": "Search-engine positioning",
+    "fr": "Au positionnement dans les moteurs de recherche"
+  },
+  "terms.p10.li6": {
+    "en": "Reputation",
+    "fr": "À la réputation"
+  },
+  "terms.p10.li7": {
+    "en": "Website availability",
+    "fr": "À la disponibilité du site web"
+  },
+  "terms.p10.li8": {
+    "en": "Third-party service interruptions",
+    "fr": "Aux interruptions de services tiers"
+  },
+  "terms.p10.li9": {
+    "en": "Expected business results",
+    "fr": "Aux résultats d'affaires escomptés"
+  },
+  "terms.p.10.4": {
+    "en": "Where liability cannot legally be excluded, Chezmaxo's total liability arising from a particular project, service or Care Plan will not exceed the total amount paid to Chezmaxo for the specific service giving rise to the claim during the six months immediately preceding the event giving rise to the claim.",
+    "fr": "Lorsque la responsabilité ne peut légalement être exclue, la responsabilité totale de Chezmaxo découlant d'un projet, d'un service ou d'un forfait d'entretien particulier ne dépassera pas le montant total payé à Chezmaxo pour le service spécifique à l'origine de la réclamation au cours des six mois précédant immédiatement l'événement à l'origine de la réclamation."
+  },
+  "terms.p.10.5": {
+    "en": "For a one-time website-development project, the applicable limit will not exceed the amount paid to Chezmaxo for that specific project.",
+    "fr": "Pour un projet de développement de site web ponctuel, la limite applicable ne dépassera pas le montant payé à Chezmaxo pour ce projet spécifique."
+  },
+  "terms.p.10.6": {
+    "en": "These limitations do not apply to liability that cannot legally be excluded or limited, including liability arising from intentional or gross fault or liability for bodily or moral injury.",
+    "fr": "Ces limitations ne s'appliquent pas à une responsabilité qui ne peut légalement être exclue ou limitée, y compris la responsabilité découlant d'une faute intentionnelle ou lourde ou la responsabilité pour préjudice corporel ou moral."
+  },
+  "terms.p.10.7": {
+    "en": "Nothing in these Terms limits a mandatory right, warranty or remedy available under applicable law.",
+    "fr": "Rien dans les présentes conditions ne limite un droit, une garantie ou un recours impératif prévu par la loi applicable."
   },
   "terms.h2.11": {
-    "en": "11. Termination",
-    "fr": "11. Résiliation"
+    "en": "11. French and English Versions",
+    "fr": "11. Versions française et anglaise"
   },
-  "terms.p.11": {
+  "terms.p.11.1": {
+    "en": "A French version of these Terms of Service and any applicable standard-form client agreement will be made available to the client before the client is asked to enter into the agreement in English.",
+    "fr": "Une version française des présentes conditions d'utilisation et de toute entente client type applicable sera mise à la disposition du client avant qu'il ne soit invité à conclure l'entente en anglais."
+  },
+  "terms.p.11.2": {
+    "en": "Where required by applicable law, the client may agree to be bound by an English version only after receiving or being given access to the French version and expressly choosing to enter into the agreement in English.",
+    "fr": "Lorsque la loi applicable l'exige, le client peut accepter d'être lié par une version anglaise seulement après avoir reçu ou obtenu accès à la version française et avoir expressément choisi de conclure l'entente en anglais."
+  },
+  "terms.p.11.3": {
+    "en": "The client's language selection must be recorded as part of the agreement or acceptance process.",
+    "fr": "Le choix de langue du client doit être consigné dans le cadre de l'entente ou du processus d'acceptation."
+  },
+  "terms.p.11.4": {
+    "en": "The French and English versions are intended to have the same meaning. If a discrepancy exists, the version that legally governs will be determined according to the client's valid language selection, the applicable client agreement and mandatory Quebec law.",
+    "fr": "Les versions française et anglaise sont destinées à avoir le même sens. En cas de divergence, la version qui fait foi sera déterminée selon le choix de langue valide du client, l'entente client applicable et la loi québécoise d'ordre public."
+  },
+  "terms.p.11.5": {
+    "en": "Nothing in this section limits any language right provided by applicable law.",
+    "fr": "Rien dans la présente section ne limite un droit linguistique prévu par la loi applicable."
+  },
+  "terms.h2.12": {
+    "en": "12. Client Agreements and Project-Specific Terms",
+    "fr": "12. Ententes clients et conditions propres au projet"
+  },
+  "terms.p.12.1": {
+    "en": "These Terms of Service provide general rules governing the Chezmaxo website and Chezmaxo services.",
+    "fr": "Les présentes conditions d'utilisation établissent les règles générales régissant le site web et les services de Chezmaxo."
+  },
+  "terms.p.12.2": {
+    "en": "Every paid website project should also be governed by an accepted proposal, quotation, statement of work or client service agreement identifying the project-specific terms.",
+    "fr": "Chaque projet de site web payant devrait également être régi par une proposition, un devis, un énoncé de travaux ou une entente de service client acceptée précisant les conditions propres au projet."
+  },
+  "terms.p.12.3": {
+    "en": "The project-specific document should include, where applicable:",
+    "fr": "Le document propre au projet devrait inclure, le cas échéant :"
+  },
+  "terms.p12.li1": {
+    "en": "The services being purchased",
+    "fr": "Les services achetés"
+  },
+  "terms.p12.li2": {
+    "en": "The number of pages and included features",
+    "fr": "Le nombre de pages et les fonctionnalités incluses"
+  },
+  "terms.p12.li3": {
+    "en": "The project price",
+    "fr": "Le prix du projet"
+  },
+  "terms.p12.li4": {
+    "en": "The required deposit",
+    "fr": "Le dépôt requis"
+  },
+  "terms.p12.li5": {
+    "en": "The payment schedule",
+    "fr": "L'échéancier de paiement"
+  },
+  "terms.p12.li6": {
+    "en": "Included revisions",
+    "fr": "Les révisions incluses"
+  },
+  "terms.p12.li7": {
+    "en": "Client content responsibilities",
+    "fr": "Les responsabilités du client en matière de contenu"
+  },
+  "terms.p12.li8": {
+    "en": "Estimated project dates",
+    "fr": "Les dates estimées du projet"
+  },
+  "terms.p12.li9": {
+    "en": "Third-party costs",
+    "fr": "Les coûts de tiers"
+  },
+  "terms.p12.li10": {
+    "en": "Website ownership terms",
+    "fr": "Les conditions de propriété du site web"
+  },
+  "terms.p12.li11": {
+    "en": "Cancellation terms",
+    "fr": "Les conditions d'annulation"
+  },
+  "terms.p12.li12": {
+    "en": "The selected Website Care Plan, if any",
+    "fr": "Le forfait d'entretien de site web sélectionné, le cas échéant"
+  },
+  "terms.p12.li13": {
+    "en": "Any project-specific exclusions or limitations",
+    "fr": "Toute exclusion ou limitation propre au projet"
+  },
+  "terms.p.12.4": {
+    "en": "General descriptions displayed on the Chezmaxo website do not automatically become project deliverables unless they are included in the client's accepted proposal or agreement.",
+    "fr": "Les descriptions générales affichées sur le site web de Chezmaxo ne deviennent pas automatiquement des livrables de projet, à moins qu'elles ne soient incluses dans la proposition ou l'entente acceptée du client."
+  },
+  "terms.h2.13": {
+    "en": "13. Incorporation of Related Terms",
+    "fr": "13. Intégration des conditions connexes"
+  },
+  "terms.p.13.1": {
+    "en": "Where applicable, the following documents form part of the agreement between Chezmaxo and the client:",
+    "fr": "Le cas échéant, les documents suivants font partie de l'entente entre Chezmaxo et le client :"
+  },
+  "terms.p13.li1": {
+    "en": "The signed or electronically accepted client service agreement",
+    "fr": "L'entente de service client signée ou acceptée électroniquement"
+  },
+  "terms.p13.li2": {
+    "en": "The accepted proposal, quotation or statement of work",
+    "fr": "La proposition, le devis ou l'énoncé de travaux accepté"
+  },
+  "terms.p13.li3": {
+    "en": "The Website Care Plan Terms",
+    "fr": "Les conditions du forfait d'entretien de site web"
+  },
+  "terms.p13.li4": {
+    "en": "These Terms of Service",
+    "fr": "Les présentes conditions d'utilisation"
+  },
+  "terms.p13.li5": {
+    "en": "The Chezmaxo Privacy Policy",
+    "fr": "La politique de confidentialité de Chezmaxo"
+  },
+  "terms.p.13.2": {
+    "en": "Before the client accepts an agreement, Chezmaxo will provide the client with the applicable documents or clearly identify where they may be reviewed and saved.",
+    "fr": "Avant que le client n'accepte une entente, Chezmaxo lui fournira les documents applicables ou indiquera clairement où ils peuvent être consultés et conservés."
+  },
+  "terms.p.13.3": {
+    "en": "A link to external terms should not be hidden or presented only after the client has accepted or paid.",
+    "fr": "Un lien vers des conditions externes ne devrait pas être caché ou présenté seulement après que le client ait accepté ou payé."
+  },
+  "terms.h2.14": {
+    "en": "14. Order of Priority",
+    "fr": "14. Ordre de priorité"
+  },
+  "terms.p.14.1": {
+    "en": "If there is a conflict between applicable documents, the following order of priority applies:",
+    "fr": "En cas de conflit entre les documents applicables, l'ordre de priorité suivant s'applique :"
+  },
+  "terms.p14.li1": {
+    "en": "A signed client service agreement",
+    "fr": "Une entente de service client signée"
+  },
+  "terms.p14.li2": {
+    "en": "An accepted proposal, quotation or statement of work",
+    "fr": "Une proposition, un devis ou un énoncé de travaux accepté"
+  },
+  "terms.p14.li3": {
+    "en": "The Website Care Plan Terms, where a Care Plan was purchased",
+    "fr": "Les conditions du forfait d'entretien de site web, lorsqu'un forfait a été acheté"
+  },
+  "terms.p14.li4": {
+    "en": "These Terms of Service",
+    "fr": "Les présentes conditions d'utilisation"
+  },
+  "terms.p14.li5": {
+    "en": "General marketing or informational content displayed on the Chezmaxo website",
+    "fr": "Le contenu marketing ou informatif général affiché sur le site web de Chezmaxo"
+  },
+  "terms.p.14.2": {
+    "en": "A more specific written provision takes priority over a general provision addressing the same subject.",
+    "fr": "Une disposition écrite plus précise a préséance sur une disposition générale traitant du même sujet."
+  },
+  "terms.h2.15": {
+    "en": "15. Electronic Acceptance",
+    "fr": "15. Acceptation électronique"
+  },
+  "terms.p.15.1": {
+    "en": "The client may accept an agreement by:",
+    "fr": "Le client peut accepter une entente :"
+  },
+  "terms.p15.li1": {
+    "en": "Signing it electronically or physically",
+    "fr": "En la signant électroniquement ou physiquement"
+  },
+  "terms.p15.li2": {
+    "en": "Clicking a clearly labelled acceptance button or checkbox",
+    "fr": "En cliquant sur un bouton ou une case d'acceptation clairement identifié"
+  },
+  "terms.p15.li3": {
+    "en": "Confirming acceptance by email",
+    "fr": "En confirmant son acceptation par courriel"
+  },
+  "terms.p15.li4": {
+    "en": "Paying an invoice that clearly states that payment constitutes acceptance",
+    "fr": "En payant une facture qui indique clairement que le paiement constitue une acceptation"
+  },
+  "terms.p15.li5": {
+    "en": "Using another written method agreed to by the parties",
+    "fr": "En utilisant une autre méthode écrite convenue par les parties"
+  },
+  "terms.p.15.2": {
+    "en": "Before acceptance, the client must be given a reasonable opportunity to review and retain the applicable agreement and related terms.",
+    "fr": "Avant l'acceptation, le client doit avoir une occasion raisonnable d'examiner et de conserver l'entente applicable et les conditions connexes."
+  },
+  "terms.p.15.3": {
+    "en": "The acceptance record should identify:",
+    "fr": "Le registre d'acceptation devrait indiquer :"
+  },
+  "terms.p15.li6": {
+    "en": "The client",
+    "fr": "Le client"
+  },
+  "terms.p15.li7": {
+    "en": "The applicable agreement or proposal",
+    "fr": "L'entente ou la proposition applicable"
+  },
+  "terms.p15.li8": {
+    "en": "The date of acceptance",
+    "fr": "La date d'acceptation"
+  },
+  "terms.p15.li9": {
+    "en": "The selected language",
+    "fr": "La langue sélectionnée"
+  },
+  "terms.p15.li10": {
+    "en": "The selected services or Care Plan",
+    "fr": "Les services ou le forfait d'entretien sélectionnés"
+  },
+  "terms.p15.li11": {
+    "en": "The version of the applicable terms that was accepted",
+    "fr": "La version des conditions applicables qui a été acceptée"
+  },
+  "terms.h2.16": {
+    "en": "16. Changes to Active Client Agreements",
+    "fr": "16. Modifications aux ententes clients actives"
+  },
+  "terms.p.16.1": {
+    "en": "Changes to general website information do not modify a previously accepted client agreement.",
+    "fr": "Les modifications apportées aux renseignements généraux du site web ne modifient pas une entente client déjà acceptée."
+  },
+  "terms.p.16.2": {
+    "en": "Chezmaxo may update these Terms of Service from time to time, but material changes affecting an active paid service will be communicated to the affected client before taking effect when required by applicable law.",
+    "fr": "Chezmaxo peut mettre à jour les présentes conditions d'utilisation de temps à autre, mais les changements importants touchant un service payant actif seront communiqués au client concerné avant leur entrée en vigueur lorsque la loi applicable l'exige."
+  },
+  "terms.p.16.3": {
+    "en": "A material change may include:",
+    "fr": "Un changement important peut inclure :"
+  },
+  "terms.p16.li1": {
+    "en": "A price increase",
+    "fr": "Une augmentation de prix"
+  },
+  "terms.p16.li2": {
+    "en": "A reduction in included services",
+    "fr": "Une réduction des services inclus"
+  },
+  "terms.p16.li3": {
+    "en": "A new client obligation",
+    "fr": "Une nouvelle obligation du client"
+  },
+  "terms.p16.li4": {
+    "en": "A change to cancellation rights",
+    "fr": "Un changement aux droits d'annulation"
+  },
+  "terms.p16.li5": {
+    "en": "A change that materially affects how services are delivered",
+    "fr": "Un changement qui affecte de manière importante la façon dont les services sont livrés"
+  },
+  "terms.p.16.4": {
+    "en": "The notice will describe the change, its effective date and any cancellation or refusal rights available to the client.",
+    "fr": "L'avis décrira le changement, sa date d'entrée en vigueur et tout droit d'annulation ou de refus offert au client."
+  },
+  "terms.p.16.5": {
+    "en": "No change will retroactively alter services already paid for or work already completed unless the client expressly agrees or applicable law requires otherwise.",
+    "fr": "Aucun changement ne modifiera rétroactivement les services déjà payés ou le travail déjà complété, à moins que le client n'y consente expressément ou que la loi applicable l'exige autrement."
+  },
+  "terms.h2.17": {
+    "en": "17. Termination",
+    "fr": "17. Résiliation"
+  },
+  "terms.p.17": {
     "en": "Either party may end a service arrangement according to the terms outlined in the relevant client agreement or care plan terms.",
     "fr": "Chaque partie peut mettre fin à une entente de service selon les modalités décrites dans l'entente client ou les conditions du forfait d'entretien applicables."
   },
-  "terms.h2.12": {
-    "en": "12. Governing Law",
-    "fr": "12. Loi applicable"
+  "terms.h2.18": {
+    "en": "18. Governing Law",
+    "fr": "18. Loi applicable"
   },
-  "terms.p.12": {
+  "terms.p.18": {
     "en": "These terms are governed by the laws applicable in the Province of Quebec and the federal laws of Canada applicable there.",
     "fr": "Les présentes conditions sont régies par les lois applicables dans la province de Québec et les lois fédérales du Canada qui s'y appliquent."
   },
-  "terms.h2.13": {
-    "en": "13. Contact Us",
-    "fr": "13. Nous contacter"
+  "terms.h2.19": {
+    "en": "19. Contact Us",
+    "fr": "19. Nous contacter"
   },
-  "terms.p.13": {
+  "terms.p.19": {
     "en": "Questions about these terms can be sent to marxanc@outlook.com.",
     "fr": "Les questions concernant ces conditions peuvent être envoyées à marxanc@outlook.com."
   },
