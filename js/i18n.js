@@ -1879,14 +1879,6 @@ const I18N = {
     "en": "Starter Care includes:",
     "fr": "Le forfait de base comprend :"
   },
-  "care.p2.s.li1": {
-    "en": "Basic website monitoring",
-    "fr": "Surveillance de base du site web"
-  },
-  "care.p2.s.li2": {
-    "en": "Basic website backups, where supported by the website and hosting environment",
-    "fr": "Sauvegardes de base du site web, lorsque le site et l'environnement d'hébergement le permettent"
-  },
   "care.p2.s.li3": {
     "en": "Email support",
     "fr": "Soutien par courriel"
@@ -2628,44 +2620,44 @@ const I18N = {
     "fr": "16. Sauvegardes"
   },
   "care.p16.1": {
-    "en": "Backups are performed only where they are supported by the client's website, hosting provider and selected plan.",
-    "fr": "Les sauvegardes sont effectuées uniquement lorsqu'elles sont prises en charge par le site web du client, le fournisseur d'hébergement et le forfait sélectionné."
+    "en": "Website backups are the responsibility of the client's hosting provider. Chezmaxo does not create, perform or verify backups, and backup availability depends entirely on the features included in the client's hosting plan.",
+    "fr": "Les sauvegardes du site web relèvent de la responsabilité du fournisseur d'hébergement du client. Chezmaxo ne crée, n'effectue et ne vérifie aucune sauvegarde, et la disponibilité des sauvegardes dépend entièrement des fonctionnalités incluses dans le forfait d'hébergement du client."
   },
   "care.p16.2": {
     "en": "Unless otherwise agreed in writing:",
     "fr": "Sauf entente écrite contraire :"
   },
   "care.p16.li1": {
-    "en": "Chezmaxo does not guarantee continuous or real-time backups;",
-    "fr": "Chezmaxo ne garantit pas des sauvegardes continues ou en temps réel;"
+    "en": "Chezmaxo does not guarantee that backups exist, are current or are recoverable;",
+    "fr": "Chezmaxo ne garantit pas l'existence, l'actualité ou la récupérabilité des sauvegardes;"
   },
   "care.p16.li2": {
-    "en": "Backup availability may depend on third-party systems;",
-    "fr": "La disponibilité des sauvegardes peut dépendre de systèmes tiers;"
-  },
-  "care.p16.li3": {
-    "en": "Backups may not contain the most recent website changes;",
-    "fr": "Les sauvegardes peuvent ne pas contenir les changements les plus récents du site web;"
-  },
-  "care.p16.li4": {
-    "en": "Not every backup can be guaranteed to restore successfully; and",
-    "fr": "La restauration réussie de chaque sauvegarde ne peut être garantie; et"
+    "en": "Backup availability depends entirely on the client's hosting provider and selected hosting plan;",
+    "fr": "La disponibilité des sauvegardes dépend entièrement du fournisseur d'hébergement du client et du forfait d'hébergement choisi;"
   },
   "care.p16.li5": {
-    "en": "Care Plan backups are not a substitute for the client's own record-retention practices.",
-    "fr": "Les sauvegardes du forfait d'entretien ne remplacent pas les propres pratiques de conservation des dossiers du client."
+    "en": "Care Plan services are not a substitute for the client's own record-retention practices.",
+    "fr": "Les services du forfait d'entretien ne remplacent pas les propres pratiques de conservation des dossiers du client."
   },
   "care.p16.3": {
-    "en": "Chezmaxo will make reasonable efforts to assist with restoration when a usable backup is available. Significant restoration or recovery work may be quoted separately.",
-    "fr": "Chezmaxo déploiera des efforts raisonnables pour aider à la restauration lorsqu'une sauvegarde utilisable est disponible. Un travail important de restauration ou de récupération peut faire l'objet d'un devis distinct."
+    "en": "If restoration is ever needed, Chezmaxo will make reasonable efforts to assist the client in locating and using a backup through the hosting provider's own tools, where available. This assistance is not a guarantee of a successful outcome, and significant restoration or recovery work may be quoted separately.",
+    "fr": "Si une restauration est un jour nécessaire, Chezmaxo déploiera des efforts raisonnables pour aider le client à localiser et à utiliser une sauvegarde à l'aide des outils du fournisseur d'hébergement, lorsque disponibles. Cette assistance ne garantit pas un résultat réussi, et un travail important de restauration ou de récupération peut faire l'objet d'un devis distinct."
+  },
+  "care.p16.4": {
+    "en": "Clients who want stronger backup guarantees should choose a hosting plan that includes automated backups, or ask Chezmaxo to recommend one.",
+    "fr": "Les clients qui souhaitent des garanties de sauvegarde plus solides devraient choisir un forfait d'hébergement incluant des sauvegardes automatisées, ou demander à Chezmaxo de leur en recommander un."
   },
   "care.h2.17": {
     "en": "17. Monitoring and Technical Fixes",
     "fr": "17. Surveillance et corrections techniques"
   },
   "care.p17.1": {
-    "en": "Basic monitoring is intended to help identify obvious website availability or operational problems. It does not guarantee uninterrupted availability, complete security or detection of every issue.",
-    "fr": "La surveillance de base vise à aider à repérer les problèmes évidents de disponibilité ou de fonctionnement du site web. Elle ne garantit pas une disponibilité ininterrompue, une sécurité complète ou la détection de tous les problèmes."
+    "en": "Chezmaxo does not run automated or continuous monitoring of client websites. Chezmaxo becomes aware of a technical problem when the client reports it, or, occasionally, when Chezmaxo happens to notice it while working on the site for another reason.",
+    "fr": "Chezmaxo n'exerce aucune surveillance automatisée ou continue des sites web des clients. Chezmaxo prend connaissance d'un problème technique lorsque le client le signale ou, à l'occasion, lorsque Chezmaxo le remarque en travaillant sur le site pour une autre raison."
+  },
+  "care.p17.1b": {
+    "en": "Clients who want proactive uptime monitoring should use a dedicated monitoring service; Chezmaxo can recommend one on request.",
+    "fr": "Les clients qui souhaitent une surveillance proactive de la disponibilité de leur site devraient utiliser un service de surveillance dédié; Chezmaxo peut en recommander un sur demande."
   },
   "care.p17.2": {
     "en": "A minor technical fix is a limited correction to existing website functionality that can reasonably be completed within the plan's available time.",
