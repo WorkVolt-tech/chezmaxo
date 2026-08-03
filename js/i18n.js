@@ -84,8 +84,8 @@ const I18N = {
     "fr": "Conditions du forfait d'entretien"
   },
   "home.hero.badge": {
-    "en": "Website care plans starting at only $15/month",
-    "fr": "Forfaits d'entretien de site web à partir de seulement 15 $/mois"
+    "en": "Website care plans starting at only $25/month",
+    "fr": "Forfaits d'entretien de site web à partir de seulement 25 $/mois"
   },
   "home.hero.h1": {
     "en": "Professional Websites Made Simple.",
@@ -156,8 +156,8 @@ const I18N = {
     "fr": "Forfait"
   },
   "home.ticket.planv": {
-    "en": "Starter Care — $15/mo",
-    "fr": "Forfait de base — 15 $/mois"
+    "en": "Starter Care — $25/mo",
+    "fr": "Forfait de base — 25 $/mois"
   },
   "home.how.eyebrow": {
     "en": "How it works",
@@ -168,8 +168,8 @@ const I18N = {
     "fr": "Créé une fois. Entretenu chaque mois."
   },
   "home.how.p": {
-    "en": "Most agencies disappear after launch. We stick around — for as little as $15 a month — so your website keeps working as hard as you do.",
-    "fr": "La plupart des agences disparaissent après le lancement. Nous restons présents — pour aussi peu que 15 $ par mois — pour que votre site web travaille aussi fort que vous."
+    "en": "Most agencies disappear after launch. We stick around — for as little as $25 a month — so your website keeps working as hard as you do.",
+    "fr": "La plupart des agences disparaissent après le lancement. Nous restons présents — pour aussi peu que 25 $ par mois — pour que votre site web travaille aussi fort que vous."
   },
   "home.how.c1h": {
     "en": "1. We design your site",
@@ -192,8 +192,8 @@ const I18N = {
     "fr": "3. Nous le maintenons en marche"
   },
   "home.how.c3p": {
-    "en": "With a care plan starting at $15/month, we monitor, back up, and make small updates so your website stays current and reliable.",
-    "fr": "Avec un forfait d'entretien à partir de 15 $/mois, nous surveillons, sauvegardons et effectuons de petites mises à jour pour que votre site reste à jour et fiable."
+    "en": "With a care plan starting at $25/month, we handle small updates, technical fixes, and fast support so your website stays current and reliable.",
+    "fr": "Avec un forfait d'entretien à partir de 25 $/mois, nous nous occupons des petites mises à jour, des corrections techniques et d'un soutien rapide pour que votre site reste à jour et fiable."
   },
   "home.design.eyebrow": {
     "en": "Website design",
@@ -312,8 +312,8 @@ const I18N = {
     "fr": "Concentrez-vous sur vos clients. Nous veillons sur le site web."
   },
   "home.mgmt.p": {
-    "en": "Once your site is live, our care plans handle the technical side — small updates, minor fixes, and fast, friendly support — starting at just $15 a month.",
-    "fr": "Une fois votre site en ligne, nos forfaits d'entretien s'occupent du côté technique — petites mises à jour, corrections mineures et soutien rapide et amical — à partir de seulement 15 $ par mois."
+    "en": "Once your site is live, our care plans handle the technical side — small updates, minor fixes, and fast, friendly support — starting at just $25 a month.",
+    "fr": "Une fois votre site en ligne, nos forfaits d'entretien s'occupent du côté technique — petites mises à jour, corrections mineures et soutien rapide et amical — à partir de seulement 25 $ par mois."
   },
   "home.mgmt.li1": {
     "en": "Fast turnaround on small updates",
@@ -364,8 +364,8 @@ const I18N = {
     "fr": "Petites corrections techniques"
   },
   "home.plan.starter.f3": {
-    "en": "One small update / 3 months",
-    "fr": "Une petite mise à jour / 3 mois"
+    "en": "Up to 30 minutes of work monthly",
+    "fr": "Jusqu'à 30 minutes de travail par mois"
   },
   "common.seedetails": {
     "en": "See Full Details",
@@ -387,13 +387,9 @@ const I18N = {
     "en": "Everything in Starter Care",
     "fr": "Tout ce qui est inclus dans le forfait de base"
   },
-  "home.plan.monthly.f2": {
-    "en": "One small update / month",
-    "fr": "Une petite mise à jour / mois"
-  },
   "home.plan.monthly.f3": {
-    "en": "Up to 45 minutes of work monthly",
-    "fr": "Jusqu'à 45 minutes de travail par mois"
+    "en": "Up to 1 hour 15 minutes of work monthly",
+    "fr": "Jusqu'à 1 heure 15 minutes de travail par mois"
   },
   "plan.business.name": {
     "en": "Business Care",
@@ -408,8 +404,8 @@ const I18N = {
     "fr": "Tout ce qui est inclus dans le soutien mensuel"
   },
   "home.plan.business.f2": {
-    "en": "Up to 2 hours of work monthly",
-    "fr": "Jusqu'à 2 heures de travail par mois"
+    "en": "Up to 3 hours of work monthly",
+    "fr": "Jusqu'à 3 heures de travail par mois"
   },
   "home.plan.business.f3": {
     "en": "Priority, faster turnaround",
@@ -464,16 +460,16 @@ const I18N = {
     "fr": "Ce que disent les propriétaires d'entreprise."
   },
   "home.testi.1": {
-    "en": "“I never have to think about my website anymore. If something needs changing, I send a quick message and it's handled. Worth every penny of the $30 plan.”",
-    "fr": "« Je n'ai plus jamais à penser à mon site web. Si quelque chose doit changer, j'envoie un message rapide et c'est réglé. Ça vaut chaque sou du forfait à 30 $. »"
+    "en": "“I never have to think about my website anymore. If something needs changing, I send a quick message and it's handled. Worth every penny of the $50 plan.”",
+    "fr": "« Je n'ai plus jamais à penser à mon site web. Si quelque chose doit changer, j'envoie un message rapide et c'est réglé. Ça vaut chaque sou du forfait à 50 $. »"
   },
   "home.testi.1biz": {
     "en": "Owner, Precision Home Repairs",
     "fr": "Propriétaire, Précision Rénovations"
   },
   "home.testi.2": {
-    "en": "“They built our site fast and it actually looks like a real business, not a template. The $15 plan keeps it running without me lifting a finger.”",
-    "fr": "« Ils ont créé notre site rapidement et il ressemble vraiment à une entreprise sérieuse, pas à un modèle générique. Le forfait à 15 $ le garde fonctionnel sans que j'aie à lever le petit doigt. »"
+    "en": "“They built our site fast and it actually looks like a real business, not a template. The $25 plan keeps it running without me lifting a finger.”",
+    "fr": "« Ils ont créé notre site rapidement et il ressemble vraiment à une entreprise sérieuse, pas à un modèle générique. Le forfait à 25 $ le garde fonctionnel sans que j'aie à lever le petit doigt. »"
   },
   "home.testi.2biz": {
     "en": "Owner, The Fade Room Barbershop",
@@ -500,12 +496,12 @@ const I18N = {
     "fr": "Des réponses rapides avant de nous contacter."
   },
   "faq.q1": {
-    "en": "What's included in the $15 monthly plan?",
-    "fr": "Qu'est-ce qui est inclus dans le forfait mensuel de 15 $?"
+    "en": "What's included in the $25 monthly plan?",
+    "fr": "Qu'est-ce qui est inclus dans le forfait mensuel de 25 $?"
   },
   "faq.a1": {
-    "en": "Email support, minor technical fixes, and one very small content update every three months. It's built for websites that mostly just need to stay healthy and online.",
-    "fr": "Soutien par courriel, petites corrections techniques et une très petite mise à jour de contenu tous les trois mois. Conçu pour les sites qui doivent surtout rester fonctionnels et en ligne."
+    "en": "Email support, minor technical fixes, and up to 30 minutes of website work every month. It's built for websites that mostly just need to stay healthy and online.",
+    "fr": "Soutien par courriel, petites corrections techniques et jusqu'à 30 minutes de travail sur le site chaque mois. Conçu pour les sites qui doivent surtout rester fonctionnels et en ligne."
   },
   "faq.q4": {
     "en": "What counts as a small update?",
@@ -624,8 +620,8 @@ const I18N = {
     "fr": "Vous ne devriez pas avoir besoin d'être développeur web pour gérer votre site."
   },
   "services.mgmt.p": {
-    "en": "Once your site is live, our care plans take the technical maintenance off your plate — starting at just $15 a month.",
-    "fr": "Une fois votre site en ligne, nos forfaits d'entretien s'occupent de la maintenance technique — à partir de seulement 15 $ par mois."
+    "en": "Once your site is live, our care plans take the technical maintenance off your plate — starting at just $25 a month.",
+    "fr": "Une fois votre site en ligne, nos forfaits d'entretien s'occupent de la maintenance technique — à partir de seulement 25 $ par mois."
   },
   "services.m1h": {
     "en": "Fast response time",
@@ -796,8 +792,8 @@ const I18N = {
     "fr": "2 mois gratuits"
   },
   "pricing.starter.save": {
-    "en": "Save $30/year",
-    "fr": "Économisez 30 $/année"
+    "en": "Save $50/year",
+    "fr": "Économisez 50 $/année"
   },
   "pricing.starter.desc": {
     "en": "For websites that just need to stay healthy, secure, and online.",
@@ -812,16 +808,16 @@ const I18N = {
     "fr": "Petites corrections techniques"
   },
   "pricing.starter.f5": {
-    "en": "One very small content update every 3 months",
-    "fr": "Une très petite mise à jour de contenu tous les 3 mois"
+    "en": "Up to 30 minutes of website work per month",
+    "fr": "Jusqu'à 30 minutes de travail sur le site par mois"
   },
   "pricing.starter.f6": {
     "en": "Standard response time",
     "fr": "Délai de réponse standard"
   },
   "common.norollover": {
-    "en": "Unused updates do not roll over",
-    "fr": "Les mises à jour non utilisées ne sont pas reportées"
+    "en": "Unused time does not roll over",
+    "fr": "Le temps non utilisé n'est pas reporté"
   },
   "pricing.starter.choose": {
     "en": "Choose Starter Care",
@@ -832,8 +828,8 @@ const I18N = {
     "fr": "Aucun contrat à long terme — annulez en tout temps."
   },
   "pricing.monthly.save": {
-    "en": "Save $60/year",
-    "fr": "Économisez 60 $/année"
+    "en": "Save $100/year",
+    "fr": "Économisez 100 $/année"
   },
   "pricing.monthly.desc": {
     "en": "For businesses whose website details change on a regular basis.",
@@ -860,8 +856,8 @@ const I18N = {
     "fr": "Notre forfait le plus populaire pour les petites entreprises actives."
   },
   "pricing.business.save": {
-    "en": "Save $160/year",
-    "fr": "Économisez 160 $/année"
+    "en": "Save $200/year",
+    "fr": "Économisez 200 $/année"
   },
   "pricing.business.desc": {
     "en": "For growing businesses that want faster turnaround and more monthly work time.",
@@ -1040,8 +1036,8 @@ const I18N = {
     "fr": "Lancement et soutien continu"
   },
   "how.s5p": {
-    "en": "We connect your domain, launch your website, and set you up with a care plan starting at $15/month — so support and small updates are handled going forward.",
-    "fr": "Nous connectons votre domaine, lançons votre site web et vous inscrivons à un forfait d'entretien à partir de 15 $/mois — pour que le soutien et les petites mises à jour soient pris en charge par la suite."
+    "en": "We connect your domain, launch your website, and set you up with a care plan starting at $25/month — so support and small updates are handled going forward.",
+    "fr": "Nous connectons votre domaine, lançons votre site web et vous inscrivons à un forfait d'entretien à partir de 25 $/mois — pour que le soutien et les petites mises à jour soient pris en charge par la suite."
   },
   "how.cta.h2": {
     "en": "Ready to start with a free consultation?",
@@ -1220,8 +1216,8 @@ const I18N = {
     "fr": "Tarifs abordables"
   },
   "about.p2p": {
-    "en": "Website plans priced for real small-business budgets, starting at just $15/month.",
-    "fr": "Des forfaits à des prix adaptés aux budgets réels des petites entreprises, à partir de seulement 15 $/mois."
+    "en": "Website plans priced for real small-business budgets, starting at just $25/month.",
+    "fr": "Des forfaits à des prix adaptés aux budgets réels des petites entreprises, à partir de seulement 25 $/mois."
   },
   "about.p3h": {
     "en": "Reliable support",
@@ -1848,16 +1844,16 @@ const I18N = {
     "fr": "Les présentes conditions s'appliquent aux forfaits d'entretien de site web suivants :"
   },
   "care.p1.li1": {
-    "en": "Starter Care — $15 per month",
-    "fr": "Forfait de base — 15 $ par mois"
+    "en": "Starter Care — $25 per month",
+    "fr": "Forfait de base — 25 $ par mois"
   },
   "care.p1.li2": {
-    "en": "Monthly Support — $30 per month",
-    "fr": "Soutien mensuel — 30 $ par mois"
+    "en": "Monthly Support — $50 per month",
+    "fr": "Soutien mensuel — 50 $ par mois"
   },
   "care.p1.li3": {
-    "en": "Business Care — $80 per month",
-    "fr": "Forfait affaires — 80 $ par mois"
+    "en": "Business Care — $100 per month",
+    "fr": "Forfait affaires — 100 $ par mois"
   },
   "care.p1b": {
     "en": "All prices are in Canadian dollars unless otherwise stated. Applicable taxes may be added where required.",
@@ -1872,8 +1868,8 @@ const I18N = {
     "fr": "2. Services inclus"
   },
   "care.h3.starter": {
-    "en": "Starter Care — $15 per month",
-    "fr": "Forfait de base — 15 $ par mois"
+    "en": "Starter Care — $25 per month",
+    "fr": "Forfait de base — 25 $ par mois"
   },
   "care.p2.starter.intro": {
     "en": "Starter Care includes:",
@@ -1887,65 +1883,29 @@ const I18N = {
     "en": "Minor technical fixes",
     "fr": "Petites corrections techniques"
   },
-  "care.p2.s.li5": {
-    "en": "One very small content update every three months",
-    "fr": "Une très petite mise à jour de contenu tous les trois mois"
+  "care.p2.s.li7": {
+    "en": "Up to 30 minutes of website work per month",
+    "fr": "Jusqu'à 30 minutes de travail sur le site par mois"
   },
   "care.p2.s.li6": {
     "en": "Standard response and turnaround time",
     "fr": "Délai de réponse et de traitement standard"
   },
-  "care.p2.s.small": {
-    "en": "A very small content update generally means one simple change that can reasonably be completed within approximately 10 minutes.",
-    "fr": "Une très petite mise à jour de contenu signifie généralement un changement simple pouvant raisonnablement être effectué en environ 10 minutes."
-  },
-  "care.p2.s.examples": {
-    "en": "Examples include:",
-    "fr": "Exemples :"
-  },
-  "care.p2.s.ex1": {
-    "en": "Correcting a small amount of text",
-    "fr": "Corriger un court passage de texte"
-  },
-  "care.p2.s.ex2": {
-    "en": "Updating business hours",
-    "fr": "Mettre à jour les heures d'ouverture"
-  },
-  "care.p2.s.ex3": {
-    "en": "Changing a phone number or email address",
-    "fr": "Changer un numéro de téléphone ou une adresse courriel"
-  },
-  "care.p2.s.ex4": {
-    "en": "Replacing one existing image",
-    "fr": "Remplacer une image existante"
-  },
-  "care.p2.s.ex5": {
-    "en": "Updating one price",
-    "fr": "Mettre à jour un prix"
-  },
-  "care.p2.s.ex6": {
-    "en": "Adding or removing a brief announcement",
-    "fr": "Ajouter ou retirer une courte annonce"
-  },
   "care.p2.s.norollover": {
-    "en": "The included update does not accumulate and does not roll over if it is not used.",
-    "fr": "La mise à jour incluse ne s'accumule pas et n'est pas reportée si elle n'est pas utilisée."
+    "en": "Unused time does not accumulate and does not roll over to a future billing period.",
+    "fr": "Le temps non utilisé ne s'accumule pas et n'est pas reporté à une période de facturation future."
   },
   "care.h3.monthly": {
-    "en": "Monthly Support — $30 per month",
-    "fr": "Soutien mensuel — 30 $ par mois"
+    "en": "Monthly Support — $50 per month",
+    "fr": "Soutien mensuel — 50 $ par mois"
   },
   "care.p2.m.intro": {
     "en": "Monthly Support includes everything in Starter Care, plus:",
     "fr": "Le soutien mensuel comprend tout ce qui est inclus dans le forfait de base, plus :"
   },
-  "care.p2.m.li1": {
-    "en": "One small update per month",
-    "fr": "Une petite mise à jour par mois"
-  },
   "care.p2.m.li2": {
-    "en": "Up to 45 minutes of website work per month",
-    "fr": "Jusqu'à 45 minutes de travail sur le site par mois"
+    "en": "Up to 1 hour 15 minutes of website work per month",
+    "fr": "Jusqu'à 1 heure 15 minutes de travail sur le site par mois"
   },
   "care.p2.m.li3": {
     "en": "Content and image replacements within the existing website layout",
@@ -1955,21 +1915,17 @@ const I18N = {
     "en": "Typical turnaround within three to five business days",
     "fr": "Délai de traitement habituel de trois à cinq jours ouvrables"
   },
-  "care.p2.m.note": {
-    "en": "The monthly update and the included 45 minutes of work are not separate allowances. Together, they represent a maximum of 45 minutes of included website work per billing period.",
-    "fr": "La mise à jour mensuelle et les 45 minutes de travail incluses ne constituent pas des allocations distinctes. Ensemble, elles représentent un maximum de 45 minutes de travail inclus sur le site par période de facturation."
-  },
   "care.h3.business": {
-    "en": "Business Care — $80 per month",
-    "fr": "Forfait affaires — 80 $ par mois"
+    "en": "Business Care — $100 per month",
+    "fr": "Forfait affaires — 100 $ par mois"
   },
   "care.p2.b.intro": {
     "en": "Business Care includes everything in Monthly Support, plus:",
     "fr": "Le forfait affaires comprend tout ce qui est inclus dans le soutien mensuel, plus :"
   },
   "care.p2.b.li1": {
-    "en": "Up to 2 hours of website work per month",
-    "fr": "Jusqu'à 2 heures de travail sur le site par mois"
+    "en": "Up to 3 hours of website work per month",
+    "fr": "Jusqu'à 3 heures de travail sur le site par mois"
   },
   "care.p2.b.li2": {
     "en": "Priority support",
@@ -2496,20 +2452,20 @@ const I18N = {
     "fr": "13. Facturation et paiement"
   },
   "care.p13.1": {
-    "en": "Care Plans are billed monthly in advance using the payment method selected during signup or stated on the client's invoice.",
-    "fr": "Les forfaits d'entretien sont facturés mensuellement à l'avance selon le mode de paiement sélectionné lors de l'inscription ou indiqué sur la facture du client."
+    "en": "Care Plans are payable monthly or yearly in advance, depending on the billing cycle selected by the client.",
+    "fr": "Les forfaits d'entretien sont payables mensuellement ou annuellement à l'avance, selon le cycle de facturation choisi par le client."
+  },
+  "care.p13.1b": {
+    "en": "Chezmaxo does not store payment information or charge the client automatically. The client completes payment manually each billing period through the client portal, using PayPal, Zelle or Interac e-Transfer.",
+    "fr": "Chezmaxo ne conserve pas les renseignements de paiement et ne facture pas le client automatiquement. Le client effectue le paiement manuellement à chaque période de facturation via le portail client, par PayPal, Zelle ou virement Interac."
   },
   "care.p13.2": {
     "en": "Payment is due on the invoice date unless another due date is shown on the invoice or agreed to in writing.",
     "fr": "Le paiement est dû à la date de la facture, sauf si une autre échéance est indiquée sur la facture ou convenue par écrit."
   },
-  "care.p13.3": {
-    "en": "The client authorizes recurring monthly charges when enrolling in automatic billing.",
-    "fr": "Le client autorise des frais mensuels récurrents en s'inscrivant à la facturation automatique."
-  },
   "care.p13.4": {
-    "en": "If payment is declined, overdue or otherwise unsuccessful, Chezmaxo may pause new update and support requests or suspend Care Plan services, as described in Section 14.",
-    "fr": "Si le paiement est refusé, en retard ou autrement infructueux, Chezmaxo peut suspendre les nouvelles demandes de mise à jour et de soutien ou suspendre les services du forfait d'entretien, tel que décrit à la section 14."
+    "en": "If payment is not received for a billing period, Chezmaxo may pause new update and support requests or suspend Care Plan services, as described in Section 14.",
+    "fr": "Si le paiement n'est pas reçu pour une période de facturation, Chezmaxo peut suspendre les nouvelles demandes de mise à jour et de soutien ou suspendre les services du forfait d'entretien, tel que décrit à la section 14."
   },
   "care.h2.14": {
     "en": "14. Cancellation",
@@ -2980,8 +2936,8 @@ const I18N = {
     "fr": "Chezmaxo | Conception de sites web et forfaits d'entretien abordables pour PME"
   },
   "desc.home": {
-    "en": "Professional, affordable websites for small businesses, with website care plans starting at $15/month for ongoing management, maintenance, and support.",
-    "fr": "Des sites web professionnels et abordables pour les petites entreprises, avec des forfaits d'entretien à partir de 15 $/mois pour la gestion, la maintenance et le soutien continus."
+    "en": "Professional, affordable websites for small businesses, with website care plans starting at $25/month for ongoing management, maintenance, and support.",
+    "fr": "Des sites web professionnels et abordables pour les petites entreprises, avec des forfaits d'entretien à partir de 25 $/mois pour la gestion, la maintenance et le soutien continus."
   },
   "nav.home": {
     "en": "Home",
@@ -3032,12 +2988,12 @@ const I18N = {
     "fr": "Conception de sites sur mesure, gestion continue et améliorations pour petites entreprises — le tout chiffré clairement et approuvé avant le début des travaux."
   },
   "title.pricing": {
-    "en": "Pricing | Website Care Plans From $15/Month | Chezmaxo",
-    "fr": "Tarifs | Forfaits d'entretien à partir de 15 $/mois | Chezmaxo"
+    "en": "Pricing | Website Care Plans From $25/Month | Chezmaxo",
+    "fr": "Tarifs | Forfaits d'entretien à partir de 25 $/mois | Chezmaxo"
   },
   "desc.pricing": {
-    "en": "Website care plans starting at $15/month, plus clear starting prices for new website development. Simple, honest small-business website pricing.",
-    "fr": "Forfaits d'entretien à partir de 15 $/mois, ainsi que des prix de départ clairs pour le développement de nouveaux sites. Des tarifs simples et honnêtes pour petites entreprises."
+    "en": "Website care plans starting at $25/month, plus clear starting prices for new website development. Simple, honest small-business website pricing.",
+    "fr": "Forfaits d'entretien à partir de 25 $/mois, ainsi que des prix de départ clairs pour le développement de nouveaux sites. Des tarifs simples et honnêtes pour petites entreprises."
   },
   "title.how": {
     "en": "How It Works | Chezmaxo",
