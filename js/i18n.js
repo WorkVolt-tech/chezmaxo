@@ -2112,8 +2112,12 @@ const I18N = {
     "fr": "5. Soumission des demandes"
   },
   "care.p5.1": {
-    "en": "Support and update requests must be submitted by email to:",
-    "fr": "Les demandes de soutien et de mise à jour doivent être soumises par courriel à :"
+    "en": "Support and update requests should be submitted through the client portal. This is the preferred method and allows Chezmaxo to track and prioritize requests accurately.",
+    "fr": "Les demandes de soutien et de mise à jour devraient être soumises via le portail client. Il s'agit de la méthode privilégiée, qui permet à Chezmaxo de suivre et de prioriser les demandes avec précision."
+  },
+  "care.p5.1b": {
+    "en": "Email is also accepted and may be more convenient for requests involving large attachments or files. Requests may be sent to:",
+    "fr": "Le courriel est également accepté et peut être plus pratique pour les demandes impliquant des pièces jointes ou des fichiers volumineux. Les demandes peuvent être envoyées à :"
   },
   "care.p5.2": {
     "en": "Requests should include:",
