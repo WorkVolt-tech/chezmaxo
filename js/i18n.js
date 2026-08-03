@@ -1635,6 +1635,10 @@ const I18N = {
     "en": "Last updated: [DATE PLACEHOLDER]",
     "fr": "Dernière mise à jour : [DATE À REMPLACER]"
   },
+  "care.updated": {
+    "en": "Last updated: August 3, 2026",
+    "fr": "Dernière mise à jour : 3 août 2026"
+  },
   "legal.breadcrumb": {
     "en": "LEGAL — TEMPLATE",
     "fr": "JURIDIQUE — MODÈLE"
@@ -2966,10 +2970,6 @@ const I18N = {
   "care.p26.email": {
     "en": "Email:",
     "fr": "Courriel :"
-  },
-  "care.p26.address": {
-    "en": "Business address:",
-    "fr": "Adresse d'affaires :"
   },
   "care.p26.phone": {
     "en": "Telephone:",
