@@ -2019,6 +2019,10 @@ const I18N = {
     "en": "Chezmaxo will inform the client when a request is expected to exceed the included allowance.",
     "fr": "Chezmaxo informera le client lorsqu'une demande devrait dépasser l'allocation incluse."
   },
+  "care.p3.4": {
+    "en": "Related requests submitted separately may be grouped and treated as one request. Time spent reviewing messages, obtaining clarification, preparing content, performing the change, testing and communicating about the request counts toward the plan allowance.",
+    "fr": "Les demandes connexes soumises séparément peuvent être regroupées et traitées comme une seule demande. Le temps consacré à l'examen des messages, à l'obtention de précisions, à la préparation du contenu, à la réalisation du changement, aux tests et aux communications au sujet de la demande compte dans l'allocation du forfait."
+  },
   "care.h2.4": {
     "en": "4. Services Not Included",
     "fr": "4. Services non inclus"
@@ -2154,6 +2158,10 @@ const I18N = {
   "care.h2.6": {
     "en": "6. Response and Turnaround Times",
     "fr": "6. Délais de réponse et de traitement"
+  },
+  "care.p6.def": {
+    "en": "Response time means the time in which Chezmaxo normally acknowledges or reviews a request. Turnaround time means the estimated period required to complete eligible work after all content, information and access have been received.",
+    "fr": "Le délai de réponse désigne le délai dans lequel Chezmaxo accuse habituellement réception d'une demande ou l'examine. Le délai de traitement désigne la période estimée nécessaire pour compléter le travail admissible une fois que tout le contenu, les renseignements et l'accès requis ont été reçus."
   },
   "care.p6.intro": {
     "en": "The following turnaround times are service targets and not guarantees:",
@@ -2483,6 +2491,10 @@ const I18N = {
     "en": "Chezmaxo does not guarantee the performance, security, availability or continued operation of any third-party hosting or domain provider.",
     "fr": "Chezmaxo ne garantit pas la performance, la sécurité, la disponibilité ou le fonctionnement continu de tout fournisseur tiers d'hébergement ou de domaine."
   },
+  "care.p12.6": {
+    "en": "Assistance involving a third-party provider is limited to reasonable troubleshooting and communication. Chezmaxo cannot guarantee that the provider will resolve an issue or respond within a particular time.",
+    "fr": "L'assistance impliquant un fournisseur tiers se limite à un dépannage et à des communications raisonnables. Chezmaxo ne peut garantir que le fournisseur résoudra un problème ou répondra dans un délai particulier."
+  },
   "care.h2.13": {
     "en": "13. Billing and Payment",
     "fr": "13. Facturation et paiement"
@@ -2500,28 +2512,8 @@ const I18N = {
     "fr": "Le client autorise des frais mensuels récurrents en s'inscrivant à la facturation automatique."
   },
   "care.p13.4": {
-    "en": "If payment is declined, overdue or otherwise unsuccessful, Chezmaxo may:",
-    "fr": "Si le paiement est refusé, en retard ou autrement infructueux, Chezmaxo peut :"
-  },
-  "care.p13.li1": {
-    "en": "Pause new update and support requests;",
-    "fr": "Suspendre les nouvelles demandes de mise à jour et de soutien;"
-  },
-  "care.p13.li2": {
-    "en": "Suspend Care Plan services;",
-    "fr": "Suspendre les services du forfait d'entretien;"
-  },
-  "care.p13.li3": {
-    "en": "Remove services paid for directly by Chezmaxo; or",
-    "fr": "Retirer les services payés directement par Chezmaxo; ou"
-  },
-  "care.p13.li4": {
-    "en": "Cancel the Care Plan after providing reasonable notice.",
-    "fr": "Annuler le forfait d'entretien après un préavis raisonnable."
-  },
-  "care.p13.5": {
-    "en": "The client remains responsible for approved work and third-party costs incurred before suspension or cancellation.",
-    "fr": "Le client demeure responsable du travail approuvé et des coûts tiers engagés avant la suspension ou l'annulation."
+    "en": "If payment is declined, overdue or otherwise unsuccessful, Chezmaxo may pause new update and support requests or suspend Care Plan services, as described in Section 14.",
+    "fr": "Si le paiement est refusé, en retard ou autrement infructueux, Chezmaxo peut suspendre les nouvelles demandes de mise à jour et de soutien ou suspendre les services du forfait d'entretien, tel que décrit à la section 14."
   },
   "care.h2.14": {
     "en": "14. Cancellation",
@@ -2532,24 +2524,56 @@ const I18N = {
     "fr": "Les forfaits d'entretien fonctionnent sur une base mensuelle, sauf si une autre durée est indiquée dans l'entente de service du client."
   },
   "care.p14.2": {
-    "en": "A client may request cancellation by emailing marxanc@outlook.com before the next billing date.",
-    "fr": "Un client peut demander l'annulation en écrivant à marxanc@outlook.com avant la prochaine date de facturation."
-  },
-  "care.p14.3": {
-    "en": "Cancellation takes effect at the end of the client's current paid billing period unless the parties agree to an earlier date or applicable law requires otherwise.",
-    "fr": "L'annulation prend effet à la fin de la période de facturation payée en cours du client, sauf si les parties conviennent d'une date antérieure ou que la loi applicable l'exige autrement."
+    "en": "The client may request cancellation at any time by written notice to marxanc@outlook.com. Unless an earlier effective date is required by applicable law or agreed to by Chezmaxo, cancellation will take effect at the end of the current paid billing period.",
+    "fr": "Le client peut demander l'annulation en tout temps par avis écrit à marxanc@outlook.com. Sauf si une date d'entrée en vigueur antérieure est exigée par la loi applicable ou convenue par Chezmaxo, l'annulation prendra effet à la fin de la période de facturation payée en cours."
   },
   "care.p14.4": {
     "en": "The client will continue to receive the plan's regular services until the effective cancellation date, provided the account remains in good standing.",
     "fr": "Le client continuera de recevoir les services réguliers du forfait jusqu'à la date d'annulation effective, à condition que le compte demeure en règle."
   },
   "care.p14.5": {
-    "en": "Fees already paid for the current billing period are generally non-refundable, except where required by applicable law or where Chezmaxo agrees otherwise in writing.",
-    "fr": "Les frais déjà payés pour la période de facturation en cours sont généralement non remboursables, sauf si la loi applicable l'exige ou si Chezmaxo en convient autrement par écrit."
+    "en": "Amounts paid will be applied to services already provided, work completed, time reasonably reserved and approved expenses incurred. Any refund or outstanding balance will be determined under the applicable agreement and mandatory law.",
+    "fr": "Les montants payés seront appliqués aux services déjà rendus, au travail complété, au temps raisonnablement réservé et aux dépenses approuvées engagées. Tout remboursement ou solde impayé sera déterminé selon l'entente applicable et la loi d'ordre public."
   },
   "care.p14.6": {
     "en": "Cancellation of a Care Plan does not automatically cancel third-party products or subscriptions owned or billed directly to the client. The client remains responsible for cancelling those services.",
     "fr": "L'annulation d'un forfait d'entretien n'annule pas automatiquement les produits ou abonnements tiers appartenant au client ou facturés directement à celui-ci. Le client demeure responsable d'annuler ces services."
+  },
+  "care.h3.chezmaxocancel": {
+    "en": "Chezmaxo's Right to Suspend or End a Care Plan",
+    "fr": "Droit de Chezmaxo de suspendre ou de mettre fin à un forfait d'entretien"
+  },
+  "care.p14.7": {
+    "en": "Chezmaxo may immediately suspend services where reasonably necessary because of:",
+    "fr": "Chezmaxo peut suspendre immédiatement les services lorsque cela est raisonnablement nécessaire en raison :"
+  },
+  "care.p14.li1": {
+    "en": "Non-payment",
+    "fr": "D'un défaut de paiement"
+  },
+  "care.p14.li2": {
+    "en": "Security risks",
+    "fr": "De risques pour la sécurité"
+  },
+  "care.p14.li3": {
+    "en": "Illegal requests",
+    "fr": "De demandes illégales"
+  },
+  "care.p14.li4": {
+    "en": "Abusive behaviour",
+    "fr": "D'un comportement abusif"
+  },
+  "care.p14.li5": {
+    "en": "Missing required access",
+    "fr": "D'un accès requis manquant"
+  },
+  "care.p14.8": {
+    "en": "In other circumstances, Chezmaxo will provide reasonable written notice before ending an active Care Plan, subject to any notice period required by applicable law.",
+    "fr": "Dans les autres circonstances, Chezmaxo fournira un préavis écrit raisonnable avant de mettre fin à un forfait d'entretien actif, sous réserve de tout délai de préavis exigé par la loi applicable."
+  },
+  "care.p14.9": {
+    "en": "The client remains responsible for approved work and third-party costs incurred before suspension or cancellation.",
+    "fr": "Le client demeure responsable du travail approuvé et des coûts tiers engagés avant la suspension ou l'annulation."
   },
   "care.h2.15": {
     "en": "15. Client Responsibilities",
@@ -2644,6 +2668,10 @@ const I18N = {
     "fr": "La surveillance de base vise à aider à repérer les problèmes évidents de disponibilité ou de fonctionnement du site web. Elle ne garantit pas une disponibilité ininterrompue, une sécurité complète ou la détection de tous les problèmes."
   },
   "care.p17.2": {
+    "en": "A minor technical fix is a limited correction to existing website functionality that can reasonably be completed within the plan's available time.",
+    "fr": "Une petite correction technique est une correction limitée à une fonctionnalité existante du site web pouvant raisonnablement être réalisée dans le temps disponible au forfait."
+  },
+  "care.p17.2b": {
     "en": "Minor technical fixes generally cover small issues affecting an existing Chezmaxo-supported website.",
     "fr": "Les petites corrections techniques couvrent généralement des problèmes mineurs affectant un site web existant pris en charge par Chezmaxo."
   },
@@ -2810,6 +2838,10 @@ const I18N = {
   "care.p21.2": {
     "en": "Chezmaxo will use such information only as reasonably necessary to provide the requested services, administer the client relationship, process payments and comply with legal obligations.",
     "fr": "Chezmaxo n'utilisera ces renseignements que dans la mesure raisonnablement nécessaire pour fournir les services demandés, administrer la relation client, traiter les paiements et se conformer aux obligations légales."
+  },
+  "care.p21.2b": {
+    "en": "Chezmaxo maintains reasonable safeguards to protect confidential information and account credentials in its possession, and will remove access to client accounts once it is no longer needed for the services.",
+    "fr": "Chezmaxo maintient des mesures de protection raisonnables pour protéger les renseignements confidentiels et les identifiants de compte en sa possession, et retirera l'accès aux comptes du client dès qu'il n'est plus nécessaire à la prestation des services."
   },
   "care.p21.3": {
     "en": "The client should avoid sending passwords or sensitive personal information through insecure communication methods.",
