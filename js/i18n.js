@@ -1599,10 +1599,6 @@ const I18N = {
     "en": "OPEN",
     "fr": "OUVERT"
   },
-  "contact.ticket.phone": {
-    "en": "Phone",
-    "fr": "Téléphone"
-  },
   "contact.ticket.area": {
     "en": "Service area",
     "fr": "Zone desservie"
@@ -1732,8 +1728,8 @@ const I18N = {
     "fr": "9. Nous contacter"
   },
   "privacy.p.9": {
-    "en": "Questions about this policy can be sent to marxanc@outlook.com or 514-943-1535.",
-    "fr": "Les questions concernant cette politique peuvent être envoyées à marxanc@outlook.com ou 514-943-1535."
+    "en": "Questions about this policy can be sent to marxanc@outlook.com.",
+    "fr": "Les questions concernant cette politique peuvent être envoyées à marxanc@outlook.com."
   },
   "terms.h1": {
     "en": "Terms of Service",
@@ -3374,10 +3370,6 @@ const I18N = {
   "care.p26.email": {
     "en": "Email:",
     "fr": "Courriel :"
-  },
-  "care.p26.phone": {
-    "en": "Telephone:",
-    "fr": "Téléphone :"
   },
   "title.home": {
     "en": "Chezmaxo | Affordable Website Design & Care Plans for Small Businesses",
