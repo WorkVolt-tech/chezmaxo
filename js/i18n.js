@@ -120,20 +120,20 @@ const I18N = {
     "fr": "EN BONNE VOIE"
   },
   "home.ticket.row1": {
-    "en": "Uptime monitoring",
-    "fr": "Surveillance de disponibilité"
+    "en": "Update request",
+    "fr": "Demande de mise à jour"
   },
   "home.ticket.row1v": {
-    "en": "Passed",
-    "fr": "Réussi"
+    "en": "Completed",
+    "fr": "Complétée"
   },
   "home.ticket.row2": {
-    "en": "Backup completed",
-    "fr": "Sauvegarde effectuée"
+    "en": "Response time",
+    "fr": "Délai de réponse"
   },
   "home.ticket.row2v": {
-    "en": "This week",
-    "fr": "Cette semaine"
+    "en": "Same day",
+    "fr": "Le jour même"
   },
   "home.ticket.row3": {
     "en": "Business hours updated",
@@ -144,12 +144,12 @@ const I18N = {
     "fr": "Fait"
   },
   "home.ticket.row4": {
-    "en": "Security check",
-    "fr": "Vérification de sécurité"
+    "en": "Minor technical fix",
+    "fr": "Petite correction technique"
   },
   "home.ticket.row4v": {
-    "en": "Clear",
-    "fr": "Aucun problème"
+    "en": "Resolved",
+    "fr": "Résolu"
   },
   "home.ticket.plan": {
     "en": "Plan",
@@ -276,8 +276,8 @@ const I18N = {
     "fr": "Forfait de base"
   },
   "home.ticket3.r2": {
-    "en": "Monitoring & backups",
-    "fr": "Surveillance et sauvegardes"
+    "en": "Email support",
+    "fr": "Soutien par courriel"
   },
   "home.ticket3.included": {
     "en": "Included",
@@ -312,12 +312,12 @@ const I18N = {
     "fr": "Concentrez-vous sur vos clients. Nous veillons sur le site web."
   },
   "home.mgmt.p": {
-    "en": "Once your site is live, our care plans handle the technical side — monitoring, backups, and small updates like a phone number change or a new business hour — starting at just $15 a month.",
-    "fr": "Une fois votre site en ligne, nos forfaits d'entretien s'occupent du côté technique — surveillance, sauvegardes et petites mises à jour comme un changement de numéro de téléphone ou une nouvelle heure d'ouverture — à partir de seulement 15 $ par mois."
+    "en": "Once your site is live, our care plans handle the technical side — small updates, minor fixes, and fast, friendly support — starting at just $15 a month.",
+    "fr": "Une fois votre site en ligne, nos forfaits d'entretien s'occupent du côté technique — petites mises à jour, corrections mineures et soutien rapide et amical — à partir de seulement 15 $ par mois."
   },
   "home.mgmt.li1": {
-    "en": "Website monitoring & backups",
-    "fr": "Surveillance et sauvegardes du site"
+    "en": "Fast turnaround on small updates",
+    "fr": "Traitement rapide des petites mises à jour"
   },
   "home.mgmt.li2": {
     "en": "Small content & image updates",
@@ -352,12 +352,12 @@ const I18N = {
     "fr": "Forfait de base"
   },
   "home.plan.starter.desc": {
-    "en": "Basic monitoring, backups, and support for websites that just need to stay healthy.",
-    "fr": "Surveillance, sauvegardes et soutien de base pour les sites qui doivent simplement rester en bon état."
+    "en": "Email support and minor technical fixes for websites that just need to stay healthy.",
+    "fr": "Soutien par courriel et petites corrections techniques pour les sites qui doivent simplement rester en bon état."
   },
   "home.plan.starter.f1": {
-    "en": "Monitoring & backups",
-    "fr": "Surveillance et sauvegardes"
+    "en": "Email support",
+    "fr": "Soutien par courriel"
   },
   "home.plan.starter.f2": {
     "en": "Minor technical fixes",
@@ -504,8 +504,8 @@ const I18N = {
     "fr": "Qu'est-ce qui est inclus dans le forfait mensuel de 15 $?"
   },
   "faq.a1": {
-    "en": "Basic monitoring, basic backups, email support, minor technical fixes, and one very small content update every three months. It's built for websites that mostly just need to stay healthy and online.",
-    "fr": "Surveillance de base, sauvegardes de base, soutien par courriel, petites corrections techniques et une très petite mise à jour de contenu tous les trois mois. Conçu pour les sites qui doivent surtout rester fonctionnels et en ligne."
+    "en": "Email support, minor technical fixes, and one very small content update every three months. It's built for websites that mostly just need to stay healthy and online.",
+    "fr": "Soutien par courriel, petites corrections techniques et une très petite mise à jour de contenu tous les trois mois. Conçu pour les sites qui doivent surtout rester fonctionnels et en ligne."
   },
   "faq.q4": {
     "en": "What counts as a small update?",
@@ -628,20 +628,20 @@ const I18N = {
     "fr": "Une fois votre site en ligne, nos forfaits d'entretien s'occupent de la maintenance technique — à partir de seulement 15 $ par mois."
   },
   "services.m1h": {
-    "en": "Basic monitoring",
-    "fr": "Surveillance de base"
+    "en": "Fast response time",
+    "fr": "Délai de réponse rapide"
   },
   "services.m1p": {
-    "en": "We keep an eye on your website so problems get caught early.",
-    "fr": "Nous surveillons votre site pour détecter les problèmes rapidement."
+    "en": "Reach out and hear back quickly — not days later.",
+    "fr": "Contactez-nous et recevez une réponse rapidement — pas des jours plus tard."
   },
   "services.m2h": {
-    "en": "Website backups",
-    "fr": "Sauvegardes du site"
+    "en": "Hosting & domain guidance",
+    "fr": "Conseils d'hébergement et de domaine"
   },
   "services.m2p": {
-    "en": "Regular backups help protect your site's content and design.",
-    "fr": "Des sauvegardes régulières protègent le contenu et le design de votre site."
+    "en": "We help you choose, set up, and manage the hosting and domain behind your site.",
+    "fr": "Nous vous aidons à choisir, configurer et gérer l'hébergement et le domaine de votre site."
   },
   "services.m3h": {
     "en": "Minor technical fixes",
@@ -780,8 +780,8 @@ const I18N = {
     "fr": "Choisissez le forfait qui correspond à la fréquence de changement de votre site."
   },
   "pricing.plans.p": {
-    "en": "Every plan includes monitoring, backups, and support. The difference is how much update time is included each month.",
-    "fr": "Chaque forfait comprend la surveillance, les sauvegardes et le soutien. La différence réside dans le temps de mise à jour inclus chaque mois."
+    "en": "Every plan includes support and technical fixes. The difference is how much update time is included each month.",
+    "fr": "Chaque forfait comprend le soutien et les corrections techniques. La différence réside dans le temps de mise à jour inclus chaque mois."
   },
   "pricing.cycle.monthly": {
     "en": "Monthly",
@@ -804,16 +804,12 @@ const I18N = {
     "fr": "Pour les sites qui doivent simplement rester en bon état, sécurisés et en ligne."
   },
   "pricing.starter.f1": {
-    "en": "Basic website monitoring",
-    "fr": "Surveillance de base du site"
-  },
-  "pricing.starter.f2": {
-    "en": "Basic backups",
-    "fr": "Sauvegardes de base"
-  },
-  "pricing.starter.f3": {
     "en": "Email support",
     "fr": "Soutien par courriel"
+  },
+  "pricing.starter.f2": {
+    "en": "Minor technical fixes",
+    "fr": "Petites corrections techniques"
   },
   "pricing.starter.f5": {
     "en": "One very small content update every 3 months",
@@ -908,8 +904,8 @@ const I18N = {
     "fr": "Veuillez noter"
   },
   "pricing.notice.text": {
-    "en": "Care plans cover maintenance, monitoring, support, and small updates. They do not include redesigns, new pages, advanced features, or unlimited changes. Larger work is always quoted and approved separately — see Website Upgrades.",
-    "fr": "Les forfaits d'entretien couvrent la maintenance, la surveillance, le soutien et les petites mises à jour. Ils n'incluent pas les refontes, les nouvelles pages, les fonctionnalités avancées ou les changements illimités. Les travaux plus importants sont toujours chiffrés et approuvés séparément — voir Améliorations de site."
+    "en": "Care plans cover support, technical fixes, and small updates. They do not include redesigns, new pages, advanced features, or unlimited changes. Larger work is always quoted and approved separately — see Website Upgrades.",
+    "fr": "Les forfaits d'entretien couvrent le soutien, les corrections techniques et les petites mises à jour. Ils n'incluent pas les refontes, les nouvelles pages, les fonctionnalités avancées ou les changements illimités. Les travaux plus importants sont toujours chiffrés et approuvés séparément — voir Améliorations de site."
   },
   "pricing.dev.eyebrow": {
     "en": "Website development",
@@ -1044,8 +1040,8 @@ const I18N = {
     "fr": "Lancement et soutien continu"
   },
   "how.s5p": {
-    "en": "We connect your domain, launch your website, and set you up with a care plan starting at $15/month — so monitoring, backups, and small updates are handled going forward.",
-    "fr": "Nous connectons votre domaine, lançons votre site web et vous inscrivons à un forfait d'entretien à partir de 15 $/mois — pour que la surveillance, les sauvegardes et les petites mises à jour soient prises en charge par la suite."
+    "en": "We connect your domain, launch your website, and set you up with a care plan starting at $15/month — so support and small updates are handled going forward.",
+    "fr": "Nous connectons votre domaine, lançons votre site web et vous inscrivons à un forfait d'entretien à partir de 15 $/mois — pour que le soutien et les petites mises à jour soient pris en charge par la suite."
   },
   "how.cta.h2": {
     "en": "Ready to start with a free consultation?",
@@ -1336,8 +1332,8 @@ const I18N = {
     "fr": "Mon site actuel est sur WordPress ou Wix — pouvez-vous le gérer?"
   },
   "faq.a8b": {
-    "en": "WordPress: yes. We can take over management directly through your hosting or the WordPress dashboard and handle updates, backups, security, and content changes. Wix: no, we're not able to manage a website while it stays on Wix. Wix is a closed platform — it doesn't allow a site's code or files to be exported or accessed from outside its own editor, so there's no way for us to monitor, back up, or maintain it the way our care plans work. What we can do is rebuild your Wix site as a proper website (usually on WordPress or a custom-built site), matching your existing pages, content, and design as closely as you'd like. Once it's rebuilt outside of Wix, it's fully manageable under any of our care plans going forward.",
-    "fr": "WordPress : oui. Nous pouvons prendre en charge la gestion directement via votre hébergement ou le tableau de bord WordPress et gérer les mises à jour, sauvegardes, sécurité et changements de contenu. Wix : non, nous ne sommes pas en mesure de gérer un site web tant qu'il reste sur Wix. Wix est une plateforme fermée — elle ne permet pas d'exporter ou d'accéder au code ou aux fichiers d'un site depuis l'extérieur de son propre éditeur, donc il n'y a aucun moyen pour nous de le surveiller, le sauvegarder ou l'entretenir de la façon dont fonctionnent nos forfaits. Ce que nous pouvons faire, c'est reconstruire votre site Wix en un vrai site web (habituellement sur WordPress ou un site personnalisé), en reproduisant vos pages, votre contenu et votre design d'aussi près que vous le souhaitez. Une fois reconstruit hors de Wix, il devient entièrement gérable sous n'importe lequel de nos forfaits d'entretien."
+    "en": "WordPress: yes. We can take over management directly through your hosting or the WordPress dashboard and handle updates, security, and content changes. Wix: no, we're not able to manage a website while it stays on Wix. Wix is a closed platform — it doesn't allow a site's code or files to be exported or accessed from outside its own editor, so there's no way for us to update or maintain it directly. What we can do is rebuild your Wix site as a proper website (usually on WordPress or a custom-built site), matching your existing pages, content, and design as closely as you'd like. Once it's rebuilt outside of Wix, it's fully manageable under any of our care plans going forward.",
+    "fr": "WordPress : oui. Nous pouvons prendre en charge la gestion directement via votre hébergement ou le tableau de bord WordPress et gérer les mises à jour, la sécurité et les changements de contenu. Wix : non, nous ne sommes pas en mesure de gérer un site web tant qu'il reste sur Wix. Wix est une plateforme fermée — elle ne permet pas d'exporter ou d'accéder au code ou aux fichiers d'un site depuis l'extérieur de son propre éditeur, donc il n'y a aucun moyen pour nous de le mettre à jour ou de l'entretenir directement. Ce que nous pouvons faire, c'est reconstruire votre site Wix en un vrai site web (habituellement sur WordPress ou un site personnalisé), en reproduisant vos pages, votre contenu et votre design d'aussi près que vous le souhaitez. Une fois reconstruit hors de Wix, il devient entièrement gérable sous n'importe lequel de nos forfaits d'entretien."
   },
   "faq.q9": {
     "en": "Do I own my website?",
