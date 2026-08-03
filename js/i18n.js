@@ -1899,6 +1899,10 @@ const I18N = {
     "en": "The client will not be responsible to the extent that a claim was caused directly by Chezmaxo's own unlawful conduct, intentional fault or gross fault.",
     "fr": "Le client ne sera pas responsable dans la mesure où une réclamation a été directement causée par la conduite illégale, la faute intentionnelle ou la faute lourde de Chezmaxo elle-même."
   },
+  "terms.p.9.6b": {
+    "en": "Where a claim is covered by this section, the client will reimburse Chezmaxo's reasonable legal defense costs as they are incurred, in addition to any damages or settlement amount for which the client is responsible. Chezmaxo will not settle a covered claim in a way that creates a payment obligation for the client without the client's prior approval, and the client will not unreasonably withhold that approval where the proposed settlement is reasonable in the circumstances.",
+    "fr": "Lorsqu'une réclamation est couverte par la présente section, le client remboursera les frais de défense juridique raisonnables de Chezmaxo au fur et à mesure qu'ils sont engagés, en plus de tout dommage ou montant de règlement dont le client est responsable. Chezmaxo ne réglera pas une réclamation couverte d'une manière qui crée une obligation de paiement pour le client sans l'approbation préalable de celui-ci, et le client ne refusera pas cette approbation de façon déraisonnable lorsque le règlement proposé est raisonnable dans les circonstances."
+  },
   "terms.p.9.7": {
     "en": "Nothing in this section creates an obligation that cannot legally be imposed under applicable law.",
     "fr": "Rien dans la présente section ne crée une obligation qui ne peut légalement être imposée en vertu de la loi applicable."
@@ -1966,6 +1970,10 @@ const I18N = {
   "terms.p.10.6": {
     "en": "These limitations do not apply to liability that cannot legally be excluded or limited, including liability arising from intentional or gross fault or liability for bodily or moral injury.",
     "fr": "Ces limitations ne s'appliquent pas à une responsabilité qui ne peut légalement être exclue ou limitée, y compris la responsabilité découlant d'une faute intentionnelle ou lourde ou la responsabilité pour préjudice corporel ou moral."
+  },
+  "terms.p.10.6b": {
+    "en": "If a limitation in this section is found by a court or tribunal of competent jurisdiction to be unenforceable in a particular circumstance, that limitation will be reduced to the maximum extent permitted by law in that circumstance rather than being void entirely, and the remaining limitations in this section will continue to apply.",
+    "fr": "Si une limitation prévue à la présente section est jugée inapplicable dans une circonstance particulière par un tribunal compétent, cette limitation sera réduite dans la mesure maximale permise par la loi dans cette circonstance plutôt que d'être entièrement nulle, et les autres limitations de la présente section continueront de s'appliquer."
   },
   "terms.p.10.7": {
     "en": "Nothing in these Terms limits a mandatory right, warranty or remedy available under applicable law.",
