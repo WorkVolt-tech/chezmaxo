@@ -1996,8 +1996,8 @@ const I18N = {
     "fr": "Le choix de langue du client doit être consigné dans le cadre de l'entente ou du processus d'acceptation."
   },
   "terms.p.11.4": {
-    "en": "The French and English versions are intended to have the same meaning. If a discrepancy exists, the version that legally governs will be determined according to the client's valid language selection, the applicable client agreement and mandatory Quebec law.",
-    "fr": "Les versions française et anglaise sont destinées à avoir le même sens. En cas de divergence, la version qui fait foi sera déterminée selon le choix de langue valide du client, l'entente client applicable et la loi québécoise d'ordre public."
+    "en": "The French and English versions are intended to have the same meaning. If a discrepancy exists, the version that legally governs will be determined according to the client's valid language selection, the applicable client agreement, and applicable law.",
+    "fr": "Les versions française et anglaise sont destinées à avoir le même sens. En cas de divergence, la version qui fait foi sera déterminée selon le choix de langue valide du client, l'entente client applicable et la loi applicable."
   },
   "terms.p.11.5": {
     "en": "Nothing in this section limits any language right provided by applicable law.",
@@ -2260,8 +2260,8 @@ const I18N = {
     "fr": "18. Loi applicable"
   },
   "terms.p.18": {
-    "en": "These terms are governed by the laws applicable in the Province of Quebec and the federal laws of Canada applicable there.",
-    "fr": "Les présentes conditions sont régies par les lois applicables dans la province de Québec et les lois fédérales du Canada qui s'y appliquent."
+    "en": "These terms are governed by the laws of Canada and the laws of the province in which Chezmaxo operates, as applicable.",
+    "fr": "Les présentes conditions sont régies par les lois du Canada et les lois de la province dans laquelle Chezmaxo exerce ses activités, selon le cas."
   },
   "terms.h2.19": {
     "en": "19. Contact Us",
@@ -2580,8 +2580,8 @@ const I18N = {
     "fr": "Forfait affaires : habituellement dans un délai d'un à trois jours ouvrables"
   },
   "care.p6.holidays": {
-    "en": "Business days exclude weekends, Quebec statutory holidays and announced business closures.",
-    "fr": "Les jours ouvrables excluent les fins de semaine, les jours fériés légaux du Québec et les fermetures annoncées de l'entreprise."
+    "en": "Business days exclude weekends, statutory holidays, and announced business closures.",
+    "fr": "Les jours ouvrables excluent les fins de semaine, les jours fériés légaux et les fermetures annoncées de l'entreprise."
   },
   "care.p6.affected": {
     "en": "Turnaround times may be affected by:",
@@ -3356,8 +3356,8 @@ const I18N = {
     "fr": "25. Loi applicable"
   },
   "care.p25.1": {
-    "en": "These terms are governed by the laws applicable in the Province of Quebec and the federal laws of Canada applicable there.",
-    "fr": "Les présentes conditions sont régies par les lois applicables dans la province de Québec et les lois fédérales du Canada qui s'y appliquent."
+    "en": "These terms are governed by the laws of Canada and the laws of the province in which Chezmaxo operates, as applicable.",
+    "fr": "Les présentes conditions sont régies par les lois du Canada et les lois de la province dans laquelle Chezmaxo exerce ses activités, selon le cas."
   },
   "care.p25.2": {
     "en": "Nothing in these terms limits any mandatory rights available under applicable law.",
