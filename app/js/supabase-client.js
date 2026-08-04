@@ -270,3 +270,70 @@ function subscribeToTable(table, onChange) {
     .on("postgres_changes", { event: "*", schema: "public", table }, onChange)
     .subscribe();
 }
+
+// ---------------- Project Intake ----------------
+
+async function getMyIntake(clientId) {
+  const { data, error } = await sb.from("project_intake").select("*").eq("client_id", clientId).maybeSingle();
+  if (error) throw error;
+  return data;
+}
+
+async function saveIntake(clientId, fields) {
+  const { data: existing } = await sb.from("project_intake").select("id").eq("client_id", clientId).maybeSingle();
+  if (existing) {
+    const { error } = await sb.from("project_intake").update(fields).eq("client_id", clientId);
+    if (error) throw error;
+  } else {
+    const { error } = await sb.from("project_intake").insert({ client_id: clientId, ...fields });
+    if (error) throw error;
+  }
+}
+
+async function listAllIntakes() {
+  const { data, error } = await sb.from("project_intake").select("*, profiles(business_name, full_name)").order("submitted_at", { ascending: false });
+  if (error) throw error;
+  return data;
+}
+
+// ---------------- Client Agreements ----------------
+
+async function getMyAgreement(clientId) {
+  const { data, error } = await sb.from("client_agreements").select("*").eq("client_id", clientId).order("created_at", { ascending: false }).limit(1).maybeSingle();
+  if (error) throw error;
+  return data;
+}
+
+async function saveAgreementDraft(clientId, fields) {
+  const existing = await getMyAgreement(clientId);
+  if (existing && !existing.signed_at) {
+    const { error } = await sb.from("client_agreements").update(fields).eq("id", existing.id);
+    if (error) throw error;
+    return existing.id;
+  } else {
+    const { data, error } = await sb.from("client_agreements").insert({ client_id: clientId, ...fields }).select("id").single();
+    if (error) throw error;
+    return data.id;
+  }
+}
+
+async function signAgreement(agreementId, signedName) {
+  const { error } = await sb.from("client_agreements").update({ signed_name: signedName, signed_at: new Date().toISOString() }).eq("id", agreementId);
+  if (error) throw error;
+}
+
+async function listAllAgreements() {
+  const { data, error } = await sb.from("client_agreements").select("*, profiles(business_name, full_name)").order("created_at", { ascending: false });
+  if (error) throw error;
+  return data;
+}
+
+// ---------------- Care plan acknowledgment ----------------
+
+async function acknowledgeCareTerms(clientId, paymentMethod) {
+  const { error } = await sb.from("profiles").update({
+    preferred_payment_method: paymentMethod,
+    care_terms_acknowledged_at: new Date().toISOString(),
+  }).eq("id", clientId);
+  if (error) throw error;
+}
