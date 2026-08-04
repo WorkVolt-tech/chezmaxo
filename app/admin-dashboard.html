@@ -37,7 +37,7 @@ function badgeClass(plan){
 }
 
 function renderSidebar(){
-  const items = [["projects","Projects (CRM)"],["orders","Build Orders"],["requests","Update requests"],["finance","Finance"],["applications","Applications"],["team","Team"],["payments","Payments"],["messages","Messages"]];
+  const items = [["projects","Projects (CRM)"],["orders","Build Orders"],["intakes","Intake Forms"],["agreements","Agreements"],["requests","Update requests"],["finance","Finance"],["applications","Applications"],["team","Team"],["payments","Payments"],["messages","Messages"]];
   document.getElementById("sidebar").innerHTML = items.map(([k,l]) =>
     `<button data-tab="${k}" class="${state.tab===k?'active':''}"><span class="dot"></span>${l}</button>`).join("");
   document.querySelectorAll("#sidebar button").forEach(b => b.onclick = () => { state.tab = b.dataset.tab; renderMain(); });
@@ -105,6 +105,33 @@ async function renderMain(){
     };
   }
 
+  else if(state.tab === "intakes"){
+    const intakes = await listAllIntakes();
+    main.innerHTML = `
+      <div class="page-title"><div><div class="eyebrow">Project scoping</div><h2>Intake Forms</h2></div></div>
+      ${intakes.length ? intakes.map(v => `
+        <div class="card" style="margin-bottom:14px;">
+          <h3 style="font-size:15px; margin-bottom:6px;">${v.profiles?.business_name || v.profiles?.full_name || '—'}</h3>
+          <p style="font-size:13px; color:var(--ink-soft); margin:2px 0;"><strong>Industry:</strong> ${v.industry||'—'} &nbsp;·&nbsp; <strong>Type:</strong> ${v.project_type||'—'} &nbsp;·&nbsp; <strong>Budget:</strong> ${v.budget_range||'—'}</p>
+          <p style="font-size:13px; color:var(--ink-soft); margin:2px 0;"><strong>Goals:</strong> ${v.project_goals||'—'}</p>
+          <p style="font-size:13px; color:var(--ink-soft); margin:2px 0;"><strong>Content status:</strong> ${v.content_status||'—'} &nbsp;·&nbsp; <strong>Features:</strong> ${v.features_needed||'—'}</p>
+          <p style="font-size:13px; color:var(--ink-soft); margin:2px 0;"><strong>Design notes:</strong> ${v.design_preferences||'—'}</p>
+          <p style="font-size:12px; color:var(--ink-faint); margin-top:6px;">Submitted ${new Date(v.submitted_at).toLocaleDateString()}</p>
+        </div>`).join("") : '<div class="card"><p class="empty-note">No intake forms submitted yet.</p></div>'}`;
+  }
+  else if(state.tab === "agreements"){
+    const agreements = await listAllAgreements();
+    main.innerHTML = `
+      <div class="page-title"><div><div class="eyebrow">Signed & pending</div><h2>Agreements</h2></div></div>
+      <div class="card" style="padding:0;">
+        <table class="table"><thead><tr><th>Client</th><th>Services</th><th>Price</th><th>Care Plan</th><th>Status</th><th></th></tr></thead>
+        <tbody>${agreements.length ? agreements.map(a => `
+          <tr><td>${a.profiles?.business_name || '—'}</td><td>${a.services_selected||'—'}</td><td>${a.quoted_price?'$'+a.quoted_price:'—'}</td><td>${a.care_plan_selected||'—'}</td>
+          <td><span class="status status-${a.signed_at?'confirmed':'pending'}">${a.signed_at?'Signed':'Draft'}</span></td>
+          <td>${a.signed_at ? `<span style="font-size:12px;color:var(--ink-faint);">by ${a.signed_name}, ${new Date(a.signed_at).toLocaleDateString()}</span>` : ''}</td></tr>`).join('') : '<tr><td colspan="6" class="empty-note">No agreements yet.</td></tr>'}
+        </tbody></table>
+      </div>`;
+  }
   else if(state.tab === "requests"){
     const rows = await listAllRequests();
     const priorityRank = { urgent: 0, high: 1, normal: 2, low: 3 };
