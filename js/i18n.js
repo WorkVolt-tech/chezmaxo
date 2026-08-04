@@ -1864,8 +1864,8 @@ const I18N = {
     "fr": "Aux résultats d'affaires escomptés"
   },
   "terms.p.10.4": {
-    "en": "Where liability cannot legally be excluded, Chezmaxo's total liability arising from a particular project, service or Care Plan will not exceed the total amount paid to Chezmaxo for the specific service giving rise to the claim during the six months immediately preceding the event giving rise to the claim.",
-    "fr": "Lorsque la responsabilité ne peut légalement être exclue, la responsabilité totale de Chezmaxo découlant d'un projet, d'un service ou d'un forfait d'entretien particulier ne dépassera pas le montant total payé à Chezmaxo pour le service spécifique à l'origine de la réclamation au cours des six mois précédant immédiatement l'événement à l'origine de la réclamation."
+    "en": "Where liability cannot legally be excluded, Chezmaxo's total liability for any claim, however arising, is limited to a refund of the amount the client paid for the specific service giving rise to the claim. Chezmaxo does not offer compensation beyond this refund.",
+    "fr": "Lorsque la responsabilité ne peut légalement être exclue, la responsabilité totale de Chezmaxo pour toute réclamation, peu importe la façon dont elle survient, se limite à un remboursement du montant payé par le client pour le service spécifique à l'origine de la réclamation. Chezmaxo n'offre aucune compensation au-delà de ce remboursement."
   },
   "terms.p.10.5": {
     "en": "For a one-time website-development project, the applicable limit will not exceed the amount paid to Chezmaxo for that specific project.",
@@ -4092,8 +4092,8 @@ const I18N = {
     "fr": "Un incident de confidentialité peut inclure l'accès, l'utilisation, la perte ou la communication non autorisés de renseignements personnels."
   },
   "privacy.p12.2": {
-    "en": "If Chezmaxo becomes aware of an incident involving personal information, Chezmaxo will take reasonable steps to:",
-    "fr": "Si Chezmaxo prend connaissance d'un incident impliquant des renseignements personnels, Chezmaxo prendra des mesures raisonnables pour :"
+    "en": "If Chezmaxo becomes aware of an incident involving personal information, Chezmaxo will take reasonable steps to contain it, reduce the risk of harm, correct the underlying issue, and notify affected individuals and any authorities where required by law.",
+    "fr": "Si Chezmaxo prend connaissance d'un incident impliquant des renseignements personnels, Chezmaxo prendra des mesures raisonnables pour le contenir, réduire le risque de préjudice, corriger le problème sous-jacent, et aviser les personnes concernées et les autorités le cas échéant, lorsque la loi l'exige."
   },
   "privacy.p12.li1": {
     "en": "Contain and investigate the incident",
