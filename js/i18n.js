@@ -1888,20 +1888,20 @@ const I18N = {
     "fr": "11. Versions française et anglaise"
   },
   "terms.p.11.1": {
-    "en": "A French version of these Terms of Service and any applicable standard-form client agreement will be made available to the client before the client is asked to enter into the agreement in English.",
-    "fr": "Une version française des présentes conditions d'utilisation et de toute entente client type applicable sera mise à la disposition du client avant qu'il ne soit invité à conclure l'entente en anglais."
+    "en": "Chezmaxo provides its website, communications, and standard-form documents in both English and French. The client may choose their preferred language for communications and for entering into an agreement with Chezmaxo.",
+    "fr": "Chezmaxo offre son site web, ses communications et ses documents types en anglais et en français. Le client peut choisir la langue de son choix pour les communications et pour conclure une entente avec Chezmaxo."
   },
   "terms.p.11.2": {
     "en": "Where required by applicable law, the client may agree to be bound by an English version only after receiving or being given access to the French version and expressly choosing to enter into the agreement in English.",
     "fr": "Lorsque la loi applicable l'exige, le client peut accepter d'être lié par une version anglaise seulement après avoir reçu ou obtenu accès à la version française et avoir expressément choisi de conclure l'entente en anglais."
   },
   "terms.p.11.3": {
-    "en": "The client's language selection must be recorded as part of the agreement or acceptance process.",
-    "fr": "Le choix de langue du client doit être consigné dans le cadre de l'entente ou du processus d'acceptation."
+    "en": "The client's language preference should be noted as part of the agreement or acceptance process, for clarity going forward.",
+    "fr": "La préférence linguistique du client devrait être notée dans le cadre de l'entente ou du processus d'acceptation, par souci de clarté pour la suite."
   },
   "terms.p.11.4": {
-    "en": "The French and English versions are intended to have the same meaning. If a discrepancy exists, the version that legally governs will be determined according to the client's valid language selection, the applicable client agreement, and applicable law.",
-    "fr": "Les versions française et anglaise sont destinées à avoir le même sens. En cas de divergence, la version qui fait foi sera déterminée selon le choix de langue valide du client, l'entente client applicable et la loi applicable."
+    "en": "The French and English versions are intended to have the same meaning. If a discrepancy exists, the version in the language the client selected for their agreement will govern, unless applicable law requires otherwise.",
+    "fr": "Les versions française et anglaise sont destinées à avoir le même sens. En cas de divergence, la version dans la langue choisie par le client pour son entente prévaudra, sauf si la loi applicable l'exige autrement."
   },
   "terms.p.11.5": {
     "en": "Nothing in this section limits any language right provided by applicable law.",
