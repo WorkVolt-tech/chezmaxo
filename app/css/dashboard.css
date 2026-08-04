@@ -1,4 +1,3 @@
-
 :root{
   --color-primary:#1B3A5C; --color-primary-dark:#122A44; --color-primary-tint:#E8EEF3;
   --color-secondary:#2A9D8F; --color-secondary-dark:#1F7A6F; --color-secondary-tint:#E4F4F2;
@@ -115,3 +114,11 @@ button{font-family:inherit;cursor:pointer;}
 .cycle-btn.active{background:var(--color-primary);color:#fff;}
 .cycle-save-tag{font-family:var(--font-mono);font-size:10.5px;background:var(--color-accent);color:#fff;padding:2px 7px;border-radius:100px;}
 .cycle-btn.active .cycle-save-tag{background:rgba(255,255,255,0.25);}
+
+/* ---------------- Print / PDF export ---------------- */
+@media print{
+  #sidebar, .topbar, .no-print, button{ display:none !important; }
+  body, .main{ background:#fff !important; margin:0; padding:0; }
+  .print-area{ box-shadow:none !important; border:none !important; padding:0 !important; }
+  .print-area p{ margin:6px 0; }
+}
