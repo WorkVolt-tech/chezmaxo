@@ -1639,98 +1639,6 @@ const I18N = {
     "en": "LEGAL — TEMPLATE",
     "fr": "JURIDIQUE — MODÈLE"
   },
-  "privacy.h1": {
-    "en": "Privacy Policy",
-    "fr": "Politique de confidentialité"
-  },
-  "privacy.h2.1": {
-    "en": "1. Introduction",
-    "fr": "1. Introduction"
-  },
-  "privacy.p.1": {
-    "en": "Chezmaxo (“we,” “us,” or “our”) respects your privacy. This Privacy Policy explains what information we collect through our website, how we use it, and the choices you have. This is a placeholder template — replace bracketed sections with details specific to your business.",
-    "fr": "Chezmaxo (« nous » ou « notre ») respecte votre vie privée. Cette politique de confidentialité explique quels renseignements nous recueillons via notre site web, comment nous les utilisons, et les choix qui s'offrent à vous. Ceci est un modèle — remplacez les sections entre crochets par des détails propres à votre entreprise."
-  },
-  "privacy.h2.2": {
-    "en": "2. Information We Collect",
-    "fr": "2. Renseignements que nous recueillons"
-  },
-  "privacy.li.2a": {
-    "en": "Information you provide directly, such as your name, business name, email address, phone number, and project details submitted through our contact form.",
-    "fr": "Les renseignements que vous fournissez directement, comme votre nom, le nom de votre entreprise, votre adresse courriel, votre numéro de téléphone et les détails du projet soumis via notre formulaire de contact."
-  },
-  "privacy.li.2b": {
-    "en": "Basic technical information collected automatically, such as browser type and general usage data, which may be gathered through analytics tools if enabled.",
-    "fr": "Des renseignements techniques de base recueillis automatiquement, comme le type de navigateur et des données d'utilisation générales, qui peuvent être recueillies par des outils d'analyse si activés."
-  },
-  "privacy.h2.3": {
-    "en": "3. How We Use Information",
-    "fr": "3. Comment nous utilisons les renseignements"
-  },
-  "privacy.li.3a": {
-    "en": "To respond to quote requests and inquiries",
-    "fr": "Pour répondre aux demandes de devis et aux questions"
-  },
-  "privacy.li.3b": {
-    "en": "To provide website design, management, and support services",
-    "fr": "Pour fournir des services de conception, de gestion et de soutien de sites web"
-  },
-  "privacy.li.3c": {
-    "en": "To send updates related to services you've requested",
-    "fr": "Pour envoyer des mises à jour liées aux services que vous avez demandés"
-  },
-  "privacy.li.3d": {
-    "en": "To improve our website and services",
-    "fr": "Pour améliorer notre site web et nos services"
-  },
-  "privacy.h2.4": {
-    "en": "4. Sharing of Information",
-    "fr": "4. Partage des renseignements"
-  },
-  "privacy.p.4": {
-    "en": "We do not sell your personal information. Information may be shared with third-party service providers (such as hosting, email, or payment processors) strictly as needed to deliver our services. [LIST THIRD-PARTY SERVICES PLACEHOLDER]",
-    "fr": "Nous ne vendons pas vos renseignements personnels. Ils peuvent être partagés avec des fournisseurs de services tiers (comme l'hébergement, le courriel ou les processeurs de paiement) strictement dans la mesure nécessaire pour fournir nos services. [LISTE DES SERVICES TIERS À REMPLACER]"
-  },
-  "privacy.h2.5": {
-    "en": "5. Data Retention",
-    "fr": "5. Conservation des données"
-  },
-  "privacy.p.5": {
-    "en": "We retain client and inquiry information for as long as reasonably necessary to provide services or as required by law. [RETENTION PERIOD PLACEHOLDER]",
-    "fr": "Nous conservons les renseignements des clients et des demandes aussi longtemps que raisonnablement nécessaire pour fournir nos services ou selon les exigences légales. [PÉRIODE DE CONSERVATION À REMPLACER]"
-  },
-  "privacy.h2.6": {
-    "en": "6. Cookies & Tracking",
-    "fr": "6. Témoins et suivi"
-  },
-  "privacy.p.6": {
-    "en": "[COOKIE / ANALYTICS DISCLOSURE PLACEHOLDER — describe any analytics, cookies, or tracking tools used on the live site.]",
-    "fr": "[DIVULGATION DES TÉMOINS/ANALYSES À REMPLACER — décrivez tout outil d'analyse, témoin ou suivi utilisé sur le site actif.]"
-  },
-  "privacy.h2.7": {
-    "en": "7. Your Choices",
-    "fr": "7. Vos choix"
-  },
-  "privacy.p.7": {
-    "en": "You may request access to, correction of, or deletion of your personal information by contacting us at marxanc@outlook.com.",
-    "fr": "Vous pouvez demander l'accès, la correction ou la suppression de vos renseignements personnels en nous contactant à marxanc@outlook.com."
-  },
-  "privacy.h2.8": {
-    "en": "8. Changes to This Policy",
-    "fr": "8. Modifications de cette politique"
-  },
-  "privacy.p.8": {
-    "en": "We may update this Privacy Policy from time to time. Changes will be posted on this page with an updated effective date.",
-    "fr": "Nous pouvons mettre à jour cette politique de confidentialité de temps à autre. Les modifications seront publiées sur cette page avec une date d'entrée en vigueur mise à jour."
-  },
-  "privacy.h2.9": {
-    "en": "9. Contact Us",
-    "fr": "9. Nous contacter"
-  },
-  "privacy.p.9": {
-    "en": "Questions about this policy can be sent to marxanc@outlook.com.",
-    "fr": "Les questions concernant cette politique peuvent être envoyées à marxanc@outlook.com."
-  },
   "terms.h1": {
     "en": "Terms of Service",
     "fr": "Conditions d'utilisation"
@@ -3498,6 +3406,874 @@ const I18N = {
   "desc.care": {
     "en": "Website Care Plan Terms template covering what's included, excluded, response times, and more. Review and customize before publishing.",
     "fr": "Modèle de conditions du forfait d'entretien couvrant ce qui est inclus, exclu, les délais de réponse et plus. À réviser avant publication."
+  },
+  "privacy.h2.1": {
+    "en": "1. Introduction",
+    "fr": "1. Introduction"
+  },
+  "privacy.p1.1": {
+    "en": "Chezmaxo respects your privacy and is committed to protecting the personal information entrusted to us.",
+    "fr": "Chezmaxo respecte votre vie privée et s'engage à protéger les renseignements personnels qui lui sont confiés."
+  },
+  "privacy.p1.2": {
+    "en": "This Privacy Policy explains how Chezmaxo collects, uses, communicates, stores and protects personal information when you:",
+    "fr": "La présente politique de confidentialité explique comment Chezmaxo recueille, utilise, communique, conserve et protège les renseignements personnels lorsque vous :"
+  },
+  "privacy.p1.li1": {
+    "en": "Visit the Chezmaxo website",
+    "fr": "Visitez le site web de Chezmaxo"
+  },
+  "privacy.p1.li2": {
+    "en": "Submit a contact or quotation request",
+    "fr": "Soumettez une demande de contact ou de devis"
+  },
+  "privacy.p1.li3": {
+    "en": "Communicate with Chezmaxo",
+    "fr": "Communiquez avec Chezmaxo"
+  },
+  "privacy.p1.li4": {
+    "en": "Purchase website-design or Website Care Plan services",
+    "fr": "Achetez des services de conception de site web ou un forfait d'entretien"
+  },
+  "privacy.p1.li5": {
+    "en": "Make a payment through PayPal",
+    "fr": "Effectuez un paiement via PayPal"
+  },
+  "privacy.p1.li6": {
+    "en": "Become a Chezmaxo client",
+    "fr": "Devenez client de Chezmaxo"
+  },
+  "privacy.p1.3": {
+    "en": "This policy applies to personal information collected through the Chezmaxo website and during the client relationship.",
+    "fr": "Cette politique s'applique aux renseignements personnels recueillis par l'intermédiaire du site web de Chezmaxo et durant la relation client."
+  },
+  "privacy.h2.2": {
+    "en": "2. Person Responsible for Privacy",
+    "fr": "2. Personne responsable de la protection des renseignements personnels"
+  },
+  "privacy.p2.1": {
+    "en": "The owner of Chezmaxo is responsible for protecting personal information held by the business.",
+    "fr": "Le propriétaire de Chezmaxo est responsable de la protection des renseignements personnels détenus par l'entreprise."
+  },
+  "privacy.p2.2": {
+    "en": "Questions, access requests, correction requests, privacy complaints and requests to withdraw consent may be sent to:",
+    "fr": "Les questions, demandes d'accès, demandes de correction, plaintes relatives à la vie privée et demandes de retrait de consentement peuvent être envoyées à :"
+  },
+  "privacy.p2.officer": {
+    "en": "Privacy Officer",
+    "fr": "Responsable de la protection des renseignements personnels"
+  },
+  "privacy.p2.email": {
+    "en": "Email:",
+    "fr": "Courriel :"
+  },
+  "privacy.h2.3": {
+    "en": "3. Personal Information We Collect",
+    "fr": "3. Renseignements personnels que nous recueillons"
+  },
+  "privacy.p3.intro": {
+    "en": "The information collected depends on how you interact with Chezmaxo.",
+    "fr": "Les renseignements recueillis dépendent de la façon dont vous interagissez avec Chezmaxo."
+  },
+  "privacy.h3.contact": {
+    "en": "Contact and quotation information",
+    "fr": "Renseignements de contact et de devis"
+  },
+  "privacy.p3.contact.intro": {
+    "en": "When you submit a contact or quotation form, Chezmaxo may collect:",
+    "fr": "Lorsque vous soumettez un formulaire de contact ou de devis, Chezmaxo peut recueillir :"
+  },
+  "privacy.p3.contact.li1": {
+    "en": "Your full name",
+    "fr": "Votre nom complet"
+  },
+  "privacy.p3.contact.li2": {
+    "en": "Business name",
+    "fr": "Le nom de votre entreprise"
+  },
+  "privacy.p3.contact.li3": {
+    "en": "Email address",
+    "fr": "Votre adresse courriel"
+  },
+  "privacy.p3.contact.li4": {
+    "en": "Telephone number",
+    "fr": "Votre numéro de téléphone"
+  },
+  "privacy.p3.contact.li5": {
+    "en": "Existing website address",
+    "fr": "L'adresse de votre site web existant"
+  },
+  "privacy.p3.contact.li6": {
+    "en": "Type of business",
+    "fr": "Le type d'entreprise"
+  },
+  "privacy.p3.contact.li7": {
+    "en": "Services requested",
+    "fr": "Les services demandés"
+  },
+  "privacy.p3.contact.li8": {
+    "en": "Estimated budget",
+    "fr": "Le budget estimé"
+  },
+  "privacy.p3.contact.li9": {
+    "en": "Preferred contact method",
+    "fr": "La méthode de contact préférée"
+  },
+  "privacy.p3.contact.li10": {
+    "en": "Desired project timeline",
+    "fr": "L'échéancier souhaité du projet"
+  },
+  "privacy.p3.contact.li11": {
+    "en": "Project description",
+    "fr": "La description du projet"
+  },
+  "privacy.p3.contact.li12": {
+    "en": "Any other information you voluntarily provide",
+    "fr": "Tout autre renseignement que vous fournissez volontairement"
+  },
+  "privacy.p3.contact.note": {
+    "en": "Please do not submit passwords, payment-card information, government identification numbers or other sensitive information through the contact form.",
+    "fr": "Veuillez ne pas soumettre de mots de passe, de renseignements de carte de paiement, de numéros d'identification gouvernementaux ou d'autres renseignements sensibles par le formulaire de contact."
+  },
+  "privacy.h3.client": {
+    "en": "Client and project information",
+    "fr": "Renseignements sur le client et le projet"
+  },
+  "privacy.p3.client.intro": {
+    "en": "When you become a client, Chezmaxo may also collect:",
+    "fr": "Lorsque vous devenez client, Chezmaxo peut également recueillir :"
+  },
+  "privacy.p3.client.li1": {
+    "en": "Billing and business contact information",
+    "fr": "Les renseignements de facturation et de contact d'affaires"
+  },
+  "privacy.p3.client.li2": {
+    "en": "Signed agreements and accepted proposals",
+    "fr": "Les ententes signées et les propositions acceptées"
+  },
+  "privacy.p3.client.li3": {
+    "en": "Project requirements and instructions",
+    "fr": "Les exigences et instructions du projet"
+  },
+  "privacy.p3.client.li4": {
+    "en": "Website content supplied by the client",
+    "fr": "Le contenu du site web fourni par le client"
+  },
+  "privacy.p3.client.li5": {
+    "en": "Communications, approvals and revision requests",
+    "fr": "Les communications, approbations et demandes de révision"
+  },
+  "privacy.p3.client.li6": {
+    "en": "Hosting, domain or website-account information",
+    "fr": "Les renseignements d'hébergement, de domaine ou de compte de site web"
+  },
+  "privacy.p3.client.li7": {
+    "en": "Administrator or collaborator access provided for website work",
+    "fr": "L'accès administrateur ou collaborateur fourni pour le travail sur le site"
+  },
+  "privacy.p3.client.li8": {
+    "en": "Invoices and payment records",
+    "fr": "Les factures et registres de paiement"
+  },
+  "privacy.p3.client.li9": {
+    "en": "Support and maintenance requests",
+    "fr": "Les demandes de soutien et d'entretien"
+  },
+  "privacy.p3.client.note": {
+    "en": "Whenever possible, clients should provide Chezmaxo with a separate administrator, collaborator or developer account instead of sharing their primary password.",
+    "fr": "Dans la mesure du possible, les clients devraient fournir à Chezmaxo un compte distinct d'administrateur, de collaborateur ou de développeur plutôt que de partager leur mot de passe principal."
+  },
+  "privacy.h3.payment": {
+    "en": "Payment information",
+    "fr": "Renseignements de paiement"
+  },
+  "privacy.p3.pay.1": {
+    "en": "Chezmaxo uses PayPal to process online payments.",
+    "fr": "Chezmaxo utilise PayPal pour traiter les paiements en ligne."
+  },
+  "privacy.p3.pay.2": {
+    "en": "When you choose to pay through PayPal, your payment is processed directly by PayPal under PayPal's own terms and privacy practices.",
+    "fr": "Lorsque vous choisissez de payer via PayPal, votre paiement est traité directement par PayPal selon les propres conditions et pratiques de confidentialité de PayPal."
+  },
+  "privacy.p3.pay.3": {
+    "en": "Chezmaxo may receive limited transaction information from PayPal, such as:",
+    "fr": "Chezmaxo peut recevoir des renseignements de transaction limités de la part de PayPal, tels que :"
+  },
+  "privacy.p3.pay.li1": {
+    "en": "Your name",
+    "fr": "Votre nom"
+  },
+  "privacy.p3.pay.li2": {
+    "en": "Email address",
+    "fr": "Votre adresse courriel"
+  },
+  "privacy.p3.pay.li3": {
+    "en": "Payment amount",
+    "fr": "Le montant du paiement"
+  },
+  "privacy.p3.pay.li4": {
+    "en": "Transaction date",
+    "fr": "La date de la transaction"
+  },
+  "privacy.p3.pay.li5": {
+    "en": "Transaction identification number",
+    "fr": "Le numéro d'identification de la transaction"
+  },
+  "privacy.p3.pay.li6": {
+    "en": "Payment status",
+    "fr": "Le statut du paiement"
+  },
+  "privacy.p3.pay.li7": {
+    "en": "Information needed to associate the payment with your invoice or service",
+    "fr": "Les renseignements nécessaires pour associer le paiement à votre facture ou service"
+  },
+  "privacy.p3.pay.4": {
+    "en": "Chezmaxo does not normally receive or store your complete credit-card number, bank-account number or PayPal password.",
+    "fr": "Chezmaxo ne reçoit ni ne conserve normalement votre numéro complet de carte de crédit, de compte bancaire ou votre mot de passe PayPal."
+  },
+  "privacy.h3.tech": {
+    "en": "Technical information",
+    "fr": "Renseignements techniques"
+  },
+  "privacy.p3.tech.1": {
+    "en": "When you visit the website, the website host or essential website technologies may automatically process limited technical information, such as:",
+    "fr": "Lorsque vous visitez le site web, l'hébergeur du site ou les technologies essentielles du site peuvent traiter automatiquement des renseignements techniques limités, tels que :"
+  },
+  "privacy.p3.tech.li1": {
+    "en": "Internet Protocol address",
+    "fr": "L'adresse de protocole Internet (IP)"
+  },
+  "privacy.p3.tech.li2": {
+    "en": "Browser type",
+    "fr": "Le type de navigateur"
+  },
+  "privacy.p3.tech.li3": {
+    "en": "Device type",
+    "fr": "Le type d'appareil"
+  },
+  "privacy.p3.tech.li4": {
+    "en": "Operating system",
+    "fr": "Le système d'exploitation"
+  },
+  "privacy.p3.tech.li5": {
+    "en": "Pages requested",
+    "fr": "Les pages demandées"
+  },
+  "privacy.p3.tech.li6": {
+    "en": "Date and time of access",
+    "fr": "La date et l'heure d'accès"
+  },
+  "privacy.p3.tech.li7": {
+    "en": "Referring website",
+    "fr": "Le site web référent"
+  },
+  "privacy.p3.tech.li8": {
+    "en": "Security or error logs",
+    "fr": "Les journaux de sécurité ou d'erreurs"
+  },
+  "privacy.p3.tech.2": {
+    "en": "This information may be processed to operate the website, maintain security, diagnose technical issues and prevent misuse.",
+    "fr": "Ces renseignements peuvent être traités pour faire fonctionner le site web, maintenir la sécurité, diagnostiquer des problèmes techniques et prévenir les utilisations abusives."
+  },
+  "privacy.p3.tech.3": {
+    "en": "Chezmaxo does not currently use this information for behavioural advertising or visitor profiling.",
+    "fr": "Chezmaxo n'utilise pas actuellement ces renseignements à des fins de publicité comportementale ou de profilage des visiteurs."
+  },
+  "privacy.h2.4": {
+    "en": "4. How We Collect Information",
+    "fr": "4. Comment nous recueillons les renseignements"
+  },
+  "privacy.p4.intro": {
+    "en": "Chezmaxo may collect personal information:",
+    "fr": "Chezmaxo peut recueillir des renseignements personnels :"
+  },
+  "privacy.p4.li1": {
+    "en": "Directly from you through forms, email, telephone or other communications",
+    "fr": "Directement de vous par des formulaires, courriels, appels téléphoniques ou autres communications"
+  },
+  "privacy.p4.li2": {
+    "en": "Through accepted proposals, agreements and invoices",
+    "fr": "Par le biais de propositions, ententes et factures acceptées"
+  },
+  "privacy.p4.li3": {
+    "en": "During website-development or support work",
+    "fr": "Durant le développement du site web ou le travail de soutien"
+  },
+  "privacy.p4.li4": {
+    "en": "Through PayPal when a payment is completed",
+    "fr": "Par PayPal lorsqu'un paiement est effectué"
+  },
+  "privacy.p4.li5": {
+    "en": "Through the website-hosting or form-delivery service",
+    "fr": "Par le service d'hébergement du site web ou de livraison de formulaires"
+  },
+  "privacy.p4.li6": {
+    "en": "Through technical logs required to operate and secure the website",
+    "fr": "Par les journaux techniques requis pour faire fonctionner et sécuriser le site web"
+  },
+  "privacy.p4.li7": {
+    "en": "From a representative of your business who is authorized to communicate with Chezmaxo",
+    "fr": "D'un représentant de votre entreprise autorisé à communiquer avec Chezmaxo"
+  },
+  "privacy.h2.5": {
+    "en": "5. Why We Use Personal Information",
+    "fr": "5. Pourquoi nous utilisons les renseignements personnels"
+  },
+  "privacy.p5.intro": {
+    "en": "Chezmaxo may use personal information to:",
+    "fr": "Chezmaxo peut utiliser les renseignements personnels pour :"
+  },
+  "privacy.p5.li1": {
+    "en": "Respond to inquiries and quotation requests",
+    "fr": "Répondre aux demandes de renseignements et de devis"
+  },
+  "privacy.p5.li2": {
+    "en": "Evaluate a potential project",
+    "fr": "Évaluer un projet potentiel"
+  },
+  "privacy.p5.li3": {
+    "en": "Prepare quotations, proposals and agreements",
+    "fr": "Préparer des devis, propositions et ententes"
+  },
+  "privacy.p5.li4": {
+    "en": "Provide website-design and development services",
+    "fr": "Fournir des services de conception et de développement de sites web"
+  },
+  "privacy.p5.li5": {
+    "en": "Provide Website Care Plan services",
+    "fr": "Fournir les services du forfait d'entretien de site web"
+  },
+  "privacy.p5.li6": {
+    "en": "Communicate about projects, support requests and approvals",
+    "fr": "Communiquer au sujet des projets, demandes de soutien et approbations"
+  },
+  "privacy.p5.li7": {
+    "en": "Process and confirm payments",
+    "fr": "Traiter et confirmer les paiements"
+  },
+  "privacy.p5.li8": {
+    "en": "Issue invoices and maintain accounting records",
+    "fr": "Émettre des factures et tenir des registres comptables"
+  },
+  "privacy.p5.li9": {
+    "en": "Obtain authorized access to client-owned website accounts",
+    "fr": "Obtenir un accès autorisé aux comptes de site web appartenant au client"
+  },
+  "privacy.p5.li10": {
+    "en": "Troubleshoot, maintain and update client websites",
+    "fr": "Dépanner, entretenir et mettre à jour les sites web des clients"
+  },
+  "privacy.p5.li11": {
+    "en": "Prevent fraud, abuse and security incidents",
+    "fr": "Prévenir la fraude, les abus et les incidents de sécurité"
+  },
+  "privacy.p5.li12": {
+    "en": "Maintain the security and operation of the Chezmaxo website",
+    "fr": "Maintenir la sécurité et le fonctionnement du site web de Chezmaxo"
+  },
+  "privacy.p5.li13": {
+    "en": "Fulfil contractual and legal obligations",
+    "fr": "Remplir les obligations contractuelles et légales"
+  },
+  "privacy.p5.li14": {
+    "en": "Handle privacy requests or complaints",
+    "fr": "Traiter les demandes ou plaintes relatives à la vie privée"
+  },
+  "privacy.p5.li15": {
+    "en": "Protect the legal rights and interests of Chezmaxo and its clients",
+    "fr": "Protéger les droits et intérêts légaux de Chezmaxo et de ses clients"
+  },
+  "privacy.p5.outro": {
+    "en": "Chezmaxo will not use personal information for a new purpose that is incompatible with the purpose for which it was collected without obtaining consent where required.",
+    "fr": "Chezmaxo n'utilisera pas les renseignements personnels à une nouvelle fin incompatible avec la fin pour laquelle ils ont été recueillis sans obtenir de consentement lorsque requis."
+  },
+  "privacy.h2.6": {
+    "en": "6. Consent",
+    "fr": "6. Consentement"
+  },
+  "privacy.p6.1": {
+    "en": "By voluntarily providing personal information, you consent to its collection, use and communication for the purposes described at the time of collection and in this Privacy Policy.",
+    "fr": "En fournissant volontairement des renseignements personnels, vous consentez à leur collecte, utilisation et communication aux fins décrites au moment de la collecte et dans la présente politique."
+  },
+  "privacy.p6.2": {
+    "en": "You may withdraw your consent by contacting the Chezmaxo Privacy Officer.",
+    "fr": "Vous pouvez retirer votre consentement en contactant le responsable de la protection des renseignements personnels de Chezmaxo."
+  },
+  "privacy.p6.3": {
+    "en": "Withdrawal of consent may prevent Chezmaxo from providing certain services when the information is reasonably required to prepare a quotation, complete a project, process payment, maintain records or comply with legal obligations.",
+    "fr": "Le retrait du consentement peut empêcher Chezmaxo de fournir certains services lorsque les renseignements sont raisonnablement nécessaires pour préparer un devis, compléter un projet, traiter un paiement, tenir des registres ou se conformer à des obligations légales."
+  },
+  "privacy.p6.4": {
+    "en": "Withdrawal of consent does not affect uses or communications already permitted or required by law.",
+    "fr": "Le retrait du consentement n'affecte pas les utilisations ou communications déjà permises ou exigées par la loi."
+  },
+  "privacy.h2.7": {
+    "en": "7. When We Share Information",
+    "fr": "7. Quand nous communiquons des renseignements"
+  },
+  "privacy.p7.1": {
+    "en": "Chezmaxo does not sell or rent personal information.",
+    "fr": "Chezmaxo ne vend ni ne loue de renseignements personnels."
+  },
+  "privacy.p7.2": {
+    "en": "Personal information may be shared only when reasonably necessary with service providers that help Chezmaxo operate the website or deliver services.",
+    "fr": "Les renseignements personnels peuvent être communiqués uniquement lorsque raisonnablement nécessaire à des fournisseurs de services qui aident Chezmaxo à exploiter le site web ou à livrer les services."
+  },
+  "privacy.p7.3": {
+    "en": "These providers may include:",
+    "fr": "Ces fournisseurs peuvent inclure :"
+  },
+  "privacy.p7.li1": {
+    "en": "PayPal for payment processing",
+    "fr": "PayPal pour le traitement des paiements"
+  },
+  "privacy.p7.li2": {
+    "en": "The website-hosting provider",
+    "fr": "Le fournisseur d'hébergement du site web"
+  },
+  "privacy.p7.li3": {
+    "en": "The contact-form or email-delivery provider",
+    "fr": "Le fournisseur de formulaire de contact ou de livraison de courriels"
+  },
+  "privacy.p7.li4": {
+    "en": "Email and communication providers",
+    "fr": "Les fournisseurs de courriel et de communication"
+  },
+  "privacy.p7.li5": {
+    "en": "Website platforms or content-management systems",
+    "fr": "Les plateformes de site web ou systèmes de gestion de contenu"
+  },
+  "privacy.p7.li6": {
+    "en": "Cloud-storage or secure document-management providers",
+    "fr": "Les fournisseurs de stockage infonuagique ou de gestion sécurisée de documents"
+  },
+  "privacy.p7.li7": {
+    "en": "Accounting or invoicing providers",
+    "fr": "Les fournisseurs de comptabilité ou de facturation"
+  },
+  "privacy.p7.li8": {
+    "en": "Professional advisers, such as an accountant or lawyer",
+    "fr": "Les conseillers professionnels, tels qu'un comptable ou un avocat"
+  },
+  "privacy.p7.li9": {
+    "en": "Government authorities where disclosure is legally required",
+    "fr": "Les autorités gouvernementales lorsque la divulgation est légalement requise"
+  },
+  "privacy.p7.4": {
+    "en": "Service providers receive only the information reasonably necessary to perform their services.",
+    "fr": "Les fournisseurs de services ne reçoivent que les renseignements raisonnablement nécessaires à l'exécution de leurs services."
+  },
+  "privacy.p7.5": {
+    "en": "Each provider operates under its own legal terms and privacy practices. PayPal processes payment information according to PayPal's own Privacy Statement.",
+    "fr": "Chaque fournisseur exerce ses activités selon ses propres conditions légales et pratiques de confidentialité. PayPal traite les renseignements de paiement selon sa propre déclaration de confidentialité."
+  },
+  "privacy.p7.6": {
+    "en": "Chezmaxo may also communicate personal information:",
+    "fr": "Chezmaxo peut également communiquer des renseignements personnels :"
+  },
+  "privacy.p7.li2.1": {
+    "en": "With your consent",
+    "fr": "Avec votre consentement"
+  },
+  "privacy.p7.li2.2": {
+    "en": "To fulfil an agreement with you",
+    "fr": "Pour remplir une entente avec vous"
+  },
+  "privacy.p7.li2.3": {
+    "en": "To collect an unpaid account",
+    "fr": "Pour recouvrer un compte impayé"
+  },
+  "privacy.p7.li2.4": {
+    "en": "To respond to fraud, abuse or a security incident",
+    "fr": "Pour répondre à une fraude, un abus ou un incident de sécurité"
+  },
+  "privacy.p7.li2.5": {
+    "en": "To comply with a court order or legal obligation",
+    "fr": "Pour se conformer à une ordonnance judiciaire ou une obligation légale"
+  },
+  "privacy.p7.li2.6": {
+    "en": "To protect the rights, property or safety of Chezmaxo or another person",
+    "fr": "Pour protéger les droits, la propriété ou la sécurité de Chezmaxo ou d'une autre personne"
+  },
+  "privacy.p7.li2.7": {
+    "en": "As otherwise permitted or required by law",
+    "fr": "Tel qu'autrement permis ou exigé par la loi"
+  },
+  "privacy.h2.8": {
+    "en": "8. Information Processed Outside Canada",
+    "fr": "8. Renseignements traités à l'extérieur du Canada"
+  },
+  "privacy.p8.1": {
+    "en": "Some service providers, including PayPal, website hosts, email providers or cloud-service providers, may process or store personal information outside Canada.",
+    "fr": "Certains fournisseurs de services, y compris PayPal, les hébergeurs de sites web, les fournisseurs de courriel ou les fournisseurs de services infonuagiques, peuvent traiter ou conserver des renseignements personnels à l'extérieur du Canada."
+  },
+  "privacy.p8.2": {
+    "en": "Information processed in another jurisdiction may be subject to the laws of that jurisdiction and may be accessible to its courts, governments or law-enforcement authorities.",
+    "fr": "Les renseignements traités dans une autre juridiction peuvent être assujettis aux lois de cette juridiction et être accessibles à ses tribunaux, gouvernements ou autorités chargées de l'application de la loi."
+  },
+  "privacy.p8.3": {
+    "en": "Chezmaxo will consider privacy and security when selecting service providers and will take reasonable steps to ensure that personal information receives appropriate protection.",
+    "fr": "Chezmaxo tiendra compte de la confidentialité et de la sécurité lors de la sélection de ses fournisseurs de services et prendra des mesures raisonnables pour que les renseignements personnels reçoivent une protection appropriée."
+  },
+  "privacy.h2.9": {
+    "en": "9. Cookies and Similar Technologies",
+    "fr": "9. Témoins et technologies similaires"
+  },
+  "privacy.p9.1": {
+    "en": "Cookies are small files that a website or service may store on your device.",
+    "fr": "Les témoins (cookies) sont de petits fichiers qu'un site web ou service peut enregistrer sur votre appareil."
+  },
+  "privacy.p9.2": {
+    "en": "The Chezmaxo website may use cookies or similar technologies that are reasonably necessary to:",
+    "fr": "Le site web de Chezmaxo peut utiliser des témoins ou technologies similaires raisonnablement nécessaires pour :"
+  },
+  "privacy.p9.li1": {
+    "en": "Load and operate the website",
+    "fr": "Charger et faire fonctionner le site web"
+  },
+  "privacy.p9.li2": {
+    "en": "Maintain security",
+    "fr": "Maintenir la sécurité"
+  },
+  "privacy.p9.li3": {
+    "en": "Prevent misuse",
+    "fr": "Prévenir les utilisations abusives"
+  },
+  "privacy.p9.li4": {
+    "en": "Remember essential user selections",
+    "fr": "Se souvenir des sélections essentielles de l'utilisateur"
+  },
+  "privacy.p9.li5": {
+    "en": "Process contact-form submissions",
+    "fr": "Traiter les soumissions du formulaire de contact"
+  },
+  "privacy.p9.li6": {
+    "en": "Connect with PayPal payment services",
+    "fr": "Se connecter aux services de paiement PayPal"
+  },
+  "privacy.p9.3": {
+    "en": "PayPal may place or use its own cookies or similar technologies when you interact with a PayPal payment button, embedded PayPal feature or PayPal website. PayPal controls those technologies under its own privacy and cookie practices.",
+    "fr": "PayPal peut déposer ou utiliser ses propres témoins ou technologies similaires lorsque vous interagissez avec un bouton de paiement PayPal, une fonctionnalité PayPal intégrée ou le site web de PayPal. PayPal contrôle ces technologies selon ses propres pratiques de confidentialité et de témoins."
+  },
+  "privacy.p9.4": {
+    "en": "Chezmaxo does not currently use advertising cookies, behavioural tracking or analytics tools such as Google Analytics.",
+    "fr": "Chezmaxo n'utilise pas actuellement de témoins publicitaires, de suivi comportemental ou d'outils d'analyse tels que Google Analytics."
+  },
+  "privacy.p9.5": {
+    "en": "If Chezmaxo later introduces analytics, advertising or other non-essential tracking technologies, this policy will be updated and appropriate consent choices will be provided where required.",
+    "fr": "Si Chezmaxo introduit ultérieurement des outils d'analyse, de publicité ou d'autres technologies de suivi non essentielles, cette politique sera mise à jour et des choix de consentement appropriés seront offerts lorsque requis."
+  },
+  "privacy.p9.6": {
+    "en": "You may configure your browser to block or delete cookies. Blocking essential cookies may affect certain website or payment functions.",
+    "fr": "Vous pouvez configurer votre navigateur pour bloquer ou supprimer les témoins. Le blocage des témoins essentiels peut affecter certaines fonctions du site web ou de paiement."
+  },
+  "privacy.h2.10": {
+    "en": "10. Data Retention",
+    "fr": "10. Conservation des données"
+  },
+  "privacy.p10.1": {
+    "en": "Chezmaxo keeps personal information only for as long as reasonably necessary for the purpose for which it was collected and to meet legal, accounting, contractual and dispute-resolution requirements.",
+    "fr": "Chezmaxo conserve les renseignements personnels uniquement aussi longtemps que raisonnablement nécessaire à la fin pour laquelle ils ont été recueillis et pour répondre aux exigences légales, comptables, contractuelles et de résolution de différends."
+  },
+  "privacy.p10.2": {
+    "en": "Unless a different period is required by law or justified by the circumstances, Chezmaxo generally applies the following retention periods:",
+    "fr": "Sauf si une période différente est exigée par la loi ou justifiée par les circonstances, Chezmaxo applique généralement les périodes de conservation suivantes :"
+  },
+  "privacy.h3.unsuccessful": {
+    "en": "Unsuccessful inquiries and quotation requests",
+    "fr": "Demandes de renseignements et de devis sans suite"
+  },
+  "privacy.p10.uns.1": {
+    "en": "Information relating to an inquiry that does not become a client project may be retained for up to 24 months after the last communication.",
+    "fr": "Les renseignements relatifs à une demande qui ne devient pas un projet client peuvent être conservés jusqu'à 24 mois après la dernière communication."
+  },
+  "privacy.p10.uns.2": {
+    "en": "This allows Chezmaxo to respond to follow-up inquiries and maintain reasonable business records.",
+    "fr": "Cela permet à Chezmaxo de répondre aux demandes de suivi et de tenir des registres d'affaires raisonnables."
+  },
+  "privacy.h3.clientrecords": {
+    "en": "Client and project records",
+    "fr": "Registres du client et du projet"
+  },
+  "privacy.p10.cr.1": {
+    "en": "Project correspondence, agreements, approvals, invoices, transaction information and related business records may be retained during the client relationship and for at least six years from the end of the taxation year to which the record relates, or longer where required by law.",
+    "fr": "La correspondance de projet, les ententes, approbations, factures, renseignements de transaction et registres d'affaires connexes peuvent être conservés durant la relation client et pendant au moins six ans à compter de la fin de l'année d'imposition à laquelle le registre se rapporte, ou plus longtemps si la loi l'exige."
+  },
+  "privacy.h3.credentials": {
+    "en": "Website credentials and account access",
+    "fr": "Identifiants de site web et accès aux comptes"
+  },
+  "privacy.p10.cred.1": {
+    "en": "Passwords, temporary access and administrator or collaborator credentials will be retained only while reasonably required to perform authorized work.",
+    "fr": "Les mots de passe, accès temporaires et identifiants d'administrateur ou de collaborateur ne seront conservés que le temps raisonnablement nécessaire à l'exécution du travail autorisé."
+  },
+  "privacy.p10.cred.2": {
+    "en": "Access should be removed or deleted after the service relationship ends or when it is no longer required.",
+    "fr": "L'accès devrait être retiré ou supprimé une fois la relation de service terminée ou lorsqu'il n'est plus nécessaire."
+  },
+  "privacy.h3.techrecords": {
+    "en": "Contact-form and technical records",
+    "fr": "Registres du formulaire de contact et registres techniques"
+  },
+  "privacy.p10.tr.1": {
+    "en": "Contact-form submissions and technical logs may be retained for a reasonable period required to respond to inquiries, maintain security, diagnose errors and prevent abuse.",
+    "fr": "Les soumissions du formulaire de contact et les journaux techniques peuvent être conservés pendant une période raisonnable nécessaire pour répondre aux demandes, maintenir la sécurité, diagnostiquer les erreurs et prévenir les abus."
+  },
+  "privacy.p10.outro": {
+    "en": "When personal information is no longer required, Chezmaxo will take reasonable steps to securely delete, destroy or anonymize it, subject to legal retention obligations.",
+    "fr": "Lorsque les renseignements personnels ne sont plus nécessaires, Chezmaxo prendra des mesures raisonnables pour les supprimer, les détruire ou les anonymiser de façon sécuritaire, sous réserve des obligations légales de conservation."
+  },
+  "privacy.h2.11": {
+    "en": "11. Safeguards",
+    "fr": "11. Mesures de protection"
+  },
+  "privacy.p11.1": {
+    "en": "Chezmaxo uses reasonable administrative, technical and physical safeguards appropriate to the sensitivity of the information held.",
+    "fr": "Chezmaxo utilise des mesures de protection administratives, techniques et physiques raisonnables et appropriées à la sensibilité des renseignements détenus."
+  },
+  "privacy.p11.2": {
+    "en": "These measures may include:",
+    "fr": "Ces mesures peuvent inclure :"
+  },
+  "privacy.p11.li1": {
+    "en": "Password-protected accounts",
+    "fr": "Des comptes protégés par mot de passe"
+  },
+  "privacy.p11.li2": {
+    "en": "Unique administrator or collaborator access",
+    "fr": "Un accès unique d'administrateur ou de collaborateur"
+  },
+  "privacy.p11.li3": {
+    "en": "Multifactor authentication where available",
+    "fr": "L'authentification multifacteur lorsque disponible"
+  },
+  "privacy.p11.li4": {
+    "en": "Access restrictions",
+    "fr": "Des restrictions d'accès"
+  },
+  "privacy.p11.li5": {
+    "en": "Secure website connections",
+    "fr": "Des connexions sécurisées au site web"
+  },
+  "privacy.p11.li6": {
+    "en": "Reputable service providers",
+    "fr": "Des fournisseurs de services réputés"
+  },
+  "privacy.p11.li7": {
+    "en": "Software and security updates",
+    "fr": "Des mises à jour logicielles et de sécurité"
+  },
+  "privacy.p11.li8": {
+    "en": "Secure storage practices",
+    "fr": "Des pratiques de stockage sécuritaires"
+  },
+  "privacy.p11.li9": {
+    "en": "Backup and recovery measures where appropriate",
+    "fr": "Des mesures de sauvegarde et de récupération lorsque approprié"
+  },
+  "privacy.p11.li10": {
+    "en": "Removal of access when it is no longer required",
+    "fr": "Le retrait de l'accès lorsqu'il n'est plus nécessaire"
+  },
+  "privacy.p11.3": {
+    "en": "No website, email system, payment service or storage method can be guaranteed to be completely secure.",
+    "fr": "Aucun site web, système de courriel, service de paiement ou méthode de stockage ne peut être garanti comme étant entièrement sécuritaire."
+  },
+  "privacy.p11.4": {
+    "en": "Clients should not send passwords, financial information or other sensitive information through ordinary email unless an appropriate secure method has been arranged.",
+    "fr": "Les clients ne devraient pas envoyer de mots de passe, de renseignements financiers ou d'autres renseignements sensibles par courriel ordinaire, à moins qu'une méthode sécuritaire appropriée n'ait été convenue."
+  },
+  "privacy.h2.12": {
+    "en": "12. Confidentiality Incidents",
+    "fr": "12. Incidents de confidentialité"
+  },
+  "privacy.p12.1": {
+    "en": "A confidentiality incident may include unauthorized access, use, loss or communication of personal information.",
+    "fr": "Un incident de confidentialité peut inclure l'accès, l'utilisation, la perte ou la communication non autorisés de renseignements personnels."
+  },
+  "privacy.p12.2": {
+    "en": "If Chezmaxo becomes aware of an incident involving personal information, Chezmaxo will take reasonable steps to:",
+    "fr": "Si Chezmaxo prend connaissance d'un incident impliquant des renseignements personnels, Chezmaxo prendra des mesures raisonnables pour :"
+  },
+  "privacy.p12.li1": {
+    "en": "Contain and investigate the incident",
+    "fr": "Contenir et enquêter sur l'incident"
+  },
+  "privacy.p12.li2": {
+    "en": "Reduce the risk of harm",
+    "fr": "Réduire le risque de préjudice"
+  },
+  "privacy.p12.li3": {
+    "en": "Correct relevant security weaknesses",
+    "fr": "Corriger les failles de sécurité pertinentes"
+  },
+  "privacy.p12.li4": {
+    "en": "Document the incident",
+    "fr": "Documenter l'incident"
+  },
+  "privacy.p12.li5": {
+    "en": "Maintain any legally required incident register",
+    "fr": "Tenir tout registre d'incidents exigé par la loi"
+  },
+  "privacy.p12.li6": {
+    "en": "Notify affected individuals and the appropriate authorities when required by law",
+    "fr": "Aviser les personnes concernées et les autorités appropriées lorsque la loi l'exige"
+  },
+  "privacy.h2.13": {
+    "en": "13. Access and Correction Rights",
+    "fr": "13. Droits d'accès et de rectification"
+  },
+  "privacy.p13.1": {
+    "en": "Subject to applicable law, you may request:",
+    "fr": "Sous réserve de la loi applicable, vous pouvez demander :"
+  },
+  "privacy.p13.li1": {
+    "en": "Confirmation that Chezmaxo holds personal information about you",
+    "fr": "La confirmation que Chezmaxo détient des renseignements personnels vous concernant"
+  },
+  "privacy.p13.li2": {
+    "en": "Access to your personal information",
+    "fr": "L'accès à vos renseignements personnels"
+  },
+  "privacy.p13.li3": {
+    "en": "Correction of inaccurate or incomplete information",
+    "fr": "La correction de renseignements inexacts ou incomplets"
+  },
+  "privacy.p13.li4": {
+    "en": "Information about how your information has been used or communicated",
+    "fr": "Des renseignements sur la façon dont vos renseignements ont été utilisés ou communiqués"
+  },
+  "privacy.p13.li5": {
+    "en": "Withdrawal of consent",
+    "fr": "Le retrait de votre consentement"
+  },
+  "privacy.p13.li6": {
+    "en": "Deletion of information when Chezmaxo is not legally required to keep it",
+    "fr": "La suppression de renseignements lorsque Chezmaxo n'est pas légalement tenue de les conserver"
+  },
+  "privacy.p13.li7": {
+    "en": "Information about the applicable retention period",
+    "fr": "Des renseignements sur la période de conservation applicable"
+  },
+  "privacy.p13.2": {
+    "en": "Requests must be sent in writing to the Privacy Officer at:",
+    "fr": "Les demandes doivent être envoyées par écrit au responsable de la protection des renseignements personnels à :"
+  },
+  "privacy.p13.3": {
+    "en": "Chezmaxo may need to verify your identity before responding.",
+    "fr": "Chezmaxo pourrait avoir besoin de vérifier votre identité avant de répondre."
+  },
+  "privacy.p13.4": {
+    "en": "Access or deletion may be refused or limited where permitted or required by law. When applicable, Chezmaxo will explain the reason for the refusal and available recourse.",
+    "fr": "L'accès ou la suppression peuvent être refusés ou limités lorsque la loi le permet ou l'exige. Le cas échéant, Chezmaxo expliquera le motif du refus et les recours disponibles."
+  },
+  "privacy.h2.14": {
+    "en": "14. Privacy Complaints",
+    "fr": "14. Plaintes relatives à la vie privée"
+  },
+  "privacy.p14.1": {
+    "en": "Privacy questions or complaints should be submitted to the Chezmaxo Privacy Officer.",
+    "fr": "Les questions ou plaintes relatives à la vie privée devraient être soumises au responsable de la protection des renseignements personnels de Chezmaxo."
+  },
+  "privacy.p14.2": {
+    "en": "Please include:",
+    "fr": "Veuillez inclure :"
+  },
+  "privacy.p14.li1": {
+    "en": "Your name and contact information",
+    "fr": "Votre nom et vos coordonnées"
+  },
+  "privacy.p14.li2": {
+    "en": "A description of the concern",
+    "fr": "Une description de la préoccupation"
+  },
+  "privacy.p14.li3": {
+    "en": "Relevant dates or communications",
+    "fr": "Les dates ou communications pertinentes"
+  },
+  "privacy.p14.li4": {
+    "en": "The resolution you are requesting",
+    "fr": "La résolution que vous demandez"
+  },
+  "privacy.p14.3": {
+    "en": "Chezmaxo will review the complaint and respond within a reasonable period.",
+    "fr": "Chezmaxo examinera la plainte et répondra dans un délai raisonnable."
+  },
+  "privacy.p14.4": {
+    "en": "You may also have the right to submit a complaint to the Office of the Privacy Commissioner of Canada.",
+    "fr": "Vous pourriez également avoir le droit de soumettre une plainte au Commissariat à la protection de la vie privée du Canada."
+  },
+  "privacy.h2.15": {
+    "en": "15. Automated Decisions and Profiling",
+    "fr": "15. Décisions automatisées et profilage"
+  },
+  "privacy.p15.1": {
+    "en": "Chezmaxo does not currently use personal information to make decisions based exclusively on automated processing.",
+    "fr": "Chezmaxo n'utilise pas actuellement les renseignements personnels pour prendre des décisions fondées exclusivement sur un traitement automatisé."
+  },
+  "privacy.p15.2": {
+    "en": "Chezmaxo does not currently use personal information for behavioural profiling or targeted advertising.",
+    "fr": "Chezmaxo n'utilise pas actuellement les renseignements personnels à des fins de profilage comportemental ou de publicité ciblée."
+  },
+  "privacy.p15.3": {
+    "en": "This policy will be updated if these practices change.",
+    "fr": "Cette politique sera mise à jour si ces pratiques changent."
+  },
+  "privacy.h2.16": {
+    "en": "16. Children's Information",
+    "fr": "16. Renseignements concernant les enfants"
+  },
+  "privacy.p16.1": {
+    "en": "The Chezmaxo website and services are intended for businesses and adults.",
+    "fr": "Le site web et les services de Chezmaxo s'adressent aux entreprises et aux adultes."
+  },
+  "privacy.p16.2": {
+    "en": "Chezmaxo does not knowingly collect personal information directly from children through the website.",
+    "fr": "Chezmaxo ne recueille pas sciemment de renseignements personnels directement auprès d'enfants par l'intermédiaire du site web."
+  },
+  "privacy.p16.3": {
+    "en": "A parent or legal guardian who believes that a child has submitted personal information may contact Chezmaxo to request its review and deletion, subject to applicable law.",
+    "fr": "Un parent ou tuteur légal qui croit qu'un enfant a soumis des renseignements personnels peut contacter Chezmaxo pour en demander l'examen et la suppression, sous réserve de la loi applicable."
+  },
+  "privacy.h2.17": {
+    "en": "17. External Websites",
+    "fr": "17. Sites web externes"
+  },
+  "privacy.p17.1": {
+    "en": "The Chezmaxo website may contain links to external websites, including PayPal and client websites.",
+    "fr": "Le site web de Chezmaxo peut contenir des liens vers des sites externes, y compris PayPal et des sites de clients."
+  },
+  "privacy.p17.2": {
+    "en": "Chezmaxo does not control the privacy, security or content practices of external websites.",
+    "fr": "Chezmaxo ne contrôle pas les pratiques de confidentialité, de sécurité ou de contenu des sites web externes."
+  },
+  "privacy.p17.3": {
+    "en": "You should review the privacy policy of each third-party website before providing personal information.",
+    "fr": "Vous devriez examiner la politique de confidentialité de chaque site tiers avant de fournir des renseignements personnels."
+  },
+  "privacy.h2.18": {
+    "en": "18. Changes to This Policy",
+    "fr": "18. Modifications de cette politique"
+  },
+  "privacy.p18.1": {
+    "en": "Chezmaxo may update this Privacy Policy when its practices, website technologies, service providers or legal obligations change.",
+    "fr": "Chezmaxo peut mettre à jour cette politique de confidentialité lorsque ses pratiques, technologies de site web, fournisseurs de services ou obligations légales changent."
+  },
+  "privacy.p18.2": {
+    "en": "The updated policy will be posted on this page with a revised effective date.",
+    "fr": "La politique mise à jour sera publiée sur cette page avec une date de mise à jour révisée."
+  },
+  "privacy.p18.3": {
+    "en": "When required by law, affected individuals will be notified of material changes and consent will be obtained before personal information is used for a materially different purpose.",
+    "fr": "Lorsque la loi l'exige, les personnes concernées seront avisées des changements importants et le consentement sera obtenu avant que les renseignements personnels ne soient utilisés à une fin substantiellement différente."
+  },
+  "privacy.h2.19": {
+    "en": "19. Contact Chezmaxo",
+    "fr": "19. Contacter Chezmaxo"
+  },
+  "privacy.p19.1": {
+    "en": "Questions, privacy requests and complaints may be directed to:",
+    "fr": "Les questions, demandes et plaintes relatives à la vie privée peuvent être adressées à :"
   }
 };
 
