@@ -43,7 +43,7 @@ function badgeClass(plan){
 }
 
 function renderSidebar(){
-  const items = [["build","Website Build"],["plan","My plan"],["project","My project"],["requests","Update requests"],["payments","Payments"],["messages","Messages"]];
+  const items = [["build","Website Build"],["intake","Project Intake"],["agreement","Agreement"],["plan","My plan"],["project","My project"],["requests","Update requests"],["payments","Payments"],["messages","Messages"]];
   document.getElementById("sidebar").innerHTML = items.map(([k,l]) =>
     `<button data-tab="${k}" class="${state.tab===k?'active':''}"><span class="dot"></span>${l}</button>`).join("");
   document.querySelectorAll("#sidebar button").forEach(b => b.onclick = () => { state.tab = b.dataset.tab; renderMain(); });
@@ -142,11 +142,165 @@ async function renderMain(){
         </div>
         <div class="card">
           <h3>Ready for ongoing care?</h3>
-          <p style="color:var(--ink-soft);">Your build is paid and in progress — check the "My project" tab for status. Once it's live, pick a care plan to keep it monitored, backed up, and updated.</p>
+          <p style="color:var(--ink-soft);">Your build is paid and in progress — check the "My project" tab for status. Once it's live, pick a care plan to keep small updates and support handled going forward.</p>
           <button class="btn btn-primary" data-goto="plan">Choose a Care Plan</button>
         </div>`;
       const gotoBtn = main.querySelector("[data-goto]");
       if(gotoBtn) gotoBtn.onclick = () => { state.tab = "plan"; renderMain(); };
+    }
+  }
+  else if(state.tab === "intake"){
+    const intake = await getMyIntake(c.id);
+    const v = intake || {};
+    main.innerHTML = `
+      <div class="page-title"><div><div class="eyebrow">Before we start building</div><h2>Project Intake</h2></div></div>
+      <p style="color:var(--ink-soft); max-width:640px; margin-bottom:20px;">Fill this out once — it helps us scope your project accurately before work begins. You can update it any time before your build starts.</p>
+      <div class="card">
+        <h3 style="font-size:16px; margin-bottom:14px;">Business Information</h3>
+        <div class="form-grid">
+          <div class="field"><label>Industry / type of business</label><input id="in-industry" value="${v.industry||''}"></div>
+          <div class="field"><label>Existing website (if any)</label><input id="in-website" value="${v.existing_website||''}"></div>
+          <div class="field"><label>Years in business</label><input id="in-years" value="${v.years_in_business||''}"></div>
+          <div class="field"><label>Project type</label><select id="in-type">
+            <option ${v.project_type==='New website'?'selected':''}>New website</option>
+            <option ${v.project_type==='Redesign of an existing site'?'selected':''}>Redesign of an existing site</option>
+            <option ${v.project_type==='Not sure yet'?'selected':''}>Not sure yet</option>
+          </select></div>
+        </div>
+        <div class="field"><label>What should this website help your business do?</label><textarea id="in-goals" rows="2">${v.project_goals||''}</textarea></div>
+
+        <h3 style="font-size:16px; margin:18px 0 14px;">Content & Design</h3>
+        <div class="field"><label>Content status</label><select id="in-content">
+          <option ${v.content_status==='Ready to go'?'selected':''}>Ready to go</option>
+          <option ${v.content_status==='Some of it'?'selected':''}>Some of it</option>
+          <option ${v.content_status==='Need help preparing content'?'selected':''}>Need help preparing content</option>
+        </select></div>
+        <div class="field"><label>Colors, style, or reference websites you like</label><textarea id="in-design" rows="2">${v.design_preferences||''}</textarea></div>
+        <div class="field"><label>Features needed (comma-separated)</label><input id="in-features" placeholder="e.g. Contact form, Online booking, Gallery" value="${v.features_needed||''}"></div>
+
+        <h3 style="font-size:16px; margin:18px 0 14px;">Timeline & Budget</h3>
+        <div class="form-grid">
+          <div class="field"><label>Desired launch date, if any</label><input id="in-launch" value="${v.desired_launch_date||''}"></div>
+          <div class="field"><label>Estimated budget</label><select id="in-budget">
+            <option ${v.budget_range==='Under $200'?'selected':''}>Under $200</option>
+            <option ${v.budget_range==='$200–$400'?'selected':''}>$200–$400</option>
+            <option ${v.budget_range==='$400+'?'selected':''}>$400+</option>
+            <option ${v.budget_range==='Not sure yet'?'selected':''}>Not sure yet</option>
+          </select></div>
+        </div>
+        <div class="field"><label>Additional notes</label><textarea id="in-notes" rows="2">${v.additional_notes||''}</textarea></div>
+        <button class="btn btn-primary" id="in-save">Save Intake Form</button>
+        <span id="in-saved-msg" style="color:var(--color-secondary-dark); margin-left:12px; font-size:13px; display:none;">Saved ✓</span>
+      </div>`;
+    document.getElementById("in-save").onclick = async () => {
+      await saveIntake(c.id, {
+        industry: document.getElementById("in-industry").value.trim(),
+        existing_website: document.getElementById("in-website").value.trim(),
+        years_in_business: document.getElementById("in-years").value.trim(),
+        project_type: document.getElementById("in-type").value,
+        project_goals: document.getElementById("in-goals").value.trim(),
+        content_status: document.getElementById("in-content").value,
+        design_preferences: document.getElementById("in-design").value.trim(),
+        features_needed: document.getElementById("in-features").value.trim(),
+        desired_launch_date: document.getElementById("in-launch").value.trim(),
+        budget_range: document.getElementById("in-budget").value,
+        additional_notes: document.getElementById("in-notes").value.trim(),
+      });
+      const msg = document.getElementById("in-saved-msg");
+      msg.style.display = "inline";
+      setTimeout(() => msg.style.display = "none", 2500);
+    };
+  }
+  else if(state.tab === "agreement"){
+    const order = await getMyBuildOrder(c.id);
+    const agreement = await getMyAgreement(c.id);
+    const isSigned = agreement && agreement.signed_at;
+    const v = agreement || {};
+    const servicesSelected = v.services_selected || (order ? order.description : "");
+    const quotedPrice = v.quoted_price || (order ? order.amount : "");
+
+    if (isSigned) {
+      main.innerHTML = `
+        <div class="page-title no-print"><div><div class="eyebrow">Signed</div><h2>Website Development Agreement</h2></div></div>
+        <div class="card print-area">
+          <h2 style="margin-bottom:2px;">Chezmaxo — Website Development Agreement</h2>
+          <p style="color:var(--ink-faint); font-size:12px; margin-bottom:18px;">Signed electronically on ${new Date(agreement.signed_at).toLocaleString()}</p>
+          <p><strong>Client:</strong> ${c.full_name || ''} — ${c.business_name || ''}</p>
+          <p><strong>Services:</strong> ${servicesSelected}</p>
+          <p><strong>Total price:</strong> $${quotedPrice}</p>
+          <p><strong>Payment structure:</strong> ${v.payment_structure || '—'}</p>
+          <p><strong>Revisions included:</strong> ${v.revision_rounds || '—'}</p>
+          <p><strong>Content due date:</strong> ${v.content_due_date || '—'}</p>
+          <p><strong>Estimated start / completion:</strong> ${v.estimated_start_date || '—'} to ${v.estimated_completion_date || '—'}</p>
+          <p><strong>Third-party costs (estimated):</strong> ${v.third_party_costs || '—'}</p>
+          <p><strong>Care plan selected:</strong> ${v.care_plan_selected || 'Not selected at this time'}</p>
+          <p><strong>Portfolio use:</strong> ${v.portfolio_consent ? 'Chezmaxo may display this project in its portfolio' : 'Client requested confidentiality — not shown in portfolio'}</p>
+          <p><strong>Project notes:</strong> ${v.project_notes || '—'}</p>
+          <p style="margin-top:16px; color:var(--ink-faint); font-size:12px;">This agreement incorporates by reference the Chezmaxo Terms of Service, Website Care Plan Terms (if applicable), and Privacy Policy.</p>
+          <p style="margin-top:18px;"><strong>Signed by:</strong> ${agreement.signed_name}</p>
+        </div>
+        <button class="btn btn-primary no-print" id="ag-print" style="margin-top:16px;">Download PDF</button>`;
+      document.getElementById("ag-print").onclick = () => window.print();
+    } else {
+      main.innerHTML = `
+        <div class="page-title"><div><div class="eyebrow">Before work begins</div><h2>Website Development Agreement</h2></div></div>
+        <div class="card">
+          <div class="field"><label>Services</label><input id="ag-services" value="${servicesSelected}"></div>
+          <div class="field"><label>Total price ($)</label><input id="ag-price" type="number" step="0.01" value="${quotedPrice}"></div>
+          <div class="field"><label>Payment structure</label><select id="ag-paystruct">
+            <option ${v.payment_structure==='Full payment before work begins'?'selected':''}>Full payment before work begins</option>
+            <option ${v.payment_structure==='Payment plan (as agreed in writing)'?'selected':''}>Payment plan (as agreed in writing)</option>
+          </select></div>
+          <div class="field"><label>Revision rounds included</label><input id="ag-revisions" value="${v.revision_rounds||''}"></div>
+          <div class="form-grid">
+            <div class="field"><label>Content due date</label><input id="ag-contentdue" value="${v.content_due_date||''}"></div>
+            <div class="field"><label>Estimated start date</label><input id="ag-start" value="${v.estimated_start_date||''}"></div>
+            <div class="field"><label>Estimated completion date</label><input id="ag-completion" value="${v.estimated_completion_date||''}"></div>
+            <div class="field"><label>Third-party costs (estimated)</label><input id="ag-thirdparty" value="${v.third_party_costs||''}"></div>
+          </div>
+          <div class="field"><label>Care plan selected</label><select id="ag-careplan">
+            <option ${v.care_plan_selected==='Not selected at this time'?'selected':''}>Not selected at this time</option>
+            <option ${v.care_plan_selected==='Starter Care'?'selected':''}>Starter Care</option>
+            <option ${v.care_plan_selected==='Monthly Support'?'selected':''}>Monthly Support</option>
+            <option ${v.care_plan_selected==='Business Care'?'selected':''}>Business Care</option>
+          </select></div>
+          <label style="display:flex; gap:8px; align-items:flex-start; font-weight:400; font-size:14px; margin:10px 0;">
+            <input type="checkbox" id="ag-portfolio" style="width:auto; margin-top:3px;" ${v.portfolio_consent!==false?'checked':''}>
+            <span>Chezmaxo may display this completed website in its portfolio and marketing materials (uncheck to request confidentiality)</span>
+          </label>
+          <div class="field"><label>Project-specific notes or exclusions</label><textarea id="ag-notes" rows="2">${v.project_notes||''}</textarea></div>
+          <button class="btn btn-secondary" id="ag-save">Save Draft</button>
+        </div>
+        <div class="card" style="margin-top:16px;">
+          <h3 style="font-size:16px; margin-bottom:10px;">Sign & Accept</h3>
+          <p style="color:var(--ink-soft); font-size:13.5px; margin-bottom:12px;">This agreement incorporates the Chezmaxo Terms of Service, Website Care Plan Terms (if a plan is selected), and Privacy Policy. Save your draft above before signing.</p>
+          <div class="field"><label>Type your full name to sign</label><input id="ag-signname" placeholder="Full legal name"></div>
+          <button class="btn btn-primary" id="ag-sign">Sign Agreement</button>
+        </div>`;
+      const collectFields = () => ({
+        services_selected: document.getElementById("ag-services").value.trim(),
+        quoted_price: parseFloat(document.getElementById("ag-price").value) || null,
+        payment_structure: document.getElementById("ag-paystruct").value,
+        revision_rounds: document.getElementById("ag-revisions").value.trim(),
+        content_due_date: document.getElementById("ag-contentdue").value.trim(),
+        estimated_start_date: document.getElementById("ag-start").value.trim(),
+        estimated_completion_date: document.getElementById("ag-completion").value.trim(),
+        third_party_costs: document.getElementById("ag-thirdparty").value.trim(),
+        care_plan_selected: document.getElementById("ag-careplan").value,
+        portfolio_consent: document.getElementById("ag-portfolio").checked,
+        project_notes: document.getElementById("ag-notes").value.trim(),
+      });
+      document.getElementById("ag-save").onclick = async () => {
+        await saveAgreementDraft(c.id, collectFields());
+        renderMain();
+      };
+      document.getElementById("ag-sign").onclick = async () => {
+        const name = document.getElementById("ag-signname").value.trim();
+        if(!name){ alert("Type your full name to sign."); return; }
+        const id = await saveAgreementDraft(c.id, collectFields());
+        await signAgreement(id, name);
+        renderMain();
+      };
     }
   }
   else if(state.tab === "plan"){
@@ -167,7 +321,32 @@ async function renderMain(){
         </div>`;
       }).join("")}
       </div>
-      <p style="color:var(--ink-faint);font-size:12.5px;margin-top:14px;">Switching plans or billing cycle here updates your dashboard immediately. Your next invoice will reflect the change.</p>`;
+      <p style="color:var(--ink-faint);font-size:12.5px;margin-top:14px;">Switching plans or billing cycle here updates your dashboard immediately. Your next invoice will reflect the change.</p>
+      <div class="card" style="margin-top:20px;">
+        <h3 style="font-size:15px; margin-bottom:10px;">Payment preference & acknowledgment</h3>
+        <div class="field"><label>Preferred payment method</label><select id="plan-paymethod">
+          <option value="PayPal" ${c.preferred_payment_method==='PayPal'?'selected':''}>PayPal</option>
+          <option value="Zelle" ${c.preferred_payment_method==='Zelle'?'selected':''}>Zelle</option>
+          <option value="Interac e-Transfer" ${c.preferred_payment_method==='Interac e-Transfer'?'selected':''}>Interac e-Transfer</option>
+        </select></div>
+        <label style="display:flex; gap:8px; align-items:flex-start; font-weight:400; font-size:13.5px; margin:10px 0;">
+          <input type="checkbox" id="plan-ack" style="width:auto; margin-top:3px;" ${c.care_terms_acknowledged_at ? 'checked disabled' : ''}>
+          <span>I have read and agree to the <a href="../care-plan-terms.html" target="_blank">Website Care Plan Terms</a>, and understand billing is manual each period, not automatic.</span>
+        </label>
+        ${c.care_terms_acknowledged_at
+          ? `<p style="color:var(--ink-faint); font-size:12px;">Acknowledged on ${new Date(c.care_terms_acknowledged_at).toLocaleDateString()}.</p>`
+          : `<button class="btn btn-secondary btn-sm" id="plan-ack-save">Save Preference & Acknowledge</button>`}
+      </div>`;
+    if(!c.care_terms_acknowledged_at){
+      document.getElementById("plan-ack-save").onclick = async () => {
+        if(!document.getElementById("plan-ack").checked){ alert("Please check the box to acknowledge the Care Plan Terms."); return; }
+        const method = document.getElementById("plan-paymethod").value;
+        await acknowledgeCareTerms(c.id, method);
+        c.preferred_payment_method = method;
+        c.care_terms_acknowledged_at = new Date().toISOString();
+        renderMain();
+      };
+    }
     main.querySelectorAll("[data-switch]").forEach(b => b.onclick = async () => {
       await updateClientPlan(c.id, b.dataset.switch);
       c.plan = b.dataset.switch;
