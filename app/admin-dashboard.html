@@ -37,7 +37,7 @@ function badgeClass(plan){
 }
 
 function renderSidebar(){
-  const items = [["projects","Projects (CRM)"],["orders","Build Orders"],["intakes","Intake Forms"],["agreements","Agreements"],["requests","Update requests"],["finance","Finance"],["applications","Applications"],["team","Team"],["payments","Payments"],["messages","Messages"]];
+  const items = [["projects","Projects (CRM)"],["orders","Build Orders"],["intakes","Intake Forms"],["agreements","Agreements"],["chat","Live Chat"],["requests","Update requests"],["finance","Finance"],["applications","Applications"],["team","Team"],["payments","Payments"],["messages","Messages"]];
   document.getElementById("sidebar").innerHTML = items.map(([k,l]) =>
     `<button data-tab="${k}" class="${state.tab===k?'active':''}"><span class="dot"></span>${l}</button>`).join("");
   document.querySelectorAll("#sidebar button").forEach(b => b.onclick = () => { state.tab = b.dataset.tab; renderMain(); });
@@ -131,6 +131,56 @@ async function renderMain(){
           <td>${a.signed_at ? `<span style="font-size:12px;color:var(--ink-faint);">by ${a.signed_name}, ${new Date(a.signed_at).toLocaleDateString()}</span>` : ''}</td></tr>`).join('') : '<tr><td colspan="6" class="empty-note">No agreements yet.</td></tr>'}
         </tbody></table>
       </div>`;
+  }
+  else if(state.tab === "chat"){
+    const responses = await getAllChatResponses();
+    const emotions = ["get_help","agreeing","wondering","excited","thinking","not_agreeing","happy","excited_big","curious","sad","disappointed","confused"];
+    main.innerHTML = `
+      <div class="page-title"><div><div class="eyebrow">Live chat</div><h2>Chat Responses</h2></div></div>
+      <div class="card" style="margin-bottom:18px;">
+        <h3 style="font-size:15px; margin-bottom:10px;">Add a new response</h3>
+        <div class="field"><label>Keywords (comma-separated)</label><input id="cr-new-keywords" placeholder="e.g. pricing, how much does it cost, prix"></div>
+        <div class="form-grid">
+          <div class="field"><label>Response (English)</label><textarea id="cr-new-en" rows="2"></textarea></div>
+          <div class="field"><label>Response (French)</label><textarea id="cr-new-fr" rows="2"></textarea></div>
+        </div>
+        <div class="field"><label>Emotion / reaction</label><select id="cr-new-emotion">
+          ${emotions.map(e => `<option value="${e}">${e.replace('_',' ')}</option>`).join('')}
+        </select></div>
+        <button class="btn btn-primary" id="cr-add-btn">Add Response</button>
+      </div>
+      <div class="card" style="padding:0;">
+        <table class="table"><thead><tr><th>Keywords</th><th>English reply</th><th>Emotion</th><th>Active</th><th></th></tr></thead>
+        <tbody>${responses.length ? responses.map(r => `
+          <tr data-id="${r.id}">
+            <td style="max-width:160px; font-size:12px; color:var(--ink-faint);">${r.keywords}</td>
+            <td style="max-width:280px; font-size:13px;">${r.response_en}</td>
+            <td style="font-size:12px;">${r.emotion.replace('_',' ')}</td>
+            <td><label style="display:inline-flex;align-items:center;gap:4px;font-weight:400;"><input type="checkbox" class="cr-active-toggle" data-id="${r.id}" ${r.active?'checked':''} style="width:auto;"></label></td>
+            <td><button class="btn btn-secondary btn-sm cr-delete-btn" data-id="${r.id}">Delete</button></td>
+          </tr>`).join('') : '<tr><td colspan="5" class="empty-note">No chat responses yet — add one above.</td></tr>'}
+        </tbody></table>
+      </div>`;
+
+    document.getElementById("cr-add-btn").onclick = async () => {
+      const keywords = document.getElementById("cr-new-keywords").value.trim();
+      const en = document.getElementById("cr-new-en").value.trim();
+      const fr = document.getElementById("cr-new-fr").value.trim();
+      const emotion = document.getElementById("cr-new-emotion").value;
+      if(!keywords || !en || !fr){ alert("Fill in keywords and both language responses."); return; }
+      await addChatResponse(keywords, en, fr, emotion);
+      renderMain();
+    };
+    document.querySelectorAll(".cr-active-toggle").forEach(cb => {
+      cb.onchange = async () => { await setChatResponseActive(cb.dataset.id, cb.checked); };
+    });
+    document.querySelectorAll(".cr-delete-btn").forEach(btn => {
+      btn.onclick = async () => {
+        if(!confirm("Delete this chat response?")) return;
+        await deleteChatResponse(btn.dataset.id);
+        renderMain();
+      };
+    });
   }
   else if(state.tab === "requests"){
     const rows = await listAllRequests();
