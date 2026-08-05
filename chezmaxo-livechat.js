@@ -34,6 +34,9 @@
     { keywords: ["parler à quelqu'un","speak to someone","talk to a human","real person"],
       fr: "Bien sûr ! Laissez-moi votre courriel et votre question, et on vous répond rapidement.",
       en: "Of course! Leave your email and your question, and we'll get back to you quickly.", emotion: "get_help" },
+    { keywords: ["blague","tell me a joke","dis moi une blague","make me laugh","have any jokes","any jokes","dad joke"],
+      fr: "Pourquoi le site web est-il allé en thérapie ? Trop de problèmes non résolus.|||Pourquoi les programmeurs préfèrent le mode sombre ? Parce que la lumière attire les bogues.",
+      en: "Why did the website go to therapy? Too many unresolved issues.|||Why do programmers prefer dark mode? Because light attracts bugs.", emotion: "excited" },
     { keywords: ["es tu un robot","are you a robot","are you an ai"],
       fr: "Je m'appelle MaxBot — un assistant automatisé qui répond aux questions courantes. Mais une vraie personne (Maxo) peut prendre le relais à tout moment !",
       en: "I'm MaxBot — an automated assistant that answers common questions. But a real person (Maxo) can jump in any time!", emotion: "confused" },
@@ -121,6 +124,14 @@
 
   function avatarUrl(emotion) {
     return "images/chat/" + emotion + ".webp";
+  }
+
+  // Some entries (like jokes) hold several alternatives separated by "|||"
+  // so the same question doesn't always get the exact same reply.
+  function pickResponse(text) {
+    if (!text || text.indexOf("|||") === -1) return text;
+    var options = text.split("|||");
+    return options[Math.floor(Math.random() * options.length)];
   }
 
   var visitorName = "";
@@ -321,7 +332,7 @@
       typingRow.remove();
       var lang = getLang();
       var match = matchKeyword(text);
-      var replyText = match ? match[lang] : FALLBACK[lang];
+      var replyText = match ? pickResponse(match[lang]) : FALLBACK[lang];
       var emotion = match ? match.emotion : FALLBACK.emotion;
       appendRow("bot", replyText);
       setReaction(emotion);
