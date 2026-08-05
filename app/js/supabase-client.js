@@ -337,3 +337,28 @@ async function acknowledgeCareTerms(clientId, paymentMethod) {
   }).eq("id", clientId);
   if (error) throw error;
 }
+
+// ---------------- Live chat responses (admin management) ----------------
+
+async function getAllChatResponses() {
+  const { data, error } = await sb.from("chat_responses").select("*").order("sort_order", { ascending: true });
+  if (error) throw error;
+  return data;
+}
+
+async function addChatResponse(keywords, responseEn, responseFr, emotion) {
+  const { error } = await sb.from("chat_responses").insert({
+    keywords, response_en: responseEn, response_fr: responseFr, emotion,
+  });
+  if (error) throw error;
+}
+
+async function setChatResponseActive(id, active) {
+  const { error } = await sb.from("chat_responses").update({ active }).eq("id", id);
+  if (error) throw error;
+}
+
+async function deleteChatResponse(id) {
+  const { error } = await sb.from("chat_responses").delete().eq("id", id);
+  if (error) throw error;
+}
