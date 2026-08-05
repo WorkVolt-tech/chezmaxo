@@ -79,8 +79,8 @@
   }
 
   var FALLBACK = {
-    fr: "Merci pour votre message ! Je n'ai pas de réponse précise pour ça, mais Maxo peut vous répondre directement — laissez votre courriel, ou écrivez-nous via le formulaire de contact.",
-    en: "Thanks for your message! I don't have a specific answer for that, but Maxo can help directly — leave your email, or reach out through the contact form.",
+    fr: "Celle-là me dépasse complètement — même ma longue liste de réponses préprogrammées a ses limites. Essayez de reformuler, ou écrivez directement à Maxo pour qu'une vraie personne s'en occupe.",
+    en: "That one's got me stumped — even my extensive list of pre-programmed answers has limits. Try rephrasing, or just email Maxo directly and let a real human take a crack at it.",
     emotion: "confused"
   };
 
