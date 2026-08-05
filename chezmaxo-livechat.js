@@ -14,8 +14,8 @@
   // or if Supabase is unreachable.
   var RESPONSES = [
     { keywords: ["bonjour","allo","salut","hello","hi","hey"],
-      fr: "Bonjour ! Je suis l'assistant de Chezmaxo. Posez-moi vos questions sur les prix, les délais, ou comment ça fonctionne !",
-      en: "Hi there! I'm Chezmaxo's assistant. Ask me about pricing, timelines, or how everything works!", emotion: "happy" },
+      fr: "Bonjour ! Je suis MaxBot, l'assistant de Chezmaxo. Posez-moi vos questions sur les prix, les délais, ou comment ça fonctionne !",
+      en: "Hi there! I'm MaxBot, Chezmaxo's assistant. Ask me about pricing, timelines, or how everything works!", emotion: "happy" },
     { keywords: ["combien ça coûte","how much does a website","website cost","pricing"],
       fr: "Un site Starter commence à 199 $, un site Business à 399 $, et les projets plus avancés sont soumis à un devis personnalisé.",
       en: "A Starter website starts at $199, a Business website at $399, and more advanced projects get a custom quote.", emotion: "happy" },
@@ -29,8 +29,11 @@
       fr: "Bien sûr ! Laissez-moi votre courriel et votre question, et on vous répond rapidement.",
       en: "Of course! Leave your email and your question, and we'll get back to you quickly.", emotion: "get_help" },
     { keywords: ["es tu un robot","are you a robot","are you an ai"],
-      fr: "Je suis un assistant automatisé qui répond aux questions courantes — mais une vraie personne peut prendre le relais à tout moment !",
-      en: "I'm an automated assistant that answers common questions — but a real person can jump in any time!", emotion: "confused" },
+      fr: "Je m'appelle MaxBot — un assistant automatisé qui répond aux questions courantes. Mais une vraie personne (Maxo) peut prendre le relais à tout moment !",
+      en: "I'm MaxBot — an automated assistant that answers common questions. But a real person (Maxo) can jump in any time!", emotion: "confused" },
+    { keywords: ["are you real","es-tu réel","es tu reel","are you a real person"],
+      fr: "Pas vraiment — je suis MaxBot, un assistant automatisé, pas une vraie personne. Mais une vraie personne (Maxo) peut prendre le relais à tout moment.",
+      en: "Not exactly — I'm MaxBot, an automated assistant, not a real person. But a real human (Maxo) can jump in any time you'd like.", emotion: "confused" },
   ];
 
   // Config: set these inline on the page before this script loads, e.g.
@@ -64,8 +67,8 @@
   };
 
   var GREETING = {
-    fr: "Bonjour ! Je suis l'assistant de Chezmaxo. Posez-moi vos questions sur les prix, les délais, ou comment ça fonctionne — sérieuses ou pas !",
-    en: "Hi! I'm Chezmaxo's assistant. Ask me about pricing, timelines, or how everything works — serious questions or silly ones, I don't mind!",
+    fr: "Bonjour ! Je suis MaxBot, l'assistant de Chezmaxo. Posez-moi vos questions sur les prix, les délais, ou comment ça fonctionne — sérieuses ou pas !",
+    en: "Hi! I'm MaxBot, Chezmaxo's assistant. Ask me about pricing, timelines, or how everything works — serious questions or silly ones, I don't mind!",
     emotion: "get_help"
   };
 
@@ -128,17 +131,18 @@
     'display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative;border:none;}' +
     '#cmx-chat-bubble svg{width:26px;height:26px;fill:#fff;}' +
     '#cmx-chat-badge{position:absolute;top:-4px;right:-4px;background:var(--color-secondary,#E8871E);color:#fff;border-radius:10px;font-size:11px;padding:1px 6px;font-weight:600;}' +
-    '#cmx-chat-panel{position:fixed;bottom:92px;right:22px;width:340px;max-width:92vw;height:460px;max-height:72vh;background:#fff;' +
+    '#cmx-chat-panel{position:fixed;bottom:92px;right:22px;width:340px;max-width:92vw;height:520px;max-height:78vh;background:#fff;' +
     'border-radius:14px;box-shadow:0 10px 34px rgba(0,0,0,.28);display:none;flex-direction:column;overflow:hidden;}' +
     '#cmx-chat-panel.open{display:flex;}' +
     '#cmx-chat-head{background:var(--color-primary,#1B3A5C);color:#fff;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;}' +
     '#cmx-chat-head span{font-size:.95rem;font-weight:600;}' +
     '#cmx-chat-close{background:none;border:0;color:#fff;font-size:20px;cursor:pointer;line-height:1;opacity:.85;}' +
     '#cmx-chat-close:hover{opacity:1;}' +
+    '#cmx-chat-reaction{display:flex;align-items:center;justify-content:center;background:#f0f2f5;border-bottom:1px solid #e3e5e9;padding:8px 0;}' +
+    '#cmx-chat-reaction img{height:92px;width:auto;object-fit:contain;transition:opacity .15s ease;}' +
     '#cmx-chat-body{flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:10px;background:#f7f8fa;}' +
-    '.cmx-row{display:flex;align-items:flex-end;gap:8px;max-width:92%;}' +
-    '.cmx-row.visitor{align-self:flex-end;flex-direction:row-reverse;}' +
-    '.cmx-avatar{width:44px;height:44px;flex-shrink:0;object-fit:contain;object-position:bottom;}' +
+    '.cmx-row{display:flex;max-width:92%;}' +
+    '.cmx-row.visitor{align-self:flex-end;}' +
     '.cmx-msg{padding:8px 12px;border-radius:14px;font-size:.87rem;line-height:1.42;white-space:pre-wrap;}' +
     '.cmx-row.visitor .cmx-msg{background:var(--color-primary,#1B3A5C);color:#fff;border-bottom-right-radius:3px;}' +
     '.cmx-row.bot .cmx-msg,.cmx-row.system .cmx-msg{background:#fff;color:#222;border:1px solid #e3e5e9;border-bottom-left-radius:3px;}' +
@@ -149,7 +153,7 @@
     '#cmx-chat-input{flex:1;border:1px solid #dcdfe3;border-radius:18px;padding:8px 13px;font-size:.87rem;font-family:inherit;outline:none;}' +
     '#cmx-chat-send{background:var(--color-secondary,#E8871E);border:0;color:#fff;border-radius:50%;width:36px;height:36px;cursor:pointer;flex-shrink:0;font-size:15px;}' +
     '#cmx-chat-send:disabled{opacity:.6;cursor:default;}' +
-    '#cmx-chat-chips{display:flex;flex-wrap:wrap;gap:6px;margin-left:52px;max-width:100%;}' +
+    '#cmx-chat-chips{display:flex;flex-wrap:wrap;gap:6px;max-width:100%;}' +
     '.cmx-chip{border:1px solid var(--color-secondary,#E8871E);color:var(--color-secondary,#E8871E);background:#fff;border-radius:16px;padding:6px 12px;font-size:.78rem;cursor:pointer;font-family:inherit;}' +
     '.cmx-chip:hover{background:var(--color-secondary,#E8871E);color:#fff;}' +
     '</style>' +
@@ -157,7 +161,8 @@
       '<svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>' +
     '</button>' +
     '<div id="cmx-chat-panel">' +
-      '<div id="cmx-chat-head"><span data-lang="fr">Discuter avec nous</span><span data-lang="en">Chat with us</span><button id="cmx-chat-close" aria-label="Close">\u00d7</button></div>' +
+      '<div id="cmx-chat-head"><span data-lang="fr">Discuter avec MaxBot</span><span data-lang="en">Chat with MaxBot</span><button id="cmx-chat-close" aria-label="Close">\u00d7</button></div>' +
+      '<div id="cmx-chat-reaction"><img id="cmx-reaction-img" src="" alt=""></div>' +
       '<div id="cmx-chat-namebar"><input type="text" id="cmx-chat-name" placeholder="Votre nom (optionnel) / Your name (optional)"></div>' +
       '<div id="cmx-chat-body"></div>' +
       '<div id="cmx-chat-inputbar">' +
@@ -174,20 +179,24 @@
   var sendBtn = document.getElementById("cmx-chat-send");
   var nameEl = document.getElementById("cmx-chat-name");
   var nameBar = document.getElementById("cmx-chat-namebar");
+  var reactionImg = document.getElementById("cmx-reaction-img");
   var badge = null, badgeCount = 0;
 
   nameEl.value = visitorName;
   if (visitorName) nameBar.style.display = "none";
 
-  function appendRow(sender, text, emotion) {
+  function setReaction(emotion) {
+    reactionImg.style.opacity = "0";
+    setTimeout(function () {
+      reactionImg.src = avatarUrl(emotion || "happy");
+      reactionImg.style.opacity = "1";
+    }, 120);
+  }
+
+  function appendRow(sender, text) {
     var row = document.createElement("div");
     row.className = "cmx-row " + sender;
-    var html = "";
-    if (sender === "bot" || sender === "system") {
-      html += '<img class="cmx-avatar" src="' + avatarUrl(emotion || "happy") + '" alt="">';
-    }
-    html += '<div class="cmx-msg"></div>';
-    row.innerHTML = html;
+    row.innerHTML = '<div class="cmx-msg"></div>';
     row.querySelector(".cmx-msg").textContent = text;
     bodyEl.appendChild(row);
     bodyEl.scrollTop = bodyEl.scrollHeight;
@@ -237,7 +246,12 @@
   function renderHistory() {
     bodyEl.innerHTML = "";
     var history = loadHistory();
-    history.forEach(function (m) { appendRow(m.sender, m.text, m.emotion); });
+    var lastEmotion = "happy";
+    history.forEach(function (m) {
+      appendRow(m.sender, m.text);
+      if (m.sender === "bot" && m.emotion) lastEmotion = m.emotion;
+    });
+    setReaction(lastEmotion);
   }
 
   function resetConversation() {
@@ -258,7 +272,8 @@
       if (!history.length) {
         var lang = getLang();
         var g = GREETING;
-        appendRow("bot", lang === "en" ? g.en : g.fr, g.emotion);
+        appendRow("bot", lang === "en" ? g.en : g.fr);
+        setReaction(g.emotion);
         var h = loadHistory();
         h.push({ sender: "bot", text: lang === "en" ? g.en : g.fr, emotion: g.emotion });
         saveHistory(h);
@@ -284,7 +299,8 @@
     saveHistory(history);
 
     sendBtn.disabled = true;
-    var typingRow = appendRow("bot typing", "...", TYPING_EMOTION);
+    setReaction(TYPING_EMOTION);
+    var typingRow = appendRow("bot typing", "...");
 
     setTimeout(function () {
       typingRow.remove();
@@ -292,7 +308,8 @@
       var match = matchKeyword(text);
       var replyText = match ? match[lang] : FALLBACK[lang];
       var emotion = match ? match.emotion : FALLBACK.emotion;
-      appendRow("bot", replyText, emotion);
+      appendRow("bot", replyText);
+      setReaction(emotion);
       var h = loadHistory();
       h.push({ sender: "bot", text: replyText, emotion: emotion });
       saveHistory(h);
