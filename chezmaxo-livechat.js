@@ -312,6 +312,18 @@
   bubble.addEventListener("click", function () { openPanel(!panel.classList.contains("open")); });
   document.getElementById("cmx-chat-close").addEventListener("click", function () { openPanel(false); });
 
+  var NAME_QUESTION_KEYWORDS = [
+    "do you know my name", "what's my name", "whats my name", "remember my name",
+    "quel est mon nom", "connais-tu mon nom", "connais tu mon nom", "tu connais mon nom", "te souviens-tu de mon nom"
+  ];
+  function isNameQuestion(text) {
+    var lower = text.toLowerCase();
+    for (var i = 0; i < NAME_QUESTION_KEYWORDS.length; i++) {
+      if (containsKeyword(lower, NAME_QUESTION_KEYWORDS[i])) return true;
+    }
+    return false;
+  }
+
   function send() {
     var text = inputEl.value.trim();
     if (!text) return;
@@ -331,6 +343,31 @@
     setTimeout(function () {
       typingRow.remove();
       var lang = getLang();
+      var knownName = name || visitorName;
+
+      if (isNameQuestion(text)) {
+        var replyText, emotion;
+        if (knownName) {
+          replyText = lang === "en"
+            ? "Of course, " + knownName + "! I never forget a name — mostly because you're the one who typed it in."
+            : "Bien sûr, " + knownName + " ! Je n'oublie jamais un nom — surtout parce que c'est vous qui l'avez tapé.";
+          emotion = "excited";
+        } else {
+          replyText = lang === "en"
+            ? "I don't, actually — you never told me! Pop it in the name box above and I'll remember it for the rest of our chat."
+            : "Non, en fait — vous ne me l'avez jamais dit ! Inscrivez-le dans la case ci-dessus et je m'en souviendrai pour le reste de notre conversation.";
+          emotion = "wondering";
+        }
+        appendRow("bot", replyText);
+        setReaction(emotion);
+        var h0 = loadHistory();
+        h0.push({ sender: "bot", text: replyText, emotion: emotion });
+        saveHistory(h0);
+        sendBtn.disabled = false;
+        if (!panel.classList.contains("open")) showBadge();
+        return;
+      }
+
       var match = matchKeyword(text);
       var replyText = match ? pickResponse(match[lang]) : FALLBACK[lang];
       var emotion = match ? match.emotion : FALLBACK.emotion;
