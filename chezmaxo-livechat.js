@@ -283,6 +283,7 @@
   function resetConversation() {
     clearHistory();
     bodyEl.innerHTML = "";
+    expectingMoodReply = false;
   }
 
   function openPanel(open) {
@@ -311,6 +312,53 @@
   }
   bubble.addEventListener("click", function () { openPanel(!panel.classList.contains("open")); });
   document.getElementById("cmx-chat-close").addEventListener("click", function () { openPanel(false); });
+
+  // ---------- Light conversation memory: one message deep ----------
+  // MaxBot doesn't track full context, but it does remember one thing:
+  // whether its last reply ended by asking the visitor how *they* are
+  // doing. If so, the very next message gets checked against a small
+  // set of mood replies before falling back to normal keyword matching.
+  var expectingMoodReply = false;
+  var ASKED_BACK_PATTERN = /how about you\?|et vous\s*\?|et toi\s*\?/i;
+  // Order matters: negated multi-word phrases are checked before their
+  // bare single-word substrings, so "not great" resolves as negative
+  // instead of matching "great" (positive) first.
+  var MOOD_PHRASES = [
+    { phrase: "not bad", sentiment: "positive" },
+    { phrase: "pas mal", sentiment: "positive" },
+    { phrase: "not great", sentiment: "negative" },
+    { phrase: "not good", sentiment: "negative" },
+    { phrase: "not well", sentiment: "negative" },
+    { phrase: "pas bien", sentiment: "negative" },
+    { phrase: "pretty good", sentiment: "positive" },
+    { phrase: "ça va bien", sentiment: "positive" },
+    { phrase: "good", sentiment: "positive" },
+    { phrase: "great", sentiment: "positive" },
+    { phrase: "fine", sentiment: "positive" },
+    { phrase: "awesome", sentiment: "positive" },
+    { phrase: "amazing", sentiment: "positive" },
+    { phrase: "well", sentiment: "positive" },
+    { phrase: "bien", sentiment: "positive" },
+    { phrase: "super", sentiment: "positive" },
+    { phrase: "excellent", sentiment: "positive" },
+    { phrase: "bad", sentiment: "negative" },
+    { phrase: "terrible", sentiment: "negative" },
+    { phrase: "awful", sentiment: "negative" },
+    { phrase: "tired", sentiment: "negative" },
+    { phrase: "stressed", sentiment: "negative" },
+    { phrase: "fatigué", sentiment: "negative" },
+    { phrase: "fatiguée", sentiment: "negative" },
+    { phrase: "stressé", sentiment: "negative" },
+    { phrase: "stressée", sentiment: "negative" },
+    { phrase: "mal", sentiment: "negative" },
+  ];
+  function matchMood(text) {
+    var lower = text.toLowerCase();
+    for (var i = 0; i < MOOD_PHRASES.length; i++) {
+      if (containsKeyword(lower, MOOD_PHRASES[i].phrase)) return MOOD_PHRASES[i].sentiment;
+    }
+    return null;
+  }
 
   var NAME_QUESTION_KEYWORDS = [
     "do you know my name", "what's my name", "whats my name", "remember my name",
@@ -345,6 +393,25 @@
       var lang = getLang();
       var knownName = name || visitorName;
 
+      var wasExpectingMood = expectingMoodReply;
+      expectingMoodReply = false;
+
+      if (wasExpectingMood && matchMood(text)) {
+        var moodGood = matchMood(text) === "positive";
+        var moodReply = moodGood
+          ? (lang === "en" ? "Glad to hear it! What can I help you with today?" : "Content de l'entendre ! Comment puis-je vous aider aujourd'hui ?")
+          : (lang === "en" ? "Sorry to hear that — hope things look up soon. I'm here if you need anything in the meantime!" : "Désolé d'entendre ça — j'espère que ça ira mieux bientôt. Je suis là si vous avez besoin de quoi que ce soit !");
+        var moodEmotion = moodGood ? "happy" : "sad";
+        appendRow("bot", moodReply);
+        setReaction(moodEmotion);
+        var hm = loadHistory();
+        hm.push({ sender: "bot", text: moodReply, emotion: moodEmotion });
+        saveHistory(hm);
+        sendBtn.disabled = false;
+        if (!panel.classList.contains("open")) showBadge();
+        return;
+      }
+
       if (isNameQuestion(text)) {
         var replyText, emotion;
         if (knownName) {
@@ -358,6 +425,7 @@
             : "Non, en fait — vous ne me l'avez jamais dit ! Inscrivez-le dans la case ci-dessus et je m'en souviendrai pour le reste de notre conversation.";
           emotion = "wondering";
         }
+        if (ASKED_BACK_PATTERN.test(replyText)) expectingMoodReply = true;
         appendRow("bot", replyText);
         setReaction(emotion);
         var h0 = loadHistory();
@@ -371,6 +439,7 @@
       var match = matchKeyword(text);
       var replyText = match ? pickResponse(match[lang]) : FALLBACK[lang];
       var emotion = match ? match.emotion : FALLBACK.emotion;
+      if (ASKED_BACK_PATTERN.test(replyText)) expectingMoodReply = true;
       appendRow("bot", replyText);
       setReaction(emotion);
       var h = loadHistory();
