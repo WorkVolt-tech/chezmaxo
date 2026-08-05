@@ -135,6 +135,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
       var submitBtn = form.querySelector('button[type="submit"]');
       var errorBox = document.getElementById('form-error');
+      var defaultErrorText = errorBox ? errorBox.textContent : '';
 
       // CONTACT_SUPABASE_URL / CONTACT_SUPABASE_ANON_KEY are defined inline
       // on contact.html only. If they're still placeholders (not filled
@@ -150,6 +151,27 @@ document.addEventListener('DOMContentLoaded', function () {
           successBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
         form.reset();
+        return;
+      }
+
+      // Honeypot: a real visitor never fills this in. A bot that
+      // auto-fills every field on the page will — silently drop it,
+      // but still show success so the bot doesn't learn anything.
+      var hp = document.getElementById('cf-hp');
+      if (hp && hp.value) {
+        if (successBox) { successBox.classList.add('show'); }
+        form.reset();
+        return;
+      }
+
+      // Timing check: a human takes at least a couple seconds to fill
+      // this form. Near-instant submission is almost certainly a bot.
+      var elapsed = Date.now() - (window.__contactPageLoadedAt || 0);
+      if (elapsed < 2000) {
+        if (errorBox) {
+          errorBox.textContent = 'Please take a moment to review the form before submitting.';
+          errorBox.classList.add('show');
+        }
         return;
       }
 
@@ -193,6 +215,7 @@ document.addEventListener('DOMContentLoaded', function () {
       }).catch(function () {
         if (submitBtn) submitBtn.disabled = false;
         if (errorBox) {
+          errorBox.textContent = defaultErrorText;
           errorBox.classList.add('show');
           errorBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
