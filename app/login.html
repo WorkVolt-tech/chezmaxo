@@ -28,11 +28,18 @@
       <div class="field"><label>Full name</label><input id="fullName" placeholder="Jasmine Torres"></div>
       <div class="field"><label>Business name</label><input id="businessName" placeholder="The Fade Room Barbershop"></div>
     </div>
+    <!-- Honeypot: real visitors never see or fill this in; bots that auto-fill
+         every field will, and we silently reject those submissions. -->
+    <input type="text" id="hpField" name="website" autocomplete="off" tabindex="-1" style="position:absolute;left:-9999px;" aria-hidden="true">
     <div class="field"><label>Email</label><input id="email" type="email" placeholder="you@business.com"></div>
     <div class="field"><label>Password</label><input id="password" type="password" placeholder="At least 6 characters"></div>
+    <div id="confirmPasswordField" class="field"><label>Confirm Password</label><input id="confirmPassword" type="password" placeholder="Re-enter your password"></div>
     <button class="btn btn-primary" id="submitBtn" style="width:100%;justify-content:center;">Sign in</button>
   </div>
 </div>
+<script>
+  window.__loginPageLoadedAt = Date.now();
+</script>
 
 <script>
 let mode = "signin";
@@ -42,6 +49,7 @@ function setMode(m){
   document.getElementById("tabSignin").classList.toggle("active", m==="signin");
   document.getElementById("tabSignup").classList.toggle("active", m==="signup");
   document.getElementById("signupFields").style.display = m==="signup" ? "block" : "none";
+  document.getElementById("confirmPasswordField").style.display = m==="signup" ? "block" : "none";
   document.getElementById("submitBtn").textContent = m==="signup" ? "Create account" : "Sign in";
   document.getElementById("subtext").textContent = m==="signup" ? "Set up your client dashboard access." : "Sign in to your client dashboard.";
   hideError();
@@ -68,9 +76,26 @@ document.getElementById("submitBtn").onclick = async () => {
 
   try {
     if (mode === "signup") {
+      // Honeypot: a real visitor never fills this in. A bot that
+      // auto-fills every field on the page will, so silently drop it.
+      const hp = document.getElementById("hpField").value;
+      if (hp) { return; }
+
+      // Timing check: a human takes at least a couple seconds to fill
+      // this form. A bot that fills and submits near-instantly is
+      // almost certainly automated.
+      const elapsed = Date.now() - (window.__loginPageLoadedAt || 0);
+      if (elapsed < 2000) {
+        showError("Please take a moment to review the form before submitting.");
+        return;
+      }
+
       const fullName = document.getElementById("fullName").value.trim();
       const businessName = document.getElementById("businessName").value.trim();
+      const confirmPassword = document.getElementById("confirmPassword").value;
       if (!fullName || !businessName) { showError("Enter your name and business name."); return; }
+      if (password !== confirmPassword) { showError("Passwords don't match. Please re-enter them."); return; }
+      if (password.length < 6) { showError("Password must be at least 6 characters."); return; }
       await signUp(email, password, fullName, businessName);
     } else {
       await signIn(email, password);
