@@ -88,8 +88,8 @@
   }
 
   var FALLBACK = {
-    fr: "Celle-là me dépasse complètement — même ma longue liste de réponses préprogrammées a ses limites. Essayez de reformuler, ou écrivez directement à Maxo pour qu'une vraie personne s'en occupe.",
-    en: "That one's got me stumped — even my extensive list of pre-programmed answers has limits. Try rephrasing, or just email Maxo directly and let a real human take a crack at it.",
+    fr: "Celle-là me dépasse complètement — même ma longue liste de réponses préprogrammées a ses limites. Voulez-vous que je contacte Maxo pour qu'il puisse vous aider directement ?",
+    en: "That one's got me stumped — even my extensive list of pre-programmed answers has limits. Would you like me get a hold of Maxo so he can help you out instead?",
     emotion: "confused"
   };
 
@@ -166,6 +166,24 @@
     usedResponseIndices[entryKey] = used;
     lastShownIndex[entryKey] = chosen;
     return options[chosen];
+  }
+
+  function requestHumanHelp(question, name) {
+    if (!chatConfigured) return;
+    fetch(CHAT_SUPABASE_URL + '/rest/v1/chat_help_requests', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        apikey: CHAT_SUPABASE_ANON_KEY,
+        Authorization: 'Bearer ' + CHAT_SUPABASE_ANON_KEY,
+        Prefer: 'return=minimal'
+      },
+      body: JSON.stringify({
+        visitor_name: name || '',
+        last_message: question || '',
+        page_url: window.location.href
+      })
+    }).catch(function () { /* fails silently — the chat still works either way */ });
   }
 
   var visitorName = "";
@@ -319,6 +337,9 @@
     bodyEl.innerHTML = "";
     expectingMoodReply = false;
     expectingJokeOffer = false;
+    expectingJokeFeedback = false;
+    expectingHelpOffer = false;
+    lastUnansweredQuestion = "";
     usedResponseIndices = {};
     lastShownIndex = {};
   }
@@ -357,6 +378,9 @@
   // set of mood replies before falling back to normal keyword matching.
   var expectingMoodReply = false;
   var expectingJokeOffer = false;
+  var expectingJokeFeedback = false;
+  var expectingHelpOffer = false;
+  var lastUnansweredQuestion = "";
   var JOKE_OFFER_PATTERN = /want to hear one\?|en entendre une\s*\?/i;
   var YES_WORDS = ["yes","yeah","yea","yep","yup","sure","go ahead","tell me","please do","ok","okay","alright","oui","vas-y","d'accord","envoie"];
   var NO_WORDS = ["no","nah","nope","not now","maybe later","no thanks","non","pas maintenant","plus tard","non merci"];
@@ -366,6 +390,49 @@
       if (containsKeyword(lower, list[i])) return true;
     }
     return false;
+  }
+  function isJokeEntry(entry) {
+    return !!(entry && entry.keywords && entry.keywords[0] === "blague");
+  }
+  // Order matters here too: negated phrases before the bare words they contain.
+  var JOKE_FEEDBACK_PHRASES = [
+    { phrase: "not that funny", sentiment: "negative" },
+    { phrase: "not funny", sentiment: "negative" },
+    { phrase: "pas si drôle", sentiment: "negative" },
+    { phrase: "pas drôle", sentiment: "negative" },
+    { phrase: "good one", sentiment: "positive" },
+    { phrase: "nice one", sentiment: "positive" },
+    { phrase: "good joke", sentiment: "positive" },
+    { phrase: "great joke", sentiment: "positive" },
+    { phrase: "that was funny", sentiment: "positive" },
+    { phrase: "that's funny", sentiment: "positive" },
+    { phrase: "thats funny", sentiment: "positive" },
+    { phrase: "hilarious", sentiment: "positive" },
+    { phrase: "love it", sentiment: "positive" },
+    { phrase: "funny", sentiment: "positive" },
+    { phrase: "lol", sentiment: "positive" },
+    { phrase: "haha", sentiment: "positive" },
+    { phrase: "hehe", sentiment: "positive" },
+    { phrase: "bonne blague", sentiment: "positive" },
+    { phrase: "excellente blague", sentiment: "positive" },
+    { phrase: "c'était drôle", sentiment: "positive" },
+    { phrase: "mdr", sentiment: "positive" },
+    { phrase: "bad one", sentiment: "negative" },
+    { phrase: "that sucked", sentiment: "negative" },
+    { phrase: "that was bad", sentiment: "negative" },
+    { phrase: "terrible joke", sentiment: "negative" },
+    { phrase: "awful joke", sentiment: "negative" },
+    { phrase: "lame", sentiment: "negative" },
+    { phrase: "boo", sentiment: "negative" },
+    { phrase: "mauvaise blague", sentiment: "negative" },
+    { phrase: "nulle", sentiment: "negative" },
+  ];
+  function matchJokeFeedback(text) {
+    var lower = text.toLowerCase();
+    for (var i = 0; i < JOKE_FEEDBACK_PHRASES.length; i++) {
+      if (containsKeyword(lower, JOKE_FEEDBACK_PHRASES[i].phrase)) return JOKE_FEEDBACK_PHRASES[i].sentiment;
+    }
+    return null;
   }
   var ASKED_BACK_PATTERN = /how about you\?|et vous\s*\?|et toi\s*\?/i;
   // Order matters: negated multi-word phrases are checked before their
@@ -498,6 +565,10 @@
       expectingMoodReply = false;
       var wasExpectingJoke = expectingJokeOffer;
       expectingJokeOffer = false;
+      var wasExpectingJokeFeedback = expectingJokeFeedback;
+      expectingJokeFeedback = false;
+      var wasExpectingHelp = expectingHelpOffer;
+      expectingHelpOffer = false;
 
       if (wasExpectingMood && matchMood(text)) {
         var moodGood = matchMood(text) === "positive";
@@ -515,6 +586,47 @@
         return;
       }
 
+      if (wasExpectingJokeFeedback && matchJokeFeedback(text)) {
+        var feedbackGood = matchJokeFeedback(text) === "positive";
+        var feedbackReply = feedbackGood
+          ? (lang === "en" ? "Thank you, I try!" : "Merci, je fais de mon mieux !")
+          : (lang === "en" ? "Ouch, tough crowd. I'll keep working on my material." : "Aïe, dur public. Je vais continuer à travailler mon numéro.");
+        var feedbackEmotion = feedbackGood ? "happy" : "sad";
+        appendRow("bot", feedbackReply);
+        setReaction(feedbackEmotion);
+        var hf = loadHistory();
+        hf.push({ sender: "bot", text: feedbackReply, emotion: feedbackEmotion });
+        saveHistory(hf);
+        sendBtn.disabled = false;
+        if (!panel.classList.contains("open")) showBadge();
+        return;
+      }
+
+      if (wasExpectingHelp && (matchesWordList(text, YES_WORDS) || matchesWordList(text, NO_WORDS))) {
+        var wantsHelp = matchesWordList(text, YES_WORDS);
+        var helpReply, helpEmotion;
+        if (wantsHelp) {
+          requestHumanHelp(lastUnansweredQuestion, name || visitorName);
+          helpReply = lang === "en"
+            ? "Got it — I've let Maxo know! He'll reach out as soon as he can. Feel free to keep asking me things in the meantime."
+            : "C'est noté — j'ai avisé Maxo ! Il vous contactera dès que possible. N'hésitez pas à continuer à me poser des questions entretemps.";
+          helpEmotion = "happy";
+        } else {
+          helpReply = lang === "en"
+            ? "No worries! Let me know if there's anything else I can help with."
+            : "Pas de problème ! Dites-moi si je peux vous aider avec autre chose.";
+          helpEmotion = "happy";
+        }
+        appendRow("bot", helpReply);
+        setReaction(helpEmotion);
+        var hh = loadHistory();
+        hh.push({ sender: "bot", text: helpReply, emotion: helpEmotion });
+        saveHistory(hh);
+        sendBtn.disabled = false;
+        if (!panel.classList.contains("open")) showBadge();
+        return;
+      }
+
       if (wasExpectingJoke && (matchesWordList(text, YES_WORDS) || matchesWordList(text, NO_WORDS))) {
         var saidYes = matchesWordList(text, YES_WORDS);
         var jokeReplyText, jokeEmotion;
@@ -522,6 +634,7 @@
           var jokeMatch = matchKeyword("tell me a joke");
           jokeReplyText = jokeMatch ? pickResponse(jokeMatch[lang], jokeMatch.keywords[0]) : FALLBACK[lang];
           jokeEmotion = jokeMatch ? jokeMatch.emotion : FALLBACK.emotion;
+          if (isJokeEntry(jokeMatch)) expectingJokeFeedback = true;
         } else {
           jokeReplyText = lang === "en"
             ? "No worries! I'll hold onto them for when you're in the mood."
@@ -568,6 +681,11 @@
       var emotion = match ? match.emotion : FALLBACK.emotion;
       if (ASKED_BACK_PATTERN.test(replyText)) expectingMoodReply = true;
       if (JOKE_OFFER_PATTERN.test(replyText)) expectingJokeOffer = true;
+      if (isJokeEntry(match)) expectingJokeFeedback = true;
+      if (!match) {
+        expectingHelpOffer = true;
+        lastUnansweredQuestion = text;
+      }
       appendRow("bot", replyText);
       setReaction(emotion);
       var h = loadHistory();
