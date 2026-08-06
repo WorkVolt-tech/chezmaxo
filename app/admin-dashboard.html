@@ -134,9 +134,21 @@ async function renderMain(){
   }
   else if(state.tab === "chat"){
     const responses = await getAllChatResponses();
+    const helpRequests = await getAllChatHelpRequests();
     const emotions = ["get_help","agreeing","wondering","excited","thinking","not_agreeing","happy","excited_big","curious","sad","disappointed","confused"];
     main.innerHTML = `
       <div class="page-title"><div><div class="eyebrow">Live chat</div><h2>Chat Responses</h2></div></div>
+      <div class="card" style="margin-bottom:18px;">
+        <h3 style="font-size:15px; margin-bottom:10px;">Recent "talk to Maxo" requests</h3>
+        ${helpRequests.length ? `
+        <table class="table"><thead><tr><th>When</th><th>Name</th><th>They asked</th><th>Page</th></tr></thead>
+        <tbody>${helpRequests.slice(0,10).map(r => `
+          <tr><td style="font-size:12px; white-space:nowrap;">${new Date(r.created_at).toLocaleString()}</td>
+          <td>${r.visitor_name || '—'}</td>
+          <td style="max-width:260px;">${r.last_message || '—'}</td>
+          <td style="font-size:12px; max-width:160px; overflow:hidden; text-overflow:ellipsis;">${r.page_url}</td></tr>`).join('')}
+        </tbody></table>` : '<p class="empty-note">No requests yet — you\'ll also get a Telegram notification the moment one comes in.</p>'}
+      </div>
       <div class="card" style="margin-bottom:18px;">
         <h3 style="font-size:15px; margin-bottom:10px;">Add a new response</h3>
         <div class="field"><label>Keywords (comma-separated)</label><input id="cr-new-keywords" placeholder="e.g. pricing, how much does it cost, prix"></div>
