@@ -1452,8 +1452,8 @@ const I18N = {
     "fr": "Merci — votre demande a été reçue! Nous vous répondrons dans un délai d'un à deux jours ouvrables."
   },
   "contact.error": {
-    "en": "Something went wrong sending your request. Please try again, or email us directly at marxanc@outlook.com.",
-    "fr": "Une erreur est survenue lors de l'envoi de votre demande. Veuillez réessayer, ou nous écrire directement à marxanc@outlook.com."
+    "en": "Something went wrong sending your request. Please try again, or email us directly at chezmaxo@outlook.com.",
+    "fr": "Une erreur est survenue lors de l'envoi de votre demande. Veuillez réessayer, ou nous écrire directement à chezmaxo@outlook.com."
   },
   "contact.f.name": {
     "en": "Full name",
@@ -2172,8 +2172,8 @@ const I18N = {
     "fr": "19. Nous contacter"
   },
   "terms.p.19": {
-    "en": "Questions about these terms can be sent to marxanc@outlook.com.",
-    "fr": "Les questions concernant ces conditions peuvent être envoyées à marxanc@outlook.com."
+    "en": "Questions about these terms can be sent to chezmaxo@outlook.com.",
+    "fr": "Les questions concernant ces conditions peuvent être envoyées à chezmaxo@outlook.com."
   },
   "care.h1": {
     "en": "Website Care Plan Terms",
@@ -2828,8 +2828,8 @@ const I18N = {
     "fr": "Les forfaits d'entretien fonctionnent sur une base mensuelle, sauf si une autre durée est indiquée dans l'entente de service du client."
   },
   "care.p14.2": {
-    "en": "The client may request cancellation at any time by written notice to marxanc@outlook.com. Unless an earlier effective date is required by applicable law or agreed to by Chezmaxo, cancellation will take effect at the end of the current paid billing period.",
-    "fr": "Le client peut demander l'annulation en tout temps par avis écrit à marxanc@outlook.com. Sauf si une date d'entrée en vigueur antérieure est exigée par la loi applicable ou convenue par Chezmaxo, l'annulation prendra effet à la fin de la période de facturation payée en cours."
+    "en": "The client may request cancellation at any time by written notice to chezmaxo@outlook.com. Unless an earlier effective date is required by applicable law or agreed to by Chezmaxo, cancellation will take effect at the end of the current paid billing period.",
+    "fr": "Le client peut demander l'annulation en tout temps par avis écrit à chezmaxo@outlook.com. Sauf si une date d'entrée en vigueur antérieure est exigée par la loi applicable ou convenue par Chezmaxo, l'annulation prendra effet à la fin de la période de facturation payée en cours."
   },
   "care.p14.4": {
     "en": "The client will continue to receive the plan's regular services until the effective cancellation date, provided the account remains in good standing.",
