@@ -362,3 +362,9 @@ async function deleteChatResponse(id) {
   const { error } = await sb.from("chat_responses").delete().eq("id", id);
   if (error) throw error;
 }
+
+async function getAllChatHelpRequests() {
+  const { data, error } = await sb.from("chat_help_requests").select("*").order("created_at", { ascending: false });
+  if (error) throw error;
+  return data;
+}
