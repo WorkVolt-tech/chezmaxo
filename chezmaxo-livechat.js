@@ -34,6 +34,9 @@
     { keywords: ["parler à quelqu'un","speak to someone","talk to a human","real person"],
       fr: "Bien sûr ! Laissez-moi votre courriel et votre question, et on vous répond rapidement.",
       en: "Of course! Leave your email and your question, and we'll get back to you quickly.", emotion: "get_help" },
+    { keywords: ["do you have a sense of humor","do you have a sense of humour","sense of humor","are you funny","as tu le sens de l'humour","es tu drole"],
+      fr: "Je pense que oui ! Mon humour se résume surtout à des blagues de papa et des jeux de mots sur les sites web, mais j'assume à 100 %. Vous voulez en entendre une ?",
+      en: "I like to think so! My humor mostly consists of dad jokes and website puns, but I stand by all of it. Want to hear one?", emotion: "excited" },
     { keywords: ["blague","tell me a joke","dis moi une blague","make me laugh","have any jokes","any jokes","dad joke"],
       fr: "Pourquoi le site web est-il allé en thérapie ? Trop de problèmes non résolus.|||Pourquoi les programmeurs préfèrent le mode sombre ? Parce que la lumière attire les bogues.",
       en: "Why did the website go to therapy? Too many unresolved issues.|||Why do programmers prefer dark mode? Because light attracts bugs.", emotion: "excited" },
@@ -284,6 +287,7 @@
     clearHistory();
     bodyEl.innerHTML = "";
     expectingMoodReply = false;
+    expectingJokeOffer = false;
   }
 
   function openPanel(open) {
@@ -319,6 +323,17 @@
   // doing. If so, the very next message gets checked against a small
   // set of mood replies before falling back to normal keyword matching.
   var expectingMoodReply = false;
+  var expectingJokeOffer = false;
+  var JOKE_OFFER_PATTERN = /want to hear one\?|en entendre une\s*\?/i;
+  var YES_WORDS = ["yes","yeah","yea","yep","yup","sure","go ahead","tell me","please do","ok","okay","alright","oui","vas-y","d'accord","envoie"];
+  var NO_WORDS = ["no","nah","nope","not now","maybe later","no thanks","non","pas maintenant","plus tard","non merci"];
+  function matchesWordList(text, list) {
+    var lower = text.toLowerCase();
+    for (var i = 0; i < list.length; i++) {
+      if (containsKeyword(lower, list[i])) return true;
+    }
+    return false;
+  }
   var ASKED_BACK_PATTERN = /how about you\?|et vous\s*\?|et toi\s*\?/i;
   // Order matters: negated multi-word phrases are checked before their
   // bare single-word substrings, so "not great" resolves as negative
@@ -448,6 +463,8 @@
 
       var wasExpectingMood = expectingMoodReply;
       expectingMoodReply = false;
+      var wasExpectingJoke = expectingJokeOffer;
+      expectingJokeOffer = false;
 
       if (wasExpectingMood && matchMood(text)) {
         var moodGood = matchMood(text) === "positive";
@@ -460,6 +477,29 @@
         var hm = loadHistory();
         hm.push({ sender: "bot", text: moodReply, emotion: moodEmotion });
         saveHistory(hm);
+        sendBtn.disabled = false;
+        if (!panel.classList.contains("open")) showBadge();
+        return;
+      }
+
+      if (wasExpectingJoke && (matchesWordList(text, YES_WORDS) || matchesWordList(text, NO_WORDS))) {
+        var saidYes = matchesWordList(text, YES_WORDS);
+        var jokeReplyText, jokeEmotion;
+        if (saidYes) {
+          var jokeMatch = matchKeyword("tell me a joke");
+          jokeReplyText = jokeMatch ? pickResponse(jokeMatch[lang]) : FALLBACK[lang];
+          jokeEmotion = jokeMatch ? jokeMatch.emotion : FALLBACK.emotion;
+        } else {
+          jokeReplyText = lang === "en"
+            ? "No worries! I'll hold onto them for when you're in the mood."
+            : "Pas de problème ! Je les garde pour quand vous serez d'humeur.";
+          jokeEmotion = "happy";
+        }
+        appendRow("bot", jokeReplyText);
+        setReaction(jokeEmotion);
+        var hj = loadHistory();
+        hj.push({ sender: "bot", text: jokeReplyText, emotion: jokeEmotion });
+        saveHistory(hj);
         sendBtn.disabled = false;
         if (!panel.classList.contains("open")) showBadge();
         return;
@@ -479,6 +519,7 @@
           emotion = "wondering";
         }
         if (ASKED_BACK_PATTERN.test(replyText)) expectingMoodReply = true;
+        if (JOKE_OFFER_PATTERN.test(replyText)) expectingJokeOffer = true;
         appendRow("bot", replyText);
         setReaction(emotion);
         var h0 = loadHistory();
@@ -493,6 +534,7 @@
       var replyText = match ? pickResponse(match[lang]) : FALLBACK[lang];
       var emotion = match ? match.emotion : FALLBACK.emotion;
       if (ASKED_BACK_PATTERN.test(replyText)) expectingMoodReply = true;
+      if (JOKE_OFFER_PATTERN.test(replyText)) expectingJokeOffer = true;
       appendRow("bot", replyText);
       setReaction(emotion);
       var h = loadHistory();
