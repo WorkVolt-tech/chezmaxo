@@ -14,8 +14,8 @@
   // or if Supabase is unreachable.
   var RESPONSES = [
     { keywords: ["bonjour","allo","salut","hello","hi","hey"],
-      fr: "Bonjour ! Je suis MaxBot, l'assistant de Chezmaxo. Posez-moi vos questions sur les prix, les délais, ou comment ça fonctionne !",
-      en: "Hi there! I'm MaxBot, Chezmaxo's assistant. Ask me about pricing, timelines, or how everything works!", emotion: "happy" },
+      fr: "Bonjour ! Je suis Marxo, l'assistant de Chezmaxo. Posez-moi vos questions sur les prix, les délais, ou comment ça fonctionne !",
+      en: "Hi there! I'm Marxo, Chezmaxo's assistant. Ask me about pricing, timelines, or how everything works!", emotion: "happy" },
     { keywords: ["combien ça coûte","how much does a website","website cost","pricing for a website","cost of a website"],
       fr: "Un site Starter commence à 199 $, un site Business à 399 $, et les projets plus avancés sont soumis à un devis personnalisé.",
       en: "A Starter website starts at $199, a Business website at $399, and more advanced projects get a custom quote.", emotion: "happy" },
@@ -41,11 +41,11 @@
       fr: "Pourquoi le site web est-il allé en thérapie ? Trop de problèmes non résolus.|||Pourquoi les programmeurs préfèrent le mode sombre ? Parce que la lumière attire les bogues.",
       en: "Why did the website go to therapy? Too many unresolved issues.|||Why do programmers prefer dark mode? Because light attracts bugs.", emotion: "excited" },
     { keywords: ["es tu un robot","are you a robot","are you an ai"],
-      fr: "Je m'appelle MaxBot — un assistant automatisé qui répond aux questions courantes. Mais une vraie personne (Maxo) peut prendre le relais à tout moment !",
-      en: "I'm MaxBot — an automated assistant that answers common questions. But a real person (Maxo) can jump in any time!", emotion: "confused" },
+      fr: "Je m'appelle Marxo — un assistant automatisé qui répond aux questions courantes. Mais une vraie personne (Maxo) peut prendre le relais à tout moment !",
+      en: "I'm Marxo — an automated assistant that answers common questions. But a real person (Maxo) can jump in any time!", emotion: "confused" },
     { keywords: ["what's your name","whats your name","your name","quel est ton nom","comment tu t'appelles"],
-      fr: "Je m'appelle MaxBot ! Pas le nom le plus original du monde, mais bon — \"Internet\" non plus, et ça s'est bien passé.",
-      en: "I'm MaxBot! Not the most creative name in the world, but hey — neither is \"the internet,\" and that one worked out fine.", emotion: "excited" },
+      fr: "Je m'appelle Marxo ! Pas le nom le plus original du monde, mais bon — \"Internet\" non plus, et ça s'est bien passé.",
+      en: "I'm Marxo! Not the most creative name in the world, but hey — neither is \"the internet,\" and that one worked out fine.", emotion: "excited" },
     { keywords: ["ça va","comment allez","how are you","how's it going","ca va"],
       fr: "Je vis ma meilleure vie numérique — pas besoin de café, pas peur des lundis. Et vous ?",
       en: "Living my best digital life — no coffee needed, no Mondays feared. How about you?", emotion: "happy" },
@@ -53,8 +53,8 @@
       fr: "Aww, c'est gentil ! Moi aussi je vous aime — un peu comme j'aime un site web bien optimisé : profondément, et sans complications légales.",
       en: "Aw, that's sweet! I love you too — in the same way I love a well-optimized website: deeply, and without any legal complications.", emotion: "happy" },
     { keywords: ["are you real","es-tu réel","es tu reel","are you a real person"],
-      fr: "Pas vraiment — je suis MaxBot, un assistant automatisé, pas une vraie personne. Mais une vraie personne (Maxo) peut prendre le relais à tout moment.",
-      en: "Not exactly — I'm MaxBot, an automated assistant, not a real person. But a real human (Maxo) can jump in any time you'd like.", emotion: "confused" },
+      fr: "Pas vraiment — je suis Marxo, un assistant automatisé, pas une vraie personne. Mais une vraie personne (Maxo) peut prendre le relais à tout moment.",
+      en: "Not exactly — I'm Marxo, an automated assistant, not a real person. But a real human (Maxo) can jump in any time you'd like.", emotion: "confused" },
   ];
 
   // Config: set these inline on the page before this script loads, e.g.
@@ -88,8 +88,8 @@
   };
 
   var GREETING = {
-    fr: "Bonjour ! Je suis MaxBot, l'assistant de Chezmaxo. Posez-moi vos questions sur les prix, les délais, ou comment ça fonctionne — sérieuses ou pas !",
-    en: "Hi! I'm MaxBot, Chezmaxo's assistant. Ask me about pricing, timelines, or how everything works — serious questions or silly ones, I don't mind!",
+    fr: "Bonjour ! Je suis Marxo, l'assistant de Chezmaxo. Posez-moi vos questions sur les prix, les délais, ou comment ça fonctionne — sérieuses ou pas !",
+    en: "Hi! I'm Marxo, Chezmaxo's assistant. Ask me about pricing, timelines, or how everything works — serious questions or silly ones, I don't mind!",
     emotion: "get_help"
   };
 
@@ -190,7 +190,7 @@
       '<svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>' +
     '</button>' +
     '<div id="cmx-chat-panel">' +
-      '<div id="cmx-chat-head"><span data-lang="fr">Discuter avec MaxBot</span><span data-lang="en">Chat with MaxBot</span><button id="cmx-chat-close" aria-label="Close">\u00d7</button></div>' +
+      '<div id="cmx-chat-head"><span data-lang="fr">Discuter avec Marxo</span><span data-lang="en">Chat with Marxo</span><button id="cmx-chat-close" aria-label="Close">\u00d7</button></div>' +
       '<div id="cmx-chat-reaction"><img id="cmx-reaction-img" src="" alt=""></div>' +
       '<div id="cmx-chat-namebar"><input type="text" id="cmx-chat-name" placeholder="Votre nom (optionnel) / Your name (optional)"></div>' +
       '<div id="cmx-chat-body"></div>' +
@@ -318,7 +318,7 @@
   document.getElementById("cmx-chat-close").addEventListener("click", function () { openPanel(false); });
 
   // ---------- Light conversation memory: one message deep ----------
-  // MaxBot doesn't track full context, but it does remember one thing:
+  // Marxo doesn't track full context, but it does remember one thing:
   // whether its last reply ended by asking the visitor how *they* are
   // doing. If so, the very next message gets checked against a small
   // set of mood replies before falling back to normal keyword matching.
