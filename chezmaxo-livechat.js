@@ -37,7 +37,7 @@
     { keywords: ["do you have a sense of humor","do you have a sense of humour","sense of humor","are you funny","as tu le sens de l'humour","es tu drole"],
       fr: "Je pense que oui ! Mon humour se résume surtout à des blagues de papa et des jeux de mots sur les sites web, mais j'assume à 100 %. Vous voulez en entendre une ?",
       en: "I like to think so! My humor mostly consists of dad jokes and website puns, but I stand by all of it. Want to hear one?", emotion: "excited" },
-    { keywords: ["blague","tell me a joke","dis moi une blague","make me laugh","have any jokes","any jokes","dad joke"],
+    { keywords: ["blague","tell me a joke","dis moi une blague","make me laugh","have any jokes","any jokes","dad joke","other jokes","another joke","more jokes","d'autres blagues"],
       fr: "Pourquoi le site web est-il allé en thérapie ? Trop de problèmes non résolus.|||Pourquoi les programmeurs préfèrent le mode sombre ? Parce que la lumière attire les bogues.",
       en: "Why did the website go to therapy? Too many unresolved issues.|||Why do programmers prefer dark mode? Because light attracts bugs.", emotion: "excited" },
     { keywords: ["are you alive","do you exist","es-tu vivant","existes-tu"],
@@ -135,12 +135,37 @@
     return "images/chat/" + emotion + ".webp";
   }
 
-  // Some entries (like jokes) hold several alternatives separated by "|||"
-  // so the same question doesn't always get the exact same reply.
-  function pickResponse(text) {
+  // Some entries (like jokes) hold several alternatives separated by "|||".
+  // usedResponseIndices tracks which options have already been shown for
+  // each entry this session, so the same one doesn't repeat until every
+  // option has had a turn — then the cycle reshuffles.
+  var usedResponseIndices = {};
+  var lastShownIndex = {};
+  function pickResponse(text, entryKey) {
     if (!text || text.indexOf("|||") === -1) return text;
     var options = text.split("|||");
-    return options[Math.floor(Math.random() * options.length)];
+    if (!entryKey) return options[Math.floor(Math.random() * options.length)];
+
+    var used = usedResponseIndices[entryKey] || [];
+    var available = [];
+    for (var i = 0; i < options.length; i++) {
+      if (used.indexOf(i) === -1) available.push(i);
+    }
+    if (available.length === 0) {
+      // Full cycle just finished — reshuffle, but don't let the reshuffle
+      // immediately repeat whatever was shown last.
+      var last = lastShownIndex[entryKey];
+      available = [];
+      for (var j = 0; j < options.length; j++) {
+        if (options.length === 1 || j !== last) available.push(j);
+      }
+      used = [];
+    }
+    var chosen = available[Math.floor(Math.random() * available.length)];
+    used.push(chosen);
+    usedResponseIndices[entryKey] = used;
+    lastShownIndex[entryKey] = chosen;
+    return options[chosen];
   }
 
   var visitorName = "";
@@ -294,6 +319,8 @@
     bodyEl.innerHTML = "";
     expectingMoodReply = false;
     expectingJokeOffer = false;
+    usedResponseIndices = {};
+    lastShownIndex = {};
   }
 
   function openPanel(open) {
@@ -493,7 +520,7 @@
         var jokeReplyText, jokeEmotion;
         if (saidYes) {
           var jokeMatch = matchKeyword("tell me a joke");
-          jokeReplyText = jokeMatch ? pickResponse(jokeMatch[lang]) : FALLBACK[lang];
+          jokeReplyText = jokeMatch ? pickResponse(jokeMatch[lang], jokeMatch.keywords[0]) : FALLBACK[lang];
           jokeEmotion = jokeMatch ? jokeMatch.emotion : FALLBACK.emotion;
         } else {
           jokeReplyText = lang === "en"
@@ -537,7 +564,7 @@
       }
 
       var match = matchKeyword(text);
-      var replyText = match ? pickResponse(match[lang]) : FALLBACK[lang];
+      var replyText = match ? pickResponse(match[lang], match.keywords[0]) : FALLBACK[lang];
       var emotion = match ? match.emotion : FALLBACK.emotion;
       if (ASKED_BACK_PATTERN.test(replyText)) expectingMoodReply = true;
       if (JOKE_OFFER_PATTERN.test(replyText)) expectingJokeOffer = true;
