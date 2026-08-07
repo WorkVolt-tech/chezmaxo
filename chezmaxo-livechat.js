@@ -387,14 +387,68 @@
   var expectingHelpOffer = false;
   var lastUnansweredQuestion = "";
   var JOKE_OFFER_PATTERN = /want to hear one\?|en entendre une\s*\?/i;
-  var YES_WORDS = ["yes","yeah","yea","yep","yup","sure","go ahead","tell me","please do","ok","okay","alright","oui","vas-y","d'accord","envoie"];
-  var NO_WORDS = ["no","nah","nope","not now","maybe later","no thanks","non","pas maintenant","plus tard","non merci"];
-  function matchesWordList(text, list) {
+  // Single ordered list — same principle as MOOD_PHRASES: multi-word
+  // phrases that could contain a generic word (like "ok" inside "that's
+  // ok") are checked before the bare word, so intent doesn't get flipped.
+  var YES_NO_PHRASES = [
+    { phrase: "that's ok", sentiment: "no" },
+    { phrase: "thats ok", sentiment: "no" },
+    { phrase: "i'm good", sentiment: "no" },
+    { phrase: "im good", sentiment: "no" },
+    { phrase: "not necessary", sentiment: "no" },
+    { phrase: "don't bother", sentiment: "no" },
+    { phrase: "dont bother", sentiment: "no" },
+    { phrase: "not now", sentiment: "no" },
+    { phrase: "maybe later", sentiment: "no" },
+    { phrase: "no thanks", sentiment: "no" },
+    { phrase: "ça va aller", sentiment: "no" },
+    { phrase: "ca va aller", sentiment: "no" },
+    { phrase: "pas nécessaire", sentiment: "no" },
+    { phrase: "pas maintenant", sentiment: "no" },
+    { phrase: "non merci", sentiment: "no" },
+    { phrase: "id like that", sentiment: "yes" },
+    { phrase: "i'd like that", sentiment: "yes" },
+    { phrase: "that would be great", sentiment: "yes" },
+    { phrase: "that'd be great", sentiment: "yes" },
+    { phrase: "sounds good", sentiment: "yes" },
+    { phrase: "works for me", sentiment: "yes" },
+    { phrase: "go ahead", sentiment: "yes" },
+    { phrase: "please do", sentiment: "yes" },
+    { phrase: "of course", sentiment: "yes" },
+    { phrase: "bien sûr", sentiment: "yes" },
+    { phrase: "ça marche", sentiment: "yes" },
+    { phrase: "ca marche", sentiment: "yes" },
+    { phrase: "yes", sentiment: "yes" },
+    { phrase: "yeah", sentiment: "yes" },
+    { phrase: "yea", sentiment: "yes" },
+    { phrase: "yep", sentiment: "yes" },
+    { phrase: "yup", sentiment: "yes" },
+    { phrase: "sure", sentiment: "yes" },
+    { phrase: "tell me", sentiment: "yes" },
+    { phrase: "ok", sentiment: "yes" },
+    { phrase: "okay", sentiment: "yes" },
+    { phrase: "alright", sentiment: "yes" },
+    { phrase: "please", sentiment: "yes" },
+    { phrase: "definitely", sentiment: "yes" },
+    { phrase: "absolutely", sentiment: "yes" },
+    { phrase: "volontiers", sentiment: "yes" },
+    { phrase: "avec plaisir", sentiment: "yes" },
+    { phrase: "oui", sentiment: "yes" },
+    { phrase: "vas-y", sentiment: "yes" },
+    { phrase: "d'accord", sentiment: "yes" },
+    { phrase: "envoie", sentiment: "yes" },
+    { phrase: "no", sentiment: "no" },
+    { phrase: "nah", sentiment: "no" },
+    { phrase: "nope", sentiment: "no" },
+    { phrase: "non", sentiment: "no" },
+    { phrase: "plus tard", sentiment: "no" },
+  ];
+  function matchYesNo(text) {
     var lower = text.toLowerCase();
-    for (var i = 0; i < list.length; i++) {
-      if (containsKeyword(lower, list[i])) return true;
+    for (var i = 0; i < YES_NO_PHRASES.length; i++) {
+      if (containsKeyword(lower, YES_NO_PHRASES[i].phrase)) return YES_NO_PHRASES[i].sentiment;
     }
-    return false;
+    return null;
   }
   function isJokeEntry(entry) {
     return !!(entry && entry.keywords && entry.keywords[0] === "blague");
@@ -659,8 +713,8 @@
         return;
       }
 
-      if (wasExpectingHelp && (matchesWordList(text, YES_WORDS) || matchesWordList(text, NO_WORDS))) {
-        var wantsHelp = matchesWordList(text, YES_WORDS);
+      if (wasExpectingHelp && matchYesNo(text)) {
+        var wantsHelp = matchYesNo(text) === "yes";
         var helpReply, helpEmotion;
         if (wantsHelp) {
           requestHumanHelp(lastUnansweredQuestion, name || visitorName);
@@ -684,8 +738,8 @@
         return;
       }
 
-      if (wasExpectingJoke && (matchesWordList(text, YES_WORDS) || matchesWordList(text, NO_WORDS))) {
-        var saidYes = matchesWordList(text, YES_WORDS);
+      if (wasExpectingJoke && matchYesNo(text)) {
+        var saidYes = matchYesNo(text) === "yes";
         var jokeReplyText, jokeEmotion;
         if (saidYes) {
           var jokeMatch = matchKeyword("tell me a joke");
