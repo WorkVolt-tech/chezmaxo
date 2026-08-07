@@ -399,6 +399,30 @@
   function isTalkToPersonEntry(entry) {
     return !!(entry && entry.keywords && entry.keywords[0] === "parler à quelqu'un");
   }
+
+  // ---------- Real-time business hours awareness ----------
+  // Hours: Noon–11PM, 7 days a week, in Chezmaxo's own time zone —
+  // not the visitor's, since "are you open" means Maxo's clock, not theirs.
+  var BUSINESS_TIMEZONE = "America/Toronto";
+  function isCurrentlyOpen() {
+    var hourStr = new Intl.DateTimeFormat("en-US", { timeZone: BUSINESS_TIMEZONE, hour: "numeric", hour12: false }).format(new Date());
+    var hour = parseInt(hourStr, 10);
+    return hour >= 12 && hour < 23;
+  }
+  var TIME_QUESTION_KEYWORDS = [
+    "is your team asleep", "are you open right now", "are you open now", "is anyone there right now",
+    "are you open at this hour", "is your team asleep right now", "are you awake right now",
+    "is anyone awake", "are you closed right now", "are you closed now",
+    "votre équipe dort", "êtes vous ouverts maintenant", "êtes-vous ouverts en ce moment",
+    "y a-t-il quelqu'un en ce moment", "êtes vous fermés maintenant"
+  ];
+  function isTimeQuestion(text) {
+    var lower = text.toLowerCase();
+    for (var i = 0; i < TIME_QUESTION_KEYWORDS.length; i++) {
+      if (containsKeyword(lower, TIME_QUESTION_KEYWORDS[i])) return true;
+    }
+    return false;
+  }
   var expectingContactInfo = false;
   var EMAIL_PATTERN = /[^\s@]+@[^\s@]+\.[^\s@]+/;
   // Order matters here too: negated phrases before the bare words they contain.
@@ -676,6 +700,30 @@
         var hj = loadHistory();
         hj.push({ sender: "bot", text: jokeReplyText, emotion: jokeEmotion });
         saveHistory(hj);
+        sendBtn.disabled = false;
+        if (!panel.classList.contains("open")) showBadge();
+        return;
+      }
+
+      if (isTimeQuestion(text)) {
+        var open = isCurrentlyOpen();
+        var timeReplyText, timeEmotion;
+        if (open) {
+          timeReplyText = lang === "en"
+            ? "Nope, wide awake! We're open right now — Noon to 11PM, 7 days a week. Ask away."
+            : "Non, bien éveillés ! On est ouverts en ce moment — de midi à 23h, 7 jours sur 7. Posez vos questions.";
+          timeEmotion = "happy";
+        } else {
+          timeReplyText = lang === "en"
+            ? "Actually, yes — it's outside our hours right now (Noon to 11PM, 7 days a week). Leave your question here and we'll get back to you when things open back up."
+            : "En fait, oui — c'est en dehors de nos heures en ce moment (midi à 23h, 7 jours sur 7). Laissez votre question ici et on vous répondra à la réouverture.";
+          timeEmotion = "sad";
+        }
+        appendRow("bot", timeReplyText);
+        setReaction(timeEmotion);
+        var ht = loadHistory();
+        ht.push({ sender: "bot", text: timeReplyText, emotion: timeEmotion });
+        saveHistory(ht);
         sendBtn.disabled = false;
         if (!panel.classList.contains("open")) showBadge();
         return;
