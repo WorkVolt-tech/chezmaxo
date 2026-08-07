@@ -168,7 +168,7 @@
     return options[chosen];
   }
 
-  function requestHumanHelp(question, name) {
+  function requestHumanHelp(question, name, email) {
     if (!chatConfigured) return;
     fetch(CHAT_SUPABASE_URL + '/rest/v1/chat_help_requests', {
       method: 'POST',
@@ -180,6 +180,7 @@
       },
       body: JSON.stringify({
         visitor_name: name || '',
+        email: email || '',
         last_message: question || '',
         page_url: window.location.href
       })
@@ -339,6 +340,7 @@
     expectingJokeOffer = false;
     expectingJokeFeedback = false;
     expectingHelpOffer = false;
+    expectingContactInfo = false;
     lastUnansweredQuestion = "";
     usedResponseIndices = {};
     lastShownIndex = {};
@@ -394,6 +396,11 @@
   function isJokeEntry(entry) {
     return !!(entry && entry.keywords && entry.keywords[0] === "blague");
   }
+  function isTalkToPersonEntry(entry) {
+    return !!(entry && entry.keywords && entry.keywords[0] === "parler à quelqu'un");
+  }
+  var expectingContactInfo = false;
+  var EMAIL_PATTERN = /[^\s@]+@[^\s@]+\.[^\s@]+/;
   // Order matters here too: negated phrases before the bare words they contain.
   var JOKE_FEEDBACK_PHRASES = [
     { phrase: "not that funny", sentiment: "negative" },
@@ -569,6 +576,29 @@
       expectingJokeFeedback = false;
       var wasExpectingHelp = expectingHelpOffer;
       expectingHelpOffer = false;
+      var wasExpectingContact = expectingContactInfo;
+      expectingContactInfo = false;
+
+      if (wasExpectingContact) {
+        var emailMatch = text.match(EMAIL_PATTERN);
+        if (emailMatch) {
+          var providedEmail = emailMatch[0];
+          requestHumanHelp(text, name || visitorName, providedEmail);
+          var contactReply = lang === "en"
+            ? "Thanks! I've passed this along to Maxo — he'll reach out to you at " + providedEmail + " soon."
+            : "Merci ! J'ai transmis ceci à Maxo — il vous contactera à " + providedEmail + " sous peu.";
+          appendRow("bot", contactReply);
+          setReaction("happy");
+          var hc = loadHistory();
+          hc.push({ sender: "bot", text: contactReply, emotion: "happy" });
+          saveHistory(hc);
+          sendBtn.disabled = false;
+          if (!panel.classList.contains("open")) showBadge();
+          return;
+        }
+        // Didn't look like an email — fall through to normal matching
+        // below rather than force an error over a missed follow-up.
+      }
 
       if (wasExpectingMood && matchMood(text)) {
         var moodGood = matchMood(text) === "positive";
@@ -682,6 +712,7 @@
       if (ASKED_BACK_PATTERN.test(replyText)) expectingMoodReply = true;
       if (JOKE_OFFER_PATTERN.test(replyText)) expectingJokeOffer = true;
       if (isJokeEntry(match)) expectingJokeFeedback = true;
+      if (isTalkToPersonEntry(match)) expectingContactInfo = true;
       if (!match) {
         expectingHelpOffer = true;
         lastUnansweredQuestion = text;
