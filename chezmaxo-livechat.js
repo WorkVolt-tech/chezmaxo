@@ -31,7 +31,7 @@
     { keywords: ["comment ça marche","how does it work","how it works","how everything works","how does everything work","what's the process"],
       fr: "On discute de votre projet, je vous envoie un devis, vous approuvez, je construis le site, et vous approuvez le résultat avant le lancement.",
       en: "We talk about your project, I send a quote, you approve it, I build the site, and you approve the result before launch.", emotion: "get_help" },
-    { keywords: ["parler à quelqu'un","speak to someone","talk to a human","real person"],
+    { keywords: ["parler à quelqu'un","speak to someone","talk to a human","real person","speak with someone","talk with someone","may i speak","can i speak with","speak with a human"],
       fr: "Bien sûr ! Laissez-moi votre courriel et votre question, et on vous répond rapidement.",
       en: "Of course! Leave your email and your question, and we'll get back to you quickly.", emotion: "get_help" },
     { keywords: ["i'm a troublemaker","im a troublemaker","i'm trouble","je suis un fauteur de troubles"],
