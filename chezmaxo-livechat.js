@@ -46,7 +46,7 @@
     { keywords: ["what do you do","what's your job","whats your job","what's your purpose","qu'est-ce que tu fais"],
       fr: "Je réponds aux questions sur les sites web et forfaits d'entretien de Chezmaxo, je fais des blagues de papa à l'occasion, et j'essaie de ne pas dépasser mes compétences.",
       en: "I answer questions about Chezmaxo's websites and care plans, crack the occasional dad joke, and try not to overstep into things above my pay grade.", emotion: "happy" },
-    { keywords: ["es tu un robot","are you a robot","are you an ai","is this ai","is it ai","is this an ai","are you using ai","is this artificial intelligence"],
+    { keywords: ["es tu un robot","are you a robot","are you an ai","is this ai","is it ai","is this an ai","are you using ai","is this artificial intelligence","are you a bot","is this a bot","are you a chatbot","is this a chatbot"],
       fr: "Oui, en quelque sorte — je suis Marxo, un brin d'automatisation façon IA conçue par Maxo lui-même pour répondre aux questions courantes ici. Pas de mystérieuse compagnie technologique derrière moi, juste Maxo et une correspondance de mots-clés bien pensée.",
       en: "Yes, sort of — I'm Marxo, a bit of AI-ish automation designed by Maxo himself to answer common questions here. No mysterious tech company behind me, just Maxo and some clever keyword matching.", emotion: "excited" },
     { keywords: ["what's your name","whats your name","your name","quel est ton nom","comment tu t'appelles"],
