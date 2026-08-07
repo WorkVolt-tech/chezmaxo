@@ -34,6 +34,9 @@
     { keywords: ["parler à quelqu'un","speak to someone","talk to a human","real person"],
       fr: "Bien sûr ! Laissez-moi votre courriel et votre question, et on vous répond rapidement.",
       en: "Of course! Leave your email and your question, and we'll get back to you quickly.", emotion: "get_help" },
+    { keywords: ["i'm a troublemaker","im a troublemaker","i'm trouble","je suis un fauteur de troubles"],
+      fr: "Ça dépend du genre de trouble — je peux vous construire un excellent site web, mais je ne peux pas vous sortir de prison. Commençons par le site web, on verra pour le reste.",
+      en: "Depends on the kind of trouble — I can build you a great website, but I can't bail you out of jail. Let's start with the website and go from there.", emotion: "excited" },
     { keywords: ["do you have a sense of humor","do you have a sense of humour","sense of humor","are you funny","as tu le sens de l'humour","es tu drole"],
       fr: "Je pense que oui ! Mon humour se résume surtout à des blagues de papa et des jeux de mots sur les sites web, mais j'assume à 100 %. Vous voulez en entendre une ?",
       en: "I like to think so! My humor mostly consists of dad jokes and website puns, but I stand by all of it. Want to hear one?", emotion: "excited" },
@@ -240,7 +243,7 @@
       '<svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>' +
     '</button>' +
     '<div id="cmx-chat-panel">' +
-      '<div id="cmx-chat-head"><span data-lang="fr">Discuter avec Marxo</span><span data-lang="en">Chat with Marxo</span><button id="cmx-chat-close" aria-label="Close">\u00d7</button></div>' +
+      '<div id="cmx-chat-head"><span>Marxo</span><button id="cmx-chat-close" aria-label="Close">\u00d7</button></div>' +
       '<div id="cmx-chat-reaction"><img id="cmx-reaction-img" src="" alt=""></div>' +
       '<div id="cmx-chat-namebar"><input type="text" id="cmx-chat-name" placeholder="Votre nom (optionnel) / Your name (optional)"></div>' +
       '<div id="cmx-chat-body"></div>' +
