@@ -4274,6 +4274,30 @@ const I18N = {
   "privacy.p19.1": {
     "en": "Questions, privacy requests and complaints may be directed to:",
     "fr": "Les questions, demandes et plaintes relatives à la vie privée peuvent être adressées à :"
+  },
+  "cat.saas": {
+    "en": "SaaS Platform",
+    "fr": "Plateforme SaaS"
+  },
+  "pf11.name": {
+    "en": "MaxoServe",
+    "fr": "MaxoServe"
+  },
+  "pf11.desc": {
+    "en": "A bilingual, QR-based table service platform for restaurants and nightclubs — real-time ordering, live staff requests, floor plan management, multi-location support, and a full admin dashboard, built as a complete multi-tenant SaaS product.",
+    "fr": "Une plateforme de service aux tables bilingue basée sur des codes QR pour restaurants et boîtes de nuit — commandes en temps réel, demandes du personnel en direct, gestion du plan de salle, prise en charge multi-établissements, et un tableau de bord administrateur complet, conçue comme un produit SaaS multi-locataire complet."
+  },
+  "pf11.svc0": {
+    "en": "Custom Web App",
+    "fr": "Application web personnalisée"
+  },
+  "pf11.svc1": {
+    "en": "Real-Time Ordering",
+    "fr": "Commande en temps réel"
+  },
+  "pf11.svc2": {
+    "en": "Admin Dashboard",
+    "fr": "Tableau de bord administrateur"
   }
 };
 
