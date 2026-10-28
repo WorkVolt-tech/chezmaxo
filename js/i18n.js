@@ -4298,7 +4298,15 @@ const I18N = {
   "pf11.svc2": {
     "en": "Admin Dashboard",
     "fr": "Tableau de bord administrateur"
-  }
+  },
+  "pf12.name": {"en":"Hair by Lynna","fr":"Hair by Lynna"},
+  "pf12.desc": {
+    "en":"A bilingual hairstyling website with appointment scheduling, deposit status, customer booking tracking and an owner dashboard. Explore the interactive demo with fictional data.",
+    "fr":"Un site de coiffure bilingue avec prise de rendez-vous, suivi des dépôts, statut des réservations et tableau de bord propriétaire. Explorez la démo interactive avec des données fictives."
+  },
+  "pf12.svc0": {"en":"Bilingual Website","fr":"Site web bilingue"},
+  "pf12.svc1": {"en":"Booking System","fr":"Système de réservation"},
+  "pf12.svc2": {"en":"Owner Dashboard","fr":"Tableau de bord propriétaire"}
 };
 
 /* =========================================================================
