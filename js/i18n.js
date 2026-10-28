@@ -1075,6 +1075,10 @@ const I18N = {
     "en": "Consultant",
     "fr": "Consultant"
   },
+  "cat.game": {
+    "en": "Game / Web App",
+    "fr": "Jeu / application web"
+  },
   "pf6.svc0": {
     "en": "Website Design",
     "fr": "Conception de site"
@@ -1090,6 +1094,10 @@ const I18N = {
   "pf.viewlivedemo": {
     "en": "View Live Demo",
     "fr": "Voir la démo en direct"
+  },
+  "pf.playgame": {
+    "en": "Play Game",
+    "fr": "Jouer"
   },
   "pf6.name": {
     "en": "Luxe Nail Studio",
@@ -1118,6 +1126,26 @@ const I18N = {
   "pf10.desc": {
     "en": "A bilingual funeral coordination platform with public booking, live chat, a family client portal, and a full staff dashboard for managing inquiries, jobs, invoicing, and more.",
     "fr": "Une plateforme bilingue de coordination funéraire avec réservation publique, clavardage en direct, un portail client pour les familles, et un tableau de bord complet pour gérer les demandes, les dossiers, la facturation et plus encore."
+  },
+  "pf13.name": {
+    "en": "Dekabess",
+    "fr": "Dekabess"
+  },
+  "pf13.desc": {
+    "en": "A full online Haitian-rules domino game built for desktop and mobile, with real-time multiplayer, Story Mode, tournaments, challenges, unlockable tables and tiles, achievements, friends, and installable PWA support.",
+    "fr": "Un jeu de dominos haïtien complet en ligne, conçu pour ordinateur et mobile, avec multijoueur en temps réel, mode Histoire, tournois, défis, tables et dominos à débloquer, succès, amis et installation comme application PWA."
+  },
+  "pf13.svc0": {
+    "en": "Custom Web Game",
+    "fr": "Jeu web sur mesure"
+  },
+  "pf13.svc1": {
+    "en": "Real-Time Multiplayer",
+    "fr": "Multijoueur en temps réel"
+  },
+  "pf13.svc2": {
+    "en": "Mobile PWA",
+    "fr": "PWA mobile"
   },
   "pf.note2": {
     "en": "More projects coming soon.",
