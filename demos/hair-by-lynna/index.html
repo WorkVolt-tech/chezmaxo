@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="description" content="Explore a safe, interactive portfolio demonstration of the Hair by Lynna salon booking system. All customers and payments are fictional.">
+  <title>Hair by Lynna — Interactive Portfolio Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/demo.css">
+  <script src="assets/demo.js" defer></script>
+</head>
+<body>
+<div class="demo-ribbon" role="status">
+  <div class="shell ribbon-inner">
+    <span class="demo-pill"><span class="pulse-dot"></span><span data-t="ribbon">INTERACTIVE PORTFOLIO DEMO</span></span>
+    <span class="ribbon-description" data-t="fictional">Fictional customers & sample payments · No live services connected</span>
+    <a class="back-link" href="../../portfolio.html"><span aria-hidden="true">←</span> <span data-t="back">Back to Chezmaxo portfolio</span></a>
+  </div>
+</div>
+<header class="topbar">
+  <div class="shell header-inner">
+    <a class="brand" href="#home" data-action="nav" data-value="customer" aria-label="Hair by Lynna demo home"><span>hair by</span><strong>Lynna</strong><i>✧</i></a>
+    <nav class="mode-nav" aria-label="Demo views">
+      <button type="button" class="nav-mode selected" data-action="nav" data-value="customer" data-t="navBooking">Customer booking</button>
+      <button type="button" class="nav-mode" data-action="nav" data-value="status" data-t="navStatus">Booking status</button>
+      <button type="button" class="nav-mode" data-action="nav" data-value="admin" data-t="navAdmin">Owner dashboard</button>
+    </nav>
+    <div class="language-switch" role="group" aria-label="Language">
+      <button type="button" data-action="lang" data-value="en" class="selected" aria-pressed="true">EN</button><span>/</span>
+      <button type="button" data-action="lang" data-value="fr" aria-pressed="false">FR</button>
+    </div>
+  </div>
+</header>
+<main id="home" class="shell">
+  <div class="environment-note"><span aria-hidden="true">◈</span> <span data-t="safetyNote">Demo only: appointments, deposits, emails and notifications are simulated. Please do not enter real personal information.</span></div>
+
+  <section id="customer-view" class="view" aria-label="Customer booking demo">
+    <div class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow" data-t="heroEyebrow">YOUR NEXT LOOK STARTS HERE</p>
+        <h1><span data-t="heroTitle">Beautiful braids.</span><em data-t="heroScript">Thoughtful care.</em></h1>
+        <p class="hero-lede" data-t="heroLede">A little luxury, just for you. Choose your style, pick a date and try our interactive booking experience.</p>
+        <a href="#book-demo" class="btn btn-primary" data-t="heroCta">EXPLORE BOOKING</a>
+        <div class="hero-stats"><span>✦ <span data-t="bilingual">Bilingual booking</span></span><span>✦ <span data-t="clientPortal">Private client portal</span></span></div>
+      </div>
+      <div class="hero-visual" role="img" aria-label="Illustrative flowing braid pattern">
+        <div class="hero-orbit"></div>
+        <div class="braid braid-one"></div><div class="braid braid-two"></div><div class="braid braid-three"></div>
+        <span class="hero-visual-word">Lynna</span><span class="hero-visual-tag" data-t="demoArt">THE STUDIO EDIT</span>
+      </div>
+    </div>
+
+    <section class="section-block" id="services-demo">
+      <p class="eyebrow centered" data-t="signature">OUR SIGNATURE</p>
+      <h2 class="section-title" data-t="styles">BRAIDING STYLES</h2>
+      <p class="section-lede centered" data-t="stylesNote">Two example services with illustrative demo prices and appointment lengths.</p>
+      <div class="service-grid" id="service-cards"></div>
+    </section>
+
+    <section class="section-block booking-section" id="book-demo">
+      <div class="section-heading"><p class="eyebrow" data-t="bookingLabel">YOUR BEAUTY, YOUR TIME</p><h2 class="section-title left" data-t="bookingTitle">BOOK WITH LYNNA</h2><p data-t="bookingNote">Select a sample service, date and time. No real appointment will be created.</p></div>
+      <div class="booking-layout">
+        <div class="booking-panel">
+          <div class="step-title"><span class="numbered">01</span><h3 data-t="pickService">Choose a service</h3></div>
+          <div id="service-options" class="service-options" role="group" aria-label="Demo services"></div>
+          <div class="step-title"><span class="numbered">02</span><h3 data-t="pickDate">Choose a date</h3></div>
+          <div class="calendar-head"><button type="button" data-action="month" data-value="-1" aria-label="Previous month">‹</button><strong id="calendar-month"></strong><button type="button" data-action="month" data-value="1" aria-label="Next month">›</button></div>
+          <div id="calendar-grid" class="calendar-grid"></div>
+          <div class="step-title"><span class="numbered">03</span><h3 data-t="pickTime">Choose a time</h3></div>
+          <div id="time-slots" class="time-slots"></div>
+        </div>
+        <div class="booking-panel booking-summary">
+          <span class="summary-eyebrow" data-t="summary">YOUR SELECTION</span>
+          <h3 id="summary-service">—</h3>
+          <p id="summary-day" class="summary-date"></p>
+          <div class="deposit-box"><strong data-t="depositTitle">$20 CAD deposit · Interac</strong><p data-t="depositInfo">Requests are pending until the owner verifies the deposit and approves the appointment. This demo does not collect or transfer money.</p></div>
+          <form id="booking-form" class="booking-form">
+            <label><span data-t="sampleName">Sample customer name</span><input name="name" id="customer-name" maxlength="80" value="Alex Demo" required></label>
+            <label><span data-t="sampleEmail">Example email (never sent)</span><input name="email" id="customer-email" type="email" maxlength="120" value="alex@example.test" required></label>
+            <label class="check"><input type="checkbox" id="booking-agree" required><span data-t="fakeAgreement">I understand this is an interactive demonstration, not a real booking.</span></label>
+            <button class="btn btn-primary wide" id="booking-submit" type="submit" data-t="tryBooking">CREATE DEMO BOOKING</button>
+          </form>
+          <div id="booking-feedback" class="booking-feedback" role="status" aria-live="polite"></div>
+        </div>
+      </div>
+    </section>
+  </section>
+
+  <section id="status-view" class="view" hidden>
+    <div class="page-heading"><p class="eyebrow" data-t="portalEyebrow">CUSTOMER PORTAL</p><h1 data-t="statusHeadline">Track your appointment</h1><p data-t="statusIntro">Review a fictional booking, mark a deposit as sent, and see how the owner's dashboard responds.</p></div>
+    <div class="status-layout"><div class="status-card" id="status-card"></div><aside class="side-card"><span class="mini-icon">✉</span><h3 data-t="emailPreview">Notification preview</h3><p data-t="emailExplainer">Emails and Telegram notifications are simulated here. Nothing is actually sent.</p><div id="preview-feed" aria-live="polite"></div></aside></div>
+  </section>
+
+  <section id="admin-view" class="view" hidden>
+    <div class="page-heading"><p class="eyebrow" data-t="adminEyebrow">OWNER DASHBOARD · DEMO ACCESS</p><h1 data-t="adminHeadline">Salon management</h1><p data-t="adminIntro">Approve requests, verify reported deposits, preview availability and view illustrative statistics.</p></div>
+    <div class="admin-tabs" role="group" aria-label="Dashboard section">
+      <button type="button" class="admin-tab selected" data-action="admin-tab" data-value="appointments" data-t="tabAppointments">Appointments</button>
+      <button type="button" class="admin-tab" data-action="admin-tab" data-value="availability" data-t="tabAvailability">Availability</button>
+      <button type="button" class="admin-tab" data-action="admin-tab" data-value="reports" data-t="tabReports">Statistics</button>
+    </div>
+    <div id="admin-content"></div>
+  </section>
+</main>
+<footer class="demo-footer"><div class="shell"><div><strong>Hair by Lynna</strong> <span data-t="footer">— illustrative demo, developed for portfolio display</span></div><div class="footer-actions"><button type="button" class="btn-text" data-action="reset" data-t="reset">Reset demo</button><a href="../../portfolio.html" data-t="back2">Chezmaxo portfolio</a></div></div></footer>
+</body>
+</html>
