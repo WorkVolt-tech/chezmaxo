@@ -1,4 +1,8 @@
 const I18N = {
+  "services.subnav.cloud": {
+    "en": "+ Cloud Solutions",
+    "fr": "+ Solutions infonuagiques"
+  },
   "services.cloud.eyebrow": {
     "en": "New • Cloud Solutions",
     "fr": "Nouveau • Solutions infonuagiques"
