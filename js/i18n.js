@@ -1,4 +1,68 @@
 const I18N = {
+  "services.cloud.eyebrow": {
+    "en": "New • Cloud Solutions",
+    "fr": "Nouveau • Solutions infonuagiques"
+  },
+  "services.cloud.h2": {
+    "en": "The technical side, handled.",
+    "fr": "La technologie, sans les complications."
+  },
+  "services.cloud.intro": {
+    "en": "Six practical services to get your website or business application online, protect your information, and simplify ongoing maintenance.",
+    "fr": "Six services concrets pour mettre votre site ou application en ligne, protéger vos données et simplifier la maintenance."
+  },
+  "services.cloud.note": {
+    "en": "All cloud projects are scoped individually. Third-party hosting, domains, licenses and infrastructure charges may be billed separately.",
+    "fr": "Chaque projet est évalué individuellement. Les frais d’hébergement, de domaines, de licences et d’infrastructure de tiers peuvent être facturés séparément."
+  },
+  "services.cloud.hosting.title": {
+    "en": "Cloud Hosting Setup",
+    "fr": "Configuration d’hébergement infonuagique"
+  },
+  "services.cloud.hosting.desc": {
+    "en": "Get your website or application online with the right hosting environment, domain connection, and launch configuration.",
+    "fr": "Mettez votre site ou application en ligne avec un hébergement adapté, la connexion du domaine et les réglages de lancement."
+  },
+  "services.cloud.databases.title": {
+    "en": "Cloud Databases",
+    "fr": "Bases de données infonuagiques"
+  },
+  "services.cloud.databases.desc": {
+    "en": "Set up and organize secure databases for customer portals, appointments, orders, and business applications.",
+    "fr": "Configurez et organisez des bases de données sécurisées pour les portails clients, rendez-vous, commandes et applications."
+  },
+  "services.cloud.servers.title": {
+    "en": "Virtual Servers",
+    "fr": "Serveurs virtuels"
+  },
+  "services.cloud.servers.desc": {
+    "en": "Configure virtual servers for business software, websites, and custom applications that need dedicated resources.",
+    "fr": "Configurez des serveurs virtuels pour les logiciels d’entreprise, les sites Web et les applications nécessitant des ressources dédiées."
+  },
+  "services.cloud.security.title": {
+    "en": "Cloud Security",
+    "fr": "Sécurité infonuagique"
+  },
+  "services.cloud.security.desc": {
+    "en": "Set up DNS, HTTPS certificates, account permissions, and practical protections for your online services.",
+    "fr": "Configurez les DNS, certificats HTTPS, droits d’accès et protections essentielles de vos services en ligne."
+  },
+  "services.cloud.backups.title": {
+    "en": "Cloud Backups",
+    "fr": "Sauvegardes infonuagiques"
+  },
+  "services.cloud.backups.desc": {
+    "en": "Set up scheduled backups, storage retention, and recovery procedures so important business data can be restored.",
+    "fr": "Mettez en place des sauvegardes planifiées, une durée de conservation et des procédures de restauration des données."
+  },
+  "services.cloud.managed.title": {
+    "en": "Managed Cloud Services",
+    "fr": "Gestion de services infonuagiques"
+  },
+  "services.cloud.managed.desc": {
+    "en": "Get ongoing monitoring, updates, troubleshooting, and technical assistance without managing everything yourself.",
+    "fr": "Profitez d’un suivi régulier, de mises à jour, de dépannage et d’assistance technique sans tout gérer vous-même."
+  },
   "footer.tagline": {
     "en": "Professional websites without the technical stress. We design, launch, and take care of websites for small businesses so you can focus on running yours.",
     "fr": "Des sites web professionnels, sans le stress technique. Nous concevons, lançons et entretenons les sites de petites entreprises pour que vous puissiez vous concentrer sur la vôtre."
